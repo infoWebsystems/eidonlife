@@ -1,0 +1,97 @@
+{%- liquid
+
+  assign section_padding = ''
+  if section.settings.section_padding == 'top'
+    assign section_padding = 'pb0'
+  elsif section.settings.section_padding == 'bottom'
+    assign section_padding = 'mt0'
+  elsif section.settings.section_padding == 'none'
+    assign section_padding = 'mt0 pb0'
+  endif
+
+-%}
+
+<section class="global__section section-{{ section.id }} {{ section_padding }}"
+data-section-id="{{ section.id }}"
+data-aos="fade"
+data-section-type="related-products">
+
+  <div class="row grid__wrapper">
+    {% if section.settings.title != blank %}
+      <div class="span-12 auto">
+        <h2 class="section-heading mb0">{{ section.settings.title | escape }}</h2>
+      </div>
+    {% endif %}
+
+    <div class="related__products grid__wrapper grid__wrapper-nest product-loop span-12 auto">
+
+        {% for block in section.blocks %}
+        {% assign related_product = block.settings.product %}
+          {% unless related_product == blank %}
+            <div class="featured__collection-product product-index js-product-listing span-3 auto md-span-4 sm-span-6" 
+              id="product-listing-{{ product.id }}" 
+              data-product-id="{{ product.id }}"
+              data-alpha="{{ product.title }}"
+              data-price="{{ product.price }}"
+              data-aos="fade"
+              data-aos-delay="{{ forloop.index | times: 100 }}">
+              {% render 'product-listing', product: related_product %}
+            </div>
+          {% endunless %}
+        {% endfor %}
+    </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Related products",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "You might like"
+    },
+    {
+      "type": "select",
+      "id": "section_padding",
+      "label": "Section spacing",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "both",
+          "label": "Both"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "both"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product",
+          "info": "Choose a product or connect a dynamic source using metafields for hand picked related items per product."
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,205 @@
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "8922aa76-72dd-483a-b25d-e169d768a152": {
+          "type": "product_variants",
+          "settings": {
+            "show_size_chart": false,
+            "size_chart_page": "",
+            "size_chart_label": "Size chart"
+          }
+        },
+        "product_size_chart_EKfWew": {
+          "type": "product_size_chart",
+          "settings": {
+            "size_chart_page": "{{ product.metafields.custom.product_size_guide.value }}"
+          }
+        },
+        "d9681722-e21d-42cb-b517-5a22bc70b2e5": {
+          "type": "product_quantity",
+          "settings": {
+          }
+        },
+        "569acd10-43ac-4854-adc8-bc64927b54bb": {
+          "type": "product_buttons",
+          "settings": {
+            "show_gift_card_recipient": false
+          }
+        },
+        "1af258e7-17dd-4fe5-bccb-351630d70821": {
+          "type": "product_description",
+          "settings": {
+          }
+        },
+        "99c90ebd-bddf-457b-993b-38360f657fd4": {
+          "type": "tab_content",
+          "settings": {
+            "tab_title": "Care & Wash",
+            "tab_text": "<p>If you love your Eidon suit and want to keep it for as long as possible we suggest doing the following:<\/p><p>1. After each use, immediately rinse your swimsuit under cold water to get rid of all chlorine and salt water residue.<\/p><p>2. Hand wash gently using a mild soap or lingerie soap.<\/p><p>3. If using a washer, use cold water and a mild detergent without chlorine.<\/p><p>4. Leave to dry on a flat surface away from direct midday sunlight to prevent colors from fading.<\/p>"
+          }
+        },
+        "6162e73c-ef73-497d-8df4-45f86f2d2c5a": {
+          "type": "tab_content",
+          "settings": {
+            "tab_title": "Shipping",
+            "tab_text": "<p><strong>COVID-19 Shipping Update<\/strong><\/p><p>We are currently working with reduced staff to comply with distancing protocols put in place by the government. This may result in slower shipping times on orders placed during this period.<\/p><p>Since <a href=\"https:\/\/www.canadapost.ca\/cpc\/en\/our-company\/news-and-media\/corporate-news\/coronavirus-disease-covid-19.page?icid=display_ddn_int_hero_covid_101#updates\" target=\"_blank\">Canada Post<\/a> \/ <a href=\"https:\/\/www.ups.com\/ca\/en\/about\/news\/important-updates.page?\" target=\"_blank\">UPS<\/a> have suspended their service guarantee, only the regular shipping method is available at this time for orders placed online.<\/p><p>We thank you for your understanding and support, and wish our Eidon community the very best.<\/p><p>﻿ <\/p><p><strong>Do you ship all over the world?<\/strong><\/p><p>There ain't no mountain high enough,<br\/>Ain't no valley low enough,<br\/>Ain't no river wide enough,<br\/>To keep Eidon from getting to you, babe<br\/>(Yes, we do.)<\/p><p>﻿ <\/p><p><strong>DON'T PAY FOR SHIPPING <\/strong><\/p><p>We offer free shipping to most US states and territories with every order of $60 USD or more, but there are a few exceptions**:<\/p><p>American Samoa<\/p><p>Federal States of Micronesia<\/p><p>Guam<\/p><p>Marshall Island<\/p><p>PalauArmed Forces – Americas<\/p><p>Armed Forces – Europe<\/p><p>Armed Forces – Pacific<\/p><p><em>**Free shipping is available to these locations for orders over $90 USD.<\/em><\/p><p>﻿ <\/p><p><strong>How much does international shipping cost for locations outside Canada and the US?<\/strong><\/p><p>We love our international family! With every order of $90 USD or more, you will receive free international shipping.<\/p><p>  <\/p><p><strong>Do I need a code to activate free shipping?<\/strong><\/p><p>Nope. Shipping fees are calculated during the checkout process according to the package’s destination. If you’re eligible for free shipping, we’ll let you know on the spot.<\/p><p>﻿ <\/p><p><a href=\"\/policies\/shipping-policy\" target=\"_blank\" title=\"Shipping Policy\">Click here to view our full shipping policy.<\/a><\/p>"
+          }
+        },
+        "3e9061c5-24a7-49dc-901d-384b3d1ff886": {
+          "type": "tab_content",
+          "settings": {
+            "tab_title": "Returns",
+            "tab_text": "<p>Customers who have purchased items from <a href=\"https:\/\/eidonlife.com\/\">eidonlife.com<\/a>** may return items within 30 days from the delivery date for a refund. We do not cover shipping and handling fees for the return, and we do not reimburse the original shipping fees.<\/p><p>All returned items must be:<\/p><p>• Unworn<br\/>• Unwashed<br\/>• Without scent or odors<br\/>• Without rips and tears<br\/>• Attached with tags<br\/>• In their original packaging<\/p><p>If the products do not meet the above criteria, we will not be able to process your refund.<\/p><p><em>**Items from our Clearance section (marked as Final Sale) are not returnable.<\/em><\/p><p><\/p><p><a href=\"\/policies\/refund-policy\" target=\"_blank\" title=\"Refund Policy\">Click here to consult our full refund policy.<\/a><\/p>"
+          }
+        },
+        "a8669386-f6bb-4d3c-8852-d475c3aa853b": {
+          "type": "tab_question",
+          "settings": {
+            "tab_title": "Ask us a question",
+            "tab_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "8922aa76-72dd-483a-b25d-e169d768a152",
+        "product_size_chart_EKfWew",
+        "d9681722-e21d-42cb-b517-5a22bc70b2e5",
+        "569acd10-43ac-4854-adc8-bc64927b54bb",
+        "1af258e7-17dd-4fe5-bccb-351630d70821",
+        "99c90ebd-bddf-457b-993b-38360f657fd4",
+        "6162e73c-ef73-497d-8df4-45f86f2d2c5a",
+        "3e9061c5-24a7-49dc-901d-384b3d1ff886",
+        "a8669386-f6bb-4d3c-8852-d475c3aa853b"
+      ],
+      "settings": {
+        "product_background": "",
+        "thumbnail_position": "right",
+        "click_to_enlarge": true,
+        "enable_video_looping": false,
+        "show_tax_information": false
+      }
+    },
+    "product-content": {
+      "type": "main-product-content",
+      "blocks": {
+        "fb1f4d16-df0d-45b5-9465-721dc7a91c53": {
+          "type": "product_description",
+          "settings": {
+            "label": "The Deets: {{ product.title }}",
+            "block_width": "medium"
+          }
+        },
+        "d3cc7dc2-4446-46d2-899d-88e4dc8bb59c": {
+          "type": "text",
+          "settings": {
+            "label": "Discover: The {{ product.metafields.my_fields.color_name.value }} Collection",
+            "text": "<p>{{ product.metafields.my_fields.color_description.value }}<\/p>",
+            "block_width": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "fb1f4d16-df0d-45b5-9465-721dc7a91c53",
+        "d3cc7dc2-4446-46d2-899d-88e4dc8bb59c"
+      ],
+      "settings": {
+        "color": "#000000",
+        "background": "#f9f9f9"
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "title": "You might like",
+        "section_padding": "none"
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "settings": {
+        "product_recommendations_heading": "Have you seen these",
+        "grid": 4,
+        "limit": 4
+      }
+    },
+    "2c57f40a-8a20-4102-89b0-c9839af37809": {
+      "type": "section-heading",
+      "settings": {
+        "title": "See it in action",
+        "title_size": "h1",
+        "title_alignment": "center",
+        "title_border": false,
+        "section_padding": "top"
+      }
+    },
+    "alireviews-section-1666181636": {
+      "type": "apps",
+      "blocks": {
+        "cbbd1765-3d92-4523-a79f-1dd5b82607ed": {
+          "type": "shopify:\/\/apps\/foursixty-shoppable-social-ugc\/blocks\/custom_slider\/e2616dfe-fbb6-4e7d-874d-d250b973556d",
+          "settings": {
+            "foreground_color": "#ffffff",
+            "background_color": "#000000",
+            "background_color_alpha": 90,
+            "post_spacing": 1,
+            "hover_margin": 0,
+            "cell_size": "25%",
+            "target_blank": true,
+            "arrows_outside": false,
+            "show_icon": true,
+            "show_text": false,
+            "show_date": false,
+            "call_to_action": "shop it",
+            "shop_type": "button",
+            "body_font_size": 14,
+            "body_font": "avenir_next_n4",
+            "accent_font_size": 14,
+            "accent_font": "avenir_next_n6",
+            "disable_filter": false,
+            "override_feed_id": "",
+            "arbitrary_attributes": "",
+            "custom_css": "",
+            "custom_js": ""
+          }
+        },
+        "alireviews-block-1666181636": {
+          "type": "shopify:\/\/apps\/ali-reviews\/blocks\/widget-box\/bf2eea72-0400-4db1-8908-44b7418f9a88",
+          "disabled": true,
+          "settings": {
+            "product": "",
+            "name": "Review Box 1",
+            "vertical_alignment": "5",
+            "rating_color": "#1f1f1f",
+            "section_color": "#ffffff",
+            "primary_text_color": "#1f1f1f"
+          }
+        }
+      },
+      "block_order": [
+        "cbbd1765-3d92-4523-a79f-1dd5b82607ed",
+        "alireviews-block-1666181636"
+      ],
+      "settings": {
+        "section_padding": "none"
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "main",
+    "product-content",
+    "related-products",
+    "product-recommendations",
+    "2c57f40a-8a20-4102-89b0-c9839af37809",
+    "alireviews-section-1666181636"
+  ]
+}

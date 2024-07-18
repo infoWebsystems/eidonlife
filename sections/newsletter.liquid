@@ -1,0 +1,94 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --text-color: {{ section.settings.text_color }};
+    --section-background: {{ section.settings.newsletter_background }};
+    --button-color: {{ section.settings.newsletter_button_color }};
+  }
+</style>
+
+  <section class="newsletter__section newsletter-{{ section.id }}" data-aos="fade">
+    <div class="newsletter__section-container row">
+      <div class="newsletter__section-contentWrapper">
+        {% unless section.settings.heading == blank %}
+          <h2>{{ section.settings.heading }}</h2>
+        {% endunless %}
+        {% unless section.settings.newsletter_subheading == blank %}
+          <span class="newsletter__section-subheading rte">
+            {{ section.settings.newsletter_subheading }}
+          </span>
+        {% endunless %}
+      </div>
+      <div class="newsletter__section-contentWrapper">
+        {% form 'customer' %}
+          {% if form.posted_successfully? %}
+            <p class="success">{{ 'general.password_page.thanks' | t }}</p>
+          {% else %}
+            <input type="hidden" name="contact[tags]" value="prospect, newsletter">
+            <label class="visuallyhidden" for="newsletter__section-email">{{ 'general.newsletter_form.newsletter_email' | t }}</label>
+            <input type="email" class="newsletter__section-email" name="contact[email]" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" id="newsletter__section-email">
+            <input type="submit" class="newsletter__section-submit" value="{{ 'general.newsletter_form.submit' | t }}">
+          {% endif %}
+          {{ form.errors | default_errors }}
+        {% endform %}
+        {% if section.settings.show_social_icons %}
+          <ul class="newsletter__social-icons">
+          {% render 'social-icons', wrapper: '.newsletter__social-icons', fill_color: section.settings.text_color, hover_color: section.settings.text_color %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "limit": 1,
+  "settings": [{
+      "type": "paragraph",
+      "content": "Any customers who signup will have an account created for them in Shopify. [View customers](/admin/customers?query=&accepts_marketing=1)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_icons",
+      "label": "Show social icons",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Subscribe to our newsletter"
+    },
+    {
+      "type": "richtext",
+      "id": "newsletter_subheading",
+      "label": "Subheading",
+      "default": "<p>Signup for our newsletter to stay up to date on sales and events.</p>"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "newsletter_background",
+      "label": "Background",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "newsletter_button_color",
+      "label": "Button text",
+      "default": "#fff"
+    }
+  ],
+  "presets": [{
+    "name": "Newsletter"
+  }],
+  "disabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

@@ -1,0 +1,92 @@
+{% comment %}
+  Render a collection grid item.
+
+  Accepts:
+  - collection: {Object} Liquid Collection object
+  - grid_item_width: {String}
+  - floating_text: {Boolean} Render a floating text or not.
+  - block_image: {Boolean} Render a block image.
+  - bold: {Boolean} Render bold text.
+  - aos_mod: {Number}
+  - loading: {String} Determines the loading attribute. (optional)
+  - fetchpriority: {String} Determines fetch priority attribute. (optional)
+
+  Usage:
+  {%
+    render 'collection-grid-item',
+    collection: collection,
+    grid_item_width: grid_item_width,
+    floating_text: floating_text,
+    block_image: false,
+    bold: bold,
+    aos_mod: aos_mod,
+    loading: loading,
+    fetchpriority: fetch_priority
+  %}
+{% endcomment %}
+{% if collection.empty? %}
+  {% comment %}add default state for collection block in storefront editor{% endcomment %}
+  {% capture collection_title %}{{ 'homepage.onboarding.collection_title' | t }}{% endcapture %}
+  {% capture collection_image_url %}{% endcapture %}
+{% else %}
+  {% capture collection_title %}{{ collection.title }}{% endcapture %}
+{% endif %}
+{% capture collection_details %}
+  <div class="collection__item-details{% if bold %} is_bold{% endif %}">
+    <a class="inline-block-full" href="{{ collection.url }}" title="{{ collection_title }}">
+      <h3 class="prod-title h4">{{ collection.title }}</h3>
+      {%- if section.settings.collection_count -%}
+        <p class="mb0">{{ collection.products_count }} {{ 'collections.general.items' | t }}</p>
+      {%- endif -%}
+    </a>
+  </div>
+{% endcapture %}
+
+<div class="collection__list-item" 
+  data-aos="fade"
+  data-aos-delay="{{ forloop.index | minus: 1 | modulo: aos_mod | times: 100 }}"
+  data-alpha="{{ collection.title }}">
+  <div class="collection__item-image">
+    {%- if floating_text -%}
+      {{ collection_details }}
+    {%- endif -%}
+    <a class="inline-block-full" href="{{ collection.url }}" title="{{ collection_title }}">
+    {% if block_image != blank %}
+      {%
+        render 'basic-responsive-image',
+        type: block_image,
+        width: 1200,
+        loading: loading,
+        fetchpriority: fetchpriority
+      %}
+    {% elsif collection.image %}
+      {%
+        render 'basic-responsive-image',
+        type: collection.image,
+        width: 1200,
+        loading: loading,
+        fetchpriority: fetchpriority
+      %}
+    {% elsif collection.products.first.featured_image %}
+      {%
+        render 'basic-responsive-image',
+        type: collection.products.first.featured_image,
+        width: 1200,
+        loading: loading,
+        fetchpriority: fetchpriority
+      %}
+    {% else %}
+      {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+      {%- assign placeholder = 'collection-' | append: current -%}
+      <div class="collection-image no-image--placeholder onboard {% unless section.settings.image_ratio == 'natural' %}box-ratio{% endunless %}">
+        {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    {% endif %}
+    </a>
+  </div>
+
+  {%- unless floating_text -%}
+    {{ collection_details }}
+  {%- endunless -%}
+
+</div>

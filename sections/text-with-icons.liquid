@@ -1,0 +1,471 @@
+{%- liquid
+
+  assign section_padding = ''
+  if section.settings.section_padding == 'top'
+    assign section_padding = 'pb0'
+  elsif section.settings.section_padding == 'bottom'
+    assign section_padding = 'mt0 pt0'
+  elsif section.settings.section_padding == 'none'
+    assign section_padding = 'pb0 pt0'
+  endif
+
+  assign color = section.settings.color
+  assign background = section.settings.background
+
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --text-color: {{ color }};
+    --section-background: {{ background }};
+  }
+</style>
+
+<section class="global__section padded--section section-{{ section.id }} textwith__icon-section {{ section_padding }}" data-section-id="{{ section.id }}" data-aos="fade">
+  <div class="row grid__wrapper gr0">
+
+    {% if section.settings.heading != blank %}
+    <div class="textwith__icon--heading span-12 auto">
+      <h2 class="section-heading mb0">{{ section.settings.heading | escape }}</h2>
+    </div>
+    {% endif %}
+
+      <div class="textwith__icon--content textwith__icon--content--{{ section.id }}{% if section.settings.appearance == 'inline' %} appearance--inline{% endif %} grid__wrapper gr0">
+        {% for block in section.blocks %}
+          <div class="textwith__icon--content-block"
+            data-aos="fade"
+            data-aos-delay="{{ forloop.index | times: 100 }}"
+            {{ block.shopify_attributes }}>
+
+            {% if block.settings.image == blank %}
+              <div class="icon__wrapper{% unless section.settings.appearance == 'inline' %} center{% endunless %}">
+                {% if has_link %}<a href="{{ block.settings.link }}" title="{{ block.settings.text | escape }}">{% endif %}
+                {% liquid
+                  assign icon = block.settings.icon
+                  assign type = 'fash-theme'
+                  case icon
+                  when 'bag', 'cart', 'chat', 'checkmark', 'gift', 'grid', 'home', 'menu-dots', 'money', 'promo', 'sale-tag', 'search', 'secure', 'share', 'ship-truck', 'star', 'user', 'wish', 'wish-focus'
+                    assign type = 'apollo'
+                  endcase
+                %}
+                {% render 'snip-icons',
+                   wrapper: '.text__block-icon',
+                   type: type,
+                   icon: block.settings.icon,
+                   size: section.settings.icon_height | append 'px',
+                   fill: section.settings.color %}
+                {% if has_link %}</a>{% endif %}
+              </div>
+            {% else %}
+              <div class="icon__image-wrapper{% unless section.settings.appearance == 'inline' %} center{% endunless %}">
+                {%
+                  render 'basic-responsive-image',
+                  type: block.settings.image,
+                  width: 1200
+                %}
+              </div>
+            {% endif %}
+            <div class="rte{% unless section.settings.appearance == 'inline' %} center{% endunless %}">
+              {{ block.settings.rich_text }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <style type="text/css">
+        @media screen and (max-width: 740px) {
+          .textwith__icon--content--{{ section.id }} {
+            {% if section.blocks.size > 3 %}
+              grid-template-columns: 1fr 1fr;
+            {% else %}
+              grid-template-columns: 1fr;
+            {% endif %}
+          }
+        }
+      </style>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Text with icons",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Welcome"
+    },
+    {
+      "type": "range",
+      "id": "icon_height",
+      "min": 20,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Icon height",
+      "default": 20
+    },
+    {
+      "type": "radio",
+      "id": "appearance",
+      "label": "Appearance",
+      "options": [
+        {
+          "value": "inline",
+          "label": "Inline"
+        },
+        {
+          "value": "icon_above",
+          "label": "Icon above"
+        }
+      ],
+      "default": "inline"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Text color",
+      "default": "#000"
+    },
+    {
+      "type": "select",
+      "id": "section_padding",
+      "label": "Section spacing",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "both",
+          "label": "Both"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "both"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text_block",
+      "name": "Column",
+      "settings": [
+        {
+            "type": "select",
+            "id": "icon",
+            "label": "Choose an icon",
+            "options": [
+            {
+              "value": "appliance",
+              "label": "Appliance"
+            },
+            {
+              "value": "bag",
+              "label": "Bag"
+            },
+            {
+              "value": "battery",
+              "label": "Battery"
+            },
+            {
+              "value": "bed",
+              "label": "Bed"
+            },
+            {
+              "value": "bell",
+              "label": "Bell"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "camera",
+              "label": "Camera"
+            },
+            {
+              "value": "chair",
+              "label": "Chair"
+            },
+            {
+              "value": "chat",
+              "label": "Chat"
+            },
+            {
+              "value": "checkmark",
+              "label": "Checkmark"
+            },
+            {
+              "value": "child",
+              "label": "Child"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "disability",
+              "label": "Disability"
+            },
+            {
+              "value": "dishwasher",
+              "label": "Dishwasher"
+            },
+            {
+              "value": "display",
+              "label": "Display"
+            },
+            {
+              "value": "drill",
+              "label": "Drill"
+            },
+            {
+              "value": "drink",
+              "label": "Drink"
+            },
+            {
+              "value": "eco",
+              "label": "Eco"
+            },
+            {
+              "value": "filter",
+              "label": "Filter"
+            },
+            {
+              "value": "flower",
+              "label": "Flower"
+            },
+            {
+              "value": "food",
+              "label": "Food"
+            },
+            {
+              "value": "gift",
+              "label": "Gift"
+            },
+            {
+              "value": "globe",
+              "label": "Globe"
+            },
+            {
+              "value": "grid",
+              "label": "Grid"
+            },
+            {
+              "value": "hammer",
+              "label": "Hammer"
+            },
+            {
+              "value": "hanger",
+              "label": "Hanger"
+            },
+            {
+              "value": "headphones",
+              "label": "Headphones"
+            },
+            {
+              "value": "wish",
+              "label": "Heart"
+            },
+            {
+              "value": "wish-focus",
+              "label": "Heart filled"
+            },
+            {
+              "value": "help",
+              "label": "Help"
+            },
+            {
+              "value": "home",
+              "label": "Home"
+            },
+            {
+              "value": "laptop",
+              "label": "Laptop"
+            },
+            {
+              "value": "laundry",
+              "label": "Laundry"
+            },
+            {
+              "value": "lights",
+              "label": "Lights"
+            },
+            {
+              "value": "location",
+              "label": "Location"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "menu-dots",
+              "label": "Menu dots"
+            },
+            {
+              "value": "microphone",
+              "label": "Microphone"
+            },
+            {
+              "value": "money",
+              "label": "Money"
+            },
+            {
+              "value": "oven",
+              "label": "Oven"
+            },
+            {
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "value": "pine",
+              "label": "Pine"
+            },
+            {
+              "value": "planet",
+              "label": "Planet"
+            },
+            {
+              "value": "promo",
+              "label": "Promo"
+            },
+            {
+              "value": "receiver",
+              "label": "Receiver"
+            },
+            {
+              "value": "returns",
+              "label": "Returns"
+            },
+            {
+              "value": "sale-tag",
+              "label": "Sale tag"
+            },
+            {
+              "value": "search",
+              "label": "Search"
+            },
+            {
+              "value": "secure",
+              "label": "Secure"
+            },
+            {
+              "value": "security",
+              "label": "Security"
+            },
+            {
+              "value": "share",
+              "label": "Share"
+            },
+            {
+              "value": "ship-truck",
+              "label": "Shipping truck"
+            },
+            {
+              "value": "speaker",
+              "label": "Speaker"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "support",
+              "label": "Support"
+            },
+            {
+              "value": "trophy",
+              "label": "Trophy"
+            },
+            {
+              "value": "tv",
+              "label": "TV"
+            },
+            {
+              "value": "user",
+              "label": "User"
+            },
+            {
+              "value": "verified",
+              "label": "Verified"
+            },
+            {
+              "value": "video",
+              "label": "Video"
+            },
+            {
+              "value": "watch",
+              "label": "Watch"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Or add a custom image",
+          "info": "80px x 80px recommended"
+        },
+        {
+          "type": "richtext",
+          "id": "rich_text",
+          "label": "Text",
+          "default": "<p>Add text with an image or icon</p>"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text with icons",
+      "blocks": [
+          {
+            "type": "text_block",
+            "settings": {
+              "icon": "ship-truck",
+              "rich_text": "<p>Add text with an image or icon<\/p>",
+              "link": ""
+            }
+          },
+          {
+            "type": "text_block",
+            "settings": {
+              "icon": "gift",
+              "rich_text": "<p>Add text with an image or icon<\/p>",
+              "link": ""
+            }
+          },
+          {
+            "type": "text_block",
+            "settings": {
+              "icon": "star",
+              "rich_text": "<p>Add text with an image or icon<\/p>",
+              "link": ""
+            }
+          }
+        ]
+    }
+  ]
+}
+{% endschema %}

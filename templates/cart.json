@@ -1,0 +1,40 @@
+{
+  "sections": {
+    "banner": {
+      "type": "banner-image",
+      "settings": {
+      }
+    },
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+      }
+    },
+    "main": {
+      "type": "main-cart",
+      "settings": {
+        "link": ""
+      }
+    },
+    "rich_text_DX67mQ": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "",
+        "rich_text": "<p><em>Please Note: There is a one-week shipping delay on all orders. We appreciate your patience and understanding.<\/em><\/p>",
+        "page": "",
+        "link": "",
+        "link_text": "",
+        "background": "#ffffff",
+        "color": "#000",
+        "width": 60,
+        "section_padding": "none"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "breadcrumbs",
+    "main",
+    "rich_text_DX67mQ"
+  ]
+}

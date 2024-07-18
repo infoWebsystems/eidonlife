@@ -1,0 +1,209 @@
+{%- liquid
+
+  case settings.product_image_size
+    when 'natural'
+      assign aspect_ratio = 'natural'
+    when 'square'
+      assign aspect_ratio = 'square'
+    when 'landscape'
+      assign aspect_ratio = 'landscape'
+    when 'portrait'
+      assign aspect_ratio = 'portrait'
+  endcase
+
+  assign show_swatches = false
+  assign show_sizes = false
+  assign show_quickview = false
+  assign show_quickadd = false
+
+  if settings.quickview_type != 'none'
+    assign show_quickview = true
+  endif
+
+  if settings.quickadd
+    assign show_quickadd = true
+  endif
+
+  if settings.show_collection_swatches
+    assign show_swatches = true
+  endif
+
+  if settings.show_collection_sizes
+    assign show_sizes = true
+  endif
+
+-%}
+
+<div class="prod-container">
+  {% if product.available %}
+   {% for col in product.collections %}
+     {% if col.handle == 'new' %}
+      <div class="new icn">{{ 'products.general.new' | t }}</div>
+     {% endif %}
+   {% endfor %}
+     {% if product.price < product.compare_at_price %}
+      <div class="sale-item sale-item--{{ settings.sale_items }} icn">
+        {% case settings.sale_items %}
+          {% when 'percentage' %}
+            {% if product.price_varies or product.compare_at_price_varies %}
+              {{ 'products.general.sale' | t }}
+            {% else %}
+              {% assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price %}
+              {% assign discount = discount | round | append: '%' %}
+              {{ 'products.general.savings' | t: savings: discount }}
+            {% endif %}
+          {% when 'amount' %}
+            {% if product.price_varies or product.compare_at_price_varies %}
+              {{ 'products.general.sale' | t }}
+            {% else %}
+              {% assign discount = product.compare_at_price | minus: product.price | money %}
+              {{ 'products.general.savings' | t: savings: discount }}
+            {% endif %}
+          {% when 'icon' %}
+            {{ 'products.general.sale' | t }}
+        {% endcase %}
+      </div>
+     {% endif %}
+     {% if product.template_suffix == 'pre-order' %}
+      <div class="pre-order icn">{{ 'products.product.pre_order' | t }}</div>
+    {% endif %}
+   {% else %}
+    <div class="so icn">{{ 'products.general.sold' | t }}</div>
+   {% endif %}
+
+   <div class="prod-image image_{{ aspect_ratio }} js-product-image">
+     <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+       <div class="reveal">
+
+        {%- if product.media.size < 1 -%}
+
+          <div class="box-ratio" style="padding-bottom: 100%;">
+            {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+            {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+
+        {% else %}
+
+          {% if
+            product.featured_media.media_type == 'video' or
+            product.featured_media.media_type == 'external_video'
+          %}
+
+            {% if settings.product_grid_video %}
+              {% render 'product-loop-video', product: product %}
+            {% endif %}
+            {%
+              render "basic-responsive-image",
+              type: product.featured_media.preview_image,
+              width: 800,
+              loading: loading,
+              fetchpriority: fetchpriority
+            %}
+
+          {% else %}
+
+            {%
+              render 'basic-responsive-image',
+                type: product.featured_media,
+                width: 1200,
+                loading: loading,
+                fetchpriority: fetchpriority
+            %}
+
+          {% endif %}
+
+          {% if
+            settings.secondary_images_hover and
+            product.media.size > 1 and
+            second_image.media_type == 'image'
+          %}
+            <div class="hidden">
+              {%
+                render 'basic-responsive-image',
+                type: product.media[1].preview_image,
+                width: 800
+              %}
+            </div>
+          {% elsif
+            settings.secondary_images_hover and
+            product.media.size > 1 and
+            second_image.media_type != 'image'
+          %}
+            <div class="hidden">
+              {%
+                render 'basic-responsive-image',
+                type: product.media[1].preview_image
+                width: 800
+              %}
+            </div>
+          {% endif %}
+        {%- endif -%}
+       </div>
+     </a>
+   </div>
+
+   {% if settings.quickview_type != 'none' %}
+
+    {%- liquid
+
+      if settings.quickview_type == 'modal'
+        assign quickview_classes = 'js-modal-open'
+        assign quickview_settings = 'data-wau-modal-target="quickview"'
+      else
+        assign quickview_classes = 'js-slideout-open'
+        assign quickview_settings = 'data-wau-slideout-target="quickview" data-slideout-direction="right"'
+      endif
+
+    -%}
+
+     <button class="quick-view-{{ product.id }} product-listing__quickview-trigger {{ quickview_classes }} js-quickview-trigger"
+       type="button"
+       name="button"
+       {{ quickview_settings }}
+       data-product-url="{{ product.url }}?view=quick">{{ 'products.general.quick_view' | t }}</button>
+   {% endif %}
+
+   {% if show_quickadd and product.available %}
+      {% render 'product-grid-add'
+        product: product,
+        color_swatch_style: settings.color_swatch_style,
+        show_quickview: show_quickview,
+        show_sizes: show_sizes,
+        show_swatches: show_swatches %}
+   {% endif %}
+
+</div>
+
+<div class="product-info">
+  <a href="{{ product.url | within: collection }}">
+    {% if settings.vendor %}
+      <p class="product__vendor">{{ product.vendor }}</p>
+    {% endif %}
+    <h2>{{ product.title }}</h2>
+  </a>
+
+  {% render 'product-price-listing', product: product %}
+
+  {% assign meta_1 = product.metafields.custom.feature_1 %}
+  {% assign meta_2 = product.metafields.custom.feature_2 %}
+  {% assign meta_3 = product.metafields.custom.feature_3 %}
+
+  {% if meta_1 != blank or meta_2 != blank or meta_3 != blank %}
+    <ul class="meta-content">
+      <strong>{{ 'products.product.features' | t }}</strong>
+      {% if meta_1 != blank %}
+        <li>{{ meta_1 }}{% endif %}{% if meta_2 != blank %},</li>
+        <li>{{ meta_2 }}{% endif %}{% if meta_3 != blank %},</li>
+        <li>{{ meta_3 }}{% endif %}</li>
+    </ul>
+  {% endif %}
+
+  {% if show_swatches or show_sizes %}
+    {% render 'product-listing-swatches'
+      product: product,
+      show_swatches: show_swatches,
+      show_sizes: show_sizes
+    %}
+    {% endif %}
+
+</div>

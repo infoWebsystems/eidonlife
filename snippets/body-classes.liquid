@@ -1,0 +1,33 @@
+{%- comment -%}
+snippets/body-classes.liquid
+
+snippet to render classes based on theme settings on the body element.
+{%- endcomment -%}
+{%- liquid
+
+  assign body_classes = ''
+
+  assign base_class = 'theme-features__'
+
+
+  if template contains 'product'
+    assign body_classes = body_classes | append: body_classes | append: ' ' | append: 'product'
+  elsif template contains 'collection'
+    assign body_classes = body_classes | append: body_classes | append: ' ' | append: 'collection'
+  else
+    assign body_classes = body_classes | append: body_classes | append: ' ' | append: template | handleize
+  endif
+
+  assign body_classes = body_classes | append: ' ' | append: base_class | append: 'product-variants--' | append: settings.product_variants
+
+  assign body_classes = body_classes | append: ' ' | append: base_class | append: 'section-title-border--' | append: settings.section_title_border
+
+  assign body_classes = body_classes | append: ' ' | append: base_class | append: 'details-align--' | append: settings.details_align
+
+  assign body_classes = body_classes | append: ' ' | append: base_class | append: 'image-hover-transition--' | append: settings.hover_transition
+  
+  assign body_classes = body_classes | append: ' ' | append: base_class | append: 'ghost-buttons--' | append: settings.ghost_buttons
+
+  echo body_classes | strip
+
+ -%}

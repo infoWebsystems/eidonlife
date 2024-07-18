@@ -1,0 +1,86 @@
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "banner": {
+      "type": "banner-image",
+      "settings": {
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "page_alignment": "a-left"
+      }
+    },
+    "7fc04250-e999-479e-bed7-52a0b7648e08": {
+      "type": "collection-list",
+      "blocks": {
+        "template--14691918708821__7fc04250-e999-479e-bed7-52a0b7648e08-16661104522b50b224-0": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "bikinis"
+          }
+        },
+        "template--14691918708821__7fc04250-e999-479e-bed7-52a0b7648e08-16661104522b50b224-1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "one-pieces"
+          }
+        },
+        "template--14691918708821__7fc04250-e999-479e-bed7-52a0b7648e08-16661104522b50b224-3": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "d-cups"
+          }
+        },
+        "template--14691918708821__7fc04250-e999-479e-bed7-52a0b7648e08-16661104522b50b224-2": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "surf"
+          }
+        },
+        "819623a2-6a77-47c7-9186-77209b04c133": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "clothing"
+          }
+        },
+        "832136be-59b6-4b21-92cd-c5559879c71e": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "summer-2023"
+          }
+        }
+      },
+      "block_order": [
+        "template--14691918708821__7fc04250-e999-479e-bed7-52a0b7648e08-16661104522b50b224-0",
+        "template--14691918708821__7fc04250-e999-479e-bed7-52a0b7648e08-16661104522b50b224-1",
+        "template--14691918708821__7fc04250-e999-479e-bed7-52a0b7648e08-16661104522b50b224-3",
+        "template--14691918708821__7fc04250-e999-479e-bed7-52a0b7648e08-16661104522b50b224-2",
+        "819623a2-6a77-47c7-9186-77209b04c133",
+        "832136be-59b6-4b21-92cd-c5559879c71e"
+      ],
+      "settings": {
+        "title": "",
+        "grid": 4,
+        "carousel": false,
+        "collection_count": true,
+        "title_position": "below_image",
+        "image_ratio": "natural",
+        "section_padding": "none"
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "banner",
+    "main",
+    "7fc04250-e999-479e-bed7-52a0b7648e08"
+  ]
+}

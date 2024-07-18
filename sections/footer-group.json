@@ -1,0 +1,73 @@
+{
+  "name": "Footer",
+  "type": "footer",
+  "sections": {
+    "6e1e7f0e-a8ab-4b5d-b533-03e147b1d76c": {
+      "type": "newsletter",
+      "disabled": true,
+      "settings": {
+        "show_social_icons": false,
+        "heading": "",
+        "newsletter_subheading": "<p><strong>Get the latest news, products and discounts (including 10% off your next purchase) straight to your inbox.<\/strong><\/p>",
+        "text_color": "#ffffff",
+        "newsletter_background": "#acacac",
+        "newsletter_button_color": "#ffffff"
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "1480973024958": {
+          "type": "text",
+          "settings": {
+            "heading": "#LiveTravelSurf",
+            "footer_text": "<p>Eidon was created to stoke the adventurous flame inside all of us. Active ladies who live for discovering new places, basking in the fresh air, and chasing the surf all year‘round, this one’s for you. At Eidon, our philosophy — “live, travel, surf” — is more than just a phrase. It’s a lifestyle.<\/p>"
+          }
+        },
+        "1522183092230": {
+          "type": "menu",
+          "settings": {
+            "footer_nav": "about",
+            "heading": "About"
+          }
+        },
+        "d1e139a4-3a41-4d51-967e-660c106795b8": {
+          "type": "menu",
+          "settings": {
+            "footer_nav": "customer-service",
+            "heading": "Customer Service"
+          }
+        },
+        "1480972996114": {
+          "type": "menu",
+          "settings": {
+            "footer_nav": "footer",
+            "heading": "Explore"
+          }
+        }
+      },
+      "block_order": [
+        "1480973024958",
+        "1522183092230",
+        "d1e139a4-3a41-4d51-967e-660c106795b8",
+        "1480972996114"
+      ],
+      "settings": {
+        "footer_text_align": "left",
+        "footer_title_transform": "uppercase",
+        "footer_title_size": 14,
+        "show_credit_cards": true,
+        "show_social_icons": true,
+        "enable_follow_on_shop": true,
+        "show_copyright": true,
+        "show_locale_selector": false,
+        "show_country_selector": false,
+        "show_flag": true
+      }
+    }
+  },
+  "order": [
+    "6e1e7f0e-a8ab-4b5d-b533-03e147b1d76c",
+    "footer"
+  ]
+}

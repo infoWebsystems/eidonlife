@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "page_alignment": "a-center"
+      }
+    },
+    "form": {
+      "type": "contact-form",
+      "settings": {
+        "title": "",
+        "section_padding": "both"
+      }
+    },
+    "banner": {
+      "type": "banner-image",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "breadcrumbs",
+    "main",
+    "form"
+  ]
+}

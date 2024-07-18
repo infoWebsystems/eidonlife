@@ -1,0 +1,35 @@
+<section class="global__section row grid__wrapper">
+  <div id="page" 
+    class="span-12 auto" 
+    data-section-id="{{ section.id }}"
+    data-aos="fade">
+    {%- if page.content != blank -%}
+      <div class="rte {{ section.settings.page_alignment }}">
+        {{ page.content }}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Page template",
+  "settings": [
+    {
+      "type": "select",
+      "id": "page_alignment",
+      "label": "Content alignment",
+      "default": "a-left",
+      "options": [
+        {
+          "value": "a-left",
+          "label": "Left"
+        },
+        {
+          "value": "a-center",
+          "label": "Center"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

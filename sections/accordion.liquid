@@ -1,0 +1,152 @@
+{% comment %}Accordion Logic {% endcomment %}
+{%- liquid
+
+  assign section_padding = ''
+  if section.settings.section_padding == 'top'
+    assign section_padding = 'pb0'
+  elsif section.settings.section_padding == 'bottom'
+    assign section_padding = 'mt0'
+  elsif section.settings.section_padding == 'none'
+    assign section_padding = 'mt0 pb0'
+  endif
+
+  assign unique_id = section.id | slice: -7, 7
+
+  if section.settings.allow_multiple
+    assign allow_multiple = true
+  endif
+
+  if section.settings.title != blank
+    assign grid_width = 'span-9'
+  else
+    assign grid_width = 'span-12'
+  endif
+
+-%}
+
+{% comment %} Accordion Template {% endcomment %}
+<section class="accordion__section global__section row section-{{ section.id }} {{ section_padding }}">
+  <div class="accordion__section-inner-wrapper grid__wrapper">
+    {% if section.settings.title != blank %}
+      <div class="accordion__section-title span-3 sm-span-12 auto">
+        <h2>{{ section.settings.title | escape }}</h2>
+      </div>
+    {% endif %}
+    <div class="accordion__section-content {{ grid_width }} sm-span-12 auto">
+      <div class="js-accordion c-accordion c-accordion--{{ unique_id }} c-accordion--custom-page" id="c-accordion--{{ unique_id }}" {% if allow_multiple %}data-accordion-allow-multiple{% endif %}>
+       {% for block in section.blocks %}
+
+       {%- liquid
+
+         assign accordion_content_class = 'c-accordion__panel--'
+         assign accordion_content_id = accordion_content_class | append: unique_id | append: '-' | append: forloop.index
+
+         assign defaultOpen = section.settings.default_open_accordion
+
+        if block.settings.title != blank
+          assign accordion_title = block.settings.title
+        endif
+
+        if block.settings.content != blank
+          assign accordion_content = block.settings.content
+        endif
+
+       -%}
+
+         {% if accordion_title %}
+            <button class="js-accordion-header c-accordion__header" 
+              data-aos="fade"
+              data-aos-delay="{{ forloop.index | times: 100 }}"
+              aria-expanded="false" 
+              aria-controls="{{ accordion_content_id }}" 
+              data-toggle="accordion">
+              {{ accordion_title }}
+            </button>
+             <div class="c-accordion__panel {{ accordion_content_id }} rte" id="{{ accordion_content_id }}" data-parent="#c-accordion--{{ unique_id }}">
+              <div class="c-accordion__inner">
+               {{ accordion_content }}
+              </div>
+             </div>
+         {% endif %}
+       {% endfor %}
+      </div>
+    </div>
+  </div>
+  <style>
+    @media screen and (min-width: 741px) {
+      .accordion__section.section-{{ section.id }} .accordion__section-inner-wrapper {
+        width: {{ section.settings.max_width }}%;
+        margin: 0 auto;
+      }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Accordion",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Accordion"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Content width less than 100% width will center on the page",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "allow_multiple",
+      "label": "Allow multiple accordions open at one time",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "accordion_pane",
+      "name": "Accordion pane",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Accordion pane content</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Accordion",
+      "blocks": [
+        {
+          "type": "accordion_pane"
+        },
+        {
+          "type": "accordion_pane"
+        },
+        {
+          "type": "accordion_pane"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

@@ -1,0 +1,86 @@
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "banner_image_type": "collection"
+      }
+    },
+    "d4754f19-003f-450a-8e5b-fa02ea6f4f8b": {
+      "type": "apps",
+      "blocks": {
+        "6269c4f0-85b0-4de2-9943-f6f7b8f1ee4c": {
+          "type": "shopify:\/\/apps\/boost-ai-search-discovery\/blocks\/product-filter\/7fc998ae-a150-4367-bab8-505d8a4503f7",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "6269c4f0-85b0-4de2-9943-f6f7b8f1ee4c"
+      ],
+      "settings": {
+        "section_padding": "both"
+      }
+    },
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "promo": {
+      "type": "promotional-banner",
+      "disabled": true,
+      "settings": {
+        "background_color": "#f5f5f5",
+        "link": "",
+        "text_align": "center",
+        "heading": "Heading",
+        "subheading": "<p>Add a short sentence to your banner<\/p>",
+        "button_text": "Button",
+        "heading_font_size": 26,
+        "subheading_font_size": 16,
+        "text_color": "#000000",
+        "button_text_color": "#ffffff",
+        "button_color": "#000000",
+        "section_padding": "bottom"
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "blocks": {
+        "bef67807-6de8-4afa-b1fe-bc0a46351382": {
+          "type": "side_sortby",
+          "settings": {
+          }
+        },
+        "cea9f996-51a8-4b3a-8837-6975c0590a9c": {
+          "type": "side_filter",
+          "settings": {
+            "show_color_swatches": true,
+            "show_filter_count": true
+          }
+        }
+      },
+      "block_order": [
+        "bef67807-6de8-4afa-b1fe-bc0a46351382",
+        "cea9f996-51a8-4b3a-8837-6975c0590a9c"
+      ],
+      "disabled": true,
+      "settings": {
+        "rows": 4,
+        "grid": 3,
+        "show_image": false,
+        "description_position": "top"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "d4754f19-003f-450a-8e5b-fa02ea6f4f8b",
+    "breadcrumbs",
+    "promo",
+    "main"
+  ],
+  "wrapper": ".boost-sd__product-filter-fallback"
+}

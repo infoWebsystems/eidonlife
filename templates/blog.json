@@ -1,0 +1,52 @@
+{
+  "sections": {
+    "banner": {
+      "type": "banner-image",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+      }
+    },
+    "main": {
+      "type": "main-blog",
+      "blocks": {
+        "7525a920-821c-4c2f-af95-76eb0141ecc7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/LATEST-ARRIVALS-Citrus.jpg",
+            "link": "shopify:\/\/collections\/latest-arrivals"
+          }
+        },
+        "d8daa176-308f-4aea-a55e-f53d51249821": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Subscribe",
+            "text": "<p>Get the latest news, products and discounts (including 10% off your next purchase) straight to your inbox.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "7525a920-821c-4c2f-af95-76eb0141ecc7",
+        "d8daa176-308f-4aea-a55e-f53d51249821"
+      ],
+      "settings": {
+        "text": "",
+        "tag_navigation": true,
+        "article_tags": true,
+        "show_author": true,
+        "show_date": true,
+        "sidebar_text_align": "center",
+        "sidebar_block_border": true
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "breadcrumbs",
+    "main"
+  ]
+}

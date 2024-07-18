@@ -1,0 +1,64 @@
+{%- liquid
+
+  assign color = section.settings.color
+  assign background = section.settings.background
+
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --text-color: {{ color }};
+    --section-background: {{ background }};
+  }
+  @media screen and (min-width: 800px) {
+    .promotion__bar-section.section-{{ section.id }} .promotion__bar-content .rte {
+      width: {{ width }};
+      margin: 0 auto;
+    }
+  }
+</style>
+
+<section class="global__section section-{{ section.id }} promotion__bar-section mt0 pb0" data-section-id="{{ section.id }}" data-aos="fade">
+  <div class="row grid__wrapper gr0">
+
+    <div class="promotion__bar--content span-12 auto">
+        <div class="rte text-center">
+          {{ section.settings.rich_text }}
+        </div>
+    </div>
+
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Promotion bar",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "rich_text",
+      "label": "Text",
+      "default": "<p>Add a promotion bar to highlight sales or promote content</p>"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Text color",
+      "default": "#000"
+    }
+  ],
+  "presets": [{
+    "name": "Promotion bar"
+  }],
+  "disabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

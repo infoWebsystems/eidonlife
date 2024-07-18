@@ -1,0 +1,67 @@
+<div class="article-info">
+
+  {% if article.image %}
+    <div class="article-image">
+      <a href="{{ article.url }}">
+        {% liquid
+          if forloop.index < 3
+            assign loading = 'eager'
+            assign fetch_priority = 'high'
+          endif
+         %}
+        {%
+          render 'basic-responsive-image',
+          type: article.image,
+          width: 1200,
+          loading: loading,
+          fetchpriority: fetch_priority
+        %}
+      </a>
+    </div>
+  {% endif %}
+
+  <div class="article-info-inner">
+    <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+
+    {% if article.tags.size > 0 and section.settings.article_tags %}
+      <ul class="article-tags">
+        {% for tag in article.tags %}
+          <li>
+            <a href="{{ blog.url }}/tagged/{{ tag | handle }}">
+              {{ tag }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% assign published_at = article.published_at | date: format: 'month_date_year' %}
+    {% if section.settings.show_date or section.settings.show_author %}
+      <p class="posted">
+        {% if section.settings.show_author %}
+          <span class="post_meta">
+            {{ article.user.first_name }}
+          </span>
+        {% endif %}
+        {% if section.settings.show_date %}
+          <span class="post_meta">
+            {{ 'blogs.article.posted_on_date_html' | t: date: published_at }}
+          </span>
+        {% endif %}
+      </p>
+    {% endif %}
+
+    <div class="article-content">
+      {% if article.excerpt == blank %}
+        {{ article.content | strip_html | truncatewords: 50 }}
+      {% else %}
+        {{ article.excerpt }}
+      {% endif %}
+    </div>
+
+    <div class="readmore">
+      <a href="{{ article.url }}">{{ 'blogs.article.read_more' | t }}</a>
+    </div>
+
+  </div>
+</div>

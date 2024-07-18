@@ -1,0 +1,269 @@
+{
+  "sections": {
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "35068d49-a78a-4416-86f9-c422c0965481": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Eidon-S23-Reskin-Desktop-min.jpg",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
+            "caption_position": "middle_right",
+            "mobile_image": "shopify:\/\/shop_images\/Eidon-S23-Reskin-Mobile-min.jpg",
+            "heading": "",
+            "subheading": "",
+            "link": "shopify:\/\/collections\/latest-arrivals",
+            "button_text": "latest arrivals >>",
+            "second_link": "",
+            "second_button_text": "Button 2 text",
+            "text_color": "#000000",
+            "button_color": "#313131",
+            "button_background": "#ffffff"
+          }
+        },
+        "d3250875-f7c1-40bb-aec9-87edb0224b73": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Desktop-min.jpg",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
+            "caption_position": "middle_right",
+            "mobile_image": "shopify:\/\/shop_images\/Mobile-min.jpg",
+            "heading": "",
+            "subheading": "",
+            "link": "shopify:\/\/collections\/all",
+            "button_text": "shop all products >>",
+            "second_link": "",
+            "second_button_text": "Button 2 text",
+            "text_color": "#000000",
+            "button_color": "#313131",
+            "button_background": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "35068d49-a78a-4416-86f9-c422c0965481",
+        "d3250875-f7c1-40bb-aec9-87edb0224b73"
+      ],
+      "settings": {
+        "pager": "dots",
+        "slider_speed": 5,
+        "slide_heading_size": 36,
+        "subheading_size": 25,
+        "section_padding": "bottom"
+      }
+    },
+    "image-gallery": {
+      "type": "image-gallery",
+      "blocks": {
+        "335d5c34-3ab9-45ce-918b-47288dbef5ee": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/EIDON-S22-Bikinis_03.jpg",
+            "image_width": "25%",
+            "link": "shopify:\/\/collections\/bikinis",
+            "subheading": "",
+            "button_text": "",
+            "caption_position": "middle_center",
+            "hover_caption": false,
+            "caption_background": "rgba(0,0,0,0)",
+            "text_color": "#000000",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "a7dbca9b-0905-4449-9f2e-a167368e3828": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Artboard_21.png",
+            "image_width": "25%",
+            "link": "shopify:\/\/collections\/one-pieces",
+            "subheading": "",
+            "button_text": "",
+            "caption_position": "middle_center",
+            "hover_caption": false,
+            "caption_background": "rgba(0,0,0,0)",
+            "text_color": "#000000",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "453f2c03-32be-493e-a961-2dd9317d5761": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Artboard_31.png",
+            "image_width": "25%",
+            "link": "shopify:\/\/collections\/surf",
+            "subheading": "",
+            "button_text": "",
+            "caption_position": "middle_center",
+            "hover_caption": false,
+            "caption_background": "rgba(0,0,0,0)",
+            "text_color": "#000000",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "1a9a9884-5fd0-4b1c-9ac0-02e20222bdf5": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/EIDON-S22-Clothing_01.jpg",
+            "image_width": "25%",
+            "link": "",
+            "subheading": "",
+            "button_text": "",
+            "caption_position": "middle_center",
+            "hover_caption": false,
+            "caption_background": "#ffffff",
+            "text_color": "#000000",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "335d5c34-3ab9-45ce-918b-47288dbef5ee",
+        "a7dbca9b-0905-4449-9f2e-a167368e3828",
+        "453f2c03-32be-493e-a961-2dd9317d5761",
+        "1a9a9884-5fd0-4b1c-9ac0-02e20222bdf5"
+      ],
+      "settings": {
+        "full_width": true,
+        "swipe": true,
+        "images_touching": false,
+        "section_padding": "top"
+      }
+    },
+    "1626727788d94cc42e": {
+      "type": "text-banner",
+      "blocks": {
+        "1626727788d94cc42e-0": {
+          "type": "text",
+          "settings": {
+            "heading": "FREE SHIPPING",
+            "textarea": "<p>Spend $60 USD and to get FREE shipping to Canada & USA<\/p>"
+          }
+        },
+        "1626727788d94cc42e-1": {
+          "type": "text",
+          "settings": {
+            "heading": "RETURN POLICY",
+            "textarea": "<p>You may return items within 30 days from the delivery date<\/p>"
+          }
+        },
+        "1626727788d94cc42e-2": {
+          "type": "text",
+          "settings": {
+            "heading": "TRUE TO SIZE",
+            "textarea": "<p><a href=\"\/pages\/fit-guide\" target=\"_blank\" title=\"Fit Guide\"><strong>Click here<\/strong><\/a><strong> <\/strong>to consult our comprehensive fit guide<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "1626727788d94cc42e-0",
+        "1626727788d94cc42e-1",
+        "1626727788d94cc42e-2"
+      ],
+      "settings": {
+        "notification_heading_size": 23,
+        "notification_font_size": 14,
+        "vertical_spacing": 30,
+        "spacing": 20,
+        "background": "#444444",
+        "text_color": "#ffffff",
+        "add_divider": true,
+        "section_padding": "bottom"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Discover: Color Field",
+        "collection": "color-field",
+        "carousel": true,
+        "show_view_all": true,
+        "reduce_width": true,
+        "grid": 4,
+        "limit": 9,
+        "section_padding": "none"
+      }
+    },
+    "5b14a444-3a34-41af-99c5-bba7db2b52ec": {
+      "type": "image-with-text",
+      "settings": {
+        "full_width": true,
+        "section_padding": "both",
+        "layout": "left",
+        "image_width": "50%",
+        "text_align": "center",
+        "heading": "Introducing #EidonAdventurer Carlie Eastwood",
+        "text": "<p>Get to know Carlie Eastwood, a young surfer from Florida who aspires to go pro one day!<\/p><p>Discover why this Eidon Adventurer embodies the LIVE, TRAVEL, SURF spirit in our exclusive one-on-one interview.<\/p>",
+        "button": "read the interview",
+        "link": "shopify:\/\/blogs\/news\/adventurer-carlie",
+        "background": "rgba(0,0,0,0)",
+        "color": "#000000"
+      }
+    },
+    "d14c33b8-197c-4190-b8cc-aae04776737f": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "#EverydayAdventurers",
+        "rich_text": "<p>Tag <a href=\"https:\/\/instagram.com\/EidonLife\" target=\"_blank\">@EidonLife<\/a> + <a href=\"https:\/\/instagram.com\/explore\/tags\/LiveTravelSurf\" target=\"_blank\">#LiveTravelSurf<\/a> for a chance to be featured<\/p>",
+        "page": "",
+        "link": "",
+        "link_text": "",
+        "background": "rgba(0,0,0,0)",
+        "color": "#000000",
+        "width": 60,
+        "section_padding": "none"
+      }
+    },
+    "16661071288a330574": {
+      "type": "apps",
+      "blocks": {
+        "67b8f666-9e22-42a9-beea-56273dd85d62": {
+          "type": "shopify:\/\/apps\/foursixty-shoppable-social-ugc\/blocks\/custom_slider\/e2616dfe-fbb6-4e7d-874d-d250b973556d",
+          "settings": {
+            "foreground_color": "#ffffff",
+            "background_color": "#000000",
+            "background_color_alpha": 90,
+            "post_spacing": 1,
+            "hover_margin": 0,
+            "cell_size": "20%",
+            "target_blank": false,
+            "arrows_outside": true,
+            "show_icon": true,
+            "show_text": false,
+            "show_date": false,
+            "call_to_action": "SHOP IT",
+            "shop_type": "button",
+            "body_font_size": 14,
+            "body_font": "helvetica_n4",
+            "accent_font_size": 14,
+            "accent_font": "helvetica_n4",
+            "override_feed_id": "",
+            "arbitrary_attributes": "",
+            "custom_css": "",
+            "custom_js": ""
+          }
+        }
+      },
+      "block_order": [
+        "67b8f666-9e22-42a9-beea-56273dd85d62"
+      ],
+      "settings": {
+        "section_padding": "both"
+      }
+    }
+  },
+  "order": [
+    "slideshow",
+    "image-gallery",
+    "1626727788d94cc42e",
+    "featured-collection",
+    "5b14a444-3a34-41af-99c5-bba7db2b52ec",
+    "d14c33b8-197c-4190-b8cc-aae04776737f",
+    "16661071288a330574"
+  ]
+}

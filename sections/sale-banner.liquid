@@ -1,0 +1,290 @@
+{%- liquid
+
+  assign section_padding = ''
+  if section.settings.section_padding == 'top'
+    assign section_padding = 'pb0'
+  elsif section.settings.section_padding == 'bottom'
+    assign section_padding = 'mt0'
+  elsif section.settings.section_padding == 'none'
+    assign section_padding = 'mt0 pb0'
+  endif
+
+  assign section_title = false
+  if section.settings.title != blank
+    assign section_title = true
+  endif
+
+  assign full_width = false
+  if section.settings.display_wide
+   assign full_width = true
+  endif
+
+  assign color = section.settings.text_color
+  assign background = section.settings.background
+
+-%}
+
+<style>
+
+  #shopify-section-{{ section.id }} {
+    --text-color: {{ color }};
+    --section-background: {{ background }};
+  }
+
+  .section-{{ section.id }} .coupon__code-outer-wrapper {
+    {% if section_title %}padding: 50px 0 45px;{% endif %}
+  }
+  
+  .section-{{ section.id }} .coupon__code-hr-labeled .coupon__code-title-border:after {
+    background: var(--text-color);;
+    height: {{ section.settings.border_size }}px;
+    top: calc(50% - {{ section.settings.border_size }}px);
+  }
+
+  .section-{{ section.id }} .coupon__code-hr {
+    border-top: {{ section.settings.border_size }}px solid {{ section.settings.text_color }};
+  }
+</style>
+
+<section class="coupon__code-section global__section {{ section_padding }} section-{{ section.id }} {% unless full_width %}row{% endunless %}" data-aos="fade">
+  <div class="coupon__code-outer-wrapper full-width--{{ full_width }}">
+    <div class="coupon__code-inner-wrapper row">
+      {%- if section_title -%}
+        <div class="coupon__code-hr-labeled">
+          <h2>{{ section.settings.title }}</h2>
+          <div class="coupon__code-title-border"></div>
+        </div>
+      {%- endif -%}
+      <div class="coupon__code-text-container">
+        <div class="coupon__code-text-wrapper">
+          {%- for block in section.blocks -%}
+            <div class="coupon__code-{{ block.id }}">
+              {{ block.settings.title }}
+
+              {%- liquid
+                if block.settings.text_border == 'all'
+                  assign border_style = 'border: 1px solid;'
+                  assign padding_style= 'padding: 10px;'
+                elsif block.settings.text_border == 'left'
+                  assign border_style = 'border-left: 1px solid;'
+                  assign padding_style= 'padding-left: 10px;'
+                elsif block.settings.text_border == 'right'
+                  assign border_style = 'border-right: 1px solid;'
+                  assign padding_style= 'padding-right: 10px;'
+                elsif block.settings.text_border == 'top'
+                  assign border_style = 'border-top: 1px solid;'
+                  assign padding_style= 'padding-top: 10px;'
+                elsif block.settings.text_border == 'bottom'
+                  assign border_style = 'border-bottom: 1px solid;'
+                  assign padding_style= 'padding-bottom: 10px;'
+                elsif block.settings.text_border == 'none'
+                  assign border_style = 'border: none;'
+                  assign padding_style= 'padding: 0;'
+                endif
+              -%}
+              <style>
+                .coupon__code-{{ block.id }} {
+                  grid-column: auto/span {{ block.settings.column_width }};
+                  border-color: {{ section.settings.text_color }};
+                  {{ border_style }}
+                  {{ padding_style }}
+                  text-align: {{ block.settings.text_alignment }};
+                }
+                .coupon__code-{{ block.id }} p {
+                  font-size: {{ block.settings.font_size }}px;
+                  line-height: {{ block.settings.font_size }}px;
+                  margin-bottom: 0;
+                }
+              </style>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="coupon__code-hr"></div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Sale banner",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "display_wide",
+      "label": "Enable full width",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "DON'T MISS OUT"
+    },
+    {
+      "type": "range",
+      "id": "border_size",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 2
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#444444"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "section_padding",
+      "label": "Section spacing",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "both",
+          "label": "Both"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "both"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text_column",
+      "name": "Text column",
+      "settings": [
+        {
+          "type": "range",
+          "id": "column_width",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "label": "Column width",
+          "default": 2
+        },
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "Text",
+          "default": "<p>Up To</p>"
+        },
+        {
+          "type": "select",
+          "id": "text_border",
+          "label": "Text border",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            },
+            {
+              "value": "all",
+              "label": "All sides"
+            },
+            {
+              "value": "none",
+              "label": "None"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "range",
+          "id": "font_size",
+          "min": 10,
+          "max": 110,
+          "step": 2,
+          "unit": "px",
+          "label": "Text size",
+          "default": 40
+        },
+        {
+           "type": "text_alignment",
+           "id": "text_alignment",
+           "label": "Text alignment",
+           "default": "center"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Sale banner",
+    "blocks": [
+      {
+        "type": "text_column",
+        "settings": {
+          "column_width": 1,
+          "title": "<p>UP <\/p><p>TO<\/p>",
+          "font_size": 34,
+          "text_border": "right",
+          "text_alignment": "right"
+        }
+      },
+      {
+        "type": "text_column",
+        "settings": {
+          "column_width": 5,
+          "title": "<p><strong>75% OFF<\/strong><\/p>",
+          "font_size": 104,
+          "text_border": "none",
+          "text_alignment": "center"
+        }
+      },
+      {
+        "type": "text_column",
+        "settings": {
+          "column_width": 2,
+          "title": "<p><a href=\"\/collections\" target=\"_blank\" title=\"All collections\" >ALL<\/a><\/p><p><a href=\"\/collections\" target=\"_blank\" title=\"All collections\">BACKPACKS<\/a><\/p>",
+          "font_size": 28,
+          "text_border": "left",
+          "text_alignment": "left"
+        }
+      },
+      {
+        "type": "text_column",
+        "settings": {
+          "column_width": 4,
+          "title": "<p>USE CODE <strong>SUMMER<\/strong><\/p>",
+          "font_size": 34,
+          "text_border": "all",
+          "text_alignment": "center"
+        }
+      }
+    ]
+  }],
+  "disabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

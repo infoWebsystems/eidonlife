@@ -1,0 +1,81 @@
+<div class="product--grid__swatches">
+  {% for option in product.options %}
+    {%- liquid
+
+      assign color_swatch_options = settings.swatch_option_names | replace: ' ,', ',' | replace: ', ', ',' | split: ',' | downcase
+      assign size_swatch_options = "size, sizes, talle, dimensione, tamano, tamanho" | split: ", "
+      assign option_handle = option | handle
+      assign option_index = forloop.index0
+      assign values = ''
+      assign downcased_option = option | downcase
+
+    -%}
+
+    {% liquid
+
+      if color_swatch_options contains downcased_option and show_swatches
+        assign swatch_type = 'color'
+      elsif size_swatch_options contains downcased_option and show_sizes
+        assign swatch_type = 'size'
+      else
+       continue
+      endif
+
+    -%}
+
+    {% if swatch_type == 'color' or swatch_type == 'size' %}
+      <div class="prod-{{ swatch_type }}s">
+        <div class="{{ swatch_type }}-swatch">
+          <ul data-option-index="{{ option_index }}" class="{{ option_handle }} options">
+            {% for variant in product.variants %}
+              {% if variant.available %}
+                {%- liquid
+
+                  assign variant_image_url = blank
+                  if variant.image
+                    assign variant_image_url =  variant.image | image_url: width: 100
+                  endif
+                  assign value = variant.options[option_index]
+
+                -%}
+                {% capture wrapped_value %},{{ value }},{% endcapture %}
+                {% unless values contains wrapped_value %}
+                  <li data-option-title="{{ value | escape }}" class="{{ swatch_type }} {{ value | handle }}">
+                    <a title="{{ value | escape }}" href="{{ variant.url | within: collection }}">
+                      {% if swatch_type == 'color' %}
+                        {% liquid
+                          assign swatch_img = blank
+                          assign swatch_color_name = value | handle | append: '.png'
+                          if images[swatch_color_name] != blank
+                            assign swatch_img = swatch_color_name | file_url
+                          endif
+                          assign css_color = value | split: ' ' | last | handle
+                          # if value.swatch.color
+                          if value.swatch.color and settings.color_swatch_style == 'swatch'
+                            assign css_color = value.swatch.color
+                          endif
+                          assign swatch_image_url = nil
+                          if value.swatch.image
+                            assign swatch_image_url = value.swatch.image | image_url: width: 50
+                          endif
+                        %}
+                        <!-- swatch_img: {{ swatch_img }} -->
+                        <!-- swatch_color_name: {{ swatch_color_name }} -->
+                        <!-- css_color: {{ css_color }} -->
+                        <!-- swatch_image_url: {{ swatch_image_url }} -->
+                        <span style="background-color: {{ css_color }}; {% unless settings.color_swatch_style == 'default-color' %}background-image: url({% if settings.color_swatch_style == 'custom-image'  %}{{ swatch_img }}{% elsif settings.color_swatch_style == 'variant-image' %}{{ variant_image_url }}{% elsif settings.color_swatch_style == 'swatch' %}{{ swatch_image_url  }}{% endif %}); background-size: 50px;{% endunless %}"></span>
+                      {% else %}
+                        {{ value | escape }}
+                      {% endif %}
+                    </a>
+                  </li>
+                  {% capture values %}{{ values | append: wrapped_value }}{% endcapture %}
+                {% endunless %}
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div><!-- .swatch -->
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>

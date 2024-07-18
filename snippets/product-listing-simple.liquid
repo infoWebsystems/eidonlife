@@ -1,0 +1,94 @@
+{% comment %}
+  Renders a simpler version of the product listing.
+
+  Path:
+  snippets/product-listing-simple.liquid
+
+  Accepts:
+  - product: {Object} Liquid Product Option.
+  - show_quickadd: {Boolean} Determines showing Quick Add.
+  - show_quickview: {String} Determines showing Quick View.
+  - loading: {String} Determines loading attribute. (optional)
+  - fetchpriority: {String} Determines fetchpriority. (optional)
+
+  Usage:
+  {%
+    render 'product-listing-simple',
+    product: product,
+    show_quickadd: show_quickadd,
+    show_quickview: show_quickview,
+    loading: loading,
+    fetchpriority: fetch_priority
+  %}
+{% endcomment %}
+{%- liquid
+
+  case settings.product_image_size
+    when 'natural'
+      assign aspect_ratio = 'natural'
+    when 'square'
+      assign aspect_ratio = 'square'
+    when 'landscape'
+      assign aspect_ratio = 'landscape'
+    when 'portrait'
+      assign aspect_ratio = 'portrait'
+  endcase
+
+-%}
+
+<div class="prod-container">
+   <div class="prod-image image_{{ aspect_ratio }} js-product-image">
+     <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+       <div class="reveal">
+
+        {%- if product.media.size < 1 -%}
+
+          <div class="box-ratio" style="padding-bottom: 100%;">
+            {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+            {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+
+        {%- else -%}
+
+            {%
+              render 'basic-responsive-image',
+                type: product.featured_media,
+                width: 300,
+                loading: loading,
+                fetchpriority: fetchpriority
+            %}
+
+        {%- endif -%}
+       </div>
+     </a>
+   </div>
+</div>
+
+<div class="product-info">
+  <a href="{{ product.url | within: collection }}">
+    {% if settings.vendor %}
+      <p class="product__vendor">{{ product.vendor }}</p>
+    {% endif %}
+    <h3>{{ product.title }}</h3>
+  </a>
+  {% render 'product-price-listing', product: product %}
+  {% if show_quickadd and product.available %}
+    {% render 'product-grid-add'
+      product: product,
+      color_swatch_style: settings.color_swatch_style,
+      show_quickview: show_quickview,
+      show_sizes: false,
+      show_swatches: false %}
+  {% endif %}
+  {% if show_quickview %}
+    {% if product.available %}
+      <a href="{{ product.url }}" class="button link--to_product">
+        {{ 'products.product.details' | t }}
+      </a>
+    {% else %}
+      <span class="button link--to_product">
+        {{ 'products.product.sold_out' | t }}
+      </span>
+    {% endif %}
+  {% endif %}
+</div>

@@ -1,0 +1,180 @@
+{
+  "sections": {
+    "banner": {
+      "type": "banner-image",
+      "settings": {
+      }
+    },
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "page_alignment": "a-left"
+      }
+    },
+    "53b384e8-e13d-4298-b3a4-0cfb0c51d5e2": {
+      "type": "accordion",
+      "blocks": {
+        "template--14691801825365__53b384e8-e13d-4298-b3a4-0cfb0c51d5e2-16770011087bc0de8a-0": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "What does Eidon mean? How do I even pronounce it?",
+            "content": "<p>You’re not alone to think this – we get this question all the time! The name comes directly from Poseidon, the ancient Greek mythology God of the sea. If you look at our logo, the E is representative of his trident. Mind. Blown. As for pronouncing Eidon, just say Poseidon, without the Pos! Easy as A, B, C.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--14691801825365__53b384e8-e13d-4298-b3a4-0cfb0c51d5e2-16770011087bc0de8a-0"
+      ],
+      "settings": {
+        "title": "ABOUT",
+        "max_width": 80,
+        "allow_multiple": true
+      }
+    },
+    "16269717761ea06eb7": {
+      "type": "accordion",
+      "blocks": {
+        "16269717761ea06eb7-0": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "Are your bathing suits true to size?",
+            "content": "<p>From our own personal experiences and feedback from customers, our bathing suits are true to regular size. Of course, you can consult <a href=\"https:\/\/eidonlife.ca\/pages\/fit-guide\" target=\"_blank\"><span style=\"text-decoration:underline\">our fit guide<\/span><\/a> at any time if you have doubts about which size to purchase. If you still have questions or concerns, feel free to send us an e-mail at <a href=\"mailto:%20info@eidonlife.com\" target=\"_blank\"><span style=\"text-decoration:underline\">info@eidonlife.com<\/span><\/a> and we’ll provide you with personalized information to help you get the right fit!<\/p>"
+          }
+        },
+        "16269717761ea06eb7-1": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "What coverages do you offer for your bottoms?",
+            "content": "<p>Glad you asked! We offer different kinds for different preferences. Our range of bottoms go from cheeky to full coverage. Have a look at our <a href=\"https:\/\/eidonsurfswim.myshopify.com\/pages\/fit-guide\" target=\"_blank\" title=\"Eidon Fit Guide\">fit guide<\/a> which includes visuals to help you make your choice.<\/p>"
+          }
+        },
+        "16269717761ea06eb7-2": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "What sizes do your models wear?",
+            "content": "<p>Our model's sizes are located under their pictures on the product page.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "16269717761ea06eb7-0",
+        "16269717761ea06eb7-1",
+        "16269717761ea06eb7-2"
+      ],
+      "settings": {
+        "title": "FITS AND SIZING",
+        "max_width": 80,
+        "allow_multiple": true
+      }
+    },
+    "1626971780f8294dca": {
+      "type": "accordion",
+      "blocks": {
+        "1626971780f8294dca-0": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "How do I take care of my Eidon gear?",
+            "content": "<p> If you love your Eidon suit and want to keep it for as long as possible we suggest doing the following:<\/p><p>1. After each use, immediately rinse your swimsuit under cold water to get rid of all chlorine and salt water residue.<\/p><p>2. Hand wash gently using a mild soap or lingerie soap.<\/p><p>3. If using a washer, use cold water and a mild detergent without chlorine.<\/p><p>4. Leave to dry on a flat surface away from direct midday sunlight to prevent colors from fading.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "1626971780f8294dca-0"
+      ],
+      "settings": {
+        "title": "CARE AND WASH",
+        "max_width": 80,
+        "allow_multiple": true
+      }
+    },
+    "16269718683f95cb9e": {
+      "type": "accordion",
+      "blocks": {
+        "16269718683f95cb9e-0": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "I'm active on social media and want to collaborate! Who should I contact?",
+            "content": "<p>We always love collaborating with women who are passionate about what they do and love to share it with others. If you connect with our brand philosophy to Live, Travel, Surf, send us an e-mail at <a href=\"mailto:social@eidonlife.com\" target=\"_blank\"><span style=\"text-decoration:underline\">social@eidonlife.com<\/span><\/a> !<\/p>"
+          }
+        },
+        "16269718683f95cb9e-1": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "How can I become an ambassador for your brand?",
+            "content": "<p>First of all, thank you for thinking of us! We always love to collaborate with those who share our passion for adventure, the water, and swimsuits. If this speaks to you, please send an email to <a href=\"mailto:%20social@eidonlife.com\" target=\"_blank\"><span style=\"text-decoration:underline\">social@eidonlife.com<\/span><\/a> and include details about your profile, your audience reach and why you think you'd be a great match for our brand. We will then get back to you directly if you are considered (please note that, due to high demand, we do not follow up on rejected applications). We look forward to hearing from you!<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "16269718683f95cb9e-0",
+        "16269718683f95cb9e-1"
+      ],
+      "settings": {
+        "title": "COLLABORATIONS",
+        "max_width": 80,
+        "allow_multiple": true
+      }
+    },
+    "84ed2029-b087-44c9-91b1-db849ea8eac6": {
+      "type": "accordion",
+      "blocks": {
+        "ff66ecf7-33d8-40bf-a5da-f0846be24008": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "What are your Terms and Conditions for giveaways?",
+            "content": "<p><strong>Eligibility:<\/strong><\/p><p>Contests are open to residents of Canada and the United States only, unless otherwise specified. Participants must be at least 18 years or older at the time of entry.<\/p><p><strong>Sponsorship:<\/strong><\/p><p>Our contests and giveaways are not sponsored, endorsed, administrated by, or associated with Instagram, Facebook, or any other third-party platform.<\/p><p><strong>Entry Requirements:<\/strong><\/p><p>To enter, participants must follow the requirements listed on the giveaway. All entries must comply with the terms of use of the respective social media platforms. No purchase is required.<\/p><p><strong>Prizes:<\/strong><\/p><p>Prizes are non-negotiable, non-transferable, and non-refundable.<\/p><p>No cash alternative is available.<\/p><p>In the event that a prize becomes unavailable for any reason, Eidon reserves the right to substitute that prize for one of equal or higher value.<\/p><p><strong>Winner Selection:<\/strong><\/p><p>Winners will be selected at random from eligible entries. The odds of winning depend on the number of eligible entries received.<\/p><p><strong>Notification of Winners:<\/strong><\/p><p>Winners will be notified via direct message on the respective social media platform. If a winner does not respond within 5 days, a new winner will be selected.<\/p><p><strong>Publicity Release:<\/strong><\/p><p>By entering, participants agree to allow the use of their name, image, and entry for promotional purposes without compensation.<\/p><p><strong>Privacy:<\/strong><\/p><p>Information collected during the contest will only be used for the purpose of administering the contest and awarding prizes.<\/p><p>By participating in any of our contests, participants acknowledge that they have read and agree to these rules.<\/p><p><strong>Eidon men $150 voucher giveaway<\/strong><\/p><p>The contest ends on December 14 2023, at 11:59 PM EDT.<\/p><p>The voucher can only be used on products from the men's collection.<\/p>"
+          }
+        },
+        "8ae4d4f4-f306-4046-be3c-d348d74d2204": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "Boxing Day Sale",
+            "content": "<p><strong>Eligibility:<\/strong> Valid for full-price items only; clearance items are excluded.<\/p><p><strong>Discount Code:<\/strong> Code automatically applies at checkout.<\/p><p>Discount Value: <\/p><p><strong>$30 off <\/strong>- $75 to $99.99 USD<\/p><p><strong>$40 off<\/strong> - $100 to $149.99 USD<\/p><p><strong>$60 off <\/strong>- $150 USD and up<\/p><p><strong>No Cash Value:<\/strong> The discount has no cash value and cannot be exchanged for cash or credit. <\/p><p><strong>Promotion Period:<\/strong> This limited-time sale starts on December 26th at midnight EDT and will be terminated at our discretion.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "ff66ecf7-33d8-40bf-a5da-f0846be24008",
+        "8ae4d4f4-f306-4046-be3c-d348d74d2204"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "T&Cs",
+        "max_width": 80,
+        "allow_multiple": true
+      }
+    },
+    "254396d0-ab0f-4e4a-8730-0e2290dd9b88": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "",
+        "rich_text": "<p><strong>SHIPPING AND RETURNS <\/strong><\/p><p><\/p><p>For all related questions, please see <a href=\"https:\/\/eidonlife.ca\/pages\/shipping-returns\"><span style=\"text-decoration:underline\">our Shipping & Returns page<\/span><\/a>.<br\/><\/p><p>Don't see your question answered here? Send us an e-mail at <a href=\"mailto:info@eidonsurf.com\"><span style=\"text-decoration:underline\">info@eidonlife.com<\/span><\/a><\/p>",
+        "page": "",
+        "link": "",
+        "link_text": "",
+        "background": "#e5e5e5",
+        "color": "#000000",
+        "width": 80,
+        "section_padding": "top"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "breadcrumbs",
+    "main",
+    "53b384e8-e13d-4298-b3a4-0cfb0c51d5e2",
+    "16269717761ea06eb7",
+    "1626971780f8294dca",
+    "16269718683f95cb9e",
+    "84ed2029-b087-44c9-91b1-db849ea8eac6",
+    "254396d0-ab0f-4e4a-8730-0e2290dd9b88"
+  ]
+}

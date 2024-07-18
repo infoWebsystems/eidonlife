@@ -1,0 +1,170 @@
+{%- liquid
+
+  assign section_padding = ''
+  if section.settings.section_padding == 'top'
+    assign section_padding = 'pb0'
+  elsif section.settings.section_padding == 'bottom'
+    assign section_padding = 'mt0 pt0'
+  elsif section.settings.section_padding == 'none'
+    assign section_padding = 'pb0 pt0'
+  endif
+
+  assign color = section.settings.color
+  assign background = section.settings.background
+
+  assign has_link = false
+  assign link = false
+  assign link_text = false
+
+  if section.settings.link != blank
+    assign link = section.settings.link
+  endif
+
+  if section.settings.link_text != blank
+    assign link_text = section.settings.link_text
+  endif
+
+  if link and link_text
+    assign has_link = true
+  endif
+
+  assign width = section.settings.width | append: '%'
+
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --text-color: {{ color }};
+    --section-background: {{ background }};
+  }
+  @media screen and (min-width: 800px) {
+    .rich__text-section.section-{{ section.id }} .rich__text--content .rte {
+      width: {{ width }};
+      margin: 0 auto;
+      text-align: {{ section.settings.align_text }};
+    }
+  }
+</style>
+
+<section class="global__section padded--section section-{{ section.id }} rich__text-section {{ section_padding }}" data-section-id="{{ section.id }}" data-aos="fade">
+  <div class="row grid__wrapper">
+
+    {% if section.settings.heading != blank %}
+    <div class="rich__text--heading span-12 auto">
+      <h2 class="section-heading">{{ section.settings.heading | escape }}</h2>
+    </div>
+    {% endif %}
+
+    <div class="rich__text--content span-12 auto">
+      {% if section.settings.page != blank %}
+        <div class="rte">
+          {{ section.settings.page.content }}
+        </div>
+      {% else %}
+        <div class="rte text-center">
+          {{ section.settings.rich_text }}
+        </div>
+      {% endif %}
+    </div>
+    {% if has_link %}
+    <div class="rich__text--link span-12 auto text-center">
+      <a class="button" href="{{ link.url }}">{{ link_text | escape }}</a>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Rich text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Welcome"
+    },
+    {
+      "type": "richtext",
+      "id": "rich_text",
+      "label": "Text",
+      "default": "<p>Use this section to tell customers about your store or add content from one of your pages which makes it easy to add images, video or any other content.</p>"
+    },
+    {
+      "type": "page",
+      "id": "page",
+      "label": "Or show content from a page"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Text color",
+      "default": "#000"
+    },
+    {
+      "type": "range",
+      "id": "width",
+      "min": 50,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Content width",
+      "default": 60
+    },
+    {
+       "type": "text_alignment",
+       "id": "align_text",
+       "label": "Text alignment",
+       "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "section_padding",
+      "label": "Section spacing",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "both",
+          "label": "Both"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "both"
+    }
+  ],
+  "presets": [{
+    "name": "Rich text"
+  }],
+  "disabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

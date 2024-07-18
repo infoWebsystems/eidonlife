@@ -1,0 +1,174 @@
+{%- liquid
+
+  assign grid = section.settings.grid
+  assign product_limit = section.settings.grid | times: section.settings.rows
+
+  assign image_shape = false
+  unless section.settings.image_ratio == 'natural'
+    assign image_shape = true
+  endunless
+
+  assign bold = false
+  if section.settings.bold_titles
+    assign bold = true
+  endif
+
+  assign floating_text = false
+  if section.settings.title_position == 'floating'
+    assign floating_text = true
+  endif
+
+  assign aos_mod = section.settings.grid | plus: 0
+
+-%}
+
+<section data-section-id="{{ section.id }}" class="collection-list-template row grid__wrapper section-{{ section.id }}">
+  {% paginate collections by product_limit %}
+
+  <div class="collection__page-description span-12 auto">
+    {% if section.settings.text != blank %}
+      <div class="rte">
+        {{ section.settings.text }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="collection-loop collection__list-collections span-12 auto grid__wrapper grid__wrapper-nest collection__list-text-floating--{{ floating_text }} collection__list-img-shape--{{ image_shape }} collection__list-ratio--{{ section.settings.image_ratio }} collection__list-grid--{{ grid }}">
+    {% for collection in collections %}
+      {% liquid
+        # Handle LCP loading
+        assign loading = 'lazy'
+        assign fetch_priority = 'auto'
+        if section.index == 1 and forloop.index <= grid
+          assign fetch_priority = 'high'
+          assign loading = 'eager'
+        endif
+       %}
+      {% render 'collection-grid-item',
+        collection: collection,
+        grid_item_width: grid_item_width,
+        floating_text: floating_text,
+        block_image: false,
+        bold: bold,
+        aos_mod: aos_mod,
+        loading: loading,
+        fetchpriority: fetch_priority %}
+    {% endfor %}
+  </div>
+
+  {% render 'pagination',
+    paginate: paginate %}
+  {% endpaginate %}
+
+</section>
+
+<style>
+  .section-{{ section.id }} .collection__list-collections {
+    grid-template-columns: repeat({{ grid }}, 1fr);
+  }
+
+  @media screen and (max-width: 740px) {
+    .section-{{ section.id }} .collection__list-collections {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "All collections",
+  "settings": [
+    {
+      "id": "text",
+      "type": "richtext",
+      "label": "Text",
+      "default": "<p>Add some descriptive text to your all collections page.</p>"
+    },
+    {
+      "type": "range",
+      "id": "grid",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Collections per row",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "rows",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Rows",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_count",
+      "label": "Show product count"
+    },
+    {
+      "type": "checkbox",
+      "id": "bold_titles",
+      "label": "Bold titles",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "title_position",
+      "label": "Text position",
+      "options": [
+        {
+          "value": "floating",
+          "label": "Floating"
+        },
+        {
+          "value": "below_image",
+          "label": "Below image"
+        }
+      ],
+      "default": "below_image"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        {
+          "value": "natural",
+          "label": "Natural"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "vertical",
+          "label": "Vertical"
+        },
+        {
+          "value": "horizontal",
+          "label": "Horizontal"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "hexagon",
+          "label": "Hexagon"
+        },
+        {
+          "value": "rhombus",
+          "label": "Rhombus"
+        }
+      ],
+      "default": "vertical"
+    },
+    {
+      "type": "paragraph",
+      "content": "Choose a collection list section to select specific collections in a preferred order"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,161 @@
+{
+  "sections": {
+    "banner": {
+      "type": "banner-image",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "page_alignment": "a-left"
+      }
+    },
+    "16268893167298b91c": {
+      "type": "story",
+      "blocks": {
+        "16268893167298b91c-0": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair text with an image to add details about your products, brand and selling proposition.<\/p>",
+            "button": "",
+            "link": "",
+            "column_size": 2,
+            "block_height": "medium",
+            "center_align": false,
+            "color": "#000000",
+            "background": "#ededed",
+            "font_size": 20
+          }
+        },
+        "16268893167298b91c-1": {
+          "type": "video",
+          "settings": {
+            "video_url": "",
+            "description": "Describe the video for customers using screen readers",
+            "column_size": 4,
+            "block_height": "medium"
+          }
+        },
+        "16268893167298b91c-2": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "column_size": 3,
+            "block_height": "medium"
+          }
+        },
+        "16268893167298b91c-3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair text with an image to add details about your products, brand and selling proposition.<\/p>",
+            "button": "",
+            "link": "",
+            "column_size": 3,
+            "block_height": "medium",
+            "center_align": false,
+            "color": "#000000",
+            "background": "#ededed",
+            "font_size": 20
+          }
+        },
+        "16268893167298b91c-4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair text with an image to add details about your products, brand and selling proposition.<\/p>",
+            "button": "",
+            "link": "",
+            "column_size": 2,
+            "block_height": "medium",
+            "center_align": false,
+            "color": "#000000",
+            "background": "#ededed",
+            "font_size": 20
+          }
+        },
+        "16268893167298b91c-5": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "column_size": 2,
+            "block_height": "medium"
+          }
+        },
+        "16268893167298b91c-6": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "column_size": 2,
+            "block_height": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "16268893167298b91c-0",
+        "16268893167298b91c-1",
+        "16268893167298b91c-2",
+        "16268893167298b91c-3",
+        "16268893167298b91c-4",
+        "16268893167298b91c-5",
+        "16268893167298b91c-6"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "Our story",
+        "section_padding": "both"
+      }
+    },
+    "997c0657-0633-4574-89e5-00b10ad7cfb8": {
+      "type": "image-with-text-overlay",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/EIDON-S23_Add-Coming_Soon.jpg",
+        "scale": 2,
+        "page_height": 500,
+        "caption_position": "middle_center",
+        "caption_below": false,
+        "heading": "",
+        "subheading": "",
+        "button_text": "Add a button",
+        "button_link": "",
+        "heading_font_size": 26,
+        "subheading_font_size": 16,
+        "text_color": "#000",
+        "button_text_color": "#fff",
+        "button_color": "#000",
+        "background": "transparent",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "section_padding": "both"
+      }
+    },
+    "42165500-4372-47ce-a113-418204037918": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "Newsletter subscribers get it first!",
+        "rich_text": "<p>It’s almost here! Sign up to our newsletter for our Summer 2023 collection drop, featuring new products, exclusive sales and other fun stuff.<\/p>",
+        "page": "",
+        "link": "",
+        "link_text": "",
+        "background": "#ffffff",
+        "color": "#000",
+        "width": 60,
+        "section_padding": "none"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "breadcrumbs",
+    "main",
+    "16268893167298b91c",
+    "997c0657-0633-4574-89e5-00b10ad7cfb8",
+    "42165500-4372-47ce-a113-418204037918"
+  ]
+}

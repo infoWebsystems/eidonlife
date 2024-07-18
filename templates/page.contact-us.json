@@ -1,0 +1,115 @@
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "banner": {
+      "type": "banner-image",
+      "settings": {
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "page_alignment": "a-left"
+      }
+    },
+    "65d36f6e-efb6-412b-958e-54f718d57d57": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "Have a question about a product? Need advice on sizing?",
+        "rich_text": "<p>Our customer care team is available Monday to Thursday from 8 am to 4 pm EST and Friday from 8 am to 1 pm EST!<\/p><p>If you contact us outside those hours, we will get back to you the next business day.<\/p><p>Chat with us during business hours, or send an email to <strong>info@eidonlife.com<\/strong>!<\/p>",
+        "page": "",
+        "link": "",
+        "link_text": "",
+        "background": "rgba(0,0,0,0)",
+        "color": "#000000",
+        "width": 60,
+        "section_padding": "none"
+      }
+    },
+    "d9d8aa89-a779-4bca-9417-38ff0c2d1474": {
+      "type": "rich-text",
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "rich_text": "<p><strong>Our Warehouse and Customer Service will be closed on<br\/>Monday, June 26th, for St. Jean Baptiste &<br\/>Monday, July 3rd, 2023, for Canada Day.<\/strong><\/p>",
+        "page": "",
+        "link": "",
+        "link_text": "",
+        "background": "#ffffff",
+        "color": "#f83b1e",
+        "width": 60,
+        "section_padding": "none"
+      }
+    },
+    "6b864fb3-24d4-480b-ab18-d3e61c6aefe1": {
+      "type": "contact-form",
+      "settings": {
+        "title": "",
+        "section_padding": "both"
+      }
+    },
+    "06fa20f4-c706-4932-b364-48b6aac13246": {
+      "type": "editorial-columns",
+      "blocks": {
+        "template--14691927097429__06fa20f4-c706-4932-b364-48b6aac13246-1680525892dc5cafd6-0": {
+          "type": "text_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/CallArtboard_1.jpg",
+            "link": "",
+            "heading_text": "",
+            "text": "<p>Speak with a customer service rep during business hours at<\/p><p><strong>1-800-567-7535, ext. 235<\/strong><\/p>",
+            "button_text": "Button"
+          }
+        },
+        "template--14691927097429__06fa20f4-c706-4932-b364-48b6aac13246-1680525892dc5cafd6-1": {
+          "type": "text_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/CollabArtboard_1.jpg",
+            "link": "",
+            "heading_text": "",
+            "text": "<p>Interested in collaborating?<\/p><p>Check out our <a href=\"\/pages\/faq\" title=\"FAQ\"><strong>FAQ<\/strong><\/a>!<\/p>",
+            "button_text": "Button"
+          }
+        },
+        "template--14691927097429__06fa20f4-c706-4932-b364-48b6aac13246-1680525892dc5cafd6-2": {
+          "type": "text_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/MediaArtboard_1.jpg",
+            "link": "",
+            "heading_text": "",
+            "text": "<p>For media inquiries,<\/p><p>check out our <a href=\"\/pages\/faq\" title=\"FAQ\"><strong>FAQ<\/strong><\/a>!<\/p>",
+            "button_text": "Button"
+          }
+        }
+      },
+      "block_order": [
+        "template--14691927097429__06fa20f4-c706-4932-b364-48b6aac13246-1680525892dc5cafd6-0",
+        "template--14691927097429__06fa20f4-c706-4932-b364-48b6aac13246-1680525892dc5cafd6-1",
+        "template--14691927097429__06fa20f4-c706-4932-b364-48b6aac13246-1680525892dc5cafd6-2"
+      ],
+      "custom_css": [
+        "p {font-size: 20px;}"
+      ],
+      "settings": {
+        "heading": "",
+        "align_text": "center",
+        "section_padding": "both"
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "banner",
+    "main",
+    "65d36f6e-efb6-412b-958e-54f718d57d57",
+    "d9d8aa89-a779-4bca-9417-38ff0c2d1474",
+    "6b864fb3-24d4-480b-ab18-d3e61c6aefe1",
+    "06fa20f4-c706-4932-b364-48b6aac13246"
+  ]
+}

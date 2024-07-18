@@ -1,0 +1,57 @@
+{
+  "sections": {
+    "banner": {
+      "type": "banner-image",
+      "settings": {
+      }
+    },
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "page_alignment": "a-left"
+      }
+    },
+    "c0070c95-3297-4f7a-ab55-c055b2f79a99": {
+      "type": "collection-list",
+      "blocks": {
+        "template--14692879990869__c0070c95-3297-4f7a-ab55-c055b2f79a99-16661843868d8a8fa7-1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "spring-2023"
+          }
+        },
+        "template--14692879990869__c0070c95-3297-4f7a-ab55-c055b2f79a99-16661843868d8a8fa7-0": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "summer-2023"
+          }
+        }
+      },
+      "block_order": [
+        "template--14692879990869__c0070c95-3297-4f7a-ab55-c055b2f79a99-16661843868d8a8fa7-1",
+        "template--14692879990869__c0070c95-3297-4f7a-ab55-c055b2f79a99-16661843868d8a8fa7-0"
+      ],
+      "settings": {
+        "title": "",
+        "grid": 2,
+        "carousel": false,
+        "collection_count": true,
+        "title_position": "below_image",
+        "image_ratio": "natural",
+        "section_padding": "none"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "breadcrumbs",
+    "main",
+    "c0070c95-3297-4f7a-ab55-c055b2f79a99"
+  ]
+}

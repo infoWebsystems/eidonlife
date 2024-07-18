@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "banner": {
+      "type": "banner-image",
+      "settings": {
+      }
+    },
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+      }
+    },
+    "grid": {
+      "type": "main-list-collections-all",
+      "settings": {
+        "grid": 3,
+        "rows": 4,
+        "collection_count": true,
+        "title_position": "floating",
+        "image_ratio": "vertical"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "breadcrumbs",
+    "grid"
+  ]
+}

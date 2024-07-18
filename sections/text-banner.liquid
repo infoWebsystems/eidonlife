@@ -1,0 +1,252 @@
+<section class="section-{{ section.id }} usp__section" data-section-id="{{ section.id }}" data-aos="fade">
+
+  <div class="row usp__section-container grid__wrapper">
+    {% for block in section.blocks %}
+
+    {%- liquid
+
+      case section.blocks.size
+        when 1
+          assign grid = 'span-12'
+        when 2
+          assign grid = 'span-6'
+        when 3
+          assign grid = 'span-4'
+      endcase
+
+      -%}
+
+      <div class="usp__content usp-{{ block.id }} {{ grid }} auto">
+        <h3>{{ block.settings.heading | escape }}</h3>
+        {{ block.settings.textarea }}
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if section.blocks.size == 0 %}
+    {% render 'no-blocks' %}
+  {% endif %}
+
+  <style>
+    .section-{{ section.id }} {
+      {% if section.settings.section_padding == 'top' %}
+        margin-top: calc(var(--section-padding) / 2);
+      {% elsif section.settings.section_padding == 'bottom' %}
+        margin-bottom: calc(var(--section-padding) / 2);
+      {% elsif section.settings.section_padding == 'none' %}
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+      {% elsif section.settings.section_padding == 'both' %}
+        margin-top: calc(var(--section-padding) / 2);
+        margin-bottom: calc(var(--section-padding) / 2);
+      {% endif %}
+    }
+    .section-{{ section.id }}.usp__section {
+      background: {{ section.settings.background }};
+      padding: {{ section.settings.vertical_spacing }}px 0 !important;
+    }
+    .section-{{ section.id }} .usp__section-container {
+      grid-row-gap: 0;
+      column-gap: {{ section.settings.spacing }}px;
+      justify-items: stretch;
+    }
+    .section-{{ section.id }}.usp__section .usp__content h3 {
+      font-size: {{ section.settings.notification_heading_size }}px;
+      margin-bottom: 0;
+    }
+    .section-{{ section.id }}.usp__section .usp__content p {
+      font-size: {{ section.settings.notification_font_size }}px;
+      margin-top: 10px;
+    }
+
+    .section-{{ section.id }} .usp__content h3,
+    .section-{{ section.id }} .usp__content p,
+    .section-{{ section.id }} .usp__content a,
+    .section-{{ section.id }} .usp__content a:visited {
+      color: {{ section.settings.text_color }};
+    }
+    {% if section.settings.add_divider %}
+      {% assign gap = section.settings.spacing | divided_by: 2 %}
+      .section-{{ section.id }} .row.usp__section-container .usp__content:nth-child(2n):after,
+      .section-{{ section.id }} .row.usp__section-container .usp__content:nth-child(2n):before {
+          content: "";
+          position: absolute;
+          height: 50%;
+          width: 1px;
+          background: {{ section.settings.text_color }};
+          opacity: 0.7;
+      }
+      .section-{{ section.id }} .row.usp__section-container .usp__content:nth-child(2n):after {
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translate({{ gap }}px, -50%);
+      }
+      .section-{{ section.id }} .row.usp__section-container .usp__content:nth-child(2n):before {
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translate(-{{ gap }}px, -50%);
+      }
+      .section-{{ section.id }} .row.usp__section-container .usp__content:last-child:after {
+        display: none;
+      }
+    {% endif %}
+    @media screen and ( max-width: 740px ) {
+    {% if section.blocks.size > 1 %}
+      .section-{{ section.id }} .usp__section-container {
+          display: flex !important;
+          flex-wrap: nowrap !important;
+          overflow-x: auto !important;
+          -webkit-overflow-scrolling: touch;
+          margin-bottom: 10px;
+      }
+      .section-{{ section.id }} .usp__section-container::-webkit-scrollbar {
+        display: none;
+        -ms-overflow-style: none;
+      }
+      .section-{{ section.id }} .usp__content {
+          flex: 0 0 auto;
+          width: 270px;
+          margin-right: {{ section.settings.spacing }}px;
+      }
+      .section-{{ section.id }} .usp__content:last-child {
+        margin-right: 0;
+      }
+      {% endif %}
+    }
+
+    @media screen and (max-width: 740px) {
+      .section-{{ section.id }}.usp__section .usp__content h3 {
+        font-size: calc({{ section.settings.notification_heading_size }}px - ({{ section.settings.notification_heading_size }}px * 0.15));
+      }
+      .section-{{ section.id }}.usp__section .usp__content p {
+        font-size: calc({{ section.settings.notification_font_size }}px - ({{ section.settings.notification_font_size }}px * 0.15));
+      }
+    }
+  </style>
+
+</section>
+
+{% schema %}
+{
+  "name": "Text banner",
+  "max_blocks": 3,
+  "settings": [{
+      "type": "range",
+      "id": "notification_heading_size",
+      "min": 13,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "notification_font_size",
+      "min": 13,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "vertical_spacing",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "spacing",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Space between columns",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#444444"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "add_divider",
+      "label": "Add divider between columns",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "section_padding",
+      "label": "Section spacing",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "both",
+          "label": "Both"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "both"
+    }
+  ],
+  "blocks": [{
+    "type": "text",
+    "name": "Text",
+    "settings": [{
+        "id": "heading",
+        "type": "text",
+        "label": "Heading",
+        "default": "Promotion title"
+      },
+      {
+        "id": "textarea",
+        "type": "richtext",
+        "label": "Text",
+        "default": "<p>Add promotional content to a text banner</p>"
+      }
+    ]
+  }],
+  "presets": [{
+    "name": "Text banner",
+    "blocks": [{
+        "type": "text"
+      },
+      {
+        "type": "text"
+      },
+      {
+        "type": "text"
+      }
+    ]
+  }],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

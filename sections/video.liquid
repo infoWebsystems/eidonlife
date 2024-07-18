@@ -1,0 +1,359 @@
+{%- liquid
+
+  assign section_padding = ''
+  if section.settings.section_padding == 'top'
+    assign section_padding = 'pb0'
+  elsif section.settings.section_padding == 'bottom'
+    assign section_padding = 'mt0'
+  elsif section.settings.section_padding == 'none'
+    assign section_padding = 'mt0 pb0'
+  endif
+
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --h3-size: {{ section.settings.heading_font_size }}px;
+    --font-size: {{ section.settings.subheading_font_size }}px;
+    --text-color: {{ section.settings.text_color }};
+  }
+</style>
+
+<section class="global__section video__section section-{{ section.id }} {{ section_padding }}" data-section-id="{{ section.id }}" data-aos="fade" data-section-type="video-section">
+  {% if section.settings.display_wide %}<div class="gridlock-fluid"><div class="row">{% endif %}
+
+  <div class="row grid__wrapper gr0">
+    <div class="span-12 auto">
+
+
+      {%- liquid
+        case section.settings.height
+          when 'small'
+          assign mobile_height = 175
+          assign desktop_height = 475
+          when 'medium'
+          assign mobile_height = 270
+          assign desktop_height = 650
+          when 'large'
+          assign mobile_height = 375
+          assign desktop_height = 775
+        endcase
+      -%}
+
+      {%- if section.settings.image == blank -%}
+        {% style %}
+          @media screen and (max-width: 740px) {
+            .video__section-wrapper--{{ section.id }} .video__image {
+              opacity: 0;
+            }
+          }
+        {% endstyle %}
+      {%- endif -%}
+
+        <div class="video__section-wrapper
+              video__section-wrapper--{{ section.settings.height }}
+              video__section-wrapper--min-height
+              {% if section.settings.style == 'background' %} video-background-wrapper
+                {% unless section.settings.overlay %} video-background-wrapper--no-overlay{% endunless %}
+              {% endif %}
+              video__section-wrapper--{{ section.id }}"
+              data-desktop-height="{{ desktop_height }}"
+              data-mobile-height="{{ mobile_height }}">
+
+          {%- if section.settings.overlay -%}<div class="video__overlay"></div>{%- endif -%}
+            <button type="button"
+                    class="text-link video-control__close-wrapper
+                    {% if section.settings.style == 'background' %} video-control__close-background visually-hidden{% endif %}"
+                    data-controls="Video-{{ section.id }}">
+                <span class="video-control video-control__close">
+                  {% render 'snip-icons',
+                     wrapper: '.video-control__close',
+                     type: 'apollo',
+                     icon: 'close',
+                     classes: ' video-control__close--icon vib-center',
+                     size: '15px',
+                     fill: 'var(--text-color)',
+                     hover: 'var(--text-color)' %}
+                  <span class="icon__fallback-text">{{ 'general.video.close' | t: heading: '[heading]' }}</span>
+                </span>
+            </button>
+
+            {%- if section.settings.video_link != blank -%}
+              <div id="Video-{{ section.id }}"
+                  class="video{% if section.settings.style == 'background' %} video--background{% endif %}
+                  video--{{ section.settings.style }}"
+                  data-id="{{ section.settings.video_link.id }}"
+                  data-type="{{ section.settings.style }}">
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.image == blank -%}
+              <div class="video__image js">
+                <div class="placeholder-background">
+                  {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+                  {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              </div>
+            {%- else -%}
+              <div class="video__image js" data-image-loading-animation>
+              {% liquid
+                assign loading = 'lazy'
+                assign fetch_priority = 'auto'
+                if section.index == 1
+                  assign loading = 'eager'
+                  assign fetch_priority = 'high'
+                endif
+               %}
+              {%
+                render 'basic-responsive-image',
+                type: section.settings.image,
+                width: 2400,
+                loading: loading,
+                fetchpriority: fetch_priority
+              %}
+              </div>
+            {%- endif -%}
+
+            <noscript>
+              <div class="video__image"{% if section.settings.image %} style="background-image: url('{{ section.settings.image | image_url: width: 2048 }}'); background-position: center center;"{% endif %}>
+                {%- if section.settings.image == blank -%}
+                  <div class="placeholder-background">
+                    {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+                    {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                  </div>
+                {%- endif -%}
+              </div>
+            </noscript>
+
+          <div class="video__text-content center">
+            {%- unless section.settings.heading == blank and section.settings.subheading_text == blank -%}
+              <div class="video__overlay-caption">
+                {% unless section.settings.heading == blank %}
+                  <h3>{{ section.settings.heading  | escape }}</h3>
+                {% endunless %}
+                <div class="rte">
+                  {{ section.settings.subheading_text }}
+                </div>
+                {% if section.settings.link != blank and section.settings.button_text != blank %}
+                  <a class="button" href="{{ section.settings.link }}">{{ section.settings.button_text | escape }}</a>
+            		{% endif %}
+              </div>
+            {%- endunless -%}
+
+            {%- unless section.settings.style == 'background' -%}
+              <div class="video-control__play-wrapper{% if section.settings.heading != blank %} video-control__play-wrapper--with-text{% endif %}">
+                {%- if section.settings.video_link != blank -%}
+                  <div class="video-play-loader"></div>
+                {%- endif -%}
+                <button type="button" class="btn video-control video-control__play" data-controls="Video-{{ section.id }}">
+                  {% render 'snip-icons',
+                     wrapper: '.video-control__play',
+                     type: 'media-icons',
+                     icon: 'play',
+                     classes: 'video-control__play--icon vib-center',
+                     size: '25px',
+                     fill: 'var(--text-color)',
+                     hover: 'var(--text-color)' %}
+                  <span class="icon__fallback-text">{{ 'general.video.play' | t: heading: '[heading]' }}</span>
+                </button>
+              </div>
+            {%- endunless -%}
+          </div>
+
+          <div class="video-control__play-wrapper-mobile">
+            {%- if section.settings.video_link != blank -%}
+              <div class="video-play-loader"></div>
+            {%- endif -%}
+            <button type="button" class="btn video-control video-control__play" data-controls="Video-{{ section.id }}">
+              {% render 'snip-icons',
+                 wrapper: '.video-control__play',
+                 type: 'media-icons',
+                 icon: 'play',
+                 classes: 'video-control__play--icon vib-center',
+                 size: '25px',
+                 fill: 'var(--text-color)',
+                 hover: 'var(--text-color)' %}
+              <span class="icon__fallback-text">{{ 'general.video.play' | t: heading: '[heading]' }}</span>
+            </button>
+          </div>
+
+          <button type="button" class="video__pause visually-hidden" tabindex="-1" data-id="{{ section.id }}" aria-live="polite" aria-pressed="false" data-controls="Video-{{ section.id }}">
+            <span class="video__pause-stop">
+              {% render 'snip-icons',
+                 wrapper: '.video__pause-stop',
+                 type: 'media-icons',
+                 icon: 'pause',
+                 classes: 'video__pause-stop--icon vib-center',
+                 size: '25px',
+                 fill: 'var(--text-color)',
+                 hover: 'var(--text-color)' %}
+              <span class="icon__fallback-text">{{ 'general.video.pause' | t: heading: '[heading]' }}</span>
+            </span>
+            <span class="video__pause-resume">
+              {% render 'snip-icons',
+                 wrapper: '.video__pause-resume',
+                 type: 'media-icons',
+                 icon: 'play',
+                 classes: 'video__pause-resume--icon vib-center',
+                 size: '25px',
+                 fill: 'var(--text-color)',
+                 hover: 'var(--text-color)' %}
+              <span class="icon__fallback-text">{{ 'general.video.resume' | t: heading: '[heading]' }}</span>
+            </span>
+          </button>
+        </div>
+
+    </div>
+  </div>
+{% if section.settings.display_wide %}</div></div>{% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Video",
+  "class": "video__section",
+  "settings": [{
+      "type": "checkbox",
+      "id": "display_wide",
+      "label": "Enable full width"
+    },
+    {
+      "type": "select",
+      "id": "section_padding",
+      "label": "Section spacing",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "both",
+          "label": "Both"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "both"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Cover image",
+      "info": "Displayed on mobile regardless of video style, where autoplay is not possible"
+    },
+    {
+      "type": "video_url",
+      "id": "video_link",
+      "label": "Video link",
+      "accept": [
+        "youtube"
+      ],
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+    },
+    {
+      "type": "checkbox",
+      "id": "overlay",
+      "label": "Add video overlay",
+      "info": "This can help with text contrast"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "default": "background",
+      "options": [{
+          "label": "Image with play button",
+          "value": "image_with_play"
+        },
+        {
+          "label": "Background video",
+          "value": "background"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Background video height",
+      "default": "medium",
+      "options": [{
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Video"
+    },
+    {
+      "id": "subheading_text",
+      "type": "richtext",
+      "label": "Text",
+      "default": "<p>Subheading</p>"
+    },
+    {
+      "id": "button_text",
+      "type": "text",
+      "label": "Button text",
+      "default": "Button",
+      "info": "Visible only if a link is chosen"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "min": 12,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size",
+      "default": 16
+    },
+
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000"
+    }
+  ],
+  "presets": [{
+    "name": "Video",
+    "settings": {}
+  }],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

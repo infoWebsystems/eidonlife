@@ -1,0 +1,188 @@
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "banner": {
+      "type": "banner-image",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/ABOUT_US_203065cf-f8ac-420d-9808-0a09f00d67bf.jpg"
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "page_alignment": "a-left"
+      }
+    },
+    "93b5f572-eaf5-4d79-8e54-265c2ee4d1f3": {
+      "type": "slideshow",
+      "blocks": {
+        "template--14692013113429__93b5f572-eaf5-4d79-8e54-265c2ee4d1f3-16661185863fdd0b76-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/ABOUT_US.jpg",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
+            "caption_position": "middle_center",
+            "mobile_image": "shopify:\/\/shop_images\/ABOUT_US.jpg",
+            "heading": "",
+            "subheading": "",
+            "link": "",
+            "button_text": "Add a button",
+            "second_link": "",
+            "second_button_text": "Button 2 text",
+            "text_color": "#000000",
+            "button_color": "#ffffff",
+            "button_background": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "template--14692013113429__93b5f572-eaf5-4d79-8e54-265c2ee4d1f3-16661185863fdd0b76-0"
+      ],
+      "disabled": true,
+      "settings": {
+        "pager": "dots",
+        "slider_speed": 5,
+        "slide_heading_size": 22,
+        "subheading_size": 14,
+        "section_padding": "none"
+      }
+    },
+    "8f84c265-37cb-4297-af40-d164abe05244": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "",
+        "rich_text": "<p>Every day, adventure awaits us just beyond our front door. We make exciting discoveries near and far, from backyard beaches and neighboring cities to mysterious faraway lands. We taste local flavors and immerse ourselves in unfamiliar cultures. We refuse to believe there isn’t more to our world than the ground directly beneath our feet. We are Everyday Adventurers. <\/p>",
+        "page": "",
+        "link": "",
+        "link_text": "",
+        "background": "rgba(0,0,0,0)",
+        "color": "#000000",
+        "width": 60,
+        "section_padding": "top"
+      }
+    },
+    "5968c8a5-6f09-4f1c-8a7b-0441308d52e0": {
+      "type": "video",
+      "settings": {
+        "display_wide": false,
+        "section_padding": "none",
+        "image": "shopify:\/\/shop_images\/Sequence_01.00_00_01_23.Still001.jpg",
+        "video_link": "https:\/\/youtu.be\/n0kuqrIHGMo",
+        "overlay": false,
+        "style": "background",
+        "height": "medium",
+        "heading": "",
+        "subheading_text": "",
+        "button_text": "",
+        "link": "",
+        "heading_font_size": 30,
+        "subheading_font_size": 16,
+        "text_color": "#000000"
+      }
+    },
+    "255270ca-3828-4772-b79e-df7246bb395f": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "",
+        "rich_text": "<p>Since its launch, Eidon’s mission has been to create quality and trendy products that all feel confident about and rely on. We design items that they will always pack with them before embarking onto new destinations and adventures, whether it’d be a new country, a new coast, or a beach they’ve always called home.<\/p>",
+        "page": "",
+        "link": "",
+        "link_text": "",
+        "background": "rgba(0,0,0,0)",
+        "color": "#000000",
+        "width": 60,
+        "section_padding": "top"
+      }
+    },
+    "5acb42a5-a51c-49f8-8671-8ad8da4b36f5": {
+      "type": "collection-list",
+      "blocks": {
+        "75048204-8d59-4b41-8dd0-92bd0dc2b548": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "bikinis"
+          }
+        },
+        "template--14692013113429__5acb42a5-a51c-49f8-8671-8ad8da4b36f5-1668699003a5a0badd-0": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "one-pieces"
+          }
+        },
+        "template--14692013113429__5acb42a5-a51c-49f8-8671-8ad8da4b36f5-1668699003a5a0badd-2": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "clothing"
+          }
+        },
+        "template--14692013113429__5acb42a5-a51c-49f8-8671-8ad8da4b36f5-1668699003a5a0badd-3": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "d-cups"
+          }
+        },
+        "template--14692013113429__5acb42a5-a51c-49f8-8671-8ad8da4b36f5-1668699003a5a0badd-1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "surf"
+          }
+        },
+        "0bf318f4-bd7e-4f29-bd5c-7d1f877c7eb4": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "all-products"
+          }
+        }
+      },
+      "block_order": [
+        "75048204-8d59-4b41-8dd0-92bd0dc2b548",
+        "template--14692013113429__5acb42a5-a51c-49f8-8671-8ad8da4b36f5-1668699003a5a0badd-0",
+        "template--14692013113429__5acb42a5-a51c-49f8-8671-8ad8da4b36f5-1668699003a5a0badd-2",
+        "template--14692013113429__5acb42a5-a51c-49f8-8671-8ad8da4b36f5-1668699003a5a0badd-3",
+        "template--14692013113429__5acb42a5-a51c-49f8-8671-8ad8da4b36f5-1668699003a5a0badd-1",
+        "0bf318f4-bd7e-4f29-bd5c-7d1f877c7eb4"
+      ],
+      "settings": {
+        "title": "",
+        "grid": 3,
+        "carousel": true,
+        "collection_count": true,
+        "title_position": "below_image",
+        "image_ratio": "natural",
+        "section_padding": "none"
+      }
+    },
+    "24dc3659-9453-4e49-8008-1358c87273e7": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "",
+        "rich_text": "<p>Eidon was created to stoke the adventurous flame inside all of us. Active ladies who live for discovering new places, basking in the fresh air, and chasing the surf all year ‘round, this one’s for you. At Eidon, our philosophy — “live, travel, surf” — is more than just a phrase. It’s a lifestyle.<\/p>",
+        "page": "",
+        "link": "",
+        "link_text": "",
+        "background": "rgba(0,0,0,0)",
+        "color": "#000000",
+        "width": 60,
+        "section_padding": "none"
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "banner",
+    "main",
+    "93b5f572-eaf5-4d79-8e54-265c2ee4d1f3",
+    "8f84c265-37cb-4297-af40-d164abe05244",
+    "5968c8a5-6f09-4f1c-8a7b-0441308d52e0",
+    "255270ca-3828-4772-b79e-df7246bb395f",
+    "5acb42a5-a51c-49f8-8671-8ad8da4b36f5",
+    "24dc3659-9453-4e49-8008-1358c87273e7"
+  ]
+}

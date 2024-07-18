@@ -1,0 +1,52 @@
+{
+  "sections": {
+    "banner": {
+      "type": "banner-image",
+      "settings": {
+      }
+    },
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+      }
+    },
+    "main": {
+      "type": "main-article",
+      "blocks": {
+        "d65b5c7c-4674-44e1-996e-d5c8fd1d9087": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Subscribe",
+            "text": "<p>Get the latest news, products and discounts (including 10% off your next purchase) straight to your inbox.<\/p>"
+          }
+        },
+        "0919b52e-3aad-4944-8d86-9b61854b4865": {
+          "type": "blog-posts",
+          "settings": {
+            "blog": "news",
+            "heading": "More posts",
+            "show_excerpt": false
+          }
+        }
+      },
+      "block_order": [
+        "d65b5c7c-4674-44e1-996e-d5c8fd1d9087",
+        "0919b52e-3aad-4944-8d86-9b61854b4865"
+      ],
+      "settings": {
+        "show_article_image": true,
+        "article_tags": true,
+        "show_author": true,
+        "show_date": true,
+        "show_icons": true,
+        "sidebar_text_align": "center",
+        "sidebar_block_border": true
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "breadcrumbs",
+    "main"
+  ]
+}

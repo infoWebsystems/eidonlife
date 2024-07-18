@@ -1,0 +1,59 @@
+{
+  "sections": {
+    "253f6172-45d5-4410-b7b6-17129f50de5a": {
+      "type": "custom-liquid",
+      "settings": {
+        "liquid": "{% if collection.handle and collection.handle != 'all' and collection.image %}\n<center>\n<img src=\"{{ collection.image.src | collection_img_url: 'original' }}\" alt=\"{{ collection.image.alt }}\" \/>\n<\/center>\n{% endif %}\n<p><center>{{collection.description}}<\/center><p\/>",
+        "section_padding": "none"
+      }
+    },
+    "003f337f-2fec-4a6b-a92b-e16d7178b4d1": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "Newsletter subscribers get it first!",
+        "rich_text": "<p>It’s almost here! Sign up to our newsletter for our Summer 2023 collection drop, featuring new products, exclusive sales and other fun stuff.<\/p>",
+        "page": "",
+        "link": "",
+        "link_text": "",
+        "background": "#ffffff",
+        "color": "#000",
+        "width": 60,
+        "section_padding": "none"
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "blocks": {
+        "bef67807-6de8-4afa-b1fe-bc0a46351382": {
+          "type": "side_sortby",
+          "settings": {
+          }
+        },
+        "cea9f996-51a8-4b3a-8837-6975c0590a9c": {
+          "type": "side_filter",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "bef67807-6de8-4afa-b1fe-bc0a46351382",
+        "cea9f996-51a8-4b3a-8837-6975c0590a9c"
+      ],
+      "settings": {
+        "rows": 4,
+        "grid": 3
+      }
+    },
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "253f6172-45d5-4410-b7b6-17129f50de5a",
+    "003f337f-2fec-4a6b-a92b-e16d7178b4d1",
+    "main"
+  ]
+}

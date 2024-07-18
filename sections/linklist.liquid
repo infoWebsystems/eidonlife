@@ -1,0 +1,137 @@
+{%- liquid
+
+  assign section_padding = ''
+  if section.settings.section_padding == 'top'
+    assign section_padding = 'pb0'
+  elsif section.settings.section_padding == 'bottom'
+    assign section_padding = 'mt0'
+  elsif section.settings.section_padding == 'none'
+    assign section_padding = 'mt0 pb0'
+  endif
+
+  assign color = section.settings.color
+  assign background = section.settings.background
+  assign menu = linklists[section.settings.linklist]
+  assign is_bold = false
+  if section.settings.bold
+    assign is_bold = true
+  endif
+  assign alignment = section.settings.alignment
+
+-%}
+
+<style>
+
+#shopify-section-{{ section.id }} {
+  --section-background: {{ background }};
+  --text-color: {{ color }};
+}
+
+.section-{{ section.id }}.linklist__section .linklist__section-container ul.linklist__section-links {
+  justify-content: {{ alignment }};
+}
+@media screen and (max-width: 740px) {
+  .section-{{ section.id }}.linklist__section .linklist__section-container ul.linklist__section-links {
+    justify-content: start;
+  }
+}
+</style>
+
+<section class="global__section section-{{ section.id }} linklist__section {{ section_padding }}"
+data-section-id="{{ section.id }}"
+data-aos="fade">
+
+  <div class="linklist__section-container">
+    <div class="row grid__wrapper gr0">
+        <ul class="linklist__section-links span-12 auto">
+          {% for link in menu.links %}
+            <li class="linklist__section-link bold__type-{{ is_bold }}">{{ link.title | link_to: link.url }}</li>
+          {% endfor %}
+        </ul>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Linklist",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "linklist",
+      "label": "Choose menu",
+      "default": "main-menu",
+      "info": "Choose a menu from your stores navigation section. Submenus will not be shown"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#444444"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Link color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "bold",
+      "label": "Bold text",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Link alignment",
+      "options": [
+        {
+          "value": "start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "space-evenly",
+          "label": "Justify"
+        }
+      ],
+      "default": "center",
+      "info": "Left alignment is advised for longer lists as content will scroll to the right"
+    },
+    {
+      "type": "select",
+      "id": "section_padding",
+      "label": "Section spacing",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "both",
+          "label": "Both"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "both"
+    }
+  ],
+  "presets": [{
+    "name": "Linklist"
+  }],
+  "disabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

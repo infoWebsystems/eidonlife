@@ -1,0 +1,225 @@
+{
+  "sections": {
+    "banner": {
+      "type": "banner-image",
+      "settings": {
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "page_alignment": "a-left"
+      }
+    },
+    "f555462b-6d45-40a8-991d-0d4b2a161d88": {
+      "type": "video",
+      "settings": {
+        "display_wide": false,
+        "section_padding": "both",
+        "video_link": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+        "overlay": false,
+        "style": "background",
+        "height": "medium",
+        "heading": "Video",
+        "subheading_text": "<p>Subheading<\/p>",
+        "button_text": "Button",
+        "link": "",
+        "heading_font_size": 30,
+        "subheading_font_size": 16,
+        "text_color": "#000"
+      }
+    },
+    "54a40e4c-55a8-45d3-a626-9598cffd7694": {
+      "type": "image-gallery",
+      "blocks": {
+        "template--16243119489194__54a40e4c-55a8-45d3-a626-9598cffd7694-image-1": {
+          "type": "image",
+          "settings": {
+            "image_width": "33%",
+            "link": "",
+            "heading": "Heading",
+            "subheading": "Subheading",
+            "button_text": "Button",
+            "caption_position": "middle_center",
+            "hover_caption": false,
+            "caption_background": "transparent",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "template--16243119489194__54a40e4c-55a8-45d3-a626-9598cffd7694-image-2": {
+          "type": "image",
+          "settings": {
+            "image_width": "33%",
+            "link": "",
+            "heading": "Heading",
+            "subheading": "Subheading",
+            "button_text": "Button",
+            "caption_position": "middle_center",
+            "hover_caption": false,
+            "caption_background": "transparent",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "template--16243119489194__54a40e4c-55a8-45d3-a626-9598cffd7694-image-3": {
+          "type": "image",
+          "settings": {
+            "image_width": "33%",
+            "link": "",
+            "heading": "Heading",
+            "subheading": "Subheading",
+            "button_text": "Button",
+            "caption_position": "middle_center",
+            "hover_caption": false,
+            "caption_background": "transparent",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "template--16243119489194__54a40e4c-55a8-45d3-a626-9598cffd7694-image-1",
+        "template--16243119489194__54a40e4c-55a8-45d3-a626-9598cffd7694-image-2",
+        "template--16243119489194__54a40e4c-55a8-45d3-a626-9598cffd7694-image-3"
+      ],
+      "settings": {
+        "full_width": false,
+        "image_height": "natural",
+        "desktop_height": 900,
+        "mobile_height": 600,
+        "swipe": false,
+        "images_touching": false,
+        "heading_size": 22,
+        "subheading_size": 14,
+        "section_padding": "top"
+      }
+    },
+    "b85dde3f-54f0-46ec-9fba-e24833da462a": {
+      "type": "image-with-text",
+      "blocks": {
+        "template--16243119489194__b85dde3f-54f0-46ec-9fba-e24833da462a-image-2": {
+          "type": "image",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "template--16243119489194__b85dde3f-54f0-46ec-9fba-e24833da462a-image-2"
+      ],
+      "settings": {
+        "full_width": false,
+        "section_padding": "top",
+        "appearance": "overlap",
+        "layout": "left",
+        "image_width": "50%",
+        "image_height": "natural",
+        "desktop_height": 900,
+        "mobile_height": 600,
+        "text_align": "center",
+        "heading": "Image with text",
+        "text": "<p>Pair text with an image to add details about your products, brand and selling proposition.<\/p>",
+        "button": "",
+        "link": "",
+        "background": "#ffffff",
+        "color": "#000"
+      }
+    },
+    "50ed4e09-7db7-4b56-b9e5-9c728357e6a3": {
+      "type": "image-with-text",
+      "blocks": {
+        "template--16243119489194__50ed4e09-7db7-4b56-b9e5-9c728357e6a3-image-2": {
+          "type": "image",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "template--16243119489194__50ed4e09-7db7-4b56-b9e5-9c728357e6a3-image-2"
+      ],
+      "settings": {
+        "full_width": false,
+        "section_padding": "bottom",
+        "appearance": "overlap",
+        "layout": "right",
+        "image_width": "50%",
+        "image_height": "natural",
+        "desktop_height": 900,
+        "mobile_height": 600,
+        "text_align": "center",
+        "heading": "Image with text",
+        "text": "<p>Pair text with an image to add details about your products, brand and selling proposition.<\/p>",
+        "button": "",
+        "link": "",
+        "background": "#ffffff",
+        "color": "#000"
+      }
+    },
+    "a1785347-46e2-4478-b5ed-aab55266fe6a": {
+      "type": "testimonials",
+      "blocks": {
+        "template--16243119489194__a1785347-46e2-4478-b5ed-aab55266fe6a-text_block-1": {
+          "type": "text_block",
+          "settings": {
+            "heading_text": "A testimonial",
+            "stars": 5,
+            "text": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.<\/p>"
+          }
+        },
+        "template--16243119489194__a1785347-46e2-4478-b5ed-aab55266fe6a-text_block-2": {
+          "type": "text_block",
+          "settings": {
+            "heading_text": "A testimonial",
+            "stars": 5,
+            "text": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.<\/p>"
+          }
+        },
+        "template--16243119489194__a1785347-46e2-4478-b5ed-aab55266fe6a-text_block-3": {
+          "type": "text_block",
+          "settings": {
+            "heading_text": "A testimonial",
+            "stars": 5,
+            "text": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--16243119489194__a1785347-46e2-4478-b5ed-aab55266fe6a-text_block-1",
+        "template--16243119489194__a1785347-46e2-4478-b5ed-aab55266fe6a-text_block-2",
+        "template--16243119489194__a1785347-46e2-4478-b5ed-aab55266fe6a-text_block-3"
+      ],
+      "settings": {
+        "heading": "Testimonials",
+        "slider_speed": 5,
+        "star_color": "#ffd450",
+        "section_padding": "both"
+      }
+    },
+    "38d5b91d-dfc8-4eed-8fe5-253675d2298b": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Featured collection",
+        "collection": "",
+        "carousel": true,
+        "show_view_all": false,
+        "reduce_width": false,
+        "grid": 4,
+        "limit": 8,
+        "section_padding": "both"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "main",
+    "f555462b-6d45-40a8-991d-0d4b2a161d88",
+    "54a40e4c-55a8-45d3-a626-9598cffd7694",
+    "b85dde3f-54f0-46ec-9fba-e24833da462a",
+    "50ed4e09-7db7-4b56-b9e5-9c728357e6a3",
+    "a1785347-46e2-4478-b5ed-aab55266fe6a",
+    "38d5b91d-dfc8-4eed-8fe5-253675d2298b"
+  ]
+}

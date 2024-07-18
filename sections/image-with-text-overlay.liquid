@@ -1,0 +1,329 @@
+{%- liquid
+
+  assign is_parallax = false
+  assign is_fixed = false
+
+  if section.settings.scale > 0
+    assign background_effect = 'data-section-type="parallax-section"'
+    assign scale = section.settings.scale
+    assign is_parallax = true
+  else
+    assign is_fixed = true
+  endif
+
+  assign caption_below = false
+  if section.settings.caption_below == true
+    assign caption_below = true
+  endif
+
+  assign caption_position = section.settings.caption_position
+
+-%}
+
+<style>
+
+  #shopify-section-{{ section.id }} {
+    --h2-size:  {{ section.settings.heading_font_size }}px;
+    --font-size:  {{ section.settings.subheading_font_size }}px;
+  }
+  @media screen and (max-width: 740px) {
+    #shopify-section-{{ section.id }} {
+      --h2-size:  calc({{ section.settings.heading_font_size }}px - ({{ section.settings.heading_font_size }}px * 0.15));
+      --font-size:  calc({{ section.settings.subheading_font_size }}px - ({{ section.settings.subheading_font_size }}px * 0.15));
+    }
+  }
+
+  .parallax-{{ section.id }} {
+    --section-overlay-color: {{ section.settings.overlay_color | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    --section-overlay-opacity: {{ section.settings.overlay_opacity | plus: 0 | divided_by: 100.0  }};
+    --caption-background: {{ section.settings.background }};
+    --text-color: {{ section.settings.text_color }};
+    --button-text: {{ section.settings.button_text_color }};
+    --button-color: {{ section.settings.button_color }};
+
+    {% if section.settings.section_padding == 'top' %}
+      margin-top: calc(var(--section-padding) / 2);
+    {% elsif section.settings.section_padding == 'bottom' %}
+      margin-bottom: calc(var(--section-padding) / 2);
+    {% elsif section.settings.section_padding == 'none' %}
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    {% elsif section.settings.section_padding == 'both' %}
+      margin-top: calc(var(--section-padding) / 2);
+      margin-bottom: calc(var(--section-padding) / 2);
+    {% endif %}
+  }
+
+  .no-js .parallax-{{ section.id }} {
+    background-image: url('{{ section.settings.image | image_url: width: 1800 }}');
+  }
+  .parallax-{{ section.id }} .parallax__container,
+  .parallax-{{ section.id }} .parralax__image--wrapper,
+  .parallax-{{ section.id }} .box-ratio img {
+    height: {{ section.settings.page_height }}px;
+    min-height: {{ section.settings.page_height }}px;
+  }
+  #shopify-section-{{ section.id }} .box-ratio {
+    padding-bottom: {{ section.settings.page_height }}px !important;
+  }
+  .parallax-{{ section.id }} .simpleParallax.simple-parallax-initialized {
+    height: {{ section.settings.page_height }}px;
+  }
+  #shopify-section-{{ section.id }} .onboard.parallax__placeholder {
+    height: {{ section.settings.page_height }}px;
+  }
+  {% if caption_below %}
+    @media screen and (max-width: 740px) {
+      #shopify-section-{{ section.id }} .row.parallax__container {
+        height: auto;
+      }
+    }
+  {% endif %}
+</style>
+
+
+<section class="parallax-{{ section.id }} parallax{% if is_fixed %} is_fixed{% endif %}"
+  {{ background_effect }}
+  data-scale="1.{{ scale }}"
+  data-aos="fade"
+  data-section-id="{{ section.id }}">
+  <div class="row parallax__container">
+    <div class="parralax__image--wrapper">
+      <div class="parralax__image">
+        {%- if section.settings.image != blank -%}
+          {% liquid
+            assign loading = 'lazy'
+            assign fetch_priority = 'auto'
+            if section.index == 1
+              assign loading = 'eager'
+              assign fetch_priority = 'high'
+            endif
+           %}
+          {% render 'basic-responsive-image', type: section.settings.image, width: 3000, loading: loading, fetchpriority: fetch_priority %}
+        {%- endif -%}
+      </div>
+      {%- if section.settings.image == blank -%}
+        <div class="onboard parallax__placeholder">
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="parallax__caption{% if caption_below %} below-image{% endif %} image__caption {{ caption_position }}">
+      {%- unless section.settings.heading == blank -%}
+        <h2>{{ section.settings.heading | escape }}</h2>
+      {%- endunless -%}
+      {%- unless section.settings.subheading == blank -%}
+        {{ section.settings.subheading }}
+      {%- endunless -%}
+      {%- if section.settings.button_link != blank and section.settings.button_text != blank -%}
+        <div class="caption__btn-wrapper">
+          <a class="button" href="{{ section.settings.button_link }}">
+            {{ section.settings.button_text }}
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+<div class="clear"></div>
+
+{% schema %}
+{
+  "name": "Image with text overlay",
+  "class": "header__overlay-banner",
+  "settings": [{
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "1920px x 1000px recommended"
+    },
+    {
+      "type": "range",
+      "id": "scale",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "label": "Image scale",
+      "default": 2,
+      "info": "The higher the scale the greater the parallax effect, 0 removes parallax scrolling."
+    },
+    {
+      "type": "range",
+      "id": "page_height",
+      "min": 200,
+      "max": 800,
+      "step": 100,
+      "unit": "px",
+      "label": "Image height",
+      "default": 500
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "select",
+      "id": "caption_position",
+      "label": "Caption position",
+      "default": "middle_center",
+      "options": [
+        {
+          "value": "top_left",
+          "label": "Top left"
+        },
+        {
+          "value": "top_center",
+          "label": "Top center"
+        },
+        {
+          "value": "top_right",
+          "label": "Top right"
+        },
+        {
+          "value": "middle_left",
+          "label": "Middle left"
+        },
+        {
+          "value": "middle_center",
+          "label": "Middle center"
+        },
+        {
+          "value": "middle_right",
+          "label": "Middle right"
+        },
+        {
+          "value": "bottom_left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom_center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "bottom_right",
+          "label": "Bottom right"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "caption_below",
+      "label": "Mobile, show caption below image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Image with text overlay"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Text",
+      "default": "<p>Use overlay text to give your customers insight into your brand. Select imagery and text that relates to your style and story.</p>"
+    },
+    {
+      "id": "button_text",
+      "type": "text",
+      "label": "Button text",
+      "default": "Add a button",
+      "info": "Visible only if a link is chosen"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "min": 13,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size",
+      "min": 13,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button background",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Caption background",
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "section_padding",
+      "label": "Section spacing",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "both",
+          "label": "Both"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "both"
+    }
+  ],
+  "presets": [{
+    "name": "Image with text overlay"
+  }],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

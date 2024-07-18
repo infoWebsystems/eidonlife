@@ -1,0 +1,125 @@
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "banner": {
+      "type": "banner-image",
+      "disabled": true,
+      "custom_css": [
+        ".banner-header {padding-bottom: 2px;}"
+      ],
+      "settings": {
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "page_alignment": "a-left"
+      }
+    },
+    "16268893167298b91c": {
+      "type": "story",
+      "blocks": {
+        "16268893167298b91c-0": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair text with an image to add details about your products, brand and selling proposition.<\/p>",
+            "button": "",
+            "link": "",
+            "column_size": 2,
+            "block_height": "medium",
+            "center_align": false,
+            "color": "#000000",
+            "background": "#ededed",
+            "font_size": 20
+          }
+        },
+        "16268893167298b91c-1": {
+          "type": "video",
+          "settings": {
+            "video_url": "",
+            "description": "Describe the video for customers using screen readers",
+            "column_size": 4,
+            "block_height": "medium"
+          }
+        },
+        "16268893167298b91c-2": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "column_size": 3,
+            "block_height": "medium"
+          }
+        },
+        "16268893167298b91c-3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair text with an image to add details about your products, brand and selling proposition.<\/p>",
+            "button": "",
+            "link": "",
+            "column_size": 3,
+            "block_height": "medium",
+            "center_align": false,
+            "color": "#000000",
+            "background": "#ededed",
+            "font_size": 20
+          }
+        },
+        "16268893167298b91c-4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair text with an image to add details about your products, brand and selling proposition.<\/p>",
+            "button": "",
+            "link": "",
+            "column_size": 2,
+            "block_height": "medium",
+            "center_align": false,
+            "color": "#000000",
+            "background": "#ededed",
+            "font_size": 20
+          }
+        },
+        "16268893167298b91c-5": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "column_size": 2,
+            "block_height": "medium"
+          }
+        },
+        "16268893167298b91c-6": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "column_size": 2,
+            "block_height": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "16268893167298b91c-0",
+        "16268893167298b91c-1",
+        "16268893167298b91c-2",
+        "16268893167298b91c-3",
+        "16268893167298b91c-4",
+        "16268893167298b91c-5",
+        "16268893167298b91c-6"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "Our story",
+        "section_padding": "both"
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "banner",
+    "main",
+    "16268893167298b91c"
+  ]
+}

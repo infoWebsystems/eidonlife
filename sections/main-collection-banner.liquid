@@ -1,0 +1,121 @@
+{%- liquid
+
+  assign basic_banner_img = collection.handle | append: '.jpg'
+  assign has_image = true
+  case section.settings.banner_image_type
+    when 'collection'
+      if collection.image == blank
+        assign has_image = false
+      endif
+    when 'banner_image'
+      if section.settings.image == blank
+        assign has_image = false
+      endif
+    when 'shortcode'
+      if basic_banner_img == blank
+        assign has_image = false
+      endif
+  endcase
+
+  # Handle LCP loading
+  assign loading = 'lazy'
+  assign fetch_priority = 'auto'
+  if section.index == 1
+    assign fetch_priority = 'high'
+    assign loading = 'eager'
+  endif
+
+-%}
+
+  <section class="collection__section--banner collection__banner-{{ section.id }} parallax gridlock-fluid"
+  data-section-type="parallax-section"
+  data-scale="1.3"
+  data-aos="fade"
+  data-section-id="{{ section.id }}">
+    <div class="row">
+
+      <div class="parallax__container">
+        {% case section.settings.banner_image_type %}
+          {% when 'collection' %}
+            {% if collection.image != blank %}
+              <div class="collection__banner-image collection__banner-image--{{ section.settings.banner_image_type }} parralax__image">
+                {%
+                  render 'basic-responsive-image',
+                  type: collection.image,
+                  width: 2000,
+                  loading: loading,
+                  fetchpriority: fetch_priority
+                %}
+              </div>
+            {% endif %}
+          {% when 'banner_image' %}
+            {% if section.settings.image != blank %}
+              <div class="collection__banner-image collection__banner-image--{{ section.settings.banner_image_type }} parralax__image">
+                {%
+                  render 'basic-responsive-image',
+                  type: section.settings.image,
+                  width: 2000,
+                  loading: loading,
+                  fetchpriority: fetch_priority
+                %}
+              </div>
+            {% endif %}
+          {% when 'shortcode' %}
+            {% if images[basic_banner_img] != blank %}
+              <div class="collection__banner-image collection__banner-image--{{ section.settings.banner_image_type }} parralax__image">
+                {{ images[basic_banner_img] | image_url: width: 2000 | image_tag: loading: loading,
+                  fetchpriority: fetch_priority }}
+              </div>
+            {% endif %}
+        {% endcase %}
+      </div>
+
+      <div class="grid__wrapper hero__title{% if has_image %} has_banner{% endif %}">
+        <div class="span-12 auto">
+          <h1 class="collection__page-title"
+            aria-label="{{ collection.title | escape }}">
+            {{ collection.title | escape }}
+          </h1>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="clear"></div>
+
+{% schema %}
+{
+  "name": "Collection header",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Show the collection featured image as a banner above products. Override this by selecting the banner image for all collections or connect a dynamic source using a unique collection image metafield. Unique collection images can also be provided using a shortcode. [View shortcode guide](https:\/\/www.weareunderground.com\/blogs\/theme-support\/add-a-custom-banner-image-to-each-collection-page)."
+    },
+    {
+      "type": "select",
+      "id": "banner_image_type",
+      "label": "Banner image type",
+      "options": [
+        {
+          "value": "collection",
+          "label": "Collection"
+        },
+        {
+          "value": "banner_image",
+          "label": "Banner image"
+        },
+        {
+          "value": "shortcode",
+          "label": "Shortcode"
+        }
+      ],
+      "default": "collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image",
+      "info": "1920px x 600px recommended"
+    }
+  ]
+}
+{% endschema %}

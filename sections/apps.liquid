@@ -1,0 +1,59 @@
+{% comment %}App Section Logic {% endcomment %}
+{%- liquid
+
+  assign section_padding = ''
+  if section.settings.section_padding == 'top'
+    assign section_padding = 'pb0'
+  elsif section.settings.section_padding == 'bottom'
+    assign section_padding = 'mt0'
+  elsif section.settings.section_padding == 'none'
+    assign section_padding = 'mt0 pb0'
+  endif
+
+-%}
+
+{% comment %} App Section Template {% endcomment %}
+<section class="global__section {{ section_padding }}">
+  <div class="row">
+    {%- for block in section.blocks -%}
+      {% render block %}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Apps",
+  "tag": "section",
+  "settings": [{
+    "type": "select",
+    "id": "section_padding",
+    "label": "Section spacing",
+    "options": [
+      {
+        "value": "top",
+        "label": "Top"
+      },
+      {
+        "value": "bottom",
+        "label": "Bottom"
+      },
+      {
+        "value": "both",
+        "label": "Both"
+      },
+      {
+        "value": "none",
+        "label": "None"
+      }
+    ],
+    "default": "both"
+  }],
+  "blocks": [{
+    "type": "@app"
+  }],
+  "presets": [{
+    "name": "Apps"
+  }]
+}
+{% endschema %}

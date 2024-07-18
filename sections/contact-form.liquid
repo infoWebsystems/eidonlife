@@ -1,0 +1,268 @@
+{%- liquid
+
+  assign section_padding = ''
+  if section.settings.section_padding == 'top'
+    assign section_padding = 'pb0'
+  elsif section.settings.section_padding == 'bottom'
+    assign section_padding = 'mt0'
+  elsif section.settings.section_padding == 'none'
+    assign section_padding = 'mt0 pb0'
+  endif
+
+-%}
+<section
+class="global__section contact__form-section section-{{ section.id }} row grid__wrapper {{ section_padding }}"
+data-aos="fade"
+data-section-id="{{ section.id }}"
+data-section-type="contact-section">
+  {% form 'contact', class: 'span-12 auto'%}
+    <div id="contactFormWrapper">
+
+      {% if section.settings.title != blank %}
+        <div>
+          <h2 class="section-heading">{{ section.settings.title | escape }}</h2>
+        </div>
+      {% endif %}
+
+      <div class="grid__wrapper">
+        {%- liquid
+
+          assign grid_width = 'span-12'
+
+          case section.settings.form_width
+          when 'wide'
+            assign grid_width = 'span-8 push-2'
+          when 'wider'
+            assign grid_width = 'span-10 push-1'
+          when 'widest'
+            assign grid_width = 'span-12'
+          endcase
+
+        -%}
+        <div class="contact__form--inner-wrapper sm-span-12 md-span-12 {{ grid_width }} auto">
+              {% if form.posted_successfully? %}
+                <div class="successForm feedback note-success">
+                  <p>{{ 'sections.contact_form.post_success' | t }}</p>
+                </div>
+              {% endif %}
+
+              {% if form.errors %}
+                <div class="notice note-error">
+                  <p>{{ 'general.forms.post_error' | t }}</p>
+                  <ul class="disc">
+                    {% for field in form.errors %}
+                    {% if field == 'form' %}
+                    <li>
+                      {{ form.errors.messages[field] }}
+                    </li>
+                    {% else %}
+                    <li>
+                      <strong>{{ field | replace: 'body', 'Message' }}</strong> {{ form.errors.messages[field] }}
+                    </li>
+                    {% endif %}
+
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+
+              {% for block in section.blocks %}
+              <div class="contact__form--input" data-aos="fade">
+
+                {%-liquid
+
+                   assign label = block.settings.label | escape
+                   assign required = false
+                   if block.settings.required
+                    assign required = true
+                   endif
+
+                   -%}
+
+                {% case block.type %}
+                  {% when 'name' %}
+                    <input type="text" id="contactFormName" name="contact[name]" aria-label="{{ 'sections.contact_form.name' | t }}" />
+                    <label for="contactFormName">{{ 'sections.contact_form.name' | t }}</label>
+
+                  {% when 'email_address' %}
+                    <input type="email" id="contactFormEmail" name="contact[email]" aria-label="{{ 'sections.contact_form.email' | t }}" />
+                    <label for="contactFormEmail">{{ 'sections.contact_form.email' | t }}</label>
+
+                  {% when 'phone' %}
+                    <input type="text" id="contactFormTelephone" name="contact[phone]" aria-label="{{ 'sections.contact_form.phone' | t }}" />
+                    <label for="contactFormTelephone">{{ 'sections.contact_form.phone' | t }}</label>
+
+                  {% when 'message' %}
+                    <label class="visuallyhidden" for="contactFormMessage">{{ 'sections.contact_form.message' | t }}</label>
+                    <textarea rows="15" cols="90" id="contactFormMessage" name="contact[body]" aria-label="{{ 'sections.contact_form.message' | t }}"></textarea>
+                    <label for="contactFormMessage">{{ 'sections.contact_form.message' | t }}</label>
+
+                  {% when 'text_input' %}
+                    <input type="text" id="contactForm{{ label | handleize }}" name="contact[{{ label }}]" aria-label="{{ label  }}"{% if required %} required{% endif %} />
+                    <label for="contactForm{{ label | handleize }}">{{ label }}</label>
+                    {%- if block.settings.required -%}
+                      <small class="property--required">*&nbsp;{{ 'products.product.required' | t }}</small>
+                    {%- endif -%}
+
+                  {% when 'dropdown' %}
+
+                    {% assign values = block.settings.values  | replace: ' ,', ',' | replace: ', ', ',' | split: ',' %}
+
+              <select id="contactForm{{ label | handleize }}" name="contact[{{ label }}]">
+                  <option></option>
+                {% for value in values %}
+                  <option>{{ value }}</option>
+                {% endfor %}
+              </select>
+              <label for="contactForm{{ label | handleize }}">{{ label }}</label>
+
+                {% endcase %}
+              </div>
+              {% endfor %}
+
+              <div class="contact__form--input">
+                <input type="submit" id="contactFormSubmit" class="secondary button" value="{{ 'sections.contact_form.send' | t }}" />
+              </div>
+            </div>
+          </div><!-- /.grid__wrapper -->
+    </div>
+  {% endform %}
+</section>
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Contact Form"
+    },
+    {
+      "type": "select",
+      "id": "form_width",
+      "label": "Form width",
+      "options": [
+        {
+          "value": "wide",
+          "label": "Wide"
+        },
+        {
+          "value": "wider",
+          "label": "Wider"
+        },
+        {
+          "value": "widest",
+          "label": "Widest"
+        }
+      ],
+      "default": "wide"
+    },
+    {
+      "type": "select",
+      "id": "section_padding",
+      "label": "Section spacing",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "both",
+          "label": "Both"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "both"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "name",
+      "limit":1,
+      "name": "Name",
+      "settings": []
+    },
+    {
+      "type": "email_address",
+      "limit":1,
+      "name": "Email address",
+      "settings": []
+    },
+    {
+      "type": "phone",
+      "limit":1,
+      "name": "Phone",
+      "settings": []
+    },
+    {
+      "type": "message",
+      "limit":1,
+      "name": "Message",
+      "settings": []
+    },
+    {
+    "type": "text_input",
+    "name": "Text input",
+    "settings": [
+      {
+        "type": "text",
+        "id": "label",
+        "label": "Label",
+        "default": "Custom field"
+      },
+      {
+        "type": "checkbox",
+        "id": "required",
+        "label": "Is required",
+        "default": false
+      }
+    ]
+  },
+  {
+  "type": "dropdown",
+  "name": "Dropdown",
+  "settings": [
+      {
+        "type": "text",
+        "id": "label",
+        "label": "Label",
+        "default": "Custom field"
+      },
+      {
+        "type": "text",
+        "id": "values",
+        "label": "Values",
+        "default": "value 1, value 2, value 3",
+        "info":"Separate each value with a comma"
+      }
+    ]
+  }],
+  "presets": [{
+    "name": "Contact form",
+    "blocks": [{
+        "type": "name"
+      },
+      {
+        "type": "email_address"
+      },
+      {
+        "type": "phone"
+      },
+      {
+        "type": "message"
+      }
+    ]
+  }],
+  "disabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

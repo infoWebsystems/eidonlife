@@ -1,0 +1,126 @@
+{
+  "sections": {
+    "banner": {
+      "type": "banner-image",
+      "settings": {
+      }
+    },
+    "860c9b05-e739-4d1f-811b-e67f9d502ebf": {
+      "type": "accordion",
+      "blocks": {
+        "template--18862010859831__860c9b05-e739-4d1f-811b-e67f9d502ebf-168234578934e4b2c8-0": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "Can I get free shipping to any US state or territory?",
+            "content": "<p>We offer free shipping to most US states and territories with every order of $60 or more, but there are a few exceptions**:<\/p><ul><li>American Samoa<\/li><li>Federal States of Micronesia<\/li><li>Guam<\/li><li>Marshall Island<\/li><li>Palau<\/li><li>Armed Forces – Americas<\/li><li>Armed Forces – Europe<\/li><li>Armed Forces – Pacific<\/li><\/ul><p>**Free shipping is available to these locations for orders over $90.<\/p>"
+          }
+        },
+        "template--18862010859831__860c9b05-e739-4d1f-811b-e67f9d502ebf-168234578934e4b2c8-1": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "How much do I have to spend to get free shipping to Mexico?",
+            "content": "<p>Free ground shipping to Mexico is yours to enjoy with each purchase of $90 or more!<\/p>"
+          }
+        },
+        "template--18862010859831__860c9b05-e739-4d1f-811b-e67f9d502ebf-168234578934e4b2c8-2": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "Do I need a code to activate free shipping?",
+            "content": "<p>Nope. Shipping fees are calculated during the checkout process according to the package’s destination. If you’re eligible for free shipping, we’ll let you know on the spot.<\/p>"
+          }
+        },
+        "0f11d2ba-c733-4788-b0cf-03d9b6281dd9": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "How much does international shipping cost for locations outside Canada and the US?",
+            "content": "<p>We love our international family! With every order of $90 or more, you will receive free international shipping.<\/p>"
+          }
+        },
+        "f15fb2fc-a672-4daf-829c-0f4f63ea029c": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "Do you ship all over the world?",
+            "content": "<p><em>There ain't no mountain high enough,<\/em><\/p><p><em>Ain't no valley low enough,<\/em><\/p><p><em>Ain't no river wide enough,<\/em><\/p><p><em>To keep Eidon from getting to you, babe<\/em><\/p><p><em>(Yes, we do.)<\/em><\/p>"
+          }
+        },
+        "d1aff885-23dc-49f2-a5d7-0ba849695d83": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "I've placed my order. What happens next?",
+            "content": "<p>Good times are on the way! Once you close out your purchase, check your inbox for your confirmation email and unique order number. Once your package is on the road, you will receive a tracking number in a second email.<\/p>"
+          }
+        },
+        "8eb3ed35-d520-40c4-8c91-b3771df8c864": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "How long will it take to receive my package?",
+            "content": "<p>Sit tight, the wait will be over before you know it! Transit times will vary depending on your chosen shipping option. Once you have your tracking number, you will be provided with a delivery date estimation.<\/p><p><\/p><p><strong>For all North American orders with free shipping<\/strong>, delivery can take up to 2 weeks. If you have not received your shipment after 2 weeks, drop us a line at <a href=\"mailto:info@eidonlife.com\"><span style=\"text-decoration:underline\">info@eidonlife.com<\/span><\/a>for help. You can also give us call us at <a href=\"tel:+18005677535, 235\" target=\"_blank\"><span style=\"text-decoration:underline\">1-800-567-7535, ext. 235<\/span><\/a>, between 8am and 4pm EST.<\/p><p><br\/><\/p><p><strong>For all international orders with free shipping<\/strong>, delivery can take up to 30 days. If you have not received your shipment after 30 days, drop us a line at <a href=\"mailto:info@eidonlife.com\"><span style=\"text-decoration:underline\">info@eidonlife.com<\/span><\/a> for help. You can also give us call us at <a href=\"tel:+18005677535, 235\" target=\"_blank\"><span style=\"text-decoration:underline\">1-800-567-7535, ext. 235<\/span><\/a>, between 8am and 4pm EST.<\/p><p><br\/><\/p><p>Remember – <span style=\"text-decoration:underline\">we have no control over your order once it is shipped.<\/span> Weather conditions, parcel weight, and shipping destination may influence how long it takes for you to receive your order. We’re always here to address any issues or concerns – please be patient with us while we help you!<\/p><p> <\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--18862010859831__860c9b05-e739-4d1f-811b-e67f9d502ebf-168234578934e4b2c8-0",
+        "template--18862010859831__860c9b05-e739-4d1f-811b-e67f9d502ebf-168234578934e4b2c8-1",
+        "template--18862010859831__860c9b05-e739-4d1f-811b-e67f9d502ebf-168234578934e4b2c8-2",
+        "0f11d2ba-c733-4788-b0cf-03d9b6281dd9",
+        "f15fb2fc-a672-4daf-829c-0f4f63ea029c",
+        "d1aff885-23dc-49f2-a5d7-0ba849695d83",
+        "8eb3ed35-d520-40c4-8c91-b3771df8c864"
+      ],
+      "settings": {
+        "title": "SHIPPING",
+        "max_width": 100,
+        "allow_multiple": false
+      }
+    },
+    "fdc0e171-c8c3-4a22-90fd-a989ddccbf42": {
+      "type": "accordion",
+      "blocks": {
+        "template--18862010859831__fdc0e171-c8c3-4a22-90fd-a989ddccbf42-168234578934e4b2c8-0": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "What is your return policy?",
+            "content": "<p>Customers who have purchased items from <a href=\"https:\/\/eidonlife.com\/\">eidonlife.com<\/a>** may return items within 30 days from the delivery date for a refund. We do not cover shipping and handling fees for the return, and we do not reimburse the original shipping fees.<\/p><p>All returned items must be:<\/p><ul><li>Unworn<\/li><li>Unwashed<\/li><li>Without scent or odors<\/li><li>Without rips and tears<\/li><li>Attached with tags<\/li><li>In their original packaging<\/li><\/ul><p>If the products do not meet the above criteria, we will not be able to process your refund.<\/p><p>**Items from our Clearance section (marked as Final Sale) are not returnable.<\/p>"
+          }
+        },
+        "template--18862010859831__fdc0e171-c8c3-4a22-90fd-a989ddccbf42-168234578934e4b2c8-1": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "When will I receive my refund?",
+            "content": "<p>Once your items have been returned to their rightful home (Eidon HQ), we will issue a refund via the same payment method used for purchase. The refund may take 10-14 days to appear on your bank account statement, so don’t worry if you don’t see it right away!<\/p><p>You will be refunded the full price of the returned product, but not the original shipping and handling fees.<\/p>"
+          }
+        },
+        "template--18862010859831__fdc0e171-c8c3-4a22-90fd-a989ddccbf42-168234578934e4b2c8-2": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "How do I return an item?",
+            "content": "<p><a href=\"https:\/\/eidonlife.com\/apps\/return_prime\" title=\"https:\/\/eidonlife.com\/apps\/return_prime\">Click here to return an item<\/a><\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--18862010859831__fdc0e171-c8c3-4a22-90fd-a989ddccbf42-168234578934e4b2c8-0",
+        "template--18862010859831__fdc0e171-c8c3-4a22-90fd-a989ddccbf42-168234578934e4b2c8-1",
+        "template--18862010859831__fdc0e171-c8c3-4a22-90fd-a989ddccbf42-168234578934e4b2c8-2"
+      ],
+      "settings": {
+        "title": "RETURNS",
+        "max_width": 100,
+        "allow_multiple": false
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "page_alignment": "a-left"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "860c9b05-e739-4d1f-811b-e67f9d502ebf",
+    "fdc0e171-c8c3-4a22-90fd-a989ddccbf42",
+    "main"
+  ]
+}

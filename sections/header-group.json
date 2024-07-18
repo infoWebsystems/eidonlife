@@ -1,0 +1,48 @@
+{
+  "name": "Header",
+  "type": "header",
+  "sections": {
+    "header": {
+      "type": "header",
+      "blocks": {
+        "b4a8ea36-a68b-440a-9f6c-9c83b71e3d91": {
+          "type": "links_with_images",
+          "disabled": true,
+          "settings": {
+            "menu_item": "COLLECTIONS",
+            "image_ratio": "natural",
+            "image_1": "shopify:\/\/shop_images\/EIDON_W-S24-ITSY-DUO-2.jpg",
+            "link_1": "shopify:\/\/collections\/sparkle",
+            "image_2": "shopify:\/\/shop_images\/TINY_BLOOMS.jpg",
+            "link_2": "shopify:\/\/collections\/tiny-blooms",
+            "image_3": "shopify:\/\/shop_images\/KENSHO_0afac636-3889-46ab-9703-64500a862305.jpg",
+            "link_3": "shopify:\/\/collections\/kensho"
+          }
+        }
+      },
+      "block_order": [
+        "b4a8ea36-a68b-440a-9f6c-9c83b71e3d91"
+      ],
+      "settings": {
+        "full_width_announcement_bar": true,
+        "show_social_icons": true,
+        "show_locale_selector": false,
+        "show_country_selector": true,
+        "show_flag": false,
+        "header_layout": "inline",
+        "floating_header": false,
+        "logo": "shopify:\/\/shop_images\/Eidon_Logo_Black_606d8430-8987-4954-86ce-78fbccf172b0.png",
+        "logo_max_width": 55,
+        "logo_max_width_mobile": 55,
+        "icons_only": true,
+        "search_layout": "modal",
+        "main_nav": "main-menu",
+        "nav_height": 60,
+        "linklist_breakpoint": 10
+      }
+    }
+  },
+  "order": [
+    "header"
+  ]
+}

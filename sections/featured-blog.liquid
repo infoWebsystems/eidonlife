@@ -1,0 +1,238 @@
+{%- liquid
+
+  assign blog = blogs[section.settings.blog]
+  assign post_limit = section.settings.post_limit
+  assign grid = section.settings.grid
+
+  case grid
+    when 2
+      assign grid = 'span-6'
+    when 3
+      assign grid = 'span-4'
+    when 4
+      assign grid = 'span-3'
+  endcase
+
+  assign section_padding = ''
+  if section.settings.section_padding == 'top'
+    assign section_padding = 'pb0'
+  elsif section.settings.section_padding == 'bottom'
+    assign section_padding = 'mt0'
+  elsif section.settings.section_padding == 'none'
+    assign section_padding = 'mt0 pb0'
+  endif
+
+-%}
+
+<section class="global__section featured-blog {{ section_padding }}"
+  data-section-id="{{ section.id }}"
+  data-aos="fade">
+
+  <div class="index-blog row grid__wrapper gr0">
+    {% if section.settings.heading != blank %}
+      <div class="span-12 auto">
+        <h2 class="section-heading mb0">
+          {{ section.settings.heading | escape }}
+        </h2>
+      </div>
+    {% endif %}
+    <div class="article-loop span-12 auto grid__wrapper edge grid__wrapper-nest articles-{{ section.id }}">
+      {% if blog == blank %}
+        {% render 'onboard-blog', post_limit: post_limit, grid: grid %}
+      {% else %}
+        {% for article in blog.articles limit: post_limit %}
+          <div class="article-index {{ grid }} sm-span-12 auto" 
+            id="article-{{ article.id }}" 
+            data-alpha="{{ article.title }}"
+            data-aos="fade"
+            data-aos-delay="{{ forloop.index | times: 100 }}">
+            <div class="article-info">
+              <div class="article-info-inner">
+                <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                {% if section.settings.show_date %}
+                  {% assign published_at = article.published_at | date: format: 'month_date_year' %}
+                  <p class="posted">{{ 'blogs.article.posted_on_date_html' | t: date: published_at }}</p>
+                {% endif %}
+                {% if article.image %}
+                  <div class="article-image">
+                    <a href="{{ article.url }}">
+                      {% liquid
+                        assign loading = 'lazy'
+                        assign fetch_priority = 'auto'
+                        if section.index == 1
+                          assign loading = 'eager'
+                          assign fetch_priority = 'high'
+                        endif
+                       %}
+                      {%
+                        render 'basic-responsive-image',
+                        type: article.image,
+                        width: 1024,
+                        loading: loading,
+                        fetchpriority: fetch_priority
+                      %}
+                    </a>
+                  </div>
+                {% endif %}
+                <div class="article-content">
+                  {{ article.excerpt }}
+                </div>
+                <div class="readmore">
+                  <a href="{{ article.url }}">{{ 'blogs.article.read_more' | t }}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+  <style>
+    .index-blog .article-loop {
+      clear: left;
+      text-align: {{ section.settings.text_align }};
+    }
+    .readmore {
+      {% if section.settings.text_align == 'center' %}
+        margin-left: auto;
+        margin-right: auto;
+      {% endif %}
+        display: inline-block;
+    }
+    .article-index {
+      position: relative;
+    }
+    .article-index .article-image .box-ratio {
+      padding-bottom: 100% !important;
+    }
+    .article-index .article-image {
+      overflow: hidden;
+
+      position: relative;
+    }
+    .article-index .article-image .box-ratio img {
+      object-fit: cover;
+      height: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%);
+      -o-transform: translate(-50%, -50%);
+      width: 100%;
+    }
+    @media screen and ( max-width: 740px ) {
+      .index-blog .article-loop.articles-{{ section.id }} {
+          display: flex !important;
+          flex-wrap: nowrap !important;
+          overflow-x: auto !important;
+          -webkit-overflow-scrolling: touch;
+          margin-bottom: 10px;
+      }
+      .index-blog .article-loop.articles-{{ section.id }}::-webkit-scrollbar {
+        display: none;
+        -ms-overflow-style: none;
+      }
+      .index-blog .article-loop.articles-{{ section.id }} .article-index {
+          flex: 0 0 auto;
+          width: 270px;
+          margin-right: 20px;
+      }
+      .index-blog .article-loop.articles-{{ section.id }} .article-index:last-child {
+        margin-right: 0;
+      }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Featured blog",
+  "settings": [{
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Featured blog"
+    },
+    {
+      "id": "blog",
+      "type": "blog",
+      "label": "Blog"
+    },
+    {
+      "type": "range",
+      "id": "post_limit",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "label": "Posts shown",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "grid",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Per row",
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show published date",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text align",
+      "options": [{
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "section_padding",
+      "label": "Section spacing",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "both",
+          "label": "Both"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "both"
+    }
+  ],
+  "presets": [{
+    "name": "Featured blog",
+    "settings": {
+      "blog": "News",
+      "post_limit": 2
+    }
+  }],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

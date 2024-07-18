@@ -1,0 +1,128 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "896887d5-6a65-431c-9081-550cbc1a6676": {
+          "type": "product_variants",
+          "settings": {
+          }
+        },
+        "d9681722-e21d-42cb-b517-5a22bc70b2e5": {
+          "type": "product_quantity",
+          "settings": {
+          }
+        },
+        "569acd10-43ac-4854-adc8-bc64927b54bb": {
+          "type": "product_buttons",
+          "settings": {
+          }
+        },
+        "1af258e7-17dd-4fe5-bccb-351630d70821": {
+          "type": "product_description",
+          "settings": {
+          }
+        },
+        "ec330da2-623f-492b-97e6-ebb0396c1c58": {
+          "type": "tab_content",
+          "settings": {
+            "tab_title": "Care Guide",
+            "tab_text": "<p>Add text which will be shown in tabs across all product pages. Use metafields to add unite content per product.<\/p>"
+          }
+        },
+        "99c90ebd-bddf-457b-993b-38360f657fd4": {
+          "type": "tab_content",
+          "settings": {
+            "tab_title": "Tab title",
+            "tab_text": "<p>Add text which will be shown in tabs across all product pages. Use metafields to add unite content per product.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "896887d5-6a65-431c-9081-550cbc1a6676",
+        "d9681722-e21d-42cb-b517-5a22bc70b2e5",
+        "569acd10-43ac-4854-adc8-bc64927b54bb",
+        "1af258e7-17dd-4fe5-bccb-351630d70821",
+        "ec330da2-623f-492b-97e6-ebb0396c1c58",
+        "99c90ebd-bddf-457b-993b-38360f657fd4"
+      ],
+      "settings": {
+        "thumbnail_position": "left",
+        "click_to_enlarge": true,
+        "enable_video_looping": false
+      }
+    },
+    "product-content": {
+      "type": "main-product-content",
+      "blocks": {
+        "fb1f4d16-df0d-45b5-9465-721dc7a91c53": {
+          "type": "product_description",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "fb1f4d16-df0d-45b5-9465-721dc7a91c53"
+      ],
+      "disabled": true,
+      "settings": {
+        "color": "#000000",
+        "background": "#f9f9f9"
+      }
+    },
+    "1625847223ea0ebb04": {
+      "type": "image-with-text-overlay",
+      "settings": {
+        "scale": 2,
+        "page_height": 500,
+        "heading": "Image with text overlay",
+        "subheading": "<p>Use overlay text to give your customers insight into your brand. Select imagery and text that relates to your style and story.<\/p>",
+        "button_text": "Add a button",
+        "button_link": "",
+        "heading_font_size": 30,
+        "subheading_font_size": 15,
+        "text_color": "#fff",
+        "button_text_color": "#fff",
+        "button_color": "#000",
+        "background": "transparent",
+        "section_padding": "both"
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "1625846216758d1de0": {
+      "type": "image-with-text",
+      "settings": {
+        "full_width": false,
+        "section_padding": "both",
+        "layout": "right",
+        "image_width": "50%",
+        "text_align": "left",
+        "heading": "Image with text",
+        "text": "<p>Pair text with an image to add details about your products, brand and selling proposition.<\/p>",
+        "button": "",
+        "link": ""
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "product_recommendations_heading": "Have you seen these",
+        "grid": 4,
+        "limit": 4
+      }
+    }
+  },
+  "order": [
+    "main",
+    "product-content",
+    "1625847223ea0ebb04",
+    "related-products",
+    "1625846216758d1de0",
+    "product-recommendations"
+  ]
+}

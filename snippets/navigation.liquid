@@ -1,0 +1,257 @@
+{% assign menu = linklists[section.settings.main_nav].links %}
+
+{% for link in menu %}
+  {% assign meganav = false %}
+  {% assign linkswithimages = false %}
+  {% for block in section.blocks %}
+
+    {% case block.type %}
+      {% when 'mega_menu' %}
+
+        {% if block.settings.menu_item == link.title %}
+          {% capture megalink %}
+            <!-- Start megamenu -->
+            <li data-active-class="navigation__menuitem--active" class="navigation__menuitem navigation__menuitem--dropdown js-aria-expand js-doubletap-to-go" aria-haspopup="true" aria-expanded="false" role="none">
+              <a class="navigation__menulink js-menu-link js-open-dropdown-on-key" href="{{ link.url }}">
+                {{ link.title }}
+                {% render 'snip-icons',
+                   wrapper: '.navigation__menulink',
+                   type: 'apollo',
+                   icon: 'down-carrot',
+                   classes: 'navigation__menulink--icon vib-center',
+                   size: '6px',
+                   fill: 'var(--nav-color)',
+                   hover: 'var(--nav-hover-link-color)' %}
+              </a>
+
+              <ul class="megamenu">
+                <div class="megamenu__container grid__wrapper full">
+                  {% if block.settings.nav_image != blank %}
+                    {% capture menu_image %}
+                      <span class="span-3 auto mm-image">
+                        <a href="{{ block.settings.nav_promo_link }}">
+                          {%
+                            render 'basic-responsive-image',
+                            type: block.settings.nav_image,
+                            width: 1200,
+                            loading: 'eager'
+                          %}
+                        </a>
+                      </span>
+                    {% endcapture %}
+                  {% endif %}
+
+                  {% if block.settings.nav_image != blank and block.settings.image_position == 'left' %}
+                    {{ menu_image }}
+                  {% endif %}
+
+                  <span class="{% if block.settings.nav_image != blank %}span-9{% else %}span-12{% endif %} auto grid__wrapper grid__wrapper-nest">
+                    {%- liquid
+                      case link.links.size
+                        when 1
+                        assign column_width = 'span-12 auto'
+                        when 2
+                        assign column_width = 'span-6 auto'
+                        when 3 or 6
+                        assign column_width = 'span-4 auto'
+                        else
+                        assign column_width = 'span-3 auto'
+                      endcase
+                    -%}
+                    {% for sub_link in link.links %}
+                      <li class="megamenu__listcontainer {{ column_width }}">
+                        <h4 class="megamenu__header">
+                          <a class="megamenu__headerlink" href="{{ sub_link.url }}">{{ sub_link.title }}</a>
+                        </h4>
+                        {% if sub_link.links != blank %}
+                          <ul class="megamenu__list">
+                            {% for sub_sub_link in sub_link.links %}
+                              <li class="megamenu__listitem">
+                                <a class="megamenu__listlink" href="{{ sub_sub_link.url }}">{{ sub_sub_link.title }}</a>
+                              </li>
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+                      </li>
+                    {% endfor %}
+                  </span>
+
+                  {% if block.settings.nav_image != blank and block.settings.image_position == 'right' %}
+                    {{ menu_image }}
+                  {% endif %}
+
+                </div>
+              </ul>
+            </li>
+          {% endcapture %}
+          {% assign meganav = true %}
+        {% endif %}
+
+      {% when 'links_with_images' %}
+
+        {% if block.settings.menu_item == link.title %}
+          {% capture imageslink %}
+            <!-- Start megamenu -->
+            <li data-active-class="navigation__menuitem--active" class="navigation__menuitem navigation__menuitem--dropdown js-aria-expand js-doubletap-to-go" aria-haspopup="true" aria-expanded="false" role="none">
+              <a class="navigation__menulink js-menu-link js-open-dropdown-on-key" href="{{ link.url }}">
+                {{ link.title }}
+                {% render 'snip-icons',
+                   wrapper: '.navigation__menulink',
+                   type: 'apollo',
+                   icon: 'down-carrot',
+                   classes: 'navigation__menulink--icon vib-center',
+                   size: '6px',
+                   fill: 'var(--nav-color)',
+                   hover: 'var(--nav-hover-link-color)' %}
+              </a>
+              <ul class="megamenu links__withimages--container block-{{ block.id }}">
+                <div class="megamenu__container grid__wrapper full">
+                  <span class="span-3 auto links__withimages--link-container">
+                    <ul role="menu" aria-label="{{ link.title }}" class="dropdown js-dropdown">
+                      {% for sub_link in link.links %}
+                        {% if sub_link.links != blank %}
+                          <li data-active-class="dropdown__menuitem--active" role="none" class="dropdown__menuitem dropdown__menuitem--nested js-menuitem-with-nested-dropdown js-doubletap-to-go" aria-haspopup="true" aria-expanded="false">
+                            <a class="dropdown__menulink js-aria-expand js-menu-link" arial-label="{{ sub_link.title | escape }}" href="{{ sub_link.url }}">
+                              {{ sub_link.title }}
+                              {% render 'snip-icons',
+                                 wrapper: '.dropdown__menulink',
+                                 type: 'apollo',
+                                 icon: 'right-carrot',
+                                 classes: 'dropdown__menulink--icon vib-center',
+                                 size: '10px',
+                                 fill: 'var(--nav-dropdown-color)' %}
+                            </a>
+                            <ul role="menu" class="dropdown dropdown--nested js-dropdown-nested">
+                              {% for sub_sub_link in sub_link.links %}
+                                <li class="dropdown__menuitem" role="none">
+                                  <a class="dropdown__menulink js-menu-link-inside-dropdown" aria-label="{{ sub_sub_link.title | escape }}" href="{{ sub_sub_link.url }}">{{ sub_sub_link.title }}</a>
+                                </li>
+                              {% endfor %}
+                            </ul>
+                          </li>
+                        {% else %}
+                          <li class="dropdown__menuitem" role="none">
+                            <a class="dropdown__menulink js-menu-link" aria-label="{{ sub_link.title | escape }}" href="{{ sub_link.url }}">{{ sub_link.title }}</a>
+                          </li>
+                        {% endif %}
+                      {% endfor %}
+                    </ul>
+                  </span>
+                  <span class="span-9 auto links__withimages--image-container">
+                    {% for n in (1..3) %}
+                      {% assign image = "image_" | append: n %}
+                      {% assign image = block.settings[image] | default: false %}
+                      {% assign link_n = "link_" | append: n %}
+                      {% assign link_n = block.settings[link_n] | default: false %}
+
+                      {% if image != blank %}
+                      <span class="links__withimages--image image_{{ block.settings.image_ratio }}">
+                        {% if link_n != blank %}<a href="{{ link_n }}">{% endif %}
+                          {%
+                            render 'basic-responsive-image',
+                            type: image,
+                            width: 1200,
+                            loading: 'eager'
+                          %}
+                        {% if link_n != blank %}</a>{% endif %}
+                      </span>
+                      {% endif %}
+
+                    {% endfor %}
+                  </span>
+                </div>
+              </ul>
+            </li>
+          {% endcapture %}
+          {% assign linkswithimages = true %}
+        {% endif %}
+
+    {% endcase %}
+
+  {% endfor %}
+
+  {% if meganav %}
+    {{ megalink }}
+    <!-- End megamenu & start multi column where needed -->
+  {% elsif linkswithimages %}
+    {{ imageslink }}
+
+  {% elsif link.links != blank %}
+    {%- liquid
+      assign num = section.settings.linklist_breakpoint | plus:0
+      assign numx = linklists[link.handle].links.size
+      assign numy = numx | divided_by: num
+      assign mod = numx | modulo:num
+      assign mod_offset = numx | minus:mod
+    -%}
+
+    {% comment %}
+    {{ num }} chosen number of links per column
+    {{ numx }} number of links in the linklist
+    {{ numy }} Columns needed
+    {{ mod }}  Balance for last column
+    {{ mod_offset }} links to offset before adding mod
+    {% endcomment %}
+
+    <!-- Start math for calculated multi column dropdowns -->
+    <li data-active-class="navigation__menuitem--active" class="navigation__menuitem navigation__menuitem--dropdown js-aria-expand js-doubletap-to-go" aria-haspopup="true" aria-expanded="false" role="none">
+      <a class="navigation__menulink js-menu-link js-open-dropdown-on-key" href="{{ link.url }}">
+        {{ link.title }}
+        {% render 'snip-icons',
+           wrapper: '.navigation__menulink',
+           type: 'apollo',
+           icon: 'down-carrot',
+           classes: 'navigation__menulink--icon vib-center',
+           size: '6px',
+           fill: 'var(--nav-color)' %}
+      </a>
+
+      {% if link.links.size > num %}
+        {% render 'navigation-columns',
+          link: link,
+          menu: menu,
+          num: num,
+          numx: numx,
+          numy: numy,
+          mod: mod,
+          mod_offset: mod_offset %}
+        <!-- if the list is less than the chosen number -->
+      {% else %}
+        <ul role="menu" aria-label="{{ link.title }}" class="dropdown js-dropdown">
+          {% for sub_link in link.links %}
+            {% if sub_link.links != blank %}
+              <li data-active-class="dropdown__menuitem--active" role="none" class="dropdown__menuitem dropdown__menuitem--nested js-menuitem-with-nested-dropdown js-doubletap-to-go" aria-haspopup="true" aria-expanded="false">
+                <a class="dropdown__menulink js-aria-expand js-menu-link" arial-label="{{ sub_link.title | escape }}" href="{{ sub_link.url }}">
+                  {{ sub_link.title }}
+                  {% render 'snip-icons',
+                     wrapper: '.dropdown__menulink',
+                     type: 'apollo',
+                     icon: 'right-carrot',
+                     classes: 'dropdown__menulink--icon vib-center',
+                     size: '10px',
+                     fill: 'var(--nav-dropdown-color)' %}
+                </a>
+                <ul role="menu" class="dropdown dropdown--nested js-dropdown-nested">
+                  {% for sub_sub_link in sub_link.links %}
+                    <li class="dropdown__menuitem" role="none">
+                      <a class="dropdown__menulink js-menu-link-inside-dropdown" aria-label="{{ sub_sub_link.title | escape }}" href="{{ sub_sub_link.url }}">{{ sub_sub_link.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            {% else %}
+              <li class="dropdown__menuitem" role="none">
+                <a class="dropdown__menulink js-menu-link" aria-label="{{ sub_link.title | escape }}" href="{{ sub_link.url }}">{{ sub_link.title }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </li>
+    <!-- stop doing the math -->
+  {% else %}
+    <li class="navigation__menuitem" role="none">
+      <a class="navigation__menulink js-menu-link" aria-label="{{ link.title | escape }}" href="{{ link.url }}">{{ link.title }}</a>
+    </li>
+  {% endif %}
+{% endfor %}

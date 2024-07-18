@@ -1,0 +1,148 @@
+{% comment %}Section heading Logic {% endcomment %}
+{%- liquid
+
+  assign section_padding = ''
+  if section.settings.section_padding == 'top'
+    assign section_padding = 'pb0'
+  elsif section.settings.section_padding == 'bottom'
+    assign section_padding = 'mt0'
+  elsif section.settings.section_padding == 'none'
+    assign section_padding = 'mt0 pb0'
+  endif
+
+  if section.settings.title != blank
+    assign section_title = section.settings.title | escape
+  elsif template contains 'collection'
+    assign section_title = collection.title | escape
+  elsif template contains 'page'
+    assign section_title = page.title | escape
+  elsif template contains 'product'
+    assign section_title = product.title | escape
+  endif
+
+
+  if section.settings.title_size == 'h1'
+    assign title_size = 'var(--h1-size)'
+  elsif section.settings.title_size == 'h2'
+    assign title_size = 'var(--h2-size)'
+  elsif section.settings.title_size == 'h3'
+    assign title_size = 'var(--h3-size)'
+  endif
+
+-%}
+
+{% comment %} Section heading Template {% endcomment %}
+<section class="section-{{ section.id }} global__section {{ section_padding }} row" data-aos="fade">
+  {% if section_title != blank %}
+    <h2 class="section-heading">{{ section_title }}</h2>
+  {% endif %}
+  <style>
+    .section-{{ section.id }} h2 {
+      font-size: {{ title_size }} !important;
+      margin-bottom: 0 !important;
+    }
+    {%- unless section.settings.title_border -%}
+      .section-{{ section.id }} .section-heading {
+        border-bottom: none !important;
+        border-top: none !important;
+      }
+      .section-{{ section.id }} .section-heading:after {
+        content: unset !important;
+      }
+    {%- endunless -%}
+    {%- if section.settings.title_alignment == 'left' -%}
+      .section-{{ section.id }} .section-heading {
+        text-align: left !important;
+      }
+      .section-{{ section.id }} .section-heading:after {
+        left: 0 !important;
+        margin-left: 0 !important;
+      }
+    {%- endif -%}
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Section heading",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "info": "Leave blank to use current template title (collection, product, or page) if applicable."
+    },
+    {
+      "type": "select",
+      "id": "title_size",
+      "label": "Title size",
+      "options": [
+        {
+          "value": "h1",
+          "label": "Page title"
+        },
+        {
+          "value": "h2",
+          "label": "Section title"
+        },
+        {
+          "value": "h3",
+          "label": "Subheading"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title alignment",
+      "options": [
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "title_border",
+      "label": "Show border",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "section_padding",
+      "label": "Section spacing",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "both",
+          "label": "Both"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "both"
+  }],
+  "presets": [{
+    "name": "Section heading"
+  }],
+  "disabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

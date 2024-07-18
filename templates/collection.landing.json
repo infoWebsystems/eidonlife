@@ -1,0 +1,225 @@
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+      }
+    },
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+      }
+    },
+    "1626968011222c5019": {
+      "type": "section-heading",
+      "settings": {
+        "title": "",
+        "title_size": "h1",
+        "title_alignment": "center",
+        "title_border": true,
+        "section_padding": "bottom"
+      }
+    },
+    "16269675888aa1409d": {
+      "type": "image-gallery",
+      "blocks": {
+        "16269675888aa1409d-0": {
+          "type": "image",
+          "settings": {
+            "image_width": "33%",
+            "link": "",
+            "subheading": "Subheading",
+            "button_text": "Button",
+            "caption_background": "#ffffff",
+            "text_color": "#000000"
+          }
+        },
+        "16269675888aa1409d-1": {
+          "type": "image",
+          "settings": {
+            "image_width": "33%",
+            "link": "",
+            "subheading": "Subheading",
+            "button_text": "Button",
+            "caption_background": "#ffffff",
+            "text_color": "#000000"
+          }
+        },
+        "16269675888aa1409d-2": {
+          "type": "image",
+          "settings": {
+            "image_width": "33%",
+            "link": "",
+            "subheading": "Subheading",
+            "button_text": "Button",
+            "caption_background": "#ffffff",
+            "text_color": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "16269675888aa1409d-0",
+        "16269675888aa1409d-1",
+        "16269675888aa1409d-2"
+      ],
+      "settings": {
+        "full_width": true,
+        "section_padding": "bottom"
+      }
+    },
+    "1626890288450f2b1d": {
+      "type": "collection-list",
+      "blocks": {
+        "1626890288450f2b1d-0": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "1626890288450f2b1d-1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "59ae9216-4613-43d6-96c2-56cacfa0daaf": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "feed894c-9b65-440f-b07f-d4d47fd33bbd": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "0a0ebd30-d50c-4a60-bcfd-d1ab34cdf522": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "9bed3e66-78bd-49d9-bda8-aa939c079095": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "8a7cac57-24b5-40a2-a1bb-e427d57f04d8": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "0c1a41d3-fab3-4517-a732-2ac5e519edfe": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "fc8b0b80-41a4-4275-a9bd-e302fc774087": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "1626890288450f2b1d-0",
+        "1626890288450f2b1d-1",
+        "59ae9216-4613-43d6-96c2-56cacfa0daaf",
+        "feed894c-9b65-440f-b07f-d4d47fd33bbd",
+        "0a0ebd30-d50c-4a60-bcfd-d1ab34cdf522",
+        "9bed3e66-78bd-49d9-bda8-aa939c079095",
+        "8a7cac57-24b5-40a2-a1bb-e427d57f04d8",
+        "0c1a41d3-fab3-4517-a732-2ac5e519edfe",
+        "fc8b0b80-41a4-4275-a9bd-e302fc774087"
+      ],
+      "settings": {
+        "title": "Shop by Category",
+        "grid": 6,
+        "carousel": true,
+        "collection_count": true,
+        "title_position": "below_image",
+        "image_ratio": "circle",
+        "section_padding": "bottom"
+      }
+    },
+    "16269643121f498bff": {
+      "type": "image-with-text-overlay",
+      "settings": {
+        "scale": 2,
+        "page_height": 500,
+        "heading": "Image with text overlay",
+        "subheading": "<p>Use overlay text to give your customers insight into your brand. Select imagery and text that relates to your style and story.<\/p>",
+        "button_text": "Add a button",
+        "button_link": "",
+        "heading_font_size": 26,
+        "subheading_font_size": 16,
+        "text_color": "#000000",
+        "button_text_color": "#ffffff",
+        "button_color": "#000000",
+        "background": "rgba(0,0,0,0)",
+        "section_padding": "both"
+      }
+    },
+    "16269643871ef713de": {
+      "type": "tabbed-collections",
+      "blocks": {
+        "16269643871ef713de-0": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "",
+            "grid": 4,
+            "limit": 12
+          }
+        },
+        "16269643871ef713de-1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "",
+            "grid": 4,
+            "limit": 12
+          }
+        }
+      },
+      "block_order": [
+        "16269643871ef713de-0",
+        "16269643871ef713de-1"
+      ],
+      "settings": {
+        "heading": "Shop by Brand"
+      }
+    },
+    "1626968067743038de": {
+      "type": "section-heading",
+      "settings": {
+        "title": "All Products",
+        "title_size": "h2",
+        "title_alignment": "center",
+        "title_border": true,
+        "section_padding": "both"
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "rows": 4,
+        "grid": 4,
+        "description_position": "bottom"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "breadcrumbs",
+    "1626968011222c5019",
+    "16269675888aa1409d",
+    "1626890288450f2b1d",
+    "16269643121f498bff",
+    "16269643871ef713de",
+    "1626968067743038de",
+    "main"
+  ]
+}

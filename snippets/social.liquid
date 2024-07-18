@@ -1,0 +1,111 @@
+<div class="product__share-icons share-icons">
+  <span class="product__share-text share-text">{{ 'general.social.share' | t }}:</span>
+
+  {%- liquid
+
+    assign facebook_href = '//www.facebook.com/sharer.php?u=' | append: shop.url | append: share_permalink
+
+    if template contains 'blog' or template contains 'article'
+      assign facebook_href = facebook_href | append: article.url
+    else
+      assign facebook_href = facebook_href | append: product.url
+    endif
+
+  -%}
+
+  <a href="{{ facebook_href }}"
+     class="facebook product__share-icon"
+     target="_blank"
+     aria-label="{{ 'general.social.icons.facebook' | t }}"
+     title="{{ 'general.social.icons.facebook' | t }}">
+     {% render 'snip-icons',
+        wrapper: '.share-icons',
+        type: 'social',
+        icon: 'facebook',
+        classes: 'share-icons--icon',
+        size: '20px',
+        fill: 'var(--icons)',
+        hover: 'var(--icons-hover)' %}
+  </a>
+
+  {%- liquid
+
+    assign twitter_href = "//twitter.com/intent/tweet?text=" | append: shop.url | append: share_permalink
+
+    if template == 'blog' or template == 'article'
+      assign twitter_href = twitter_href | append: article.url
+    else
+      assign twitter_href = twitter_href | append: product.url
+    endif
+
+  -%}
+
+  <a href="{{ twitter_href }}"
+     class="twitter product__share-icon"
+     target="_blank"
+     aria-label="{{ 'general.social.icons.twitter' | t }}"
+     title="{{ 'general.social.icons.twitter' | t }}">
+     {% render 'snip-icons',
+        wrapper: '.share-icons',
+        type: 'social',
+        icon: 'twitter',
+        classes: 'share-icons--icon',
+        size: '20px',
+        fill: 'var(--icons)',
+        hover: 'var(--icons-hover)' %}
+  </a>
+
+  {%- liquid
+
+    assign pinterest_href = "//pinterest.com/pin/create/button/?url=" | append: shop.url | append: share_permalink
+
+    if template == 'collection' or template == 'product' or template == 'index'
+
+      assign pinterest_media = product.featured_media | image_url: width: 1024, height: 1024 | prepend: "http:"
+
+      assign pinterest_href = pinterest_href | append: product.url | append: "&amp;media=" | append: pinterest_media
+
+    endif
+
+    if template contains 'blog' or template contains 'article'
+
+      assign pinterest_media = article.image.src | image_url: width: 1024 | prepend: "http:"
+
+      assign pinterest_href = pinterest_href | append: article.url | append: "&amp;media=" | append: pinterest_media
+
+    endif
+
+  -%}
+
+  {% capture pinterest_link %}
+    <a target="_blank"
+       href="{{ pinterest_href }}"
+       title="{{ 'general.social.icons.pinterest' | t }}"
+       aria-label="{{ 'general.social.icons.pinterest' | t }}"
+       class="pinterest product__share-icon">
+       {% render 'snip-icons',
+          wrapper: '.share-icons',
+          type: 'social',
+          icon: 'pinterest',
+          classes: 'share-icons--icon',
+          size: '20px',
+          fill: 'var(--icons)',
+          hover: 'var(--icons-hover)' %}
+    </a>
+  {% endcapture %}
+
+  {% if template == 'collection' or template == 'product' or template == 'index' %}
+
+    {{ pinterest_link }}
+
+  {% elsif template contains 'blog' or template contains 'article' %}
+
+    {% if article.image %}
+
+      {{ pinterest_link }}
+
+    {% endif %}
+
+  {% endif %}
+
+</div>
