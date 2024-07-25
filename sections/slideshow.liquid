@@ -187,7 +187,7 @@ data-aos="fade">
         -%}
 
           <div id="slide--{{ section.id }}-slide-{{ forloop.index0 }}" class="slide--{{ block.id }} slideshow__slide{% if block.settings.image == blank %} slideshow__slide-onboard{% endif %}" data-block-id="{{ block.id }}" data-slider-index="{{ forloop.index0 }}" data-sizes="auto" {{ block.shopify_attributes }}>
-          {% if image_is_link %}<a class="slide__image-link" href="{{ link }}">{% endif %}
+          <a class="slide__image-link" href="{{ link }}">
             <div class="js-slideshow-slide slideshow__slide-image">
               {% liquid
                 # Determine fetch priority for LCP
@@ -226,7 +226,7 @@ data-aos="fade">
                 %}
               {% endif %}
             </div>
-          {% if image_is_link %}</a>{% endif %}
+          </a>
           {% unless hide_caption %}
           <div class="slideshow__caption image__caption {{ caption_position }} slide-{{ block.id }}{% if caption_below %} caption--below__image{% endif %}">
             <div class="slideshow__caption-wrapper">
