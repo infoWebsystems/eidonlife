@@ -1,0 +1,347 @@
+{{ 'wholescale-widget.css' | asset_url | stylesheet_tag }}
+<div class="review-widget wholescale-review-widget" data-product-id="{{ product.id }}">
+  <div class="review-widget-inner">
+    <div class="review-question">
+      <div class="review-question-inner">
+        <span class="review active" data-tab-value="reviews"> Reviews </span>
+        <span class="question" data-tab-value="questions"> Questions </span>
+      </div>
+    </div>
+    <div class="review-widget-bottom">
+      <div class="review-widget-bottom-inner">
+        <div class="rating-container">
+          <div class="rating-container-inner">
+            <div class="rating-container-top">
+              <div class="average-rating-and-star">
+                <span class="average-rating" average-rating> ---- </span>
+                <span class="star rating" rating-star>
+                  <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.51667 1.0835L8.19042 4.47433L11.9333 5.02141L9.22501 7.65933L9.86417 11.386L6.51667 9.62558L3.16917 11.386L3.80834 7.65933L1.10001 5.02141L4.84292 4.47433L6.51667 1.0835Z" stroke="#F1C343" stroke-opacity="0.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.51667 1.0835L8.19042 4.47433L11.9333 5.02141L9.22501 7.65933L9.86417 11.386L6.51667 9.62558L3.16917 11.386L3.80834 7.65933L1.10001 5.02141L4.84292 4.47433L6.51667 1.0835Z" stroke="#F1C343" stroke-opacity="0.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.51667 1.0835L8.19042 4.47433L11.9333 5.02141L9.22501 7.65933L9.86417 11.386L6.51667 9.62558L3.16917 11.386L3.80834 7.65933L1.10001 5.02141L4.84292 4.47433L6.51667 1.0835Z" stroke="#F1C343" stroke-opacity="0.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.51667 1.0835L8.19042 4.47433L11.9333 5.02141L9.22501 7.65933L9.86417 11.386L6.51667 9.62558L3.16917 11.386L3.80834 7.65933L1.10001 5.02141L4.84292 4.47433L6.51667 1.0835Z" stroke="#F1C343" stroke-opacity="0.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.51667 1.0835L8.19042 4.47433L11.9333 5.02141L9.22501 7.65933L9.86417 11.386L6.51667 9.62558L3.16917 11.386L3.80834 7.65933L1.10001 5.02141L4.84292 4.47433L6.51667 1.0835Z" stroke="#F1C343" stroke-opacity="0.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+              <div class="total-review-and-label">
+                <span class="review-count" review-count> ---- </span>
+                <label> Total Reviews </label>
+              </div>
+            </div>
+            <div class="rating-container-bottom">
+              <div class="rating-star-5">
+                <label> 5 </label>
+                <span> <span class="progress-width"></span> </span>
+                <p class="star-count">-</p>
+              </div>
+              <div class="rating-star-4">
+                <label> 4 </label>
+                <span> <span class="progress-width"></span> </span>
+                <p class="star-count">-</p>
+              </div>
+              <div class="rating-star-3">
+                <label> 3 </label>
+                <span> <span class="progress-width"></span> </span>
+                <p class="star-count">-</p>
+              </div>
+              <div class="rating-star-2">
+                <label> 2 </label>
+                <span> <span class="progress-width"></span> </span>
+                <p class="star-count">-</p>
+              </div>
+              <div class="rating-star-1">
+                <label> 1 </label>
+                <span> <span class="progress-width"></span> </span>
+                <p class="star-count">-</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reviews-container active widget-container" reviews-container>
+          <div class="reviews-actions">
+            <div class="reviews-search">
+              <div class="reviews-search-inner">
+                <input type="text" id="review-search" name="reviewsearch">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8.25 14.25C11.5637 14.25 14.25 11.5637 14.25 8.25C14.25 4.93629 11.5637 2.25 8.25 2.25C4.93629 2.25 2.25 4.93629 2.25 8.25C2.25 11.5637 4.93629 14.25 8.25 14.25Z" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M15.75 15.75L12.4875 12.4875" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+            <div class="reviews-sorby">
+              <div class="reviews-sortby-inner">
+                <div class="selected-sortby">
+                  <span class="selected-value" sortby-value> Sort By </span>
+                  <svg width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L5.5 6L10 1" stroke="#525252" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="sortby-dropdown">
+                  <span class="sortby-rating active" data-value="rating"> Rating </span>
+                  <span class="sortby-media" data-value="media"> Media </span>
+                  <span class="sortby-new-to-old" data-value="new-to-old"> New to old </span>
+                </div>
+              </div>
+            </div>
+            <div class="add-review">
+              <div class="add-review-inner form-open-cta" data-cta-value="review">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7.5 12.5H13.125" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10.3125 2.18752C10.5611 1.93888 10.8984 1.79919 11.25 1.79919C11.4241 1.79919 11.5965 1.83349 11.7574 1.90012C11.9182 1.96675 12.0644 2.06441 12.1875 2.18752C12.3106 2.31063 12.4083 2.45679 12.4749 2.61765C12.5415 2.7785 12.5758 2.95091 12.5758 3.12502C12.5758 3.29913 12.5415 3.47153 12.4749 3.63239C12.4083 3.79325 12.3106 3.93941 12.1875 4.06252L4.375 11.875L1.875 12.5L2.5 10L10.3125 2.18752Z" fill="white"/>
+                </svg>
+                <span class="add-review-btn"> Add a review </span>
+              </div>
+            </div>
+          </div>
+          <div class="reviews-list-container">
+            <div class="reviews-list-inner"></div>
+            <div class="no-reviews" style="display: none">
+              <p>No reviews found</p>
+            </div>
+          </div>
+          <div id="review-pagination" class="pagination">
+            <a class="prev wholescale-disabled">
+              <!-- ?xml version="1.0" encoding="iso-8859-1"? -->
+              <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+              <svg
+                version="1.1"
+                id="Layer_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 483.284 483.284"
+                xml:space="preserve"
+              >
+                <polygon points="483.284,221.643 88.284,221.643 88.284,153.358 0,241.644 88.284,241.644 88.284,261.643
+                  483.284,261.643 	"></polygon>
+                <polygon points="0,241.644 88.284,329.926 88.284,241.644 	"></polygon>
+              </svg>
+            </a>
+            <a class="next">
+              <!-- ?xml version="1.0" encoding="iso-8859-1"? -->
+              <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+              <svg
+                version="1.1"
+                id="Layer_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 483.284 483.284"
+                xml:space="preserve"
+              >
+                <g>
+                  <polygon points="483.284,241.644 395,153.358 395,221.643 0,221.643 0,261.643 395,261.643 395,241.644 	"></polygon>
+                  <polygon points="483.284,241.644 395,241.644 395,329.926 	"></polygon>
+                </g>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="question-container widget-container" questions-container>
+          <div class="question-actions">
+            <div class="ask-question">
+              <div class="ask-question-inner form-open-cta" data-cta-value="question">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7.5 12.5H13.125" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10.3125 2.18752C10.5611 1.93888 10.8984 1.79919 11.25 1.79919C11.4241 1.79919 11.5965 1.83349 11.7574 1.90012C11.9182 1.96675 12.0644 2.06441 12.1875 2.18752C12.3106 2.31063 12.4083 2.45679 12.4749 2.61765C12.5415 2.7785 12.5758 2.95091 12.5758 3.12502C12.5758 3.29913 12.5415 3.47153 12.4749 3.63239C12.4083 3.79325 12.3106 3.93941 12.1875 4.06252L4.375 11.875L1.875 12.5L2.5 10L10.3125 2.18752Z" fill="white"/>
+                </svg>
+                <span class="ask-question-btn"> Ask a question </span>
+              </div>
+            </div>
+          </div>
+          <div class="question-list-container">
+            <div class="question-list-inner">
+              <div class="no-questions" style="display: none">
+                <p>No questions found</p>
+              </div>
+            </div>
+          </div>
+          <div id="question-pagination" class="pagination">
+            <a class="prev wholescale-disabled">
+              <!-- ?xml version="1.0" encoding="iso-8859-1"? -->
+              <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+              <svg
+                version="1.1"
+                id="Layer_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 483.284 483.284"
+                xml:space="preserve"
+              >
+                <polygon points="483.284,221.643 88.284,221.643 88.284,153.358 0,241.644 88.284,241.644 88.284,261.643
+                  483.284,261.643 	"></polygon>
+                <polygon points="0,241.644 88.284,329.926 88.284,241.644 	"></polygon>
+              </svg>
+            </a>
+            <a class="next">
+              <!-- ?xml version="1.0" encoding="iso-8859-1"? -->
+              <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+              <svg
+                version="1.1"
+                id="Layer_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 483.284 483.284"
+                xml:space="preserve"
+              >
+                <g>
+                  <polygon points="483.284,241.644 395,153.358 395,221.643 0,221.643 0,261.643 395,261.643 395,241.644 	"></polygon>
+                  <polygon points="483.284,241.644 395,241.644 395,329.926 	"></polygon>
+                </g>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="write-review widget-form-drawer" review-form>
+  <div class="write-review-inner widget-form-inner">
+    <span class="widget-drawer-close"> close </span>
+    <div class="form-title">
+      <span> Write a Review </span>
+    </div>
+    <form action="" id="review_form">
+      <div class="wholescale-form-field">
+        <input type="text" name="first_name" placeholder="First Name*" required>
+      </div>
+      <div class="wholescale-form-field">
+        <input type="text" name="last_name" placeholder="Last Name*" required>
+      </div>
+      <div class="wholescale-form-field">
+        <input type="email" name="email" placeholder="Email Address*" required>
+      </div>
+      <div class="wholescale-form-field">
+        <div id="stars" class="wholescale-field ratinglab">
+          <select name="rating" id="reviewFormStars" required>
+            <option value="">Select Rating*</option>
+            <option value="5">★★★★★</option>
+            <option value="4">★★★★</option>
+            <option value="3">★★★</option>
+            <option value="2">★★</option>
+            <option value="1">★</option>
+          </select>
+        </div>
+      </div>
+      <div class="wholescale-form-field">
+        <input type="text" name="title" placeholder="Review Title*" required>
+      </div>
+      <div class="wholescale-form-field">
+        <textarea rows="10" name="detail" placeholder="Review Detail*" required></textarea>
+      </div>
+      <div class="wholescale-file-upload">
+        <div class="add-photo-section">
+          <label for="review-fileupload" class="add-photo">Add Photo</label>
+          <span> Add up to 4 photos </span>
+          <input id="review-fileupload" type="file" name="images" accept="image/*" style="display:none">
+        </div>
+        <span class="images-limit-text"> You can add upto 4 images only.</span>
+        <div class="uploaded-images image-list"></div>
+      </div>
+      <div class="widget-form-action">
+        <input type="submit" value="SUBMIT REVIEW">
+      </div>
+    </form>
+  </div>
+</div>
+<div class="question-form widget-form-drawer" question-form>
+  <div class="question-form-inner widget-form-inner">
+    <span class="widget-drawer-close"> close </span>
+    <div class="form-title">
+      <span> Ask a question </span>
+    </div>
+    <form action="" id="question_form">
+      <div class="wholescale-form-field">
+        <input type="text" name="first_name" placeholder="First Name" required>
+      </div>
+      <div class="wholescale-form-field">
+        <input type="text" name="last_name" placeholder="Last Name*" required>
+      </div>
+      <div class="wholescale-form-field">
+        <input type="email" name="email" placeholder="Email Address*" required>
+      </div>
+      <div class="wholescale-form-field">
+        <textarea rows="10" name="question" placeholder="Your Question" required></textarea>
+      </div>
+      <div class="wholescale-file-upload">
+        <div class="add-photo-section">
+          <label for="question-fileupload" class="add-photo">Add Photo</label>
+          <span> Add up to 4 photos </span>
+          <input id="question-fileupload" type="file" name="images" accept="image/*" style="display:none">
+        </div>
+        <span class="images-limit-text"> You can add upto 4 images only.</span>
+        <div class="uploaded-images image-list"></div>
+      </div>
+      <div class="widget-form-action">
+        <input type="submit" value="SUBMIT QUESTION">
+      </div>
+    </form>
+  </div>
+</div>
+<div class="wholescale-toast">
+  <svg
+    class="icon icon-tick"
+    aria-hidden="true"
+    focusable="false"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 20 20"
+  >
+    <path fill="#108043" stroke="#fff" d="M16.136 6.979h0l.003-.004a1.499 1.499 0 00-2.275-1.954l-5.945 6.777-1.858-1.859A1.499 1.499 0 103.94 12.06l2.999 3s0 0 0 0c.289.29.675.44 1.1.439h.019a1.5 1.5 0 001.08-.522l6.998-7.998z"/>
+  </svg>
+
+  <span class="toast-text"> Updated Sucessfully </span>
+</div>
+{% schema %}
+{
+  "name": "Wholescale Review Widget",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Wholescale Review Widget",
+      "category": "Wholescale Review App Wiget"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+<script src="{{ 'wholescale-pagination.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'wholescale-widget.js' | asset_url }}" defer="defer"></script>
+<!-- 1. Configure iovation's JavaScript. -->
+<script language="JavaScript">
+  // basic configurations must be on page before snare.js
+  (window.io_install_stm = false), // do not install Active X
+    (window.io_exclude_stm = 12), // do not run Active X
+    (window.io_install_flash = false), // do not install Flash
+    (window.io_min_flash_version = 9999); // disable Flash
+  window.io_enable_rip = true; // collect Real IP information
+</script>
+<script src="{{ 'snare.js' | asset_url }}" defer="defer"></script>
+<script language="JavaScript">
+  var timeoutId;
+  function useBlackboxString(intervalCount) {
+    if (typeof ioGetBlackbox !== 'function') {
+      return;
+    }
+    var bbData = ioGetBlackbox();
+    if (bbData.finished) {
+      clearTimeout(timeoutId);
+      window.blackBoxStr = bbData.blackbox;
+      console.log('blackBoxStr ', blackBoxStr);
+    }
+  }
+  timeoutId = setInterval(useBlackboxString, 500);
+</script>

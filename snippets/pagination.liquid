@@ -6,7 +6,7 @@
   <div class="clear"></div>
 
   {% if paginate.previous %}
-    <a href="{{ paginate.previous.url }}" class="paginate_prev" aria-label="{{ 'general.pagination.prev' | t }}"">
+    <a href="{{ paginate.previous.url }}" class="paginate_prev">
       {% render 'snip-icons',
          wrapper: '.pagination',
          type: 'apollo',
@@ -31,7 +31,7 @@
   {% endfor %}
 
   {% if paginate.next %}
-    <a href="{{ paginate.next.url }}" class="paginate_next" aria-label="{{ 'general.pagination.next' | t }}"">
+    <a href="{{ paginate.next.url }}" class="paginate_next">
       {% render 'snip-icons',
        wrapper: '.pagination',
        type: 'apollo',

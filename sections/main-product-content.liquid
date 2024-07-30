@@ -44,7 +44,10 @@
             <h3 class="product__section-title product-details">{{ label }}</h3>
           {% endif %}
           {{ product.description }}
-        </div>
+      <div>
+        {% render "display-features" %}
+      </div>
+          </div>
 
         <style>
           .product__description--base,
@@ -64,11 +67,10 @@
         {% if block.settings.image != blank %}
         <div class="product__section--richtext product__decription-container {{ block_width }} sm-span-12 auto rte" {{ block.shopify_attributes }}>
           {% if block.settings.link != blank %}<a href="{{ block.settings.link }}">{% endif %}
-              {%
-                render 'basic-responsive-image',
-                type: block.settings.image,
-                width: 1200
-              %}
+              {% render 'basic-responsive-image', type: block.settings.image, data_widths: '[180, 360, 540, 720, 900]' %}
+              <noscript>
+                <img src="{{ block.settings.image | img_url: '800x' }}" alt="{{ block.settings.image.alt }}">
+              </noscript>
           {% if block.settings.link != blank %}</a>{% endif %}
         </div>
         {% endif %}

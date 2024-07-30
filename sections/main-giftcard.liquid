@@ -10,12 +10,9 @@ data-section-type="giftcard-page">
     <div class="span-12 a-center">
       {% if section.settings.logo != blank %}
         <div class="giftcard__header__logo-image">
+          {% assign image_size = '600x' %}
           <a href="{{ routes.root_url }}">
-            {%
-              render 'basic-responsive-image',
-              type: section.settings.logo,
-              width: 600
-            %}
+            <img src="{{ section.settings.logo | img_url: image_size }}" alt="{{ section.settings.logo.alt | default: shop.name }}" itemprop="logo">
             <h1 class="h2 visually-hidden">{{ shop.name }}</h1>
           </a>
         </div>
@@ -93,6 +90,9 @@ data-section-type="giftcard-page">
 
       <div class="gift-card-actions">
         <a href="{{ routes.root_url }}" class="gift-card__shop button" target="_blank" rel="noreferrer">{{ 'gift_cards.issued.shop_link' | t }}</a>
+        <a href="#" rel="nofollow" class="gift-card__print" onclick="printContent('giftcard-page');">
+          <span class="vib-center">{{ 'gift_cards.issued.print' | t }}</span>
+        </a>
         <script type="text/javascript">
           function printContent(el){
             var restorepage = document.querySelector('body').innerHTML;
@@ -138,11 +138,6 @@ data-section-type="giftcard-page">
     }
     .gift-card-image svg #Desk---Gift-Card {
       fill: {{ section.settings.text_color }} !important;
-    }
-    div#qr-code {
-      width: 120px;
-      height: 120px;
-      margin: auto;
     }
   </style>
 </section>

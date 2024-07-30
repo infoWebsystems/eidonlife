@@ -24,11 +24,6 @@
     assign image_shape = true
   endunless
 
-  assign bold = false
-  if section.settings.bold_titles
-    assign bold = true
-  endif
-
   case grid
     when 2
     assign prod_grid = 50
@@ -46,8 +41,6 @@
   if section.settings.title_position == 'floating'
     assign floating_text = true
   endif
-
-  assign aos_mod = section.settings.grid | plus: 0
 
 -%}
 
@@ -72,61 +65,33 @@ data-section-type="collection-list">
       </div>
     {% endif %}
 
-    <div class="collection-loop collection__list-collections collection__list-text-floating--{{ floating_text }} collection__list-img-shape--{{ image_shape }} collection__list-ratio--{{ section.settings.image_ratio }} collection__list-grid--{{ grid }} {% if is_carousel %}collection__list-carousel flickity__section js-list-carousel{% endif %} span-12 auto"{% if is_carousel %} data-flickity-config='{{ slideshow_config }}'{% endif %} data-block-size="{{ section.blocks.size }}">
+    <div class="collection-loop collection__list-collections collection__list-text-floating--{{ floating_text }} collection__list-img-shape--{{ image_shape }} collection__list-ratio--{{ section.settings.image_ratio }} collection__list-grid--{{ grid }} {% if is_carousel %}collection__list-carousel flickity__section js-list-carousel{% endif %} span-12 auto"{% if is_carousel %} data-flickity='{{ slideshow_config }}'{% endif %}>
       {% for block in section.blocks limit: section.blocks.size %}
         {%- assign collection = collections[block.settings.collection] -%}
         {% if collection == blank %}
-          <div class="collection__list-item"
-            data-aos="fade"
-            data-aos-delay="{{ forloop.index | minus: 1 | modulo: aos_mod | times: 100 }}">
+          <div class="collection__list-item">
             <div class="collection__item-image">
-              {% if block.settings.collection_image != blank %}
-                {%
-                  render 'basic-responsive-image',
-                  type: block.settings.collection_image,
-                  width: 1200
-                %}
-              {% else %}
-                {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-                {%- assign placeholder = 'collection-' | append: current -%}
-                <div class="collection-image ci onboard {% unless section.settings.image_ratio == 'natural' %}box-ratio{% endunless %}">
-                    {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
-                </div>
-              {% endif %}
+              {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+              {%- assign placeholder = 'collection-' | append: current -%}
+              <div class="collection-image ci onboard {% unless section.settings.image_ratio == 'natural' %}box-ratio{% endunless %}">
+                <a href="#" title="Collection image">
+                  {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
+                </a>
+              </div>
             </div>
-            <div class="collection__item-details{% if bold %} is_bold{% endif %}">
-              <h3 class="prod-title h4">{{ 'sections.search.collections' | t }}</h3>
+            <div class="collection__item-details">
+              <h3 class="prod-title h4">Sample collection</h3>
               {%- if section.settings.collection_count -%}
-                <p class="mb0">{{ forloop.index }} {{ 'collections.general.items' | t }}</p>
+                <p class="mb0">{{ forloop.index }} items</p>
               {%- endif -%}
             </div>
           </div>
         {% else %}
-          {% liquid
-            assign loading = 'lazy'
-            assign fetch_priority = 'auto'
-
-            if section.index == 1
-              if is_carousel
-                if forloop.index <= grid
-                  assign loading = 'eager'
-                  assign fetch_priority = 'high'
-                endif
-              else
-                assign fetch_priority = 'high'
-                assign loading = 'eager'
-              endif
-            endif
-           %}
           {% render 'collection-grid-item',
             collection: collection,
             grid_item_width: grid_item_width,
             floating_text: floating_text,
-            block_image: block.settings.collection_image,
-            bold: bold,
-            aos_mod: aos_mod
-            loading: loading,
-            fetchpriority: fetch_priority %}
+            block_image: block.settings.collection_image %}
         {% endif %}
       {% endfor %}
 
@@ -179,7 +144,6 @@ data-section-type="collection-list">
       "max": 6,
       "step": 1,
       "label": "Collections per row",
-      "info": "Must be more blocks than the collections per row amount.",
       "default": 4
     },
     {
@@ -192,12 +156,6 @@ data-section-type="collection-list">
       "type": "checkbox",
       "id": "collection_count",
       "label": "Show product count",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "bold_titles",
-      "label": "Bold titles",
       "default": true
     },
     {
@@ -310,8 +268,6 @@ data-section-type="collection-list">
       }
     ]
   }],
-  "disabled_on": {
-    "groups": ["header", "footer"]
-  }
+  "templates": ["404", "article", "blog", "cart", "collection", "list-collections", "index", "page", "product", "search", "customers/account"]
 }
 {% endschema %}

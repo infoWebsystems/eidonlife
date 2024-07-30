@@ -11,15 +11,12 @@
         "8922aa76-72dd-483a-b25d-e169d768a152": {
           "type": "product_variants",
           "settings": {
-            "show_size_chart": false,
-            "size_chart_page": "",
-            "size_chart_label": "Size chart"
           }
         },
-        "product_size_chart_EKfWew": {
-          "type": "product_size_chart",
+        "text_content_PeMY8U": {
+          "type": "text_content",
           "settings": {
-            "size_chart_page": "{{ product.metafields.custom.product_size_guide.value }}"
+            "text": "<p><a href=\"https:\/\/eidonlife.com\/pages\/size-guide\" target=\"_blank\" title=\"https:\/\/eidonlife.com\/pages\/size-guide\">Size Chart<\/a><\/p>"
           }
         },
         "d9681722-e21d-42cb-b517-5a22bc70b2e5": {
@@ -30,7 +27,6 @@
         "569acd10-43ac-4854-adc8-bc64927b54bb": {
           "type": "product_buttons",
           "settings": {
-            "show_gift_card_recipient": false
           }
         },
         "1af258e7-17dd-4fe5-bccb-351630d70821": {
@@ -69,7 +65,7 @@
       },
       "block_order": [
         "8922aa76-72dd-483a-b25d-e169d768a152",
-        "product_size_chart_EKfWew",
+        "text_content_PeMY8U",
         "d9681722-e21d-42cb-b517-5a22bc70b2e5",
         "569acd10-43ac-4854-adc8-bc64927b54bb",
         "1af258e7-17dd-4fe5-bccb-351630d70821",
@@ -82,8 +78,7 @@
         "product_background": "",
         "thumbnail_position": "right",
         "click_to_enlarge": true,
-        "enable_video_looping": false,
-        "show_tax_information": false
+        "enable_video_looping": false
       }
     },
     "product-content": {
@@ -191,6 +186,28 @@
       "settings": {
         "section_padding": "none"
       }
+    },
+    "wholescale_review_widget_BwEiLN": {
+      "type": "wholescale-review-widget",
+      "settings": {
+      }
+    },
+    "1720120821a1b8077d": {
+      "type": "apps",
+      "blocks": {
+        "omnisend_email_marketing_sms_product_reviews_H8TCWJ": {
+          "type": "shopify:\/\/apps\/omnisend-email-marketing-sms\/blocks\/product-reviews\/44704aa2-794f-4c5d-8c8e-039c841158e9",
+          "disabled": true,
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "omnisend_email_marketing_sms_product_reviews_H8TCWJ"
+      ],
+      "settings": {
+        "section_padding": "both"
+      }
     }
   },
   "order": [
@@ -200,6 +217,8 @@
     "related-products",
     "product-recommendations",
     "2c57f40a-8a20-4102-89b0-c9839af37809",
-    "alireviews-section-1666181636"
+    "alireviews-section-1666181636",
+    "wholescale_review_widget_BwEiLN",
+    "1720120821a1b8077d"
   ]
 }

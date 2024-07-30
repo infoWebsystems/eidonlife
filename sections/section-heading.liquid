@@ -27,12 +27,16 @@
     assign title_size = 'var(--h2-size)'
   elsif section.settings.title_size == 'h3'
     assign title_size = 'var(--h3-size)'
+  elsif section.settings.title_size == 'h4'
+    assign title_size = 'var(--h4-size)'
+  elsif section.settings.title_size == 'h5'
+    assign title_size = 'var(--h5-size)'
   endif
 
 -%}
 
 {% comment %} Section heading Template {% endcomment %}
-<section class="section-{{ section.id }} global__section {{ section_padding }} row" data-aos="fade">
+<section class="section-{{ section.id }} global__section {{ section_padding }} row">
   {% if section_title != blank %}
     <h2 class="section-heading">{{ section_title }}</h2>
   {% endif %}
@@ -79,15 +83,23 @@
       "options": [
         {
           "value": "h1",
-          "label": "Page title"
+          "label": "H1"
         },
         {
           "value": "h2",
-          "label": "Section title"
+          "label": "H2"
         },
         {
           "value": "h3",
-          "label": "Subheading"
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
         }
       ],
       "default": "h2"
@@ -141,8 +153,6 @@
   "presets": [{
     "name": "Section heading"
   }],
-  "disabled_on": {
-    "groups": ["header"]
-  }
+  "templates": ["404", "article", "blog", "cart", "collection", "list-collections", "index", "page", "product", "search"]
 }
 {% endschema %}

@@ -3,12 +3,10 @@
     assign cart_type_class = 'ajax-cart__drawer-wrapper'
     assign cart_class = 'js-slideout-close'
     assign cart_data = 'data-slideout-direction="right" aria-controls="slideout-ajax-cart"'
-    assign footer_grid = 'span-12'
   elsif settings.cart_type == 'modal_cart'
     assign cart_type_class = 'ajax-cart__modal-wrapper'
     assign cart_class = 'js-modal-close'
     assign cart_data = 'aria-controls="modal-ajax-cart"'
-    assign footer_grid = 'push-6 span-6'
   endif
 -%}
 
@@ -35,15 +33,4 @@
   <div class="ajax-cart__form-wrapper cart-wrapper js-ajax-cart-content">
 
   </div>
-  {%- unless request.design_mode -%}
-    {%- if additional_checkout_buttons -%}
-      <div class="ajax-cart__footer-wrapper grid__wrapper edge">
-        <div class="{{ footer_grid }} sm-span-12 auto" id="dynamic">
-          <div class="ajax-cart__buttons-additional">
-            {{ content_for_additional_checkout_buttons }}
-          </div>
-        </div>
-      </div>
-    {%- endif -%}
-  {%- endunless -%}
 </section>

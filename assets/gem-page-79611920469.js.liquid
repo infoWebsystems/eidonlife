@@ -1,0 +1,68 @@
+{% comment %}
+	GEMPAGE BUILDER (https://apps.shopify.com/gempage)
+
+	You SHOULD NOT modify source code in this page because
+	It is automatically generated from GEMPAGE BUILDER
+	Try to edit page with the live editor.
+{% endcomment %}
+
+    
+    
+    
+    
+(function( jQuery ){
+  var $module = jQuery('#m-1619029820179');
+  var mode = jQuery('.gryffeditor').hasClass('editing') ? 'dev' : 'production';
+  $module.css({
+    'height': 'auto'
+  });
+  jQuery(window).resize(function(){
+    $module.css('height', 'auto');
+  });
+  $module.children('.module').removeClass('full-height');
+
+  var image = $module.children('.module').data('image') || '';
+  if ($module.children('.module').data('speed') || $module.children('.module').data('speed') == 0) {
+    var speed = parseFloat($module.children('.module').data('speed'));
+  } else {
+    var speed = 0.2;
+  }
+  if($module.data('gfv3parallax') != undefined) {
+    $module.removeData('gfv3parallax');
+  }
+  $module.gfV3Parallax({
+    'image': image,
+    'speed': speed,
+    'mode': mode
+  });
+  if(mode == 'dev') {
+    var moduleId = "1619029820179";
+    var moduleIdSlug = moduleId.toString().replace(/-/g, '');
+    if (moduleIdSlug == "1619029820179") {
+      window.getParallax1619029820179 = function() {
+        return $module.data('gfv3parallax');
+      }
+    }
+  }
+})( window.GemQuery || jQuery );
+    
+    
+    
+(function( jQuery ){
+  var $module = jQuery('#m-1619030726837').children('.module');
+  if(jQuery().gfYoutube) {
+    $module.gfYoutube();
+  }
+})( window.GemQuery || jQuery );
+    
+                          jQuery(function(){
+                              try{
+                                  if(jQuery().gfV2Lazyload){
+                                      var $module=jQuery(window);
+                                      $module.gfV2Lazyload({delay:125})
+                                  }
+                              }catch(err){
+                                  console.error(err)
+                              }
+                          })
+                      

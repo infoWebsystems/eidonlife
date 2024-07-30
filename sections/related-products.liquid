@@ -28,13 +28,7 @@ data-section-type="related-products">
         {% for block in section.blocks %}
         {% assign related_product = block.settings.product %}
           {% unless related_product == blank %}
-            <div class="featured__collection-product product-index js-product-listing span-3 auto md-span-4 sm-span-6" 
-              id="product-listing-{{ product.id }}" 
-              data-product-id="{{ product.id }}"
-              data-alpha="{{ product.title }}"
-              data-price="{{ product.price }}"
-              data-aos="fade"
-              data-aos-delay="{{ forloop.index | times: 100 }}">
+            <div class="featured__collection-product product-index span-3 auto sm-span-6" id="product-listing-{{ product.id }}" data-product-id="{{ product.id }}" data-alpha="{{ product.title }}" data-price="{{ product.price }}">
               {% render 'product-listing', product: related_product %}
             </div>
           {% endunless %}

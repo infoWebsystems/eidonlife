@@ -1,19 +1,9 @@
-{%- liquid
-
-  if product.template_suffix == 'pre-order'
-    assign button_text = 'products.product.pre_order' | t
-  else
-    assign button_text = 'products.product.add_to_cart' | t
-  endif
-
--%}
 <script id="cart-config" type="application/json">
   {
     "cart_url": {{ routes.cart_url | json }},
-    "form_error": {{ "cart.general.form_error" | t | json }},
     "cart_error": {{ "cart.general.cart_error" | t | json }},
     "update_qty_error": {{ "cart.general.update_qty_error" | t | json }},
-    "add_to_cart": {{ button_text | json }},
+    "add_to_cart": {{'products.product.add_to_cart' | t | json }},
     "adding_to_cart": {{ 'products.product.adding' | t | json }},
     "added_to_cart": {{ 'products.product.added' | t | json }},
     "cart_added_event": {{ settings.cart_added_event | json }},

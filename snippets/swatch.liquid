@@ -1,39 +1,13 @@
 {%- liquid
 
   assign option_name = option.name | downcase
-  assign color_swatch_options = settings.swatch_option_names | replace: ' ,', ',' | replace: ', ', ',' | split: ',' | downcase
+  assign color_swatch_options = "color, colour" | split: ", "
   assign current_option = "option" | append: option.position
   assign other_options = "option1 option2 option3" | remove: current_option | strip | split: " "
-  assign size_swatches = "size, sizes" | split: ", "
 
 -%}
 
 <div class="swatches__container js-variant-selector product__section--element" data-option-index="{{ option.position }}" data-other-options='{{ other_options | json }}'>
-
-  {% unless template == 'product.quick' %}
-    {% if show_size_chart and size_swatches contains option_name %}
-      <div class="size-chart">
-        <button
-          class="button-as-link js-modal-open"
-          type="button"
-          name="button"
-          aria-label="Open popup"
-          data-wau-modal-target="product-modal--{{ section.id }}--{{ forloop.index }}">
-          {{ size_chart_label }}
-        </button>
-
-        <!-- modal content -->
-        <div data-wau-modal-content="product-modal--{{ section.id }}--{{ forloop.index }}" style="display: none;">
-          <div class="rte">
-            {{ size_chart_page.content }}
-          </div><!-- /.rte -->
-        </div>
-
-      </div>
-
-    {% endif %}
-  {% endunless %}
-
   <p class="swatches__option-name">{{ option.name }}: {% for value in option.values %}{% if option.selected_value == value %}<span id="selected-option-{{ option.position }}" class="swatches__option-value">{{ value }}</span>{% endif %}{% endfor %}</p>
 
   {% for value in option.values %}
@@ -42,13 +16,6 @@
       assign image_url = value | handle | append: '.png' | file_url
       assign css_color = value | split: ' ' | last | handle
       assign available = false
-      assign swatch_image_url = nil
-      if value.swatch.image
-        assign swatch_image_url = value.swatch.image | image_url: width: 50
-      endif
-      if value.swatch.color and color_swatch_style == 'swatch'
-        assign css_color = value.swatch.color
-      endif
 
     -%}
 
@@ -96,7 +63,7 @@
         endunless
 
         if variant.image
-          assign variant_image_url =  variant.image | image_url: width: 100
+          assign variant_image_url =  variant.image | img_url: '100x'
         endif
       endfor
 
@@ -150,7 +117,7 @@
         tabindex="0"
         style="background-color: {{ css_color }};
         {% unless color_swatch_style == 'default-color' %}
-          background-image: url({% if color_swatch_style == 'custom-image' %}{{ image_url }}{% elsif color_swatch_style == 'variant-image' %}{{ variant_image_url }}{% elsif color_swatch_style == 'swatch' %}{{ swatch_image_url  }}{% endif %}); background-position: center center; background-size: 50px;
+          background-image: url({% if color_swatch_style == 'custom-image' %}{{ image_url }}{% elsif color_swatch_style == 'variant-image' %}{{ variant_image_url }}{% endif %}); background-position: center center;
         {% endunless %}">
           {{ sold_out_image }}
         </label>

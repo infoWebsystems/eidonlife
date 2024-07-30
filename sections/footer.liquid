@@ -2,7 +2,7 @@
   assign locale_selector = false
   assign country_selector = false
 
-  if section.settings.show_country_selector and localization.available_countries.size > 1
+  if section.settings.show_country_selector and shop.enabled_currencies.size > 1
     assign country_selector = true
   endif
 
@@ -23,74 +23,60 @@
 -%}
 
 <div class="footer-section" data-section-id="{{ section.id }}" data-section-type="footer-section">
-<footer id="footer" class="footer">
+<footer id="footer">
   <div class="row grid__wrapper">
     {% for block in section.blocks %}
-      <div class="{{ column_width }} footer-sect"
-        data-aos="fade"
-        data-aos-delay="{{ forloop.index | times: 100 }}">
-
-        {% case block.type %}
-        {% when 'menu' %}
-
-            <div class="section-title">
-              <h3>{{ block.settings.heading | escape }}</h3>
-            </div>
-            <ul {{ block.shopify_attributes }}>
-              {% for link in linklists[block.settings.footer_nav].links %}
-              <li>{{ link.title | link_to: link.url }}</li>
-              {% endfor %}
-            </ul>
-
-        {% when 'blog' %}
-
-            <div class="section-title">
-              <h3>{{ block.settings.heading | escape }}</h3>
-            </div>
-            <ul>
-              {% for article in blogs[block.settings.footer_blog].articles limit: block.settings.post_limit %}
-              <li><a href="{{ article.url }}">{{ article.title }}</a></li>
-              {% endfor %}
-            </ul>
-
-        {% when 'text' %}
-
-            <div class="section-title">
-              <h3>{{ block.settings.heading | escape }}</h3>
-            </div>
-            <div class="rte">
-              {{ block.settings.footer_text }}
-            </div>
-
-        {% endcase %}
-
-      </div>
+      {% case block.type %}
+      {% when 'menu' %}
+        <div class="{{ column_width }} footer-sect">
+          <div class="section-title">
+            <h3>{{ block.settings.heading | escape }}</h3>
+          </div>
+          <ul {{ block.shopify_attributes }}>
+            {% for link in linklists[block.settings.footer_nav].links %}
+            <li>{{ link.title | link_to: link.url }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% when 'blog' %}
+        <div class="{{ column_width }} footer-sect">
+          <div class="section-title">
+            <h3>{{ block.settings.heading | escape }}</h3>
+          </div>
+          <ul>
+            {% for article in blogs[block.settings.footer_blog].articles limit: block.settings.post_limit %}
+            <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% when 'text' %}
+        <div class="{{ column_width }} footer-sect">
+          <div class="section-title">
+            <h3>{{ block.settings.heading | escape }}</h3>
+          </div>
+          <div class="rte">
+            {{ block.settings.footer_text }}
+          </div>
+        </div>
+      {% endcase %}
     {% endfor %}
   </div>
   <div class="clear"></div>
   <div id="bottom-footer" class="sub-footer row grid__wrapper">
-    <div class="footer-left"
-      data-aos="fade"
-      data-aos-delay="{{ forloop.index | times: 100 }}">
+    <div class="footer-left">
       {% if section.settings.show_social_icons %}
         <ul id="social-links">
           {% render 'social-icons', wrapper: '.footer-left', fill_color: 'var(--footer-color)', hover_color: 'var(--footer-color)' %}
         </ul>
       {% endif %}
-      {%- if shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}
-        <div class="footer__follow-on-shop mt10">
-          {{ shop | login_button: action: 'follow' }}
-        </div>
-      {%- endif -%}
+
       <p class="copyright-text">
         {% if section.settings.show_copyright %}<a href="{{ routes.root_url }}">
           &copy; {{ 'now' | date: "%Y" }} {{ shop.name }}
-        </a> • {% endif %}{{ powered_by_link }}
+        </a> {% endif %}
       </p>
     </div>
-    <div id="payment" class="footer-right"
-      data-aos="fade"
-      data-aos-delay="{{ forloop.index | times: 100 }}">
+    <div id="payment" class="footer-right">
       {% if locale_selector or country_selector %}
         <div class="disclosures">
             {%- if locale_selector -%}
@@ -142,12 +128,12 @@
 
             {%- if country_selector -%}
               <div class="selectors-form__item">
-                <h2 class="visually-hidden" id="currency-heading_footer">
+                <h2 class="visually-hidden" id="currency-heading">
                   {{ 'general.currency.dropdown_label' | t }}
                 </h2>
                 <noscript>
                   {%- form 'localization', id: 'FooterCountryFormNoScript', class: 'selectors-form', data-disclosure-form: '' -%}
-                    <select class="localization-selector link disclosure__toggle button styled-select" name="country_code" aria-labelledby="currency-heading_footer">
+                    <select class="localization-selector link disclosure__toggle button styled-select" name="country_code" aria-labelledby="currency-heading">
                       <option value="" disabled>{{ 'general.currency.dropdown_label' | t }}</option>
                       {%- for country in localization.available_countries -%}
                         <option value="{{ country.iso_code }}" {%- if country.iso_code == localization.country.iso_code %} selected{% endif %}>
@@ -168,27 +154,14 @@
                 </noscript>
                 {%- form 'localization', id: 'FooterCountryForm', class: 'selectors-form', data-disclosure-form: '' -%}
                 <div class="disclosure" data-disclosure-currency>
-                  <button type="button" class="disclosure__toggle" aria-expanded="false" aria-controls="currency-list_footer" aria-describedby="currency-heading_footer" data-disclosure-toggle>
-                    {% if section.settings.show_flag %}
-                      <span class="country--flag">
-                        {{ localization.country | image_url: width: 32 | image_tag: class: 'disclosure__toggle__flag', loading: 'lazy', image_alt: country.name }}
-                      </span>
-                    {% endif %}
-                    {{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }}
+                  <button type="button" class="disclosure__toggle" aria-expanded="false" aria-controls="currency-list" aria-describedby="currency-heading" data-disclosure-toggle>
+                    {{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
                   </button>
-                  <ul id="currency-list_footer" class="disclosure-list" data-disclosure-list>
+                  <ul id="currency-list" class="disclosure-list" data-disclosure-list>
                     {% for country in localization.available_countries %}
                       <li class="disclosure-list__item {% if country.iso_code == localization.country.iso_code %}disclosure-list__item--current{% endif %}">
                         <a class="disclosure-list__option" href="#" {% if country.iso_code == localization.country.iso_code %}aria-current="true"{% endif %} data-value="{{ country.iso_code }}" data-disclosure-option>
-                          {% if section.settings.show_flag %}
-                            <span class="country--flag">
-                              {{ country | image_url: width: 32 | image_tag: class: 'disclosure__toggle__flag', loading: 'lazy', alt: country.name }}
-                            </span>
-                          {% endif %}
-                          <span class="country--name">
-                            {{ country.name }} 
-                          </span>
-                          <span class="localization-form__currency">({{ country.currency.iso_code }} {{ country.currency.symbol }})</span>
+                          {{ country.name }} <span class="localization-form__currency">({{ country.currency.iso_code }} {{ country.currency.symbol }})</span>
                         </a>
                       </li>
                     {%- endfor -%}
@@ -389,17 +362,6 @@
       "default": true
     },
     {
-      "type": "header",
-      "content": "Follow on Shop",
-      "info": "Display follow button for your storefront on the Shop app. [Learn more](https://help.shopify.com/en/manual/online-store/themes/customizing-themes/follow-on-shop)"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_follow_on_shop",
-      "default": true,
-      "label": "Enable Follow on Shop"
-    },
-    {
       "type": "checkbox",
       "id": "show_copyright",
       "label": "Show site name and copyright",
@@ -425,12 +387,6 @@
       "type": "checkbox",
       "id": "show_country_selector",
       "label": "Enable country/region selector",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_flag",
-      "label": "Show country flags",
       "default": true
     }
   ],

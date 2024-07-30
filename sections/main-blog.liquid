@@ -1,6 +1,4 @@
-<section data-section-id="{{ section.id }}" 
-  class="blog-template global__section row grid__wrapper gr0" 
-  data-aos="fade">
+<section data-section-id="{{ section.id }}" class="blog-template global__section row grid__wrapper gr0" data-aos="fade">
 
   <h2 class="span-12 auto">
     {% if current_tags %}
@@ -21,7 +19,7 @@
         <ul class="taglist">
           {% for tag in blog.all_tags %}
             <li>
-              <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+              <a href="/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}">{{ tag }}</a>
             </li>
           {% endfor %}
         </ul>
@@ -38,19 +36,126 @@
               assign number_of_comments = article.comments_count | plus: 1
             endif
           -%}
-          <div class="article-index" 
-            id="article-{{ article.id }}" 
-            data-alpha="{{ article.title }}"
-            data-aos="fade"
-            data-aos-delay="{{ forloop.index | times: 100 }}">
+          <div class="article-index" id="article-{{ article.id }}" data-alpha="{{ article.title }}">
            {% render 'article-loop',
-              article: article,
-              forloop: forloop %}
+              article: article %}
           </div>
         {% endfor %}
       </div>
       {% if section.blocks.size > 0 %}
-        {% render 'blog-sidebar', block: block %}
+        <div id="blog-sidebar" data-aos="fade">
+          {% for block in section.blocks %}
+            <div class="blog-sidebar-block">
+              {% case block.type %}
+              {% when 'menu' %}
+               <ul class="blog-sidebar-menu" {{ block.shopify_attributes }}>
+                 <h4>{{ block.settings.heading | escape }}</h4>
+                 {% for link in linklists[block.settings.side_nav].links %}
+                  <li>{{ link.title | link_to: link.url }}</li>
+                 {% endfor %}
+               </ul>
+              {% when 'text' %}
+               <div class="textnote_container">
+                  <h4>{{ block.settings.heading | escape }}</h4>
+                  <span class="rte">{{ block.settings.sidebar_text }}</span>
+               </div>
+              {% when 'newsletter' %}
+               <div class="blog-sidebar-newsletter">
+                 <h4>{{ block.settings.heading | escape }}</h4>
+                 {{ block.settings.text }}
+
+                 {% form 'customer' %}
+                  {{ form.errors | default_errors }}
+                   {% if form.posted_successfully? %}
+                    <p class="success">{{ 'password.general.thanks' | t }}</p>
+                   {% else %}
+                     <input type="hidden" name="contact[tags]" value="prospect, password page">
+                     <input type="email" name="contact[email]" id="blog-email-input" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}">
+                     <input type="submit" id="blog-email-submit" value="{{ 'general.newsletter_form.submit' | t }}">
+                   {% endif %}
+                 {% endform %}
+               </div>
+              {% when 'image' %}
+               <div class="image_container"{% if block.settings.image == blank %} style="background: #eee"{% endif %}>
+                 <a href="{{ block.settings.link }}">
+                   {% if block.settings.image != blank %}
+                    <img src="{{ block.settings.image | img_url: '450x' }}" alt="{{ block.settings.image.alt }}">
+                   {% else %}
+                    {{ 'collection-1' | placeholder_svg_tag }}
+                   {% endif %}
+                 </a>
+               </div>
+              {% when 'profile' %}
+                <h4>{{ block.settings.heading | escape }}</h4>
+                <div class="bio_image_container"{% if block.settings.image == blank %} style="background: #eee"{% endif %}>
+                  {% if block.settings.image != blank %}
+                    <img src="{{ block.settings.image | img_url: '450x' }}" alt="{{ block.settings.image.alt }}">
+                  {% else %}
+                    {{ 'collection-1' | placeholder_svg_tag }}
+                  {% endif %}
+                </div>
+                <div class="textnote_container rte">
+                 {{ block.settings.bio_text }}
+                </div>
+              {% when 'product' %}
+                {%- liquid
+                  assign product = all_products[block.settings.featured_product]
+                  assign preview_image = product.featured_media.preview_image
+                  assign image_box_ratio = preview_image.height | append: ".0" | times: 1 | divided_by: preview_image.width | times: 100 | append: "%"
+                  assign img_url = preview_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.'
+                -%}
+                {%- if product != blank -%}
+                  <div class="prod-image">
+                    <a href="{{ product.url | within: collection }}">
+                      <div class="box-ratio" style="padding-bottom: {{ image_box_ratio }};">
+                        <img class="lazyload lazyload-fade {% if settings.secondary_images_hover and product.images.size > 1 %}first-image{% endif %}"
+                          data-src="{{ img_url }}"
+                          data-sizes="auto"
+                          data-original="{{ preview_image | img_url: '500x' }}"
+                          alt="{{ preview_image.alt | escape }}">
+                      </div>
+                      <noscript>
+                        <img src="{{ preview_image | img_url: '500x' }}" alt="{{ preview_image.alt | escape }}">
+                      </noscript>
+                     </a>
+                  </div>
+                  <div class="blog-product-info">
+                    <a href="{{ product.url | within: collection }}">
+                      {% if settings.vendor %}
+                       <p>{{ product.vendor }}</p>
+                      {% endif %}
+                      <p>{{ product.title }}</p>
+                    </a>
+                    {% render 'product-price-listing', product: product %}
+                    {% if block.settings.show_button %}
+                      <a class="button" href="{{ product.url | within: collection }}">
+                        {{ block.settings.button_text }}
+                      </a>
+                    {% endif %}
+                  </div>
+                {%- else -%}
+                  <div class="prod-image">
+                    {{ 'product-1' | placeholder_svg_tag }}
+                  </div>
+                  <div class="blog-product-info {% if block.settings.sidebar_text_align == 'center' %}a-center{% endif %}">
+                    <a href="">
+                      {% if settings.vendor %}
+                       <p>VENDOR</p>
+                      {% endif %}
+                      <p>Product Title</p>
+                    </a>
+                    $12.00
+                    {% if block.settings.show_button %}
+                      <a class="button" href="">
+                        {{ block.settings.button_text }}
+                      </a>
+                    {% endif %}
+                  </div>
+                {%- endif -%}
+              {% endcase %}
+            </div>
+          {% endfor %}
+        </div>
       {% endif %}
     </div>
     <div class="clear"></div>
@@ -120,10 +225,18 @@
       "content": "Sidebar settings"
     },
     {
-       "type": "text_alignment",
-       "id": "sidebar_text_align",
-       "label": "Text alignment",
-       "default": "left"
+      "type": "select",
+      "id": "sidebar_text_align",
+      "label": "Text alignment",
+      "options": [{
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
     },
     {
       "type": "checkbox",

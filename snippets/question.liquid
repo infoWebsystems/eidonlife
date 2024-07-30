@@ -3,7 +3,7 @@
 
   {% if form.posted_successfully? %}
     <div class="successForm feedback note-success">
-      <p>{{ 'sections.contact_form.post_success' | t }}</p>
+      <p>{{ 'contact.form.post_success' | t }}</p>
     </div>
   {% endif %}
 
@@ -28,30 +28,30 @@
 
   <div id="contactFormWrapper">
     <div class="contact__form--input">
-      <input type="text" id="contactFormName" name="contact[name]" aria-label="{{ 'sections.contact_form.name' | t }}" />
-      <label for="contactFormName">{{ 'sections.contact_form.name' | t }}</label>
+      <input type="text" id="contactFormName" name="contact[name]" aria-label="{{ 'contact.form.name' | t }}" />
+      <label for="contactFormName">{{ 'contact.form.name' | t }}</label>
     </div>
 
     <div class="contact__form--input">
-      <input type="email" id="contactFormEmail" name="contact[email]" aria-label="{{ 'sections.contact_form.email' | t }}" />
-      <label for="contactFormEmail">{{ 'sections.contact_form.email' | t }}</label>
+      <input type="email" id="contactFormEmail" name="contact[email]" aria-label="{{ 'contact.form.email' | t }}" />
+      <label for="contactFormEmail">{{ 'contact.form.email' | t }}</label>
     </div>
 
     <div class="contact__form--input">
-      <input type="text" id="contactFormTelephone" name="contact[phone]" aria-label="{{ 'sections.contact_form.phone' | t }}" />
-      <label for="contactFormTelephone">{{ 'sections.contact_form.phone' | t }}</label>
+      <input type="text" id="contactFormTelephone" name="contact[phone]" aria-label="{{ 'contact.form.phone' | t }}" />
+      <label for="contactFormTelephone">{{ 'contact.form.phone' | t }}</label>
     </div>
 
     <input type="hidden" name="contact[product]" value="{{product.title}}">
     <input type="hidden" name="contact[producturl]" value="{{ routes.root_url }}/{{product.url}}">
 
     <div class="contact__form--input">
-      <textarea rows="15" cols="90" id="contactFormMessage" name="contact[body]" aria-label="{{ 'sections.contact_form.message' | t }}"></textarea>
-      <label for="contactFormMessage">{{ 'sections.contact_form.message' | t }}</label>
+      <textarea rows="15" cols="90" id="contactFormMessage" name="contact[body]" aria-label="{{ 'contact.form.message' | t }}"></textarea>
+      <label for="contactFormMessage">{{ 'contact.form.message' | t }}</label>
     </div>
 
     <div class="contact__form--input">
-      <input type="submit" id="contactFormSubmit" class="secondary button" value="{{ 'sections.contact_form.send' | t }}" />
+      <input type="submit" id="contactFormSubmit" class="secondary button" value="{{ 'contact.form.send' | t }}" />
     </div>
   </div><!-- contactWrapper -->
 

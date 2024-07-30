@@ -1,29 +1,3 @@
-{% comment %}
-  Render a collection grid item.
-
-  Accepts:
-  - collection: {Object} Liquid Collection object
-  - grid_item_width: {String}
-  - floating_text: {Boolean} Render a floating text or not.
-  - block_image: {Boolean} Render a block image.
-  - bold: {Boolean} Render bold text.
-  - aos_mod: {Number}
-  - loading: {String} Determines the loading attribute. (optional)
-  - fetchpriority: {String} Determines fetch priority attribute. (optional)
-
-  Usage:
-  {%
-    render 'collection-grid-item',
-    collection: collection,
-    grid_item_width: grid_item_width,
-    floating_text: floating_text,
-    block_image: false,
-    bold: bold,
-    aos_mod: aos_mod,
-    loading: loading,
-    fetchpriority: fetch_priority
-  %}
-{% endcomment %}
 {% if collection.empty? %}
   {% comment %}add default state for collection block in storefront editor{% endcomment %}
   {% capture collection_title %}{{ 'homepage.onboarding.collection_title' | t }}{% endcapture %}
@@ -32,7 +6,7 @@
   {% capture collection_title %}{{ collection.title }}{% endcapture %}
 {% endif %}
 {% capture collection_details %}
-  <div class="collection__item-details{% if bold %} is_bold{% endif %}">
+  <div class="collection__item-details">
     <a class="inline-block-full" href="{{ collection.url }}" title="{{ collection_title }}">
       <h3 class="prod-title h4">{{ collection.title }}</h3>
       {%- if section.settings.collection_count -%}
@@ -42,39 +16,27 @@
   </div>
 {% endcapture %}
 
-<div class="collection__list-item" 
-  data-aos="fade"
-  data-aos-delay="{{ forloop.index | minus: 1 | modulo: aos_mod | times: 100 }}"
-  data-alpha="{{ collection.title }}">
+<div class="collection__list-item" data-alpha="{{ collection.title }}">
   <div class="collection__item-image">
     {%- if floating_text -%}
       {{ collection_details }}
     {%- endif -%}
     <a class="inline-block-full" href="{{ collection.url }}" title="{{ collection_title }}">
     {% if block_image != blank %}
-      {%
-        render 'basic-responsive-image',
-        type: block_image,
-        width: 1200,
-        loading: loading,
-        fetchpriority: fetchpriority
-      %}
+      {% render "basic-responsive-image", type: block_image, data_widths: '[180, 360, 540, 720, 900]' %}
+      <noscript>
+        <img src="{{ block_image | img_url: '1024x1024' }}" alt="{{ block_image.alt | escape }}" class="collection__image">
+      </noscript>
     {% elsif collection.image %}
-      {%
-        render 'basic-responsive-image',
-        type: collection.image,
-        width: 1200,
-        loading: loading,
-        fetchpriority: fetchpriority
-      %}
+      {% render "basic-responsive-image", type: collection.image, data_widths: '[180, 360, 540, 720, 900]' %}
+      <noscript>
+        <img src="{{ collection.image | img_url: '1024x1024' }}" alt="{{ collection.image.alt | escape }}" class="collection__image">
+      </noscript>
     {% elsif collection.products.first.featured_image %}
-      {%
-        render 'basic-responsive-image',
-        type: collection.products.first.featured_image,
-        width: 1200,
-        loading: loading,
-        fetchpriority: fetchpriority
-      %}
+      {% render "basic-responsive-image", type: collection.products.first.featured_image, data_widths: '[180, 360, 540, 720, 900]' %}
+      <noscript>
+        <img src="{{ collection.products.first.featured_image | img_url: '1024x1024' }}" alt="{{ collection.products.first.featured_image.alt | escape }}" class="collection__image">
+      </noscript>
     {% else %}
       {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
       {%- assign placeholder = 'collection-' | append: current -%}

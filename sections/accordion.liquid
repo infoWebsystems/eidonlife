@@ -25,7 +25,7 @@
 -%}
 
 {% comment %} Accordion Template {% endcomment %}
-<section class="accordion__section global__section row section-{{ section.id }} {{ section_padding }}">
+<section class="accordion__section global__section row section-{{ section.id }} {{ section_padding }}" data-aos="fade">
   <div class="accordion__section-inner-wrapper grid__wrapper">
     {% if section.settings.title != blank %}
       <div class="accordion__section-title span-3 sm-span-12 auto">
@@ -54,12 +54,7 @@
        -%}
 
          {% if accordion_title %}
-            <button class="js-accordion-header c-accordion__header" 
-              data-aos="fade"
-              data-aos-delay="{{ forloop.index | times: 100 }}"
-              aria-expanded="false" 
-              aria-controls="{{ accordion_content_id }}" 
-              data-toggle="accordion">
+            <button class="js-accordion-header c-accordion__header" aria-expanded="false" aria-controls="{{ accordion_content_id }}" data-toggle="accordion">
               {{ accordion_title }}
             </button>
              <div class="c-accordion__panel {{ accordion_content_id }} rte" id="{{ accordion_content_id }}" data-parent="#c-accordion--{{ unique_id }}">
@@ -145,8 +140,6 @@
       ]
     }
   ],
-  "disabled_on": {
-    "groups": ["header", "footer"]
-  }
+  "templates": ["404","article","index","page","product","search"]
 }
 {% endschema %}

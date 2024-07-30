@@ -11,20 +11,30 @@ section/predictive-search.liquid
         aria-labelledby="predictive-search-products">
 
 
-      <!-- Queries/Collections -->
-      {%- if predictive_search.resources.queries.size > 0 or predictive_search.resources.collections.size > 0 -%}
+      <!-- Products -->
+      {%- if predictive_search.resources.products.size > 0 -%}
         <li>
-          <h3 id="predictive-search-collections" class="predictive-search__heading h4 a-left">
-            {{ 'sections.search.suggestions' | t }}
+          <h3 id="predictive-search-products" class="predictive-search__heading h4 a-left">
+            {{ 'sections.predictive_search.products' | t }}
           </h3>
-          <ul>
-            {%- for query in predictive_search.resources.queries -%}
-              <li class="predictive-search__list-item" role="option">
-                <a class="predictive-search__item" href="{{ query.url }}">
-                  <p aria-label="{{ query.text }}">{{ query.styled_text }}</p>
-                </a>
+          <ul class="search__product-loop grid__wrapper">
+            {%- for product in predictive_search.resources.products -%}
+              <li class="product-index span-2 md-span-4 sm-span-6 auto" role="option">
+                {% render 'product-listing', product: product, collection: collection %}
               </li>
             {%- endfor -%}
+          </ul>
+        </li>
+      {%- endif -%}
+
+
+      <!-- Collections -->
+      {%- if predictive_search.resources.collections.size > 0 -%}
+        <li>
+          <h3 id="predictive-search-collections" class="predictive-search__heading h4 a-left">
+            {{ 'sections.predictive_search.collections' | t }}
+          </h3>
+          <ul>
             {%- for collection in predictive_search.resources.collections -%}
               <li class="predictive-search__list-item" role="option">
                 <a class="predictive-search__item" href="{{ collection.url }}" title="{{ collection.title }}">
@@ -37,28 +47,11 @@ section/predictive-search.liquid
       {%- endif -%}
 
 
-      <!-- Products -->
-      {%- if predictive_search.resources.products.size > 0 -%}
-        <li>
-          <h3 id="predictive-search-products" class="predictive-search__heading h4 a-left">
-            {{ 'sections.search.products' | t }}
-          </h3>
-          <ul class="search__product-loop grid__wrapper">
-            {%- for product in predictive_search.resources.products -%}
-              <li class="product-index span-2 md-span-4 sm-span-6 auto js-product-listing" role="option">
-                {% render 'product-listing', product: product, collection: collection %}
-              </li>
-            {%- endfor -%}
-          </ul>
-        </li>
-      {%- endif -%}
-
-
-      <!-- Pages/Articles -->
-      {%- if predictive_search.resources.pages.size > 0 or predictive_search.resources.articles.size > 0 -%}
+      <!-- Pages -->
+      {%- if predictive_search.resources.pages.size > 0 -%}
         <li>
           <h3 id="predictive-search-pages" class="predictive-search__heading h4 a-left">
-            {{ 'sections.search.pages' | t }}
+            {{ 'sections.predictive_search.pages' | t }}
           </h3>
           <ul>
             {%- for page in predictive_search.resources.pages -%}
@@ -68,6 +61,18 @@ section/predictive-search.liquid
                 </a>
               </li>
             {%- endfor -%}
+          </ul>
+        </li>
+      {%- endif -%}
+
+
+      <!-- Articles -->
+      {%- if predictive_search.resources.articles.size > 0 -%}
+        <li>
+          <h3 id="predictive-search-articles" class="predictive-search__heading h4 a-left">
+            {{ 'sections.predictive_search.articles' | t }}
+          </h3>
+          <ul>
             {%- for article in predictive_search.resources.articles -%}
               <li class="predictive-search__list-item" role="option">
                 <a class="predictive-search__item" href="{{ article.url }}" title="{{ article.title }}">
@@ -79,11 +84,10 @@ section/predictive-search.liquid
         </li>
       {%- endif -%}
 
-
       <!-- More results -->
       <li class="predictive-search__list-item predictive-search__list-item--search" role="option">
         <button class="predictive-search__item button-as-link">
-          {{ 'sections.search.search_for' | t: terms: predictive_search.terms }}
+          {{ 'sections.predictive_search.search_for' | t: terms: predictive_search.terms }}
         </button>
       </li>
     </ul>

@@ -4,7 +4,7 @@
   <div class="article-index {{ grid }} sm-span-12 auto" id="article" data-alpha="">
     <div class="article-info">
       <div class="article-info-inner">
-        <h3><a href="#">{{ 'blogs.onboarding.title' | t }}</a></h3>
+        <h3><a href="#">Article title</a></h3>
         {% if section.settings.show_date %}
           {% assign published_at = article.published_at | date: format: 'month_date_year' %}
           <p class="posted">{{ 'now' | date: "%a, %b %d, %y" }}</p>
@@ -15,7 +15,7 @@
           </a>
         </div>
         <div class="article-content">
-          {{ 'blogs.onboarding.description' | t }}
+          A short description of the content included in your blog article.
         </div>
         <div class="readmore">
           <a href="">{{ 'blogs.article.read_more' | t }}</a>

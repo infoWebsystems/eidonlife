@@ -3,19 +3,10 @@
   {% if article.image %}
     <div class="article-image">
       <a href="{{ article.url }}">
-        {% liquid
-          if forloop.index < 3
-            assign loading = 'eager'
-            assign fetch_priority = 'high'
-          endif
-         %}
-        {%
-          render 'basic-responsive-image',
-          type: article.image,
-          width: 1200,
-          loading: loading,
-          fetchpriority: fetch_priority
-        %}
+        {%- render 'basic-responsive-image', type: article.image, data_widths: '[180, 360, 540, 720, 900]' -%}
+        <noscript>
+          <img src="{{ article.image | img_url: '800x' }}" alt="{{ article.image.alt }}">
+        </noscript>
       </a>
     </div>
   {% endif %}

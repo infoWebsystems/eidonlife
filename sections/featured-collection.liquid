@@ -34,15 +34,13 @@
     assign prod_grid = 20
   endcase
 
-  assign aos_mod = section.settings.grid | plus: 0
-
 -%}
 
-<section class="global__section {{ section_padding }}" data-section-id="{{ section.id }}" data-section-type="featured-collection" data-aos="fade">
+<section class="global__section {{ section_padding }}" data-section-id="{{ section.id }}" data-section-type="homepage-products" data-aos="fade">
   <div class="row grid__wrapper gr0">
     {% if section.settings.heading != blank %}
       <div class="span-12 auto">
-        <h2 class="section-heading mb0">
+        <h2 class="section-heading">
           <a href="{{ collection.url }}">{{ section.settings.heading | escape }}</a>
         </h2>
       </div>
@@ -58,36 +56,13 @@
       "pageDots": false
    }{% endcapture %}
 
-   <div id="featured_collection--{{ section.id }}" class="featured__collection{% if is_carousel %}-carousel flickity__section js-carousel{% endif %} product-loop span-12 auto"{% if is_carousel %} data-flickity-config='{{ slideshow_config }}'{% endif %} data-product-count="{{ collection.products.size }}">
+   <div id="featured_collection--{{ section.id }}" class="featured__collection{% if is_carousel %}-carousel flickity__section js-carousel{% endif %} product-loop span-12 auto"{% if is_carousel %} data-flickity='{{ slideshow_config }}'{% endif %}>
      {% if section.settings.collection == blank %}
-      {% render 'onboard-product', prod_limit: prod_limit, grid: grid, aos_mod: aos_mod %}
+      {% render 'onboard-product', prod_limit: prod_limit, grid: grid %}
      {% else %}
        {% for product in collection.products limit: prod_limit %}
-         <div class="featured__collection-product product-index js-product-listing" 
-          id="product-listing-{{ product.id }}" 
-          data-product-id="{{ product.id }}" 
-          data-alpha="{{ product.title }}" 
-          data-price="{{ product.price }}"
-          data-aos="fade"
-          data-aos-delay="{{ forloop.index | minus: 1 | modulo: aos_mod | times: 100 }}">
-           {% liquid
-
-            assign loading = 'lazy'
-            assign fetch_priority = 'auto'
-
-            if section.index == 1
-              if is_carousel
-                if forloop.index <= grid
-                  assign loading = 'eager'
-                  assign fetch_priority = 'high'
-                endif
-              else
-                assign loading = 'eager'
-              endif
-            endif
-
-           %}
-           {% render 'product-listing', product: product, collection: collection, loading: loading, fetchpriority: fetch_priority, index: forloop.index %}
+         <div class="featured__collection-product product-index" id="product-listing-{{ product.id }}" data-product-id="{{ product.id }}" data-alpha="{{ product.title }}" data-price="{{ product.price }}">
+           {% render 'product-listing', product: product, collection: collection %}
          </div>
        {% endfor %}
      {% endif %}
@@ -201,8 +176,6 @@
   "presets": [{
     "name": "Featured collection"
   }],
-  "disabled_on": {
-    "groups": ["header", "footer"]
-  }
+  "templates": ["404", "article", "blog", "cart", "collection", "list-collections", "index", "page", "product", "search", "customers/account"]
 }
 {% endschema %}

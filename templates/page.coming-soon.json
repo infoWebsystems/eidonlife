@@ -116,6 +116,7 @@
       "type": "image-with-text-overlay",
       "settings": {
         "image": "shopify:\/\/shop_images\/EIDON-S23_Add-Coming_Soon.jpg",
+        "background_effect": "fixed",
         "scale": 2,
         "page_height": 500,
         "caption_position": "middle_center",

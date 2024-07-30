@@ -222,7 +222,7 @@
 
   {% if section.settings.heading != blank %}
     <div class="row">
-      <h2 class="section-heading mb0">
+      <h2 class="section-heading">
         {{ section.settings.heading }}
       </h2>
     </div>
@@ -262,21 +262,16 @@
         </div>
         <div class="map-section-background-wrapper contained desktop-9 tablet-4 mobile-3">
           {%- if bg_image -%}
-            {% liquid
-              assign loading = 'lazy'
-              assign fetch_priority = 'auto'
-              if section.index == 1
-                assign fetch_priority = 'high'
-                assign loading = 'eager'
-              endif
-             %}
-            {%
-              render 'basic-responsive-image',
-              type: bg_image,
-              width: 2400,
-              loading: loading,
-              fetchpriority: fetch_priority
-            %}
+            <div class="map-section-image lazyload lazyload-fade"
+              data-bgset="{% render 'bgset', image: bg_image %}"
+              data-sizes="auto"
+              data-parent-fit="cover"
+              data-bg-image
+              style="background-image: url('{{ bg_image | img_url: '900x' }});">
+            </div>
+            <noscript>
+              <div class="map-section-image" style="background-image: url({{ bg_image | img_url: 'x800', crop: 'top' }});"></div>
+            </noscript>
           {%- endif -%}
 
           <div class="placeholder-background">
@@ -297,17 +292,11 @@
     }
     #MapSection--{{ section.id }} .map-section-content h2,
     #MapSection--{{ section.id }} .map-section-content p,
-    #MapSection--{{ section.id }} .map-section-content a:not(.button) {
+    #MapSection--{{ section.id }} .map-section-content a {
       color: {{ section.settings.text_color }} !important;
     }
-
-    .map-section-background-wrapper img {
-        object-fit: cover;
-        height: 500px;
-    }
-
-    .map-section-background-wrapper .box-ratio {
-        padding-bottom: 500px !important;
+    #MapSection--{{ section.id }} .map-section-image {
+      background-position: {{ section.settings.background_image_position }};
     }
   </style>
 </section>
@@ -388,6 +377,49 @@
     },
     {
       "type": "select",
+      "id": "background_image_position",
+      "label": "Image position",
+      "default": "center center",
+      "options": [{
+          "label": "Top left",
+          "value": "top left"
+        },
+        {
+          "label": "Top center",
+          "value": "top center"
+        },
+        {
+          "label": "Top right",
+          "value": "top right"
+        },
+        {
+          "label": "Middle left",
+          "value": "center left"
+        },
+        {
+          "label": "Middle center",
+          "value": "center center"
+        },
+        {
+          "label": "Middle right",
+          "value": "center right"
+        },
+        {
+          "label": "Bottom left",
+          "value": "bottom left"
+        },
+        {
+          "label": "Bottom center",
+          "value": "bottom center"
+        },
+        {
+          "label": "Bottom right",
+          "value": "bottom right"
+        }
+      ]
+    },
+    {
+      "type": "select",
       "id": "section_padding",
       "label": "Section spacing",
       "options": [
@@ -430,8 +462,6 @@
   "presets": [{
     "name": "Map"
   }],
-  "disabled_on": {
-    "groups": ["header", "footer"]
-  }
+  "templates": ["404", "article", "blog", "cart", "collection", "list-collections", "index", "page", "product", "search"]
 }
 {% endschema %}

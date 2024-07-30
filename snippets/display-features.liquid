@@ -1,0 +1,67 @@
+<p>
+
+{% if product.title contains "D Cup Top" %}
+
+<img src="{{ 'D_cup.svg' | asset_url }}" width="50px" alt="Available in D cup size" title="Available in D cup size">
+
+{% endif %}
+
+{% if product.title contains "D, DD & E Cup Top" %}
+
+<img src="{{ 'D_E_cup.svg' | asset_url }}" width="50px" alt="Available in D, DD & E cup sizes" title="Available in D, DD & E cup sizes">
+
+{% endif %}
+ 
+  {% if product.title contains "D, DD, E & F Cup Top" %}
+
+<img src="{{ 'D_F_cup.svg' | asset_url }}" width="50px" alt="Available in D, DD, E & F cup sizes" title="Available in D, DD, E & F cup sizes">
+
+{% endif %}
+
+{% if product.tags contains "coverage:Minimal" %}
+
+<img src="{{ 'minimal_coverage.svg' | asset_url }}" width="50px" alt="Minimal coverage" title="Minimal coverage">
+
+{% endif %}
+
+{% if product.tags contains "coverage:Cheeky" %}
+
+<img src="{{ 'cheeky_coverage.svg' | asset_url }}" width="50px" alt="Cheeky coverage" title="Cheeky coverage">
+
+{% endif %}
+
+{% if product.tags contains "coverage:Mid" %}
+
+<img src="{{ 'mid_coverage.svg' | asset_url }}" width="50px" alt="Mid coverage" title="Mid coverage">
+
+{% endif %}
+
+{% if product.tags contains "coverage:Full" %}
+
+<img src="{{ 'full_coverage.svg' | asset_url }}" width="50px" alt="Full coverage" title="Full coverage">
+
+{% endif %}
+  
+{% if product.tags contains "feature:Detachable straps" %}
+
+<img src="{{ 'detachable_straps.svg' | asset_url }}" width="50px" alt="Detachable straps" title="Detachable straps">
+
+{% endif %}
+
+{% if product.tags contains "feature:Adjustable 2-way tie back" %}
+
+<img src="{{ '2_way_tie_back_01.svg' | asset_url }}" width="50px" alt="2-way tie back" title="2-way tie back">
+
+<img src="{{ '2_way_tie_back_02.svg' | asset_url }}" width="50px" alt="2-way tie back" title="2-way tie back">
+
+{% endif %}
+
+{% if product.tags contains "feature:2-way tie back" %}
+
+<img src="{{ '2_way_tie_back_01.svg' | asset_url }}" width="50px" alt="2-way tie back" title="2-way tie back">
+
+<img src="{{ '2_way_tie_back_02.svg' | asset_url }}" width="50px" alt="2-way tie back" title="2-way tie back">
+
+{% endif %}
+
+</p>

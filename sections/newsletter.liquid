@@ -1,3 +1,5 @@
+{% if section.settings.show_newsletter %}
+
 <style>
   #shopify-section-{{ section.id }} {
     --text-color: {{ section.settings.text_color }};
@@ -21,11 +23,10 @@
       <div class="newsletter__section-contentWrapper">
         {% form 'customer' %}
           {% if form.posted_successfully? %}
-            <p class="success">{{ 'general.password_page.thanks' | t }}</p>
+            <p class="success">{{ 'password.general.thanks' | t }}</p>
           {% else %}
             <input type="hidden" name="contact[tags]" value="prospect, newsletter">
-            <label class="visuallyhidden" for="newsletter__section-email">{{ 'general.newsletter_form.newsletter_email' | t }}</label>
-            <input type="email" class="newsletter__section-email" name="contact[email]" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" id="newsletter__section-email">
+            <input type="email" class="newsletter__section-email" name="contact[email]" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}">
             <input type="submit" class="newsletter__section-submit" value="{{ 'general.newsletter_form.submit' | t }}">
           {% endif %}
           {{ form.errors | default_errors }}
@@ -38,19 +39,20 @@
       </div>
     </div>
   </section>
+  <div class="clear"></div>
+{% endif %}
 
 {% schema %}
 {
   "name": "Newsletter",
-  "limit": 1,
   "settings": [{
       "type": "paragraph",
       "content": "Any customers who signup will have an account created for them in Shopify. [View customers](/admin/customers?query=&accepts_marketing=1)"
     },
     {
       "type": "checkbox",
-      "id": "show_social_icons",
-      "label": "Show social icons",
+      "id": "show_newsletter",
+      "label": "Enable newsletter section",
       "default": true
     },
     {
@@ -82,13 +84,13 @@
       "id": "newsletter_button_color",
       "label": "Button text",
       "default": "#fff"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_icons",
+      "label": "Show social icons",
+      "default": true
     }
-  ],
-  "presets": [{
-    "name": "Newsletter"
-  }],
-  "disabled_on": {
-    "groups": ["header"]
-  }
+  ]
 }
 {% endschema %}

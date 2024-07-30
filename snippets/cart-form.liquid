@@ -3,7 +3,7 @@
     method="post">
   <div class="ajax-cart__cart-items span-12 auto">
     {% for item in cart.items %}
-      <div class="item_{{ item.id | append: '-' | append: forloop.index }} ajax-cart__cart-item grid__wrapper edge">
+      <ul  data-hulkapps-lineitem class="item_{{ item.id | append: '-' | append: forloop.index }} ajax-cart__cart-item grid__wrapper edge">
         <a class="ajax-cart__item-remove--no-js" style="display:none;" href="/cart/change?line={{ forloop.index }}&amp;quantity=0" data-role="product-remove">
           {% render 'snip-icons',
              wrapper: '.ajax-cart__item-remove--no-js',
@@ -14,7 +14,7 @@
              fill: 'var(--text-color)',
              hover: 'var(--text-color)' %}
         </a>
-        <div class="remove_{{ item.id | append: '-' | append: forloop.index }} ajax-cart__item-remove mb0 js-cart-remove"
+        <li class="remove_{{ item.id | append: '-' | append: forloop.index }} ajax-cart__item-remove mb0 js-cart-remove"
           {% if no_js_cart %}style="display: none;"{% endif %}
           data-item-id="{{ item.id | append: '-' | append: forloop.index }}"
           data-item-key="{{ item.key }}"
@@ -27,33 +27,19 @@
              size: '10px',
              fill: 'var(--text-color)',
              hover: 'var(--text-color)' %}
-        </div>
-        <div class="ajax-cart__item-image v-start">
+        </li>
+        <li class="ajax-cart__item-image v-start">
           <div class="ajax-cart__item-image__wrapper">
             <a href="{{ item.url }}" title="{{ item.product.title | escape }}">
               {% if item.image != blank %}
-                {% liquid
-                  assign loading = 'lazy'
-                  assign fetch_priority = 'auto'
-                  if forloop.index < 3
-                    assign loading = 'eager'
-                    assign fetch_priority = 'high'
-                  endif
-                 %}
-                {%
-                  render 'basic-responsive-image',
-                  type: item.image,
-                  width: 1200,
-                  loading: loading,
-                  fetchpriority: fetch_priority
-                %}
+                <img src="{{ item.image | img_url: '200x' }}" alt="{{ item.image.title | escape }}" />
               {% else %}
                 {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
               {% endif %}
             </a>
           </div>
-        </div>
-        <div class="ajax-cart__item-details v-center">
+        </li>
+        <li class="ajax-cart__item-details v-center">
           <div class="ajax-cart__cart-title__wrapper inline-block v-center">
             <p class="ajax-cart__title"><a href="{{ item.product.url }}">{{ item.product.title }}</a></p>
             <div class="ajax-cart__cart-variants">
@@ -63,16 +49,16 @@
 
               {%- unless item.variant.title contains 'Default' -%}
                 {% for option in item.product.options %}
-                  {{ option }}: {{ item.variant.options[forloop.index0] }}<br/>
+                  <strong>{{ option }}:</strong> {{ item.variant.options[forloop.index0] }}<br/>
                 {% endfor %}
               {%- endunless -%}
               {% assign property_size = item.properties | size %}
-              {% if property_size > 0 %}
-                <p>
+              <div class='hulkapps-reminder' data-key='{{item.key}}'></div>              {% if property_size > 0 %}
+                <p  data-hulkapps-line-properties        >
                   {% for p in item.properties %}
-                    {%- assign p_first_char = p.first | slice: 0 -%}
-                    {% if p.last != blank and p_first_char != '_' %}
-                      {{ p.first }}:
+
+                    {% unless p.last == blank %}
+                      <strong>{{ p.first }}:</strong>
                       {% comment %}
                       Check if there was an uploaded file associated
                       {% endcomment %}
@@ -82,14 +68,19 @@
                         {{ p.last }}
                       {% endif %}
                       <br>
-                    {% endif %}
+                    {% endunless %}
                   {% endfor %}
                 </p>
+<button type='button' style='display: none;' class='edit_cart_option btn btn--primary button' data-product_id='{{item.product_id}}' data-key='{{item.key}}' data-variant_id='{{item.variant_id}}' data-quantity='{{item.quantity}}'>Edit Options</button>
+
+
+
+
               {% endif %}
             </div>
           </div>
-        </div>
-        <div class="ajax-cart__item-price v-center">
+        </li>
+        <li class="ajax-cart__item-price v-center">
           {%- assign hasDiscount = false -%}
           {%- if item.original_price != item.final_price -%}
             {%- assign hasDiscount = true -%}
@@ -105,13 +96,13 @@
                   <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
                 </dt>
                 <dd>
-                  <s data-cart-item-original-price>{{ item.original_price | money }}</s>
+                  <s  data-hulkapps-ci-price data-key='{{item.key}}' data-cart-item-original-price>{{ item.original_price | money }}</s>
                 </dd>
                 <dt>
                   <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
                 </dt>
                 <dd>
-                  <span class="order-discount onsale" data-cart-item-final-price>{{ item.final_price | money }}</span>
+                  <span  data-hulkapps-ci-price data-key='{{item.key}}' class="order-discount onsale" data-cart-item-final-price>{{ item.final_price | money }}</span>
                 </dd>
               </div>
 
@@ -122,7 +113,7 @@
                 <dt>
                   <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
                 </dt>
-                <dd data-cart-item-regular-price>
+                <dd  data-hulkapps-ci-price data-key='{{item.key}}' data-cart-item-regular-price>
                   {{ item.original_price | money }}
                 </dd>
               </div>
@@ -158,9 +149,9 @@
             {%- assign itemDiscounts = item.line_level_discount_allocations -%}
           {%- endif -%}
 
-          <div class="ajax-cart__order-discount mb0 order-discount--list order-discount--title order-discount--cart{% if item.line_level_discount_allocations == blank %} hide{% endif %}" aria-label="{{ 'customer.order.discount' | t }}" data-cart-item-discount-list>
+          <ul class="ajax-cart__order-discount mb0 order-discount--list order-discount--title order-discount--cart{% if item.line_level_discount_allocations == blank %} hide{% endif %}" aria-label="{{ 'customer.order.discount' | t }}" data-cart-item-discount-list>
             {%- for discount_allocation in itemDiscounts -%}
-              <div class="order-discount__item" data-cart-item-discount>
+              <li class="order-discount__item" data-cart-item-discount>
                 <p class="onsale">
                   {% render 'snip-icons',
                      wrapper: '.order-discount__item',
@@ -174,13 +165,15 @@
                     {{- discount_allocation.discount_application.title -}}
                   </span> (-<span data-cart-item-discount-amount>{{ discount_allocation.amount | money }}</span>)
                  </p>
-              </div>
+              </li>
             {%- endfor -%}
-          </div>
-        </div>
-        <div class="ajax-cart__item-qty v-center js-item-quantity">
+          </ul>
+        </li>
+        <li class="ajax-cart__item-qty v-center js-item-quantity">
           <div class="ajax-cart__item-quantity a-left">
-            <button data-ajax-qty-decrease="{{ item.id | append: '-' | append: forloop.index }}" data-item-key="{{ item.key }}" class="downer-{{ item.id | append: '-' | append: forloop.index }} ajax-cart__qty-control--down mb0 v-center" type="button"><span class="visuallyhidden">{{ 'cart.general.decrease' | t: product: item.title | escape }}</span>-</button>
+            <a data-ajax-qty-decrease="{{ item.id | append: '-' | append: forloop.index }}" data-item-key="{{ item.key }}" class="downer-{{ item.id | append: '-' | append: forloop.index }} ajax-cart__qty-control--down mb0 v-center">
+              -
+            </a>
             <input class="updates_{{ item.id | append: '-' | append: forloop.index }} {% if no_js_cart %}ajax-cart__qty-input--no-js{% else %}ajax-cart__qty-input{% endif %} v-center a-center"
               data-item-qty
               data-item-id="{{ item.id | append: '-' | append: forloop.index }}"
@@ -191,66 +184,59 @@
               value="{{ item.quantity }}"
               min="0"
               data-limit="{% if item.variant.inventory_management == 'shopify' %}{% unless item.variant.inventory_policy == 'continue' %}{{ item.variant.inventory_quantity }}{% endunless %}{% endif %}" />
-            <button data-ajax-qty-increase="{{ item.id | append: '-' | append: forloop.index }}" class="up-{{ item.id | append: '-' | append: forloop.index }} ajax-cart__qty-control--up mb0 v-center" type="button"><span class="visuallyhidden">{{ 'cart.general.increase' | t: product: item.title | escape }}</span>+</button>
+            <a data-ajax-qty-increase="{{ item.id | append: '-' | append: forloop.index }}" class="up-{{ item.id | append: '-' | append: forloop.index }} ajax-cart__qty-control--up mb0 v-center">
+              +
+            </a>
           </div>
           <input class="ajax-cart__item-update--no-js button-as-link" type="submit" name="update" style="display:none;" value="{{ 'cart.general.update' | t }}">
-        </div>
-        <div class="ajax-cart__item-line-price v-center">
+        </li>
+        <li class="ajax-cart__item-line-price v-center">
           <dl {% unless item.original_line_price != item.final_line_price %}class="hide" {% endunless %}data-cart-item-discounted-price-group>
             <dt>
               <span class="visually-hidden">{{ 'cart.label.regular_total' | t }}</span>
             </dt>
             <dd>
-              <s data-cart-item-original-price>{{ item.original_line_price | money }}</s>
+              <s  data-hulkapps-line-price data-key='{{item.key}}' data-cart-item-original-price>{{ item.original_line_price | money }}</s>
             </dd>
             <dt>
               <span class="visually-hidden">{{ 'cart.label.discounted_total' | t }}</span>
             </dt>
             <dd>
-              <span class="order-discount onsale" data-cart-item-final-price>{{ item.final_line_price | money }}</span>
+              <span  data-hulkapps-line-price data-key='{{item.key}}' class="order-discount onsale" data-cart-item-final-price>{{ item.final_line_price | money }}</span>
             </dd>
           </dl >
           <div {% if item.original_line_price != item.final_line_price %}class="hide" {% endif %}data-cart-item-regular-price-group>
-            <span data-cart-item-regular-price>{{ item.original_line_price | money }}</span>
+            <span  data-hulkapps-line-price data-key='{{item.key}}' data-cart-item-regular-price>{{ item.original_line_price | money }}</span>
           </div>
-        </div>
-      </div>
+        </li>
+      </ul>
     {% endfor %}
   </div>
   <div class="ajax-cart__info-wrapper a-left {% if cart.item_count < 1 %}hide{% endif %} js-cart-info">
-    <div class="ajax-cart__accordion js-cart-accordion">
-      {% if settings.show_cart_giftwrap %}
-        <span class="gift--wrap">
-          <label for="gift_wrap">
-            <input type="checkbox" id="gift_wrap" name="attributes[Gift Wrap]" value="Yes">
-            {{ 'cart.general.gift_wrap' | t }}
-          </label>
-        </span>
-      {% endif %}
+    <ul class="ajax-cart__accordion js-cart-accordion">
       {% if settings.show_cart_notes %}
-        <div class="tlink has_sub_menu closed">
+        <li class="tlink has_sub_menu closed">
           <a class="closed" aria-haspopup="true" aria-expanded="false" href="">{{ 'cart.general.note' | t }}</a>
           <span class="icon inactive-arrow">+</span>
           <span class="icon active-arrow">-</span>
-        </div>
-        <div class="accordion-content sub closed">
+        </li>
+        <ul class="accordion-content sub closed">
           <div class="a-left">
-            <label class="visuallyhidden" for="note">{{ 'cart.general.note' | t }}</label>
             <textarea name="note" id="note" rows="5" cols="60" class="js-cart-note">{{ cart.note }}</textarea>
           </div>
-        </div>
+        </ul>
       {% endif %}
       {% if settings.show_shipping_calculator %}
-        <div class="tlink2 has_sub_menu closed ajax-cart__accordion--shipping-calc">
+        <li class="tlink2 has_sub_menu closed ajax-cart__accordion--shipping-calc">
           <a class="closed" aria-haspopup="true" aria-expanded="false" href="">{{ 'cart.general.calc_heading' | t }}</a>
           <span class="icon inactive-arrow">+</span>
           <span class="icon active-arrow">-</span>
-        </div>
-        <div class="accordion-content2 sub closed">
+        </li>
+        <ul class="accordion-content2 sub closed">
           {% render 'cart-shipping-calculator', cart %}
-        </div>
+        </ul>
       {% endif %}
-    </div>
+    </ul>
       {% if settings.show_shipping_countdown %}
         <div class="ajax-cart__free-shipping">
           {% render 'cart-shipping-countdown', cart %}
@@ -278,9 +264,9 @@
       <div class="discounts">
         {%- if cart.cart_level_discount_applications != blank -%}
           <p class="a-left">{{ 'cart.general.discounts' | t }}</p>
-          <div class="a-right">
+          <ul class="a-right">
             {%- for discount_application in cart.cart_level_discount_applications -%}
-              <div>
+              <li>
                 {% render 'snip-icons',
                  wrapper: '.discounts',
                  type: 'apollo',
@@ -290,9 +276,9 @@
                  fill: 'var(--sale-color)',
                  hover: 'var(--sale-color)' %}
                 <span class="vi-center sale-color">{{ discount_application.title }}(-{{ discount_application.total_allocated_amount | money }})</span>
-              </div>
+              </li>
             {%- endfor -%}
-          </div>
+          </ul>
         {%- else -%}
           {% if cart.total_discounts > 0 %}
             <div class="cart_savings onsale">
@@ -305,13 +291,21 @@
       <hr />
       <div class="total">
         <p class="title a-left">{{ 'cart.general.total' | t }}</p>
-        <p class="total-price a-right"><span class="cart-original-total cart-price block">{{ cart.total_price | money }}</span>
+        <p  data-hulkapps-cart-total class="total-price a-right"><span class="cart-original-total cart-price block">{{ cart.total_price | money }}</span>
         <span class="cart-total"></span></p>
       </div>
     </div>
     <div class="ajax-cart__buttons">
       <a class="ajax-cart__button-view_cart button secondary-button" href="{{ routes.cart_url }}">{{ 'products.product.view_cart' | t }}</a>
       <input class="ajax-cart__button-submit" type="submit" name="checkout" id="checkout" value="{{ 'cart.general.checkout' | t }}" />
+      {%- unless request.design_mode -%}
+        {% if additional_checkout_buttons %}
+          <p class="sm-caps or-divider mt2 mb2 a-center"><span>Or</span></p>
+          <div class="ajax-cart__buttons-additional">
+            {{ content_for_additional_checkout_buttons }}
+          </div>
+        {% endif %}
+      {%- endunless -%}
     </div>
   </div>
 </form>

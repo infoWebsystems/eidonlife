@@ -23,7 +23,7 @@
   <div class="row grid__wrapper gr0">
     {% if section.settings.heading != blank %}
       <div class="span-12 auto">
-        <h2 class="section-heading mb0">{{ section.settings.heading | escape }}</h2>
+        <h2 class="section-heading">{{ section.settings.heading | escape }}</h2>
       </div>
     {% endif %}
 
@@ -48,7 +48,7 @@
          hover: section.settings.star_color %}
     {% endcapture %}
 
-    <div class="testimonial__container{% if is_carousel %}-carousel flickity__section js-carousel {% else %} grid__wrapper  grid__wrapper-nest{% endif %} span-12 auto"{% if is_carousel %} data-flickity-config='{{ slideshow_config }}'{% endif %}>
+    <div class="testimonial__container{% if is_carousel %}-carousel flickity__section js-carousel {% else %} grid__wrapper  grid__wrapper-nest{% endif %} span-12 auto"{% if is_carousel %} data-flickity='{{ slideshow_config }}'{% endif %}>
       {% for block in section.blocks %}
         <div class="testimonial span-4 sm-span-12 auto {% if forloop.first %}{% if section.blocks.size == 1 %} push-4{% elsif section.blocks.size == 2 %} push-2{% endif %}{% endif %}" {{ block.shopify_attributes }} data-slider-index="{{ forloop.index0 }}" >
           <div class="testimonial__content">
@@ -209,8 +209,6 @@
       }
     ]
   }],
-  "disabled_on": {
-    "groups": ["header", "footer"]
-  }
+  "templates": ["404", "article", "blog", "cart", "collection", "list-collections", "index", "page", "product", "search"]
 }
 {% endschema %}

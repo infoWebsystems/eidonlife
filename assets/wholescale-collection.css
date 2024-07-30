@@ -1,0 +1,32 @@
+.rating-container-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.review-count {
+  position: relative;
+  margin-left: 5px;
+  font-size: 12px;
+}
+.rating.rating-1 svg:nth-child(-n + 1) {
+  fill: inherit;
+}
+.rating.rating-2 svg:nth-child(-n + 2) {
+  fill: inherit;
+}
+.rating.rating-3 svg:nth-child(-n + 3) {
+  fill: inherit;
+}
+.rating.rating-4 svg:nth-child(-n + 4) {
+  fill: inherit;
+}
+.rating.rating-5 svg:nth-child(-n + 5) {
+  fill: inherit;
+}
+.name-rating .rating path,
+.average-rating-and-star path {
+  stroke: inherit;
+}
+.average-rating-and-star .rating {
+  display: flex;
+}

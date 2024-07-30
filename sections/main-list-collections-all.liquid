@@ -8,18 +8,10 @@
     assign image_shape = true
   endunless
 
-  assign bold = false
-  if section.settings.bold_titles
-    assign bold = true
-  endif
-
   assign floating_text = false
   if section.settings.title_position == 'floating'
     assign floating_text = true
   endif
-
-  assign aos_mod = section.settings.grid | plus: 0
-
 -%}
 
 <section data-section-id="{{ section.id }}" class="collection-list-template row grid__wrapper section-{{ section.id }}">
@@ -35,24 +27,11 @@
 
   <div class="collection-loop collection__list-collections span-12 auto grid__wrapper grid__wrapper-nest collection__list-text-floating--{{ floating_text }} collection__list-img-shape--{{ image_shape }} collection__list-ratio--{{ section.settings.image_ratio }} collection__list-grid--{{ grid }}">
     {% for collection in collections %}
-      {% liquid
-        # Handle LCP loading
-        assign loading = 'lazy'
-        assign fetch_priority = 'auto'
-        if section.index == 1 and forloop.index <= grid
-          assign fetch_priority = 'high'
-          assign loading = 'eager'
-        endif
-       %}
       {% render 'collection-grid-item',
         collection: collection,
         grid_item_width: grid_item_width,
         floating_text: floating_text,
-        block_image: false,
-        bold: bold,
-        aos_mod: aos_mod,
-        loading: loading,
-        fetchpriority: fetch_priority %}
+        block_image: false %}
     {% endfor %}
   </div>
 
@@ -106,12 +85,6 @@
       "type": "checkbox",
       "id": "collection_count",
       "label": "Show product count"
-    },
-    {
-      "type": "checkbox",
-      "id": "bold_titles",
-      "label": "Bold titles",
-      "default": true
     },
     {
       "type": "select",

@@ -7,10 +7,9 @@
           "type": "image",
           "settings": {
             "image": "shopify:\/\/shop_images\/Eidon-S23-Reskin-Desktop-min.jpg",
-            "overlay_color": "#000000",
-            "overlay_opacity": 0,
             "caption_position": "middle_right",
             "mobile_image": "shopify:\/\/shop_images\/Eidon-S23-Reskin-Mobile-min.jpg",
+            "caption_below": true,
             "heading": "",
             "subheading": "",
             "link": "shopify:\/\/collections\/latest-arrivals",
@@ -19,17 +18,18 @@
             "second_button_text": "Button 2 text",
             "text_color": "#000000",
             "button_color": "#313131",
-            "button_background": "#ffffff"
+            "button_background": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
           }
         },
         "d3250875-f7c1-40bb-aec9-87edb0224b73": {
           "type": "image",
           "settings": {
             "image": "shopify:\/\/shop_images\/Desktop-min.jpg",
-            "overlay_color": "#000000",
-            "overlay_opacity": 0,
             "caption_position": "middle_right",
             "mobile_image": "shopify:\/\/shop_images\/Mobile-min.jpg",
+            "caption_below": false,
             "heading": "",
             "subheading": "",
             "link": "shopify:\/\/collections\/all",
@@ -38,7 +38,9 @@
             "second_button_text": "Button 2 text",
             "text_color": "#000000",
             "button_color": "#313131",
-            "button_background": "#ffffff"
+            "button_background": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
           }
         }
       },
@@ -47,11 +49,13 @@
         "d3250875-f7c1-40bb-aec9-87edb0224b73"
       ],
       "settings": {
-        "pager": "dots",
+        "display_wide": true,
+        "section_padding": "bottom",
+        "enable_autoplay": false,
         "slider_speed": 5,
+        "pager": "dots",
         "slide_heading_size": 36,
-        "subheading_size": 25,
-        "section_padding": "bottom"
+        "subheading_size": 25
       }
     },
     "image-gallery": {
@@ -63,6 +67,7 @@
             "image": "shopify:\/\/shop_images\/EIDON-S22-Bikinis_03.jpg",
             "image_width": "25%",
             "link": "shopify:\/\/collections\/bikinis",
+            "heading_text": "",
             "subheading": "",
             "button_text": "",
             "caption_position": "middle_center",
@@ -79,6 +84,7 @@
             "image": "shopify:\/\/shop_images\/Artboard_21.png",
             "image_width": "25%",
             "link": "shopify:\/\/collections\/one-pieces",
+            "heading_text": "",
             "subheading": "",
             "button_text": "",
             "caption_position": "middle_center",
@@ -95,6 +101,7 @@
             "image": "shopify:\/\/shop_images\/Artboard_31.png",
             "image_width": "25%",
             "link": "shopify:\/\/collections\/surf",
+            "heading_text": "",
             "subheading": "",
             "button_text": "",
             "caption_position": "middle_center",
@@ -111,6 +118,7 @@
             "image": "shopify:\/\/shop_images\/EIDON-S22-Clothing_01.jpg",
             "image_width": "25%",
             "link": "",
+            "heading_text": "",
             "subheading": "",
             "button_text": "",
             "caption_position": "middle_center",
@@ -130,9 +138,11 @@
       ],
       "settings": {
         "full_width": true,
+        "section_padding": "top",
         "swipe": true,
         "images_touching": false,
-        "section_padding": "top"
+        "promo_size": 26,
+        "hidden_size": 18
       }
     },
     "1626727788d94cc42e": {
@@ -194,6 +204,7 @@
       "settings": {
         "full_width": true,
         "section_padding": "both",
+        "image": "shopify:\/\/shop_images\/Eidon-S21-Carlie_Eastwood-Blog_Thumbnail.jpg",
         "layout": "left",
         "image_width": "50%",
         "text_align": "center",
@@ -223,7 +234,7 @@
       "type": "apps",
       "blocks": {
         "67b8f666-9e22-42a9-beea-56273dd85d62": {
-          "type": "shopify:\/\/apps\/foursixty-shoppable-social-ugc\/blocks\/custom_slider\/e2616dfe-fbb6-4e7d-874d-d250b973556d",
+          "type": "shopify:\/\/apps\/shoppable-instagram-ugc\/blocks\/custom_slider\/e2616dfe-fbb6-4e7d-874d-d250b973556d",
           "settings": {
             "foreground_color": "#ffffff",
             "background_color": "#000000",

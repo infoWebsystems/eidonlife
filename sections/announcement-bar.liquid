@@ -1,0 +1,200 @@
+{%- liquid
+assign enable_top_header = false
+assign hd_locale_selector = false
+assign hd_country_selector = false
+assign announcement = false
+assign social_icons = false
+assign text_only = true
+
+if section.settings.show_country_selector and localization.available_countries.size > 1
+  assign hd_country_selector = true
+endif
+if section.settings.show_locale_selector and shop.published_locales.size > 1
+  assign hd_locale_selector = true
+endif
+if hd_locale_selector or hd_country_selector
+  assign selectors = true
+endif
+if section.settings.announcement_text != blank
+  assign announcement = true
+endif
+if settings.facebook_url == blank and settings.twittername == blank and settings.pinterest_url == blank and settings.tumblr_url == blank and settings.youtube_url == blank and settings.instagram_id == blank
+  assign socials_exist = false
+else
+  assign socials_exist = true
+endif
+if section.settings.show_social_icons and socials_exist
+  assign social_icons = true
+endif
+if social_icons or announcement or selectors
+  assign enable_top_header = true
+endif
+if selectors or social_icons
+  assign text_only = false
+endif
+-%}
+{% if enable_top_header %}
+<div class="announcement__bar-section" data-section-id="{{ section.id }}" data-section-type="announcement-section">
+  <div id="top-bar" class="js-top-bar {% if section.settings.full_width_header %}gridlock-fluid{% endif %}">
+    {% if section.settings.full_width_header %}<div class="row">{% endif %}
+    <div class="row top-bar-grid">
+      {% if section.settings.show_social_icons %}
+      <ul id="social-links">
+        {% render 'social-icons', wrapper: '.top-bar-grid', fill_color: 'var(--top-bar-color)', hover_color: 'var(--top-bar-color)' %}
+      </ul>
+      {% endif %}
+      {% if announcement %}
+      <div class="announcement__text{% if text_only %} text-only{% endif %} rte m0">
+          {{ section.settings.announcement_text }}
+      </div>
+      {% endif %}
+      {% if hd_locale_selector or hd_country_selector %}
+      <ul class="localization__options tablet-hide mobile-hide">
+      {%- if hd_locale_selector -%}
+        <li class="lang-selector">
+          <div class="selectors-form__item">
+            <h2 class="visually-hidden" id="lang-heading">
+              {{ 'general.language.dropdown_label' | t }}
+            </h2>
+            <noscript>
+              {%- form 'localization', id: 'HeaderLanguageFormNoScript', class: 'selectors-form', data-disclosure-form: '' -%}
+                <select name="locale_code" class="localization-selector button disclosure__toggle styled-select" aria-labelledby="lang-heading">
+                  <option value="" disabled>{{ 'general.language.dropdown_label' | t }}</option>
+                  {%- for language in localization.available_languages -%}
+                    <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}" {%- if language.iso_code == localization.language.iso_code %} selected{% endif %}>
+                      {{ language.endonym_name | capitalize }}
+                    </option>
+                  {%- endfor -%}
+                </select>
+                <button class="localization-form__noscript-btn button disclosure__toggle">
+                  {% render 'snip-icons',
+                     wrapper: '.section-top-bar__lang',
+                     type: 'apollo',
+                     icon: 'checkmark',
+                     size: '12px',
+                     fill: 'var(--topbar-text-color)',
+                     hover: 'var(--topbar-background-color)' %}
+                </button>
+              {%- endform -%}
+            </noscript>
+            {%- form 'localization', id: 'HeaderLanguageForm', class: 'selectors-form', data-disclosure-form: '' -%}
+            <div class="disclosure" data-disclosure-locale>
+              <button type="button" class="disclosure__toggle" aria-expanded="false" aria-controls="lang-list" aria-describedby="lang-heading" data-disclosure-toggle>
+                {{ form.current_locale.iso_code }}
+              </button>
+              <ul id="lang-list" class="disclosure-list" data-disclosure-list>
+                {% for locale in form.available_locales %}
+                  <li class="disclosure-list__item {% if locale.iso_code == form.current_locale.iso_code %}disclosure-list__item--current{% endif %}">
+                    <a class="disclosure-list__option" href="#" lang="{{ locale.iso_code }}" {% if locale.iso_code == form.current_locale.iso_code %}aria-current="true"{% endif %} data-value="{{ locale.iso_code }}" data-disclosure-option>
+                      {{ locale.endonym_name }}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+              <input type="hidden" name="locale_code" id="LocaleSelector" value="{{ form.current_locale.iso_code }}" data-disclosure-input/>
+            </div>
+            {%- endform -%}
+          </div>
+        </li>
+      {%- endif -%}
+      {%- if hd_country_selector -%}
+        <li class="curr-selector">
+            <div class="selectors-form__item">
+              <h2 class="visually-hidden" id="currency-heading">
+                {{ 'general.currency.dropdown_label' | t }}
+              </h2>
+              <noscript>
+                {%- form 'localization', id: 'HeaderCountryFormNoScript', class: 'selectors-form', data-disclosure-form: '' -%}
+                  <select class="localization-selector link disclosure__toggle styled-select" name="country_code" aria-labelledby="currency-heading">
+                    <option value="" disabled>{{ 'general.currency.dropdown_label' | t }}</option>
+                    {%- for country in localization.available_countries -%}
+                      <option value="{{ country.iso_code }}" {%- if country.iso_code == localization.country.iso_code %} selected{% endif %}>
+                        {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                  <button class="localization-form__noscript-btn disclosure__toggle button mb0 btn-as-link inline-block v-center button-as-link">
+                    {% render 'snip-icons',
+                       wrapper: '.section-top-bar__lang',
+                       type: 'apollo',
+                       icon: 'checkmark',
+                       size: '12px',
+                       fill: 'var(--topbar-text-color)',
+                       hover: 'var(--topbar-background-color)' %}
+                  </button>
+                {%- endform -%}
+              </noscript>
+              {%- form 'localization', id: 'HeaderCountryForm', class: 'selectors-form', data-disclosure-form: '' -%}
+              <div class="disclosure" data-disclosure-currency>
+                <button type="button" class="disclosure__toggle" aria-expanded="false" aria-controls="currency-list" aria-describedby="currency-heading" data-disclosure-toggle>
+                  {{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
+                </button>
+                <ul id="currency-list" class="disclosure-list" data-disclosure-list>
+                  {% for country in localization.available_countries %}
+                    <li class="disclosure-list__item {% if country.iso_code == localization.country.iso_code %}disclosure-list__item--current{% endif %}">
+                      <a class="disclosure-list__option" href="#" {% if country.iso_code == localization.country.iso_code %}aria-current="true"{% endif %} data-value="{{ country.iso_code }}" data-disclosure-option>
+                        {{ country.name }} <span class="localization-form__currency">({{ country.currency.iso_code }} {{ country.currency.symbol }})</span>
+                      </a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+                <input type="hidden" name="country_code" id="HeaderCurrencySelector" value="{{ localization.country.iso_code }}" data-disclosure-input/>
+              </div>
+              {%- endform -%}
+            </div>
+        </li>
+      {%- endif -%}
+      </ul>
+      {% endif %}
+    </div>
+    {% if section.settings.full_width_header %}</div>{% endif %}
+  </div>
+</div>
+{% endif %}
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [{
+      "type": "checkbox",
+      "id": "full_width_header",
+      "label": "Enable full width",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "<p>Share a shop announcement or message</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_icons",
+      "label": "Show social icons",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Language Selector",
+      "info": "To add a language, go to your [language settings.](/admin/settings/languages)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_locale_selector",
+      "label": "Show language selector",
+      "default": false
+    },
+    {
+       "type": "header",
+       "content": "Country/Region Selector",
+       "info": "To add a country/region, go to your [payment settings.](/admin/settings/payments)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_country_selector",
+      "label": "Enable country/region selector",
+      "default": true
+    }
+  ],
+  "blocks": []
+}
+{% endschema %}

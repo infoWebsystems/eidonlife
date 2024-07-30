@@ -9,30 +9,18 @@
     assign section_padding = 'mt0 pb0'
   endif
 
-  # Handle LCP loading
-  assign loading = 'lazy'
-  assign fetch_priority = 'auto'
-  if section.index == 1
-    assign fetch_priority = 'high'
-    assign loading = 'eager'
-  endif
+  assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.'
 
 -%}
 
-<section class="row grid__wrapper gr0 collection__promotion-{{ section.id }} collection__promotion-section  global__section {{ section_padding }}"
+<section class="row grid__wrapper gr0 collection__promotion-{{ section.id }} collection__promotion-section lazyload lazyload-fade global__section {{ section_padding }}"
 data-aos="fade"
 data-section-id="{{ section.id }}" >
   {% if section.settings.link != blank and section.settings.button_text == blank %}<a href="{{ section.settings.link }}">{% endif %}
   <div class="span-12 auto collection__promotion-container">
     <div class="collection__promotion-image">
       {% if section.settings.image != blank %}
-       {%
-         render 'basic-responsive-image',
-         type: section.settings.image,
-         width: 1200,
-         loading: loading,
-         fetchpriority: fetch_priority
-       %}
+       {% render 'basic-responsive-image', type:  section.settings.image %}
       {% endif %}
      </div>
     <div class="collection__promotion-caption">
@@ -58,7 +46,7 @@ data-section-id="{{ section.id }}" >
 
   <style>
     .no-js .collection__promotion-{{ section.id }} {
-      background-image: url('{{ section.settings.image | image_url: width: 1400 }}');
+      background-image: url('{{ section.settings.image | img_url: '1400x' }}');
     }
     .collection__promotion-{{ section.id }} .collection__promotion-container {
       background-color: {{ section.settings.background_color }};
@@ -245,8 +233,6 @@ data-section-id="{{ section.id }}" >
   "presets": [{
     "name": "Promotional banner"
   }],
-  "disabled_on": {
-    "groups": ["header"]
-  }
+  "templates": ["collection", "page"]
 }
 {% endschema %}

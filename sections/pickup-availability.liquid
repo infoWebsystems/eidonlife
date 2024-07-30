@@ -25,7 +25,7 @@
              size: '9px',
              fill: 'var(--text-color)',
              hover: 'var(--text-color)' %}
-            <span class="vib-center">{{ 'products.product_pickup_availability.pick_up_available_at_html' | t: location_name: closest_location.location.name }}</span>
+            <span class="vib-center">{{ 'store_availability.general.pick_up_available_at_html' | t: location_name: closest_location.location.name }}</span>
           </p>
           <p class="store-availability-information__stock">
             {{ closest_location.pick_up_time }}
@@ -33,9 +33,9 @@
           <div class="slideout__trigger--open store-availability-information__stores">
             <button class="slideout__trigger-store-availability js-slideout-open" data-slideout-direction="right" data-wau-slideout-target="store-availability" aria-label="Toggle slideout" tabindex="0" type="button" name="button">
               {%- if pick_up_availabilities.size == 1 -%}
-                {{ 'products.product_pickup_availability.view_store_info' | t }}
+                {{ 'store_availability.general.view_store_info' | t }}
               {%- else -%}
-                {{ 'products.product_pickup_availability.check_other_stores' | t }}
+                {{ 'store_availability.general.check_other_stores' | t }}
               {%- endif -%}
             </button>
           </div>
@@ -49,14 +49,14 @@
              size: '9px',
              fill: 'var(--text-color)',
              hover: 'var(--text-color)' %}
-             <span class="vib-center">{{ 'products.product_pickup_availability.pick_up_unavailable_at_html' | t: location_name: closest_location.location.name }}</span>
+             <span class="vib-center">{{ 'store_availability.general.pick_up_unavailable_at_html' | t: location_name: closest_location.location.name }}</span>
           </p>
           <div class="slideout__trigger--open store-availability-information__stores">
             <button class="slideout__trigger-store-availability js-slideout-open" data-slideout-direction="right" data-wau-slideout-target="store-availability" aria-label="Toggle slideout" tabindex="0" type="button" name="button">
               {%- if pick_up_availabilities.size == 1 -%}
-                {{ 'products.product_pickup_availability.view_store_info' | t }}
+                {{ 'store_availability.general.view_store_info' | t }}
               {%- else -%}
-                {{ 'products.product_pickup_availability.check_other_stores' | t }}
+                {{ 'store_availability.general.check_other_stores' | t }}
               {%- endif -%}
             </button>
           </div>
@@ -73,11 +73,9 @@
         <span class="store-availabilities-modal__product-information">
           <h2 class="store-availabilities-modal__product-title" data-store-availability-modal-product-title>
           </h2>
-          {% unless product_variant.title == 'Default Title' %}
-            <p class="store-availabilities-modal__variant-title store-availability-small-text">
-              {{ product_variant.title }}
-            </p>
-            {% endunless %}
+          <p class="store-availabilities-modal__variant-title store-availability-small-text">
+            {{ product_variant.title }}
+          </p>
         </span>
       </div>
       <div class="store-availabilities-list">
@@ -98,7 +96,7 @@
                    size: '9px',
                    fill: 'var(--text-color)',
                    hover: 'var(--text-color)' %}
-                  <span class="vib-center">{{ 'products.product_pickup_availability.pick_up_available' | t }}, {{ availability.pick_up_time | downcase }}</span>
+                  <span class="vib-center">{{ 'store_availability.general.pick_up_available' | t }}, {{ availability.pick_up_time | downcase }}</span>
                 {%- else -%}
                   {% render 'snip-icons',
                    wrapper: '.store-availability-list__stock',
@@ -108,7 +106,7 @@
                    size: '9px',
                    fill: 'var(--text-color)',
                    hover: 'var(--text-color)' %}
-                  <span class="vib-center">{{ 'products.product_pickup_availability.pick_up_currently_unavailable' | t }}</span>
+                  <span class="vib-center">{{ 'store_availability.general.pick_up_currently_unavailable' | t }}</span>
                 {%- endif -%}
               </div>
             {%- assign address = availability.location.address -%}

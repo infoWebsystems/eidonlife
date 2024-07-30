@@ -41,7 +41,6 @@
     .rich__text-section.section-{{ section.id }} .rich__text--content .rte {
       width: {{ width }};
       margin: 0 auto;
-      text-align: {{ section.settings.align_text }};
     }
   }
 </style>
@@ -130,12 +129,6 @@
       "default": 60
     },
     {
-       "type": "text_alignment",
-       "id": "align_text",
-       "label": "Text alignment",
-       "default": "center"
-    },
-    {
       "type": "select",
       "id": "section_padding",
       "label": "Section spacing",
@@ -163,8 +156,6 @@
   "presets": [{
     "name": "Rich text"
   }],
-  "disabled_on": {
-    "groups": ["header"]
-  }
+  "templates": ["404", "article", "blog", "cart", "collection", "list-collections", "index", "page", "product", "search", "customers/account"]
 }
 {% endschema %}

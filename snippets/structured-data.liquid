@@ -48,12 +48,9 @@
      "@type": "Product",
      "id": "{{ product.handle }}",
      "url": "{{ routes.root_url }}{{ product.url }}",
-     "image": "{{ product.featured_image | image_url: width: 1024 }}",
+     "image": "{{ product.featured_image | img_url: '1024x' }}",
      "name": "{{ product.title | strip_html | escape }}",
-     "brand": {
-        "@type": "Brand",
-        "name": {{ product.vendor | json }}
-      },
+     "brand": "{{ product.vendor | escape }}",
      "description": "{{ product.description | strip_html | escape }}",
      {%- if product.variants.first.sku != blank -%}
        "sku": "{{ product.variants.first.sku }}",
@@ -81,6 +78,13 @@
        }{% unless forloop.last %},{% endunless %}
        {% endfor %}
     ]
+    {%- if product.metafields.spr.reviews -%}
+    ,"aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": {{ product.metafields.spr.reviews | split: 'ratingValue" content="' | last | split: '"' | first | plus: 0 }},
+      "ratingCount": {{ product.metafields.spr.reviews | split: 'reviewCount" content="' | last | split: '"' | first | plus: 0 }}
+    }
+    {%- endif -%}
    }
   </script>
 {% endif %}
