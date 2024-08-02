@@ -1,12 +1,54 @@
 {
   "sections": {
-    "product-grid": {
-      "type": "collection-template-boost-pfs-filter",
+    "banner": {
+      "type": "main-collection-banner",
       "settings": {
+      }
+    },
+    "promo": {
+      "type": "promotional-banner",
+      "settings": {
+        "background_color": "#f5f5f5",
+        "link": "",
+        "text_align": "center",
+        "heading": "Heading",
+        "subheading": "<p>Add a short sentence to your banner<\/p>",
+        "button_text": "Button",
+        "heading_font_size": 26,
+        "subheading_font_size": 16,
+        "text_color": "#000000",
+        "button_text_color": "#ffffff",
+        "button_color": "#000000",
+        "section_padding": "bottom"
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "blocks": {
+        "bef67807-6de8-4afa-b1fe-bc0a46351382": {
+          "type": "side_sortby",
+          "settings": {
+          }
+        },
+        "cea9f996-51a8-4b3a-8837-6975c0590a9c": {
+          "type": "side_filter",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "bef67807-6de8-4afa-b1fe-bc0a46351382",
+        "cea9f996-51a8-4b3a-8837-6975c0590a9c"
+      ],
+      "settings": {
+        "rows": 4,
+        "grid": 3
       }
     }
   },
   "order": [
-    "product-grid"
+    "banner",
+    "promo",
+    "main"
   ]
 }

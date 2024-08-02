@@ -30,10 +30,12 @@
                     {% capture menu_image %}
                       <span class="span-3 auto mm-image">
                         <a href="{{ block.settings.nav_promo_link }}">
-                          {% render 'basic-responsive-image', type: block.settings.nav_image, data_widths: '[180, 360, 540, 720]' %}
-                          <noscript>
-                            <img src="{{ block.settings.nav_image | img_url: '300x' }}" alt="block.settings.nav_image.alt">
-                          </noscript>
+                          {%
+                            render 'basic-responsive-image',
+                            type: block.settings.nav_image,
+                            width: 1200,
+                            loading: 'eager'
+                          %}
                         </a>
                       </span>
                     {% endcapture %}
@@ -145,11 +147,13 @@
                       {% if image != blank %}
                       <span class="links__withimages--image image_{{ block.settings.image_ratio }}">
                         {% if link_n != blank %}<a href="{{ link_n }}">{% endif %}
-                          {% render 'basic-responsive-image', type: image, data_widths: '[180, 360, 540, 720]' %}
-                          <noscript>
-                            <img src="{{ image | img_url: '300x' }}" alt="image.alt">
-                          </noscript>
-                        {% if link != blank %}</a>{% endif %}
+                          {%
+                            render 'basic-responsive-image',
+                            type: image,
+                            width: 1200,
+                            loading: 'eager'
+                          %}
+                        {% if link_n != blank %}</a>{% endif %}
                       </span>
                       {% endif %}
 

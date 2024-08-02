@@ -5,10 +5,7 @@
   <div class="sidebar desktop-3 tablet-2 mobile-3">
     <ul class="sidebar-nav">
       <li>
-        <a class="sidebar-nav__link account-details selected" data-tab="account-details" href="javascript:void(0)">{{ 'customer.account.details' | t }}</a>
-      </li>
-      <li>
-        <a class="sidebar-nav__link order-history" data-tab="order-history" href="javascript:void(0)">{{ 'customer.orders.title' | t }}</a>
+        <a class="sidebar-nav__link order-history selected" data-tab="order-history" href="javascript:void(0)">{{ 'customer.orders.title' | t }}</a>
       </li>
       <li>
         <a class="sidebar-nav__link account-addresses" data-tab="account-addresses" href="javascript:void(0)">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a>
@@ -25,39 +22,37 @@
   </div>
 
   <div class="content desktop-9 tablet-4 mobile-3">
-    <div id="account-details" class="content-item">
-      <h5 class="name">{{ customer.name }}</h5>
-      <p class="email note">{{ customer.email }}</p>
-      <div class="address note">
-        {% if customer.default_address != nil %}
-          {{ customer.default_address | format_address }}
-        {% endif %}
-      </div>
-    </div>
-    <div id="order-history" class="content-item" style="display:none;">
+    <div id="order-history" class="content-item">
       {% if customer.orders.size != 0 %}
-      <table>
-        <thead>
-          <tr>
-            <th class="order_number">{{ 'customer.orders.order_number' | t }}</th>
-            <th class="date">{{ 'customer.orders.date' | t }}</th>
-            <th class="payment_status status">{{ 'customer.orders.payment_status' | t }}</th>
-            <th class="fulfillment_status status">{{ 'customer.orders.fulfillment_status' | t }}</th>
-            <th class="total">{{ 'customer.orders.total' | t }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for order in customer.orders %}
-          <tr class="{% cycle 'odd', 'even' %} {% if order.cancelled %}cancelled_order{% endif %}">
-            <td>{{ order.name | link_to: order.customer_url }}</td>
-            <td class="date"><span>{{ order.created_at | date: "%b %d, %Y" }}</span></td>
-            <td class="status"><span>{{ order.financial_status }}</span></td>
-            <td class="status"><span>{{ order.fulfillment_status }}</span></td>
-            <td class="total"><span>{{ order.total_price | money }}</span></td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+        {% paginate customer.orders by 30 %}
+        <table>
+          <thead>
+            <tr>
+              <th class="order_number">{{ 'customer.orders.order_number' | t }}</th>
+              <th class="date">{{ 'customer.orders.date' | t }}</th>
+              <th class="payment_status status">{{ 'customer.orders.payment_status' | t }}</th>
+              <th class="fulfillment_status status">{{ 'customer.orders.fulfillment_status' | t }}</th>
+              <th class="total">{{ 'customer.orders.total' | t }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in customer.orders %}
+             
+            <tr class="{% cycle 'odd', 'even' %} {% if order.cancelled %}cancelled_order{% endif %}">
+              <td>{{ order.name | link_to: order.customer_url }}</td>
+              <td class="date"><span>{{ order.created_at | date: "%b %d, %Y" }}</span></td>
+              <td class="status"><span>{{ order.financial_status }}</span></td>
+              <td class="status"><span>{{ order.fulfillment_status }}</span></td>
+              <td class="total"><span>{{ order.total_price | money }}</span></td>
+            </tr>
+            {{ paginate | default_pagination }}
+            {% endfor %}
+          </tbody>
+        </table>
+        {%- if paginate.pages > 1 -%}
+          {% render 'snip-pagination', paginate: paginate %}
+        {%- endif -%}
+        {% endpaginate %}
       {% else %}
       <h5>{{ 'customer.orders.none' | t }}</h5>
       {% endif %}
@@ -81,7 +76,7 @@
               </p>
 
               {% comment %} Edit an Address Popup {% endcomment %}
-              <div data-wau-modal-content="edit-address-{{ address.id }}" class="customer_address edit_address desktop-8 desktop-push-2 tablet-6 mobile-3" style="display:none;">
+              <div data-wau-modal-content="edit-address-{{ address.id }}" class="customer_address edit_address desktop-8 desktop-push-2 tablet-6 mobile-3" data-wau-modal-remove-original="true">
                 <h4 id="add_address_title">{{ 'customer.addresses.edit_address' | t }}</h4>
                 {% form 'customer_address', address %}
                 <table class="customer_address_table">
@@ -144,7 +139,7 @@
             <button class="inline-block-auto accounts__new-address js-modal-open" type="button" name="button" data-wau-modal-target="new-address">{{ 'customer.addresses.add_new' | t }}</button>
 
             {% comment %}Add an Address Popup {% endcomment %}
-            <div data-wau-modal-content="new-address" class="customer_address edit_address desktop-8 mobile-3" style="display:none;">
+            <div data-wau-modal-content="new-address" class="customer_address edit_address desktop-8 mobile-3"data-wau-modal-remove-original="true">
 
               {% form 'customer_address', customer.new_address %}
 

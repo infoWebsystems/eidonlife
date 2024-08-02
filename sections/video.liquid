@@ -95,17 +95,27 @@
                 </div>
               </div>
             {%- else -%}
-              <div class="video__image lazyload js"
-                    data-bgset="{% include 'bgset', image: section.settings.image %}"
-                    data-sizes="auto"
-                    data-parent-fit="contain"
-                    style="background-position: center center;"
-                    data-image-loading-animation>
+              <div class="video__image js" data-image-loading-animation>
+              {% liquid
+                assign loading = 'lazy'
+                assign fetch_priority = 'auto'
+                if section.index == 1
+                  assign loading = 'eager'
+                  assign fetch_priority = 'high'
+                endif
+               %}
+              {%
+                render 'basic-responsive-image',
+                type: section.settings.image,
+                width: 2400,
+                loading: loading,
+                fetchpriority: fetch_priority
+              %}
               </div>
             {%- endif -%}
 
             <noscript>
-              <div class="video__image"{% if section.settings.image %} style="background-image: url('{{ section.settings.image | img_url: '2048x' }}'); background-position: center center;"{% endif %}>
+              <div class="video__image"{% if section.settings.image %} style="background-image: url('{{ section.settings.image | image_url: width: 2048 }}'); background-position: center center;"{% endif %}>
                 {%- if section.settings.image == blank -%}
                   <div class="placeholder-background">
                     {% capture current %}{% cycle 1, 2 %}{% endcapture %}
@@ -342,6 +352,8 @@
     "name": "Video",
     "settings": {}
   }],
-  "templates": ["404", "article", "blog", "cart", "collection", "list-collections", "index", "page", "product", "search"]
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
 }
 {% endschema %}

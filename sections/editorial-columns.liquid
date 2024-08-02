@@ -11,21 +11,44 @@
 
   case section.blocks.size
     when 1
-    assign image_size = '900x'
     assign column_width = 'span-8 push-2'
+    assign md_render = 'calc(100vw * 0.6667)'
+    assign lg_render = 'calc(1600px * 0.6667)'
     when 2
-    assign image_size = '800x'
     assign column_width = 'span-6'
+    assign md_render = 'calc(100vw / 2)'
+    assign lg_render = 'calc(1600px / 2)'
     when 3
-    assign image_size = '500x'
     assign column_width = 'span-4'
+    assign md_render = 'calc(100vw / 3)'
+    assign lg_render = 'calc(1600px / 3)'
     when 4
-    assign image_size = '400x'
     assign column_width = 'span-3'
+    assign md_render = 'calc(100vw / 4)'
+    assign lg_render = 'calc(1600px / 4)'
   endcase
 
+  assign desktop_height = section.settings.desktop_image_height | append: 'px'
+  assign mobile_height = section.settings.mobile_image_height | append: 'px'
+
+  assign fixed_height = false
+  if section.settings.image_size == fixed
+    assign fixed_height = true
+  endif
+
 -%}
-<section class="global__section text-columns-with-image {{ section_padding }}" id="text-promo-{{ section.id }}" data-section-id="{{ section.id }}" data-aos="fade">
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --desktop-section-height: {{ desktop_height }};
+    --mobile-section-height: {{ mobile_height }};
+  }
+{% endstyle %}
+
+<section class="global__section text-columns-with-image {{ section_padding }}" 
+  id="text-promo-{{ section.id }}" 
+  data-section-id="{{ section.id }}"
+  data-aos="fade">
 
   {% if section.settings.full_width %}<div class="gridlock-fluid"><div class="row">{% endif %}
   <div class="row grid__wrapper">
@@ -38,14 +61,26 @@
     {% endif %}
 
     {% for block in section.blocks %}
-      {%- assign img_url = block.settings.image | img_url: image_size -%}
-      <div class="editorial__content-item {{ column_width }} sm-span-12 auto text-promo-{{ block.id }}" {{ block.shopify_attributes }}>
+      <div class="editorial__content-item {{ column_width }} sm-span-12 auto text-promo-{{ block.id }} size--{{ section.settings.image_size }}" data-aos="fade" data-aos-delay="{{ forloop.index | times: 100 }}" {{ block.shopify_attributes }}>
         {% if block.settings.link != blank %}<a href="{{ block.settings.link }}">{% endif %}
           {% if block.settings.image != blank %}
-            {% render 'basic-responsive-image', type: block.settings.image, data_widths: '[180, 360, 540, 720, 900]' %}
-            <noscript>
-              <img src="{{ block.settings.image | img_url: '800x' }}" alt="{{ block.settings.image.alt }}">
-            </noscript>
+            {% liquid
+              assign loading = 'lazy'
+              assign fetch_priority = 'auto'
+              if section.index == 1
+                assign loading = 'eager'
+                assign fetch_priority = 'high'
+              endif
+             %}
+            {%
+              render 'basic-responsive-image',
+              type: block.settings.image,
+              md_render: md_render,
+              lg_render: lg_render,
+              width: 800,
+              loading: loading,
+              fetchpriority: fetch_priority
+            %}
           {% endif %}
         {% if block.settings.link != blank %}</a>{% endif %}
         <div class="text-promo-content">
@@ -90,19 +125,10 @@
       "default": "Editorial columns"
     },
     {
-      "type": "select",
+      "type": "text_alignment",
       "id": "align_text",
       "label": "Text alignment",
-      "default": "left",
-      "options": [{
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Centered"
-        }
-      ]
+      "default": "center"
     },
     {
       "type": "select",
@@ -127,6 +153,41 @@
         }
       ],
       "default": "both"
+    },
+    {
+      "type": "radio",
+      "id": "image_size",
+      "label": "Image size",
+      "options": [
+        {
+          "value": "natural",
+          "label": "Natural"
+        },
+        {
+          "value": "fixed",
+          "label": "Fixed height"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "desktop_image_height",
+      "min": 100,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "label": "Fixed image height (desktop)",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_height",
+      "min": 100,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "label": "Fixed image height (mobile)",
+      "default": 400
     }
   ],
   "blocks": [{
@@ -177,6 +238,8 @@
       }
     ]
   }],
-  "templates": ["404", "article", "blog", "cart", "collection", "list-collections", "index", "page", "product", "search"]
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
 }
 {% endschema %}

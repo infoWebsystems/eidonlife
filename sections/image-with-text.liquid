@@ -2,32 +2,35 @@
 
   assign section_padding = ''
   if section.settings.section_padding == 'top'
-    assign section_padding = 'pb0'
+    assign section_padding = 'pb0 mb0'
   elsif section.settings.section_padding == 'bottom'
-    assign section_padding = 'mt0'
+    assign section_padding = 'pt0 mt0'
   elsif section.settings.section_padding == 'none'
-    assign section_padding = 'mt0 pb0 pt0'
+    assign section_padding = 'mt0 mb0 pb0 pt0'
   endif
 
   case section.settings.image_width
    when '25%'
-   assign image_size = '500x'
+   assign md_render = 'calc(100vw / 4)'
+    assign lg_render = 'calc(1600px / 4)'
    assign image_width = '3'
    when '33%'
-   assign image_size = '500x'
+   assign md_render = 'calc(100vw / 3)'
+   assign lg_render = 'calc(1600px / 3)'
    assign image_width = '4'
    when '50%'
-   assign image_size = '800x'
+   assign md_render = 'calc(100vw / 2)'
+   assign lg_render = 'calc(1600px / 2)'
    assign image_width = '6'
    when '66%'
-   assign image_size = '1200x'
+   assign md_render = 'calc(100vw * 0.6667)'
+   assign lg_render = 'calc(1600px * 0.6667)'
    assign image_width = '8'
    when '75%'
-   assign image_size = '1200x'
+   assign md_render = 'calc(100vw * 0.75)'
+   assign lg_render = 'calc(1600px * 0.75)'
    assign image_width = '9'
   endcase
-
-  assign img_url = section.settings.image | img_url: image_size
 
   assign cw = 12 | minus: image_width
   assign color = section.settings.color
@@ -35,12 +38,36 @@
   assign button_color = section.settings.button_color
   assign button_background = section.settings.button_background
 
+  assign fixed_height = false
+  if section.settings.image_height == 'fixed_height'
+    assign fixed_height = true
+  endif
+
+  assign desktop_height = section.settings.desktop_height
+  assign mobile_height = section.settings.mobile_height
+
 -%}
 
 <style>
   #shopify-section-{{ section.id }} {
     --section-background: {{ background }};
     --text-color: {{ color }};
+    {% if fixed_height %}
+      --desktop-section-height: {{ desktop_height }}px;
+      --mobile-section-height: {{ mobile_height }}px;
+    {% endif %}
+  }
+
+  @media screen and (max-width: 740px) {
+    {% if section.settings.full_width %}
+      .section-{{ section.id }} .image__withText-wrapper .image__withText-caption {
+        width: 92%;
+        margin: 0 auto;
+      }
+    {% endif %}
+    .image__withText-image.layout--overlap.is-fixed_height {
+      margin-bottom: 20px !important;
+    }
   }
 </style>
 
@@ -50,17 +77,40 @@
   {% endif %}
 
   {% capture image_layout %}
-    <div class="image__withText-image span-{{ image_width }} sm-span-12 auto{% if section.settings.section_padding == 'none' %} mt0 mb0{% endif %}">
-      {% if section.settings.image != blank %}
-        {% render 'basic-responsive-image', type: section.settings.image, data_widths: '[180, 360, 540, 720, 900]' %}
-        <noscript>
-          <img src="{{ section.settings.image | img_url: '800x' }}" alt="{{ section.settings.image.alt }}">
-        </noscript>
-      {% else %}
-        <div class="onboard">
-          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    <div class="image__withText-image {% if section.blocks.size > 1 %}layout--{{ section.settings.appearance }}{% endif %} span-{{ image_width }} sm-span-12 auto {{ section_padding }}{% if fixed_height %} is-fixed_height{% endif %}"
+      data-aos="fade"
+      data-aos-delay="{{ forloop.index | times: 100 }}">
+      {% for block in section.blocks %}
+        {% if block.settings.image != blank %}
+          <div class="image--{{ forloop.index0 }}"
+            data-aos="fade"
+            data-aos-delay="{{ forloop.index | times: 100 }}">
+          {% liquid
+            assign loading = 'lazy'
+            assign fetch_priority = 'auto'
+            if section.index == 1
+              assign loading = 'eager'
+              assign fetch_priority = 'high'
+            endif
+           %}
+          {%
+            render 'basic-responsive-image',
+            type: block.settings.image,
+            md_render: md_render,
+            lg_render: lg_render,
+            width: 1200,
+            loading: loading,
+            fetchpriority: fetch_priority
+          %}
         </div>
-      {% endif %}
+        {% else %}
+        <div class="image--{{ forloop.index0 }}">
+          <div class="onboard">
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        </div>
+        {% endif %}
+      {% endfor %}
     </div>
   {% endcapture %}
 
@@ -69,7 +119,9 @@
       {{ image_layout }}
     {% endif %}
 
-    <div class="image__withText-caption{% if section.settings.text_align == 'center' %} a-center{% endif %} span-{{ cw }} sm-span-12 auto">
+    <div class="image__withText-caption a-{{ section.settings.text_align }} span-{{ cw }} sm-span-12 auto"
+      data-aos="fade"
+      data-aos-delay="{{ forloop.index | times: 100 }}">
       {% if section.settings.heading != blank %}
         <h3>{{ section.settings.heading | escape }}</h3>
       {% endif %}
@@ -77,7 +129,7 @@
         <div class="rte">{{ section.settings.text }}</div>
       {% endif %}
       {% if section.settings.button != blank and section.settings.link != blank %}
-        <a class="caption__link" href="{{ section.settings.link }}">
+        <a class="button" href="{{ section.settings.link }}">
           {{ section.settings.button | escape }}
         </a>
       {% endif %}
@@ -92,6 +144,7 @@
 {% schema %}
 {
   "name": "Image with text",
+  "max_blocks": 2,
   "settings": [
     {
       "type": "checkbox",
@@ -125,12 +178,27 @@
     },
     {
       "type": "header",
-      "content": "Image"
+      "content": "Images"
     },
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Image"
+      "type": "select",
+      "id": "appearance",
+      "label": "Appearance",
+      "info":"When multiple images, select how the images will align",
+      "default": "overlap",
+      "options": [{
+          "value": "overlap",
+          "label": "Overlap"
+        },
+        {
+          "value": "parallel",
+          "label": "Parallel"
+        },
+        {
+          "value": "parallel_no_spaces",
+          "label": "Parallel no spaces"
+        }
+      ]
     },
     {
       "type": "select",
@@ -139,18 +207,18 @@
       "default": "left",
       "options": [{
           "value": "left",
-          "label": "Image on left"
+          "label": "Images on left"
         },
         {
           "value": "right",
-          "label": "Image on right"
+          "label": "Images on right"
         }
       ]
     },
     {
       "type": "select",
       "id": "image_width",
-      "label": "Width",
+      "label": "Image section width",
       "default": "50%",
       "options": [{
           "value": "25%",
@@ -175,23 +243,49 @@
       ]
     },
     {
+      "type": "radio",
+      "id": "image_height",
+      "label": "Image section height",
+      "options": [
+        {
+          "value": "natural",
+          "label": "Natural"
+        },
+        {
+          "value": "fixed_height",
+          "label": "Fixed height"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "min": 200,
+      "max": 1000,
+      "step": 100,
+      "unit": "px",
+      "label": "Desktop fixed height",
+      "default": 900
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "min": 200,
+      "max": 1000,
+      "step": 100,
+      "unit": "px",
+      "label": "Mobile fixed height",
+      "default": 600
+    },
+    {
       "type": "header",
       "content": "Text content"
     },
     {
-      "type": "select",
-      "id": "text_align",
-      "label": "Text alignment",
-      "default": "left",
-      "options": [{
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        }
-      ]
+       "type": "text_alignment",
+       "id": "text_align",
+       "label": "Text alignment",
+       "default": "center"
     },
     {
       "type": "text",
@@ -231,12 +325,37 @@
       "label": "Text color",
       "default": "#000"
     }
-
   ],
-  "presets": [{
-    "name": "Image with text"
+  "blocks": [
+    {
+    "type": "image",
+    "name": "Image",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "For best results when adding multiple images, use images of a similar size"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      }
+    ]
+  }],
+  "presets": [
+    {
+    "name": "Image with text",
+    "blocks": [{
+        "type": "image"
+      },
+      {
+        "type": "image"
+      }
+    ]
   }
   ],
-  "templates": ["404", "article", "blog", "cart", "collection", "list-collections", "index", "page", "product", "search"]
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
 }
 {% endschema %}

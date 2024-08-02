@@ -34,7 +34,11 @@
         <article id="{{ line_item.id }}" class="{% cycle 'odd', 'even' %}">
           <div class="img">
             {% if line_item.image %}
-              {{ line_item.image | img_url: '100x' | img_tag }}
+              {%
+                render 'basic-responsive-image',
+                type: line_item.image,
+                width: 1200
+              %}
             {% endif %}
           </div>
           <div class="info">

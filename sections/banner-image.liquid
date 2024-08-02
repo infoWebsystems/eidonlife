@@ -14,7 +14,7 @@
   when '404'
     assign heading = 'general.404.title' | t
   when 'search'
-    assign heading = 'general.search.title' | t
+    assign heading = 'sections.search.title' | t
   when 'list-collections'
     assign heading = 'collections.general.all_collections' | t
   when 'blog'
@@ -27,10 +27,18 @@ if template contains 'page'
   assign heading = page.title
 endif
 
+# Handle LCP loading
+assign loading = 'lazy'
+assign fetch_priority = 'auto'
+if section.index == 1
+  assign fetch_priority = 'high'
+  assign loading = 'eager'
+endif
+
 -%}
 
 
-  <section class="global__section collection__section--banner collection__banner-{{ section.id }} parallax lazyload lazyload-fade gridlock-fluid mt0"
+  <section class="global__section collection__section--banner collection__banner-{{ section.id }} parallax  gridlock-fluid mt0"
   data-section-type="parallax-section"
   data-scale="1.3"
   data-aos="fade"
@@ -40,9 +48,21 @@ endif
       <div class="parallax__container">
         <div class="collection__banner-image parralax__image">
           {%- if section.settings.image == blank and template contains 'article' and article.image != blank -%}
-            {% render 'basic-responsive-image', type:  article.image %}
+            {%
+              render 'basic-responsive-image',
+              type:  article.image,
+              width: 2000,
+              loading: loading,
+              fetchpriority: fetch_priority
+            %}
           {%- else -%}
-            {% render 'basic-responsive-image', type:  section.settings.image %}
+            {%
+              render 'basic-responsive-image',
+              type:  section.settings.image,
+              width: 2000,
+              loading: loading,
+              fetchpriority: fetch_priority
+            %}
           {%- endif -%}
         </div>
       </div>

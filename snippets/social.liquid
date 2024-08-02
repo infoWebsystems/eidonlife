@@ -61,7 +61,7 @@
 
     if template == 'collection' or template == 'product' or template == 'index'
 
-      assign pinterest_media = product.featured_media | img_url: '1024x1024' | prepend: "http:"
+      assign pinterest_media = product.featured_media | image_url: width: 1024, height: 1024 | prepend: "http:"
 
       assign pinterest_href = pinterest_href | append: product.url | append: "&amp;media=" | append: pinterest_media
 
@@ -69,7 +69,7 @@
 
     if template contains 'blog' or template contains 'article'
 
-      assign pinterest_media = article.image.src | img_url: 'grande' | prepend: "http:"
+      assign pinterest_media = article.image.src | image_url: width: 1024 | prepend: "http:"
 
       assign pinterest_href = pinterest_href | append: article.url | append: "&amp;media=" | append: pinterest_media
 

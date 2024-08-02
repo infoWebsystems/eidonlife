@@ -6,50 +6,33 @@
         "image_CYKz9C": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Desktop_4e8b2831-fe52-45b9-84be-79e6b4f0808d.jpg",
+            "image": "shopify:\/\/shop_images\/Desktop_e8e72448-38e3-4f1a-899f-cfbb2fa9630f.jpg",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
             "caption_position": "bottom_center",
-            "mobile_image": "shopify:\/\/shop_images\/Mobile_ae2a6789-116a-44b3-b42b-dd8775193757.jpg",
-            "caption_below": false,
+            "mobile_image": "shopify:\/\/shop_images\/Mobile_copy_2_f609cee1-00b5-46c8-a8d6-96d2cce81e9d.jpg",
+            "hide_caption_background": false,
             "heading": "",
             "subheading": "",
-            "link": "https:\/\/eidonlife.com\/collections\/the-pink-edit",
-            "button_text": "shop now",
-            "second_link": "",
-            "second_button_text": "",
+            "link": "https:\/\/eidonlife.com\/collections\/surf",
+            "button_text": "Shop women's",
+            "second_link": "https:\/\/eidonlife.com\/collections\/boardshorts",
+            "second_button_text": "Shop men's",
             "text_color": "#000000",
             "button_color": "#313131",
             "button_background": "#ffffff",
-            "overlay_color": "#000000",
-            "overlay_opacity": 0
-          }
-        },
-        "c4d882a5-a84d-40fb-b2a3-2b5adf780e72": {
-          "type": "image",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/Desktop_MENS_2ff91bec-56ff-4672-b69c-bef1230d38c5.jpg",
-            "caption_position": "bottom_center",
-            "mobile_image": "shopify:\/\/shop_images\/Artboard_1-2.jpg",
-            "caption_below": false,
-            "heading": "",
-            "subheading": "",
-            "link": "https:\/\/eidonlife.com\/collections\/mens",
-            "button_text": "shop now",
-            "second_link": "",
-            "second_button_text": "Button 2 text",
-            "text_color": "#000000",
-            "button_color": "#313131",
-            "button_background": "#ffffff",
-            "overlay_color": "#000000",
-            "overlay_opacity": 0
+            "caption_background": "rgba(0,0,0,0)"
           }
         },
         "image_DhPrry": {
           "type": "image",
           "settings": {
             "image": "shopify:\/\/shop_images\/Desktop_9749772b-3cd3-4ecd-9009-e9d98cb0677a.jpg",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
             "caption_position": "bottom_center",
             "mobile_image": "shopify:\/\/shop_images\/Mobile_copy_8bf9adad-e290-44bd-9a49-6d100e1eff8b.jpg",
-            "caption_below": false,
+            "hide_caption_background": false,
             "heading": "",
             "subheading": "",
             "link": "https:\/\/eidonlife.com\/collections\/sale",
@@ -59,24 +42,51 @@
             "text_color": "#000000",
             "button_color": "#000000",
             "button_background": "#ffffff",
+            "caption_background": "rgba(0,0,0,0)"
+          }
+        },
+        "c4d882a5-a84d-40fb-b2a3-2b5adf780e72": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Desktop_db29a992-04ab-4b29-b72d-d7e14403a03d.jpg",
             "overlay_color": "#000000",
-            "overlay_opacity": 0
+            "overlay_opacity": 0,
+            "caption_position": "bottom_center",
+            "mobile_image": "shopify:\/\/shop_images\/Spring_Mobile_copy_803bd5eb-62a6-4b3b-bd9e-323e27537a46.jpg",
+            "hide_caption_background": false,
+            "heading": "",
+            "subheading": "",
+            "link": "shopify:\/\/collections\/mens",
+            "button_text": "shop men's",
+            "second_link": "",
+            "second_button_text": "Button 2 text",
+            "text_color": "#000000",
+            "button_color": "#313131",
+            "button_background": "#ffffff",
+            "caption_background": "rgba(0,0,0,0)"
           }
         }
       },
       "block_order": [
         "image_CYKz9C",
-        "c4d882a5-a84d-40fb-b2a3-2b5adf780e72",
-        "image_DhPrry"
+        "image_DhPrry",
+        "c4d882a5-a84d-40fb-b2a3-2b5adf780e72"
       ],
       "settings": {
-        "display_wide": true,
-        "section_padding": "none",
-        "enable_autoplay": true,
-        "slider_speed": 6,
+        "full_width": true,
+        "slideshow_size": "natural",
+        "desktop_height": 900,
+        "mobile_height": 600,
+        "caption_below": false,
         "pager": "dots",
+        "show_animation": true,
+        "transition": "fade",
+        "slider_speed": 6,
+        "enable_stop_pause_on_mobile": true,
         "slide_heading_size": 36,
-        "subheading_size": 25
+        "subheading_size": 25,
+        "section_padding": "none"
       }
     },
     "collection_list_LgpNY6": {
@@ -126,6 +136,7 @@
         "grid": 5,
         "carousel": true,
         "collection_count": true,
+        "bold_titles": true,
         "title_position": "below_image",
         "image_ratio": "circle",
         "section_padding": "both"
@@ -140,7 +151,7 @@
             "image": "shopify:\/\/shop_images\/04.png",
             "image_width": "25%",
             "link": "https:\/\/eidonlife.com\/collections\/expeditions?pf_t_print=print%3ABlack%20Licorice",
-            "heading_text": "",
+            "heading": "Heading",
             "subheading": "",
             "button_text": "",
             "caption_position": "middle_center",
@@ -157,7 +168,7 @@
             "image": "shopify:\/\/shop_images\/03_06221ead-9f53-48ec-a692-5a5639eb2c54.jpg",
             "image_width": "25%",
             "link": "shopify:\/\/collections\/fruit-punch",
-            "heading_text": "",
+            "heading": "Heading",
             "subheading": "",
             "button_text": "",
             "caption_position": "middle_center",
@@ -174,7 +185,7 @@
             "image": "shopify:\/\/shop_images\/01_2ab1352b-4ae5-43d7-a979-99ea347ae4b7.png",
             "image_width": "25%",
             "link": "shopify:\/\/collections\/sorbet",
-            "heading_text": "",
+            "heading": "Heading",
             "subheading": "",
             "button_text": "",
             "caption_position": "middle_center",
@@ -191,7 +202,7 @@
             "image": "shopify:\/\/shop_images\/02.png",
             "image_width": "25%",
             "link": "shopify:\/\/collections\/sparkle",
-            "heading_text": "",
+            "heading": "Heading",
             "subheading": "",
             "button_text": "",
             "caption_position": "middle_center",
@@ -212,11 +223,14 @@
       "disabled": true,
       "settings": {
         "full_width": true,
-        "section_padding": "top",
+        "image_height": "natural",
+        "desktop_height": 900,
+        "mobile_height": 600,
         "swipe": true,
         "images_touching": false,
-        "promo_size": 26,
-        "hidden_size": 18
+        "heading_size": 22,
+        "subheading_size": 14,
+        "section_padding": "top"
       }
     },
     "image-gallery": {
@@ -228,7 +242,7 @@
             "image": "shopify:\/\/shop_images\/BIKINIS_3e6f5289-1961-4417-89e5-d54c284822fb.jpg",
             "image_width": "25%",
             "link": "https:\/\/eidonlife.com\/collections\/boxing-day-deals?pf_mlt_product_type=product_type%3ABikini%20Tops",
-            "heading_text": "",
+            "heading": "Heading",
             "subheading": "",
             "button_text": "",
             "caption_position": "middle_center",
@@ -245,7 +259,7 @@
             "image": "shopify:\/\/shop_images\/ONE-PIECES_4c44b426-babe-4369-8d48-be95452eb850.jpg",
             "image_width": "25%",
             "link": "https:\/\/eidonlife.com\/collections\/boxing-day-deals?pf_mlt_product_type=product_type%3AOne-Piece%20Swimsuits",
-            "heading_text": "",
+            "heading": "Heading",
             "subheading": "",
             "button_text": "",
             "caption_position": "middle_center",
@@ -262,7 +276,7 @@
             "image": "shopify:\/\/shop_images\/RASHGUARDS.jpg",
             "image_width": "25%",
             "link": "https:\/\/eidonlife.com\/collections\/boxing-day-deals?pf_mlt_product_type=product_type%3ARashguards",
-            "heading_text": "",
+            "heading": "Heading",
             "subheading": "",
             "button_text": "",
             "caption_position": "middle_center",
@@ -279,7 +293,7 @@
             "image": "shopify:\/\/shop_images\/MEN.jpg",
             "image_width": "25%",
             "link": "https:\/\/eidonlife.com\/collections\/mens",
-            "heading_text": "",
+            "heading": "Heading",
             "subheading": "",
             "button_text": "",
             "caption_position": "middle_center",
@@ -300,18 +314,21 @@
       "disabled": true,
       "settings": {
         "full_width": true,
-        "section_padding": "top",
+        "image_height": "natural",
+        "desktop_height": 900,
+        "mobile_height": 600,
         "swipe": true,
         "images_touching": false,
-        "promo_size": 26,
-        "hidden_size": 18
+        "heading_size": 22,
+        "subheading_size": 14,
+        "section_padding": "top"
       }
     },
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
         "heading": "Selling Out Fast: Meet {{ section.settings.collection.title }}",
-        "collection": "sorbet",
+        "collection": "sweet-love",
         "carousel": true,
         "show_view_all": true,
         "reduce_width": true,
@@ -375,20 +392,34 @@
     },
     "image_with_text_G67bct": {
       "type": "image-with-text",
+      "blocks": {
+        "image_Ytg8zW": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Untitled_design_5.png"
+          }
+        }
+      },
+      "block_order": [
+        "image_Ytg8zW"
+      ],
       "custom_css": [
 
       ],
       "settings": {
         "full_width": true,
         "section_padding": "both",
-        "image": "shopify:\/\/shop_images\/Untitled_design_12.png",
+        "appearance": "overlap",
         "layout": "left",
         "image_width": "50%",
+        "image_height": "natural",
+        "desktop_height": 900,
+        "mobile_height": 600,
         "text_align": "center",
-        "heading": "Fan-favorites",
-        "text": "<p>Discover the prints and cuts our customers can't get enough of.<\/p>",
-        "button": "Shop bestsellers",
-        "link": "shopify:\/\/collections\/best-sellers",
+        "heading": "In Bloom",
+        "text": "<p>Blossom in our cute floral and pastel prints, just in time for Spring.<\/p>",
+        "button": "Shop Spring",
+        "link": "shopify:\/\/collections\/spring-has-sprung",
         "background": "#ffffff",
         "color": "#000000"
       }
@@ -399,9 +430,12 @@
       "settings": {
         "full_width": true,
         "section_padding": "both",
-        "image": "shopify:\/\/shop_images\/Eidon-S21-Carlie_Eastwood-Blog_Thumbnail.jpg",
+        "appearance": "overlap",
         "layout": "left",
         "image_width": "50%",
+        "image_height": "natural",
+        "desktop_height": 900,
+        "mobile_height": 600,
         "text_align": "center",
         "heading": "Introducing #EidonAdventurer Carlie Eastwood",
         "text": "<p>Get to know Carlie Eastwood, a young surfer from Florida who aspires to go pro one day!<\/p><p>Discover why this Eidon Adventurer embodies the LIVE, TRAVEL, SURF spirit in our exclusive one-on-one interview.<\/p>",
@@ -463,6 +497,7 @@
         "background": "rgba(0,0,0,0)",
         "color": "#000000",
         "width": 60,
+        "align_text": "center",
         "section_padding": "none"
       }
     },

@@ -1,16 +1,13 @@
 {%- liquid
-  assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.'
 
   assign is_parallax = false
   assign is_fixed = false
 
-  if section.settings.background_effect == 'parallax'
+  if section.settings.scale > 0
     assign background_effect = 'data-section-type="parallax-section"'
     assign scale = section.settings.scale
     assign is_parallax = true
-  endif
-
-  if section.settings.background_effect == 'fixed'
+  else
     assign is_fixed = true
   endif
 
@@ -25,63 +22,84 @@
 
 <style>
 
+  #shopify-section-{{ section.id }} {
+    --h2-size:  {{ section.settings.heading_font_size }}px;
+    --font-size:  {{ section.settings.subheading_font_size }}px;
+  }
+  @media screen and (max-width: 740px) {
     #shopify-section-{{ section.id }} {
-      --h2-size:  {{ section.settings.heading_font_size }}px;
-      --font-size:  {{ section.settings.subheading_font_size }}px;
+      --h2-size:  calc({{ section.settings.heading_font_size }}px - ({{ section.settings.heading_font_size }}px * 0.15));
+      --font-size:  calc({{ section.settings.subheading_font_size }}px - ({{ section.settings.subheading_font_size }}px * 0.15));
     }
+  }
+
+  .parallax-{{ section.id }} {
+    --section-overlay-color: {{ section.settings.overlay_color | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    --section-overlay-opacity: {{ section.settings.overlay_opacity | plus: 0 | divided_by: 100.0  }};
+    --caption-background: {{ section.settings.background }};
+    --text-color: {{ section.settings.text_color }};
+    --button-text: {{ section.settings.button_text_color }};
+    --button-color: {{ section.settings.button_color }};
+
+    {% if section.settings.section_padding == 'top' %}
+      margin-top: calc(var(--section-padding) / 2);
+    {% elsif section.settings.section_padding == 'bottom' %}
+      margin-bottom: calc(var(--section-padding) / 2);
+    {% elsif section.settings.section_padding == 'none' %}
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    {% elsif section.settings.section_padding == 'both' %}
+      margin-top: calc(var(--section-padding) / 2);
+      margin-bottom: calc(var(--section-padding) / 2);
+    {% endif %}
+  }
+
+  .no-js .parallax-{{ section.id }} {
+    background-image: url('{{ section.settings.image | image_url: width: 1800 }}');
+  }
+  .parallax-{{ section.id }} .parallax__container,
+  .parallax-{{ section.id }} .parralax__image--wrapper,
+  .parallax-{{ section.id }} .box-ratio img {
+    height: {{ section.settings.page_height }}px;
+    min-height: {{ section.settings.page_height }}px;
+  }
+  #shopify-section-{{ section.id }} .box-ratio {
+    padding-bottom: {{ section.settings.page_height }}px !important;
+  }
+  .parallax-{{ section.id }} .simpleParallax.simple-parallax-initialized {
+    height: {{ section.settings.page_height }}px;
+  }
+  #shopify-section-{{ section.id }} .onboard.parallax__placeholder {
+    height: {{ section.settings.page_height }}px;
+  }
+  {% if caption_below %}
     @media screen and (max-width: 740px) {
-      #shopify-section-{{ section.id }} {
-        --h2-size:  calc({{ section.settings.heading_font_size }}px - ({{ section.settings.heading_font_size }}px * 0.15));
-        --font-size:  calc({{ section.settings.subheading_font_size }}px - ({{ section.settings.subheading_font_size }}px * 0.15));
+      #shopify-section-{{ section.id }} .row.parallax__container {
+        height: auto;
       }
     }
-
-    .parallax-{{ section.id }} {
-      --section-overlay-color: {{ section.settings.overlay_color | color_to_rgb | remove: 'rgb(' | remove: ')' }};
-      --section-overlay-opacity: {{ section.settings.overlay_opacity | plus: 0 | divided_by: 100.0  }};
-      --caption-background: {{ section.settings.background }};
-      --text-color: {{ section.settings.text_color }};
-      --button-text: {{ section.settings.button_text_color }};
-      --button-color: {{ section.settings.button_color }};
-
-      {% if section.settings.section_padding == 'top' %}
-        margin-top: calc(var(--section-padding) / 2);
-      {% elsif section.settings.section_padding == 'bottom' %}
-        margin-bottom: calc(var(--section-padding) / 2);
-      {% elsif section.settings.section_padding == 'none' %}
-        margin-top: 0 !important;
-        margin-bottom: 0 !important;
-      {% elsif section.settings.section_padding == 'both' %}
-        margin-top: calc(var(--section-padding) / 2);
-        margin-bottom: calc(var(--section-padding) / 2);
-      {% endif %}
-    }
-
-    .no-js .parallax-{{ section.id }} {
-      background-image: url('{{ section.settings.image | img_url: '1800x' }}');
-    }
-    .parallax-{{ section.id }} .parallax__container,
-    .parralax__image--wrapper {
-      height: {{ section.settings.page_height }}px;
-      min-height: {{ section.settings.page_height }}px;
-    }
-
+  {% endif %}
 </style>
 
 
-<section class="parallax-{{ section.id }} parallax{% if is_fixed %} is_fixed{% endif %} lazyload lazyload-fade"
+<section class="parallax-{{ section.id }} parallax{% if is_fixed %} is_fixed{% endif %}"
   {{ background_effect }}
   data-scale="1.{{ scale }}"
-  {% if section.settings.background_effect == 'fixed' %}
-  data-bgset="{% render 'bgset', image: section.settings.image %}"
-  {% endif %}
   data-aos="fade"
   data-section-id="{{ section.id }}">
   <div class="row parallax__container">
     <div class="parralax__image--wrapper">
       <div class="parralax__image">
-        {%- if section.settings.background_effect == 'parallax' and section.settings.image != blank -%}
-          {% render 'basic-responsive-image', type:  section.settings.image %}
+        {%- if section.settings.image != blank -%}
+          {% liquid
+            assign loading = 'lazy'
+            assign fetch_priority = 'auto'
+            if section.index == 1
+              assign loading = 'eager'
+              assign fetch_priority = 'high'
+            endif
+           %}
+          {% render 'basic-responsive-image', type: section.settings.image, width: 3000, loading: loading, fetchpriority: fetch_priority %}
         {%- endif -%}
       </div>
       {%- if section.settings.image == blank -%}
@@ -120,20 +138,6 @@
       "info": "1920px x 1000px recommended"
     },
     {
-      "type": "select",
-      "id": "background_effect",
-      "label": "Image effect",
-      "options": [{
-          "value": "fixed",
-          "label": "Fixed in place"
-        },
-        {
-          "value": "parallax",
-          "label": "Parallax scrolling"
-        }
-      ]
-    },
-    {
       "type": "range",
       "id": "scale",
       "min": 0,
@@ -141,7 +145,7 @@
       "step": 1,
       "label": "Image scale",
       "default": 2,
-      "info": "The higher the scale the greater the effect, 0 removes parallax scrolling"
+      "info": "The higher the scale the greater the parallax effect, 0 removes parallax scrolling."
     },
     {
       "type": "range",
@@ -149,6 +153,7 @@
       "min": 200,
       "max": 800,
       "step": 100,
+      "unit": "px",
       "label": "Image height",
       "default": 500
     },
@@ -232,28 +237,28 @@
     {
       "type": "range",
       "id": "heading_font_size",
-      "min": 12,
+      "min": 13,
       "max": 36,
       "step": 1,
       "unit": "px",
       "label": "Heading size",
-      "default": 26
+      "default": 22
     },
     {
       "type": "range",
       "id": "subheading_font_size",
-      "min": 12,
+      "min": 13,
       "max": 36,
       "step": 1,
       "unit": "px",
       "label": "Text size",
-      "default": 16
+      "default": 14
     },
     {
       "type": "color",
       "id": "text_color",
       "label": "Text",
-      "default": "#000"
+      "default": "#fff"
     },
     {
       "type": "color",
@@ -317,6 +322,8 @@
   "presets": [{
     "name": "Image with text overlay"
   }],
-  "templates": ["404", "article", "blog", "cart", "collection", "list-collections", "index", "page", "product", "search"]
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
 }
 {% endschema %}

@@ -1,49 +1,3 @@
-<style>
-    .fa-star, .fa-star-o, .fa-star-half-o {
-    color: black !important;
-    font-size: 18px !important;
-}
-    .fa1 {
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    display: var(--fa-display,inline-block);
-    font-style: normal;
-    font-variant: normal;
-    line-height: 1;
-    text-rendering: auto;
-    font-family: 'FontAwesome' !important;
-  }
-  
-	.ws--star {
-        position: relative;
-        display: inline-block;
-    }
-
-    .ws--star-under {
-        color: #e7721b;
-    }
-
-    .ws--star-over {
-        overflow: hidden;
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: none;
-    }
-
-    .ws--star-visible {
-        display: inline-block;
-    }
-    .ws--review-container > .ws--star-under {
-        font-size:14px
-    }
-    .ws--review-container span{
-    	font-size:14px;
-    }
-  .fa {
-    font-family: 'FontAwesome' !important;
-}
-</style>
 {%- liquid
 
   case settings.product_image_size
@@ -56,6 +10,27 @@
     when 'portrait'
       assign aspect_ratio = 'portrait'
   endcase
+
+  assign show_swatches = false
+  assign show_sizes = false
+  assign show_quickview = false
+  assign show_quickadd = false
+
+  if settings.quickview_type != 'none'
+    assign show_quickview = true
+  endif
+
+  if settings.quickadd
+    assign show_quickadd = true
+  endif
+
+  if settings.show_collection_swatches
+    assign show_swatches = true
+  endif
+
+  if settings.show_collection_sizes
+    assign show_sizes = true
+  endif
 
 -%}
 
@@ -70,119 +45,133 @@
       <div class="sale-item sale-item--{{ settings.sale_items }} icn">
         {% case settings.sale_items %}
           {% when 'percentage' %}
-            {% assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price %}
-            {% assign discount = discount | round | append: '%' %}
-            {{ 'products.general.savings' | t: savings: discount }}
+            {% if product.price_varies or product.compare_at_price_varies %}
+              {{ 'products.general.sale' | t }}
+            {% else %}
+              {% assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price %}
+              {% assign discount = discount | round | append: '%' %}
+              {{ 'products.general.savings' | t: savings: discount }}
+            {% endif %}
           {% when 'amount' %}
-            {% assign discount = product.compare_at_price | minus: product.price | money %}
-            {{ 'products.general.savings' | t: savings: discount }}
+            {% if product.price_varies or product.compare_at_price_varies %}
+              {{ 'products.general.sale' | t }}
+            {% else %}
+              {% assign discount = product.compare_at_price | minus: product.price | money %}
+              {{ 'products.general.savings' | t: savings: discount }}
+            {% endif %}
           {% when 'icon' %}
             {{ 'products.general.sale' | t }}
         {% endcase %}
       </div>
      {% endif %}
+     {% if product.template_suffix == 'pre-order' %}
+      <div class="pre-order icn">{{ 'products.product.pre_order' | t }}</div>
+    {% endif %}
    {% else %}
     <div class="so icn">{{ 'products.general.sold' | t }}</div>
    {% endif %}
 
-   <div class="prod-image image_{{ aspect_ratio }}">
+   <div class="prod-image image_{{ aspect_ratio }} js-product-image">
      <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
        <div class="reveal">
+
         {%- if product.media.size < 1 -%}
+
           <div class="box-ratio" style="padding-bottom: 100%;">
             {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
             {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
           </div>
+
         {% else %}
 
-        {% if product.featured_media.media_type == 'video' or
-            product.featured_media.media_type == 'external_video' %}
-        {% if settings.product_grid_video %}
-          {% render 'product-loop-video', product: product %}
-        {% endif %}
-        {% render "basic-responsive-image", type: product.featured_media.preview_image, data_widths: '[180, 360, 540, 720, 900, 1080]' %}
-        <noscript>
-          <img src="{{ product.featured_media.preview_image | img_url: '1024x' }}" alt="{{ product.featured_media.preview_image.alt | escape }}">
-        </noscript>
-      {% else %}
+          {% if
+            product.featured_media.media_type == 'video' or
+            product.featured_media.media_type == 'external_video'
+          %}
 
+            {% if settings.product_grid_video %}
+              {% render 'product-loop-video', product: product %}
+            {% endif %}
+            {%
+              render "basic-responsive-image",
+              type: product.featured_media.preview_image,
+              width: 800,
+              loading: loading,
+              fetchpriority: fetchpriority
+            %}
 
-          {%- liquid
+          {% else %}
 
-          assign preview_image = product.featured_media.preview_image
-          assign second_image = product.media[1]
+            {%
+              render 'basic-responsive-image',
+                type: product.featured_media,
+                width: 1200,
+                loading: loading,
+                fetchpriority: fetchpriority
+            %}
 
-          if settings.secondary_images_hover and product.media.size > 1
-          assign is_first = 'first-image'
-          endif
+          {% endif %}
 
-          for filter in collection.filters
-            for fil in filter.active_values
-
-              for variant in product.variants
-                assign vTitle = variant.title | downcase
-                assign fTitle = fil.label | downcase
-                if vTitle contains fTitle
-                  assign var_img_url = variant.image
-                endif
-              endfor
-            endfor
-          endfor
-          -%}
-
-          {%- if var_img_url != blank -%}
-            {%- liquid
-              assign image_box_ratio = var_img_url.height | append: ".0" | times: 1 | divided_by: var_img_url.width | times: 100 | append: "%"
-              assign img_url = var_img_url | img_url: '1x1' | replace: '_1x1.', '_{width}x.'
-            -%}
-
-            <div class="box-ratio" style="padding-bottom: {{ image_box_ratio }};">
-              <img class="lazyload lazyload-fade {{ is_first }}"
-                id="{{ var_img_url.id }}"
-                data-src="{{ img_url }}"
-                data-sizes="auto"
-                data-original="{{ type | img_url: '500x' }}"
-                data-widths="[180, 360, 540, 720]"
-                alt="{{ var_img_url.alt | escape }}">
-            </div>
-          {%- else -%}
-            {% render 'basic-responsive-image',
-            type: product.featured_media.preview_image,
-            data_widths: '[180, 360, 540, 720]',
-            is_first: is_first %}
-          {%- endif -%}
-
-          <noscript>
-          <img src="{{ preview_image | img_url: '500x' }}" alt="{{ preview_image.alt | escape }}">
-          </noscript>
-      {% endif %}
           {% if
             settings.secondary_images_hover and
             product.media.size > 1 and
             second_image.media_type == 'image'
-           %}
-          <div class="hidden">
-           {% render 'basic-responsive-image', type: product.media[1], data_widths: '[180, 360, 540]' %}
-           <noscript>
-             <img src="{{ product.media[1] | img_url: '500x' }}" alt="{{ product.media[1].alt | escape }}">
-           </noscript>
-          </div>
+          %}
+            <div class="hidden">
+              {%
+                render 'basic-responsive-image',
+                type: product.media[1].preview_image,
+                width: 800
+              %}
+            </div>
           {% elsif
             settings.secondary_images_hover and
             product.media.size > 1 and
             second_image.media_type != 'image'
-           %}
-          <div class="hidden">
-           {% render 'basic-responsive-image', type: product.media[1].preview_image, data_widths: '[180, 360, 540]' %}
-           <noscript>
-             <img src="{{ product.media[1].preview_image | img_url: '500x' }}" alt="{{ product.media[1].preview_image.alt | escape }}">
-           </noscript>
-          </div>
+          %}
+            <div class="hidden">
+              {%
+                render 'basic-responsive-image',
+                type: product.media[1].preview_image
+                width: 800
+              %}
+            </div>
           {% endif %}
         {%- endif -%}
        </div>
      </a>
    </div>
+
+   {% if settings.quickview_type != 'none' %}
+
+    {%- liquid
+
+      if settings.quickview_type == 'modal'
+        assign quickview_classes = 'js-modal-open'
+        assign quickview_settings = 'data-wau-modal-target="quickview"'
+      else
+        assign quickview_classes = 'js-slideout-open'
+        assign quickview_settings = 'data-wau-slideout-target="quickview" data-slideout-direction="right"'
+      endif
+
+    -%}
+
+     <button class="quick-view-{{ product.id }} product-listing__quickview-trigger {{ quickview_classes }} js-quickview-trigger"
+       type="button"
+       name="button"
+       {{ quickview_settings }}
+       data-product-url="{{ product.url }}?view=quick">{{ 'products.general.quick_view' | t }}</button>
+   {% endif %}
+
+   {% if show_quickadd and product.available %}
+      {% render 'product-grid-add'
+        product: product,
+        color_swatch_style: settings.color_swatch_style,
+        show_quickview: show_quickview,
+        show_sizes: show_sizes,
+        show_swatches: show_swatches %}
+   {% endif %}
+
 </div>
 
 <div class="product-info">
@@ -192,53 +181,29 @@
     {% endif %}
     <h2>{{ product.title }}</h2>
   </a>
-  {%- if settings.show_rating and product.metafields.reviews.rating.value != blank -%}
-    <div class="product__section--rating-wrapper">
-      {% liquid
-        assign rating_decimal = 0
-        assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
-        if decimal >= 0.3 and decimal <= 0.7
-          assign rating_decimal = 0.5
-        elsif decimal > 0.7
-          assign rating_decimal = 1
-        endif
-      %}
-      <div class="product__section-rating" role="img" aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: product.metafields.reviews.rating.value, rating_max: product.metafields.reviews.rating.value.scale_max }}">
-        <span aria-hidden="true" class="product__section-rating-star color-icon" style="--rating: {{ product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"></span>
-      </div>
-      <p class="product__section-rating-text caption">
-        <span aria-hidden="true">{{ product.metafields.reviews.rating.value }} / {{ product.metafields.reviews.rating.value.scale_max }}</span>
-      </p>
-      <p class="product__section-rating-count caption">
-        <span aria-hidden="true">({{ product.metafields.reviews.rating_count }})</span>
-        <span class="visually-hidden">{{ product.metafields.reviews.rating_count }} {{ "accessibility.total_reviews" | t }}</span>
-      </p>
-    </div>
-  {%- endif -%}
+
   {% render 'product-price-listing', product: product %}
-  <div class="wholescale-inline-rating" data-collection-product-id="{{ product.id }}"></div>
-</div>
 
-{% if settings.show_collection_swatches %}
-  <div class="prod-colors">
-    {% render 'product-listing-swatches',
+  {% assign meta_1 = product.metafields.custom.feature_1 %}
+  {% assign meta_2 = product.metafields.custom.feature_2 %}
+  {% assign meta_3 = product.metafields.custom.feature_3 %}
+
+  {% if meta_1 != blank or meta_2 != blank or meta_3 != blank %}
+    <ul class="meta-content">
+      <strong>{{ 'products.product.features' | t }}</strong>
+      {% if meta_1 != blank %}
+        <li>{{ meta_1 }}{% endif %}{% if meta_2 != blank %},</li>
+        <li>{{ meta_2 }}{% endif %}{% if meta_3 != blank %},</li>
+        <li>{{ meta_3 }}{% endif %}</li>
+    </ul>
+  {% endif %}
+
+  {% if show_swatches or show_sizes %}
+    {% render 'product-listing-swatches'
       product: product,
-      color_swatch_style: settings.color_swatch_style %}
-  </div>
-{% endif %}
-
-{% if settings.show_collection_sizes %}
-  <div class="prod-sizes">
-    {% render 'product-listing-sizes',
-      product: product
+      show_swatches: show_swatches,
+      show_sizes: show_sizes
     %}
-  </div>
-{% endif %}
+    {% endif %}
 
-{% if settings.quickview %}
-  <button class="quick-view-{{ product.id }} product-listing__quickview-trigger js-modal-open js-quickview-trigger"
-    type="button"
-    name="button"
-    data-wau-modal-target="quickview"
-    data-product-url="{{ product.url }}?view=quick">{{ 'products.general.quick_view' | t }}</button>
-{% endif %}
+</div>

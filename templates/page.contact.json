@@ -15,12 +15,17 @@
       "type": "contact-form",
       "settings": {
         "title": "",
-        "width": 60,
         "section_padding": "both"
+      }
+    },
+    "banner": {
+      "type": "banner-image",
+      "settings": {
       }
     }
   },
   "order": [
+    "banner",
     "breadcrumbs",
     "main",
     "form"

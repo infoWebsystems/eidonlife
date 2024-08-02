@@ -16,7 +16,8 @@
     id="custom-liquid--{{ section.id }}"
     class="custom-liquid custom-liquid--{{ section.id }} homepage-section-{{ section.id }}"
     data-section-id="{{ section.id }}"
-    data-section-type="custom-liquid">
+    data-section-type="custom-liquid"
+    data-aos="fade">
 
     <div class="row grid__wrapper">
 
@@ -70,18 +71,8 @@
       "name": "Custom liquid"
     }
   ],
-  "templates":
-  [
-    "404",
-    "article",
-    "blog",
-    "cart",
-    "collection",
-    "list-collections",
-    "index",
-    "page",
-    "product",
-    "search"
-  ]
+  "disabled_on": {
+    "groups": ["header"]
+  }
 }
 {% endschema %}

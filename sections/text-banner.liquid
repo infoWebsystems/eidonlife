@@ -140,7 +140,7 @@
       "step": 1,
       "unit": "px",
       "label": "Heading size",
-      "default": 23
+      "default": 22
     },
     {
       "type": "range",
@@ -245,6 +245,8 @@
       }
     ]
   }],
-  "templates": ["404", "article", "blog", "cart", "collection", "list-collections", "index", "page", "product", "search"]
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
 }
 {% endschema %}

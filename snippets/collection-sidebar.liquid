@@ -1,3 +1,16 @@
+{% comment %}
+
+  collection-sidebar.liquid
+
+  HTML and Liquid for the collection sidebar on collection pages
+
+  Accepts:
+
+    - collection (object): The collection object
+    - section.blocks (array): An array of blocks that make up the sidebar
+
+{%  endcomment %}
+
 <a class="collection__sidebar-mobile-trigger js-collection-side-toggle" href="#">
   <svg width="20" height="20" viewBox="0 0 24 24">
     <g fill="none" fill-rule="evenodd">
@@ -5,7 +18,7 @@
       <path fill="var(--text-color)" fill-rule="nonzero" d="M6.17070571,5 C6.58254212,3.83480763 7.69378117,3 9,3 C10.3062188,3 11.4174579,3.83480763 11.8292943,5 L20,5 L20,7 L11.8292943,7 C11.4174579,8.16519237 10.3062188,9 9,9 C7.69378117,9 6.58254212,8.16519237 6.17070571,7 L4,7 L4,5 L6.17070571,5 Z M6.17070571,17 C6.58254212,15.8348076 7.69378117,15 9,15 C10.3062188,15 11.4174579,15.8348076 11.8292943,17 L20,17 L20,19 L11.8292943,19 C11.4174579,20.1651924 10.3062188,21 9,21 C7.69378117,21 6.58254212,20.1651924 6.17070571,19 L4,19 L4,17 L6.17070571,17 Z M12.1707057,11 C12.5825421,9.83480763 13.6937812,9 15,9 C16.3062188,9 17.4174579,9.83480763 17.8292943,11 L20,11 L20,13 L17.8292943,13 C17.4174579,14.1651924 16.3062188,15 15,15 C13.6937812,15 12.5825421,14.1651924 12.1707057,13 L4,13 L4,11 L12.1707057,11 Z M15,13 C15.5522847,13 16,12.5522847 16,12 C16,11.4477153 15.5522847,11 15,11 C14.4477153,11 14,11.4477153 14,12 C14,12.5522847 14.4477153,13 15,13 Z M9,19 C9.55228475,19 10,18.5522847 10,18 C10,17.4477153 9.55228475,17 9,17 C8.44771525,17 8,17.4477153 8,18 C8,18.5522847 8.44771525,19 9,19 Z M9,7 C9.55228475,7 10,6.55228475 10,6 C10,5.44771525 9.55228475,5 9,5 C8.44771525,5 8,5.44771525 8,6 C8,6.55228475 8.44771525,7 9,7 Z"/>
     </g>
   </svg>
-  <span>{{ 'sections.collection_template.filter_button' | t }}</span>
+  <span>{{ 'collections.filters.filter_button' | t }}</span>
 </a>
 <div class="collection__page-sidebar" id="sidebar">
   {% for block in section.blocks %}
@@ -13,7 +26,7 @@
 
     {% when 'menu' %}
       <div class="collection__sidebar-block" {{ block.shopify_attributes }}>
-        <h4>{{ block.settings.heading }}</h4>
+        <p class="h4">{{ block.settings.heading }}</p>
 
         {%- liquid
 
@@ -118,7 +131,11 @@
         <div class="image_container" {% if forloop.index == 1 %}style="margin-top:0;"{% endif %}>
           <a title="{{ block.settings.image.alt }}" href="{{ block.settings.link }}">
             {% if block.settings.image != blank %}
-              <img src="{{ block.settings.image | img_url: '450x' }}" alt="{{ block.settings.image.alt }}">
+              {%
+                render 'basic-responsive-image',
+                type: block.settings.image,
+                width: 1200
+              %}
             {% else %}
               {{ 'collection-1' | placeholder_svg_tag }}
             {% endif %}
@@ -126,38 +143,37 @@
         </div>
       </div>
     {% when 'side_filter' %}
+
+      {% liquid
+        assign swatch_option_names = settings.swatch_option_names | replace: ' ,', ',' | replace: ', ', ',' | split: ',' | downcase
+      %}
+
       <div class="collection__sidebar-filters" {{ block.shopify_attributes }}>
         {%- for filter in collection.filters -%}
 
           {%- assign total_active_values = total_active_values | plus: filter.active_values.size -%}
           {% case filter.type %}
-          {% when 'list' %}
+          {% when 'list', 'boolean' %}
             {%- liquid
 
+              # Set default to false since we are in a loop.
               assign is_size_filter = false
               assign is_color_filter = false
               assign filter_label_to_lowercase = filter.label | downcase
 
-              assign color_swatches = false
-              assign filter_count = false
-
-              if block.settings.show_color_swatches
-                assign color_swatches = true
+              # Figure out color filters.
+              if swatch_option_names contains filter_label_to_lowercase
+                assign is_color_filter = true
               endif
 
-              if block.settings.show_filter_count
-                assign filter_count = true
-              endif
-
-              if filter_label_to_lowercase contains "color"
-                assign is_color_filter = true
-              elsif filter_label_to_lowercase contains "colour"
-                assign is_color_filter = true
-              elsif filter_label_to_lowercase contains "size"
+              # Don't worry about size option filters for now as they do not do anything.
+              assign size_option_names = 'size,talla,taglia,taille,tamanho,grosse' | split: ','
+              if size_option_names contains filter.label
                 assign is_size_filter = true
               endif
 
-              if is_color_filter and color_swatches
+              # Determine filter type.
+              if is_color_filter
                 assign filter_type = 'color'
               elsif is_size_filter
                 assign filter_type = 'size'
@@ -165,40 +181,31 @@
                 assign filter_type = 'regular'
               endif
 
+              assign show_filter_swatches = false
+              if block.settings.show_color_swatches
+                assign show_filter_swatches = true
+              endif
+
+              if block.settings.show_filter_count
+                assign filter_count = true
+              endif
+
             -%}
             <div class="collection__sidebar-block sidebar-filter filter--{{ filter_type }}">
-              <h4>{{ filter.label | escape }}</h4>
+              <p class="h4">{{ filter.label | escape }}{% if filter.operator == 'AND' %}<small>({{ 'collections.filters.match_all' | t }})</small>{% endif %}</p>
               <ul>
-                {% for value in filter.values %}
+                {% liquid
+                  if filter.operator == 'AND'
+                    assign active_values = filter.values | where: 'active', true
+                    assign inactive_values = filter.values | where: 'active', false
+                    assign sorted_values = active_values | concat: inactive_values
+                  else
+                    assign sorted_values = filter.values
+                  endif
+                 %}
+                {% for value in sorted_values %}
 
                   {%- liquid
-
-                    for product in collection.products
-                      unless is_color_filter
-                        continue
-                      endunless
-
-                      for option in product.options_with_values
-                        assign option_name = option.name | downcase
-
-                        unless option_name contains "color" or option_name contains "colour"
-                          continue
-                        endunless
-
-                        assign variant_img_url = null
-                        assign swatch_color_name = value.label | handleize | downcase | append: '.png'
-                        assign swatch_image_url = swatch_color_name | file_url
-                        assign css_color = value.label | split: ' ' | last | downcase
-
-                        if images[swatch_color_name] != blank
-                          assign bg_img = 'background-image:url(' | append:  swatch_image_url | append: ');'
-                        else
-                          assign bg_img = ''
-                        endif
-                        assign bg_color = 'background-color:' | append:  css_color | append: ';'
-
-                      endfor
-                    endfor
 
                     if value.active
                       assign status = 'current'
@@ -210,31 +217,82 @@
                       assign status = ''
                       assign url = value.url_to_add
                     endif
+
                   -%}
 
                   <li class="{{ status }}">
-                    {% if is_color_filter and color_swatches %}
+                    {% if is_color_filter and show_filter_swatches %}
                       <a class="js-collection-side-filter {{ status }}" href="{{ url }}" title="{{ value.label }}">
                         <input type="checkbox"
                                name="{{ value.param_name }}"
                                value="{{ value.value }}"
+                               id="SB-Filter-{{ filter.label | escape }}-{{ forloop.index }}"
                                {% if value.active %}checked{% endif %}
                                {% if value.count == 0 and value.active == false %}disabled{% endif%} >
-                        <span class="color-filter color-filter--rounded color-filter--{{ status }} {{ status }}" style="{{ bg_color }}{{ bg_img }}"></span>
-                        <span class="color-filter--label">{{ value.label | escape }}
+
+                               {%- liquid
+                                  assign swatch_color_name = value.label | handleize | downcase | append: '.png'
+                                  assign swatch_image_url = swatch_color_name | file_url
+                                  assign css_color = value.label | split: ' ' | last | downcase
+
+                                  if images[swatch_color_name] != blank
+                                    assign bg_img = 'background-image:url(' | append:  swatch_image_url | append: ');'
+                                    else
+                                    assign bg_img = ''
+                                  endif
+                                  assign bg_color = 'background-color:' | append:  css_color | append: ';'
+                              -%}
+
+                               {% if show_filter_swatches %}
+                                {%- capture classes -%}
+                                    color-filter color-filter--{{ status }} {{ status }} color-filter--{{- filter.presentation }}
+                                {%- endcapture -%}
+                                {% case filter.presentation %}
+                                  {% assign classes = classes | append: ' color-filter--rounded' %}
+                                  {% when 'swatch' %}
+                                    {% if value.swatch.image %}
+                                      {{
+                                        value.swatch.image
+                                        | image_url: width: 300
+                                        | image_tag: alt: value.swatch.image.alt, class: classes
+                                      }}
+                                    {% elsif value.swatch.color %}
+                                      {% assign swatch_background = 'rgb('
+                                        | append: value.swatch.color.rgb
+                                        | append: ')'
+                                      %}
+                                      <div class="{{- classes -}}" style="background: {{ swatch_background }};"></div>
+                                    {% endif %}
+                                  {% when 'image' %}
+                                    {% if value.image %}
+                                      {{
+                                        value.image
+                                        | image_url: width: 300
+                                        | image_tag: alt: value.image.alt, class: classes, style: swatch_size_class
+                                      }}
+                                    {% endif %}
+                                  {% else %}
+                                    <span
+                                      class="color-filter color-filter--rounded color-filter--{{ status }} {{ status }} color-filter--default"
+                                      style="{{ bg_color }}{{ bg_img }}"
+                                    ></span>
+                                {% endcase %}
+                              {% endif %}
+                        <label class="color-filter--label" for="SB-Filter-{{ filter.label | escape }}-{{ forloop.index }}">{{ value.label | escape }}
                           {% if filter_count %}<span class="filter_count">({{ value.count }})</span>{% endif %}
-                        </span>
+                        </label>
                       </a>
                     {% else %}
                       <a class="js-collection-side-filter {{ status }}" data-tag="{{ url }}" href="{{ url }}">
                         <input type="checkbox"
                                name="{{ value.param_name }}"
                                value="{{ value.value }}"
+                               id="SB-Filter-{{ filter.label | escape }}-{{ forloop.index }}"
                                {% if value.active %}checked{% endif %}
                                {% if value.count == 0 and value.active == false %}disabled{% endif%} >
-                        <span class="regular-filter--label">{{ value.label | escape }}
+                        <label class="regular-filter--label" for="SB-Filter-{{ filter.label | escape }}-{{ forloop.index }}">{{ value.label | escape }}
                           {% if filter_count %}<span class="filter_count">({{ value.count }})</span>{% endif %}
-                        </span>
+                        </label>
                       </a>
                     {% endif %}
                   </li>
@@ -253,14 +311,14 @@
             -%}
 
             <div class="collection__sidebar-block sidebar-filter filter--price-range" data-collection-filters-price-range>
-              <h4>{{ filter.label | escape }}</h4>
+              <p class="h4">{{ filter.label | escape }}</p>
               <div class="filter-range__boxes js-price-range">
                 <div class="filter-range__field">
-                  <label class="filter-range__field__label visually-hidden" for="Filter-{{ filter.label | escape }}-{{ forloop.index }}">{{ 'sections.collection_template.from' | t }}</label>
+                  <label class="filter-range__field__label visually-hidden" for="SB-Filter-{{ filter.label | escape }}-{{ forloop.index }}-GTE">{{ 'collections.filters.from' | t }}</label>
                   <span class="filter-range__field__currency">{{ cart.currency.symbol }}</span>
                   <input class="filter-range__field__input js-filter-range-input js-price-min-output"
                     name="{{ filter.min_value.param_name }}"
-                    id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+                    id="SB-Filter-{{ filter.label | escape }}-{{ forloop.index }}-GTE"
                     {%- if filter.min_value.value -%}
                       {%- if uses_comma_decimals -%}
                         value="{{ filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' | round }}"
@@ -280,11 +338,11 @@
                   </input>
                 </div>
                 <div class="filter-range__field">
-                  <label class="filter-range__field__label visually-hidden" for="Filter-{{ filter.label | escape }}-{{ forloop.index }}">{{ 'sections.collection_template.to' | t }}</label>
+                  <label class="filter-range__field__label visually-hidden" for="SB-Filter-{{ filter.label | escape }}-{{ forloop.index }}-LTE">{{ 'collections.filters.to' | t }}</label>
                   <span class="filter-range__field__currency">{{ cart.currency.symbol }}</span>
                   <input class="filter-range__field__input js-filter-range-input js-price-max-output"
                     name="{{ filter.max_value.param_name }}"
-                    id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+                    id="SB-Filter-{{ filter.label | escape }}-{{ forloop.index }}-LTE"
                     {%- if filter.max_value.value -%}
                       {%- if uses_comma_decimals -%}
                         value="{{ filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' | round }}"
@@ -306,7 +364,8 @@
                 </div>
 
                 <div class="filter-range__slider--wrapper">
-                  <input class="filter-range__slider--input"
+                  <label class="filter-range__field__label visually-hidden" for="filter--slider-range_min">{{ 'collections.filters.from' | t }}</label>
+                  <input class="filter-range__slider--input" id="filter--slider-range_min"
                     {%- if filter.min_value.value -%}
                       {%- if uses_comma_decimals -%}
                         value="{{ filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' | round }}"
@@ -324,7 +383,8 @@
                     {% endif %}
                     step="1.00"
                     type="range"/>
-                  <input class="filter-range__slider--input"
+                  <label class="filter-range__field__label visually-hidden" for="filter--slider-range_max">{{ 'collections.filters.to' | t }}</label>
+                  <input class="filter-range__slider--input" id="filter--slider-range_max"
                     {%- if filter.max_value.value -%}
                       {%- if uses_comma_decimals -%}
                         value="{{ filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' | round }}"
@@ -355,7 +415,7 @@
     {% when 'side_sortby' %}
       <div class="collection__page-sort collection__sidebar-block" data-collection-sort-by {{ block.shopify_attributes }}>
         <div class="collection__horizontal-toolbar sort-by__wrapper">
-          <h4>{{ 'collections.sorting.title' | t }}</h4>
+          <p class="h4">{{ 'collections.sorting.title' | t }}</p>
           <div class="collection__filtering js-hz-filter">
             {% render 'snip-icons',
                wrapper: '.collection__filtering',
@@ -365,7 +425,8 @@
                size: '15px',
                fill: 'var(--text-color)',
                hover: 'var(--text-color)' %}
-            <input class="chosen-value js-hz-filter-input" type="text" value="" data-filter-type="sort-by" data-placeholder="{{ 'sections.collection_template.sort_by_placeholder' | t }}" data-generic-placeholder="{{ 'sections.collection_template.type_to_filter' | t }}" placeholder="{{ 'sections.collection_template.sort_by_placeholder' | t }}">
+            <label class="visuallyhidden" for="SB-Sortby">{{ 'collections.filters.sort_by_placeholder' | t }}</label>
+            <input class="chosen-value js-hz-filter-input" type="text" value="" data-filter-type="sort-by" data-placeholder="{{ 'collections.filters.sort_by_placeholder' | t }}" data-generic-placeholder="{{ 'collections.filters.type_to_filter' | t }}" placeholder="{{ 'collections.filters.sort_by_placeholder' | t }}" id="SB-Sortby">
             <ul class="value-list js-hz-filter-list">
               {% for option in collection.sort_options %}
                 {%- liquid
@@ -379,8 +440,9 @@
                 <li class="{{ status }}" data-placeholder="{{ option.name }}" data-option-value="{{ option.value }}">
                   <input type="checkbox"
                          name="sort_by"
-                         value="{{ option.value | escape }}">
-                  <span class="js-hz-filter-label">{{ option.name }}</span>
+                         value="{{ option.value | escape }}"
+                         id="SB-Sortby-{{ option.name | escape }}-{{ forloop.index }}">
+                  <label class="js-hz-filter-label" for="SB-Sortby-{{ option.name | escape }}-{{ forloop.index }}">{{ option.name }}</label>
                 </li>
               {% endfor %}
             </ul>

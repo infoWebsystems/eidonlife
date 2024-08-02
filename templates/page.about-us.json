@@ -26,9 +26,10 @@
           "type": "image",
           "settings": {
             "image": "shopify:\/\/shop_images\/ABOUT_US.jpg",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
             "caption_position": "middle_center",
             "mobile_image": "shopify:\/\/shop_images\/ABOUT_US.jpg",
-            "caption_below": false,
             "heading": "",
             "subheading": "",
             "link": "",
@@ -37,9 +38,7 @@
             "second_button_text": "Button 2 text",
             "text_color": "#000000",
             "button_color": "#ffffff",
-            "button_background": "#000000",
-            "overlay_color": "#000000",
-            "overlay_opacity": 0
+            "button_background": "#000000"
           }
         }
       },
@@ -48,13 +47,11 @@
       ],
       "disabled": true,
       "settings": {
-        "display_wide": true,
-        "section_padding": "none",
-        "enable_autoplay": false,
-        "slider_speed": 5,
         "pager": "dots",
+        "slider_speed": 5,
         "slide_heading_size": 22,
-        "subheading_size": 14
+        "subheading_size": 14,
+        "section_padding": "none"
       }
     },
     "8f84c265-37cb-4297-af40-d164abe05244": {

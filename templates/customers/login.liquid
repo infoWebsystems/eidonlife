@@ -1,5 +1,5 @@
 {% comment %} Login Template {% endcomment %}
-<section class="user-login row">
+<section class="user-login row" data-section-type="customer-login">
   <div class="{% if shop.checkout.guest_login %}desktop-12{% else %}desktop-push-4 desktop-4{% endif %}">
     <h1 class="section-heading">
       {{ 'customer.login.title' | t }}
@@ -48,7 +48,7 @@
 
             <div class="desktop-12 tablet-6 mobile-3 a-left relative">
               <input class="button btn-secondary" type="submit" value="{{ 'customer.login.sign_in' | t }}" />
-              <hr class="hr-or" data-content="or" style="margin-bottom: 30px;"></hr>
+              <hr class="hr-or" data-content="{{ 'customer.login.or' | t }}" style="margin-bottom: 30px;"></hr>
               <button class="secondary-button accounts__create-customer js-modal-open" type="button" name="button" data-wau-modal-target="create-customer">{{ 'customer.register.title' | t }}</button>
             </div>
           </div>
@@ -119,19 +119,4 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript">
-    if (window.location.hash == '#recover') { Toggle('recover-password', 'customer-login'); }
-
-    function Toggle(show, hide) {
-      var show = document.getElementById(show);
-      show.classList.remove("hide");
-      show.classList.add("show");
-      show.style.display = 'block';
-
-      var hide = document.getElementById(hide);
-      hide.classList.remove("show");
-      hide.classList.add("hide");
-      hide.style.display='none';
-    }
-  </script>
 </section>

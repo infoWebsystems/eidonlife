@@ -1,6 +1,17 @@
 {
-  "password": {
-    "general": {
+  "general": {
+    "customer": {
+      "my_account": "KONTO",
+      "log_out": "AUSLOGGEN",
+      "log_in": "EINLOGGEN",
+      "create_account": "REGISTRIEREN"
+    },
+    "mobile_nav": {
+      "account": "Konto",
+      "login": "Einloggen \/ Konto erstellen",
+      "logout": "Ausloggen"
+    },
+    "password_page": {
       "thanks": "Danke, dass Sie unsere Liste abonniert haben",
       "enter_store": "Mit Passwort in den Laden:",
       "password": "Passwort",
@@ -8,17 +19,23 @@
       "email_address": "E-Mail-Adresse",
       "submit": "Einreichen",
       "powered": "Dieser Laden wird betrieben von"
-    }
-  },
-  "general": {
+    },
+    "age_verification": {
+      "age_title": "Bist du mindestens {{ age }}?",
+      "age_description": "Sie müssen volljährig sein, um fortfahren zu können.",
+      "age_terms": "Erfahren Sie mehr über unsere Nutzungsbedingungen.",
+      "age_enter": "Ja — Site eingeben"
+    },
     "404": {
       "title": "Hoppla – das konnten wir nicht finden",
       "subtext": "Diese Seite existiert nicht. Versuchen Sie, nach dem zu suchen, was Sie gerne finden möchten:",
       "contact": "Uns kontaktieren"
     },
     "pagination": {
-      "showing_items": "Artikel anzeigen",
-      "of": "von"
+      "showing_items": "Elemente anzeigen",
+      "of": "von",
+      "prev": "vorherige",
+      "next": "nächste"
     },
     "forms": {
       "post_error": "Es tut uns leid, es sieht so aus, als wären nicht alle Felder eingefüllt worden:"
@@ -30,13 +47,6 @@
       "newsletter_title": "Sich für E-Mail-Updates registrieren",
       "newsletter_email": "E-Mail-Adresse eingeben",
       "submit": "Werden Sie Mitglied"
-    },
-    "search": {
-      "no_results_html": "Ihre Suche nach \"{{ terms }}\" ergab keine Ergebnisse.",
-      "results_for_html": "Ihre Suche nach \"{{ terms }}\" ergab Folgendes",
-      "title": "Unseren Laden durchsuchen",
-      "placeholder": "Suchen",
-      "submit": "Suchen"
     },
     "social": {
       "icons": {
@@ -55,62 +65,14 @@
     },
     "language": {
       "dropdown_label": "Sprache"
+    },
+    "onboarding": {
+      "no_content": "Dieser Abschnitt enthält derzeit keine Inhalte. Fügen Sie diesem Abschnitt über die Seitenleiste Inhalte Hinzu."
     }
   },
   "accessibility": {
-    "total_reviews": "Bewertungen insgesamt",
-    "star_reviews_info": "{{ rating_value }} von {{ rating_max }} Sternen"
-  },
-  "sections": {
-    "predictive_search": {
-      "products": "Produkte",
-      "collections": "Kollektionen",
-      "articles": "Artikel",
-      "pages": "Seiten",
-      "search_for": "Nach “{{ terms }}” suchen",
-      "vendor": "Anbieter"
-    },
-    "map": {
-      "get_directions": "Anweisungen bekommen",
-      "address_error": "Fehler beim Nachschlagen dieser Adresse",
-      "address_no_results": "Keine Ergebnisse für diese Adresse",
-      "address_query_limit": "Sie haben das Nutzungslimit für die Google API überschritten. Erwägen Sie ein Upgrade auf einen Premium-Plan (https:\/\/developers.google.com\/maps\/premium\/usage-limits).",
-      "auth_error": "Beim Authentifizieren Ihres Google Maps-Kontos ist ein Problem aufgetreten. Erstellen und aktivieren Sie die JavaScript-API (https:\/\/developers.google.com\/maps\/documentation\/javascript\/get-api-key) and Geocoding API (https:\/\/developers.google.com\/maps\/documentation\/geocoding\/get-api-key) permissions of your app."
-    },
-    "featured_collection": {
-      "view_all": "Alle ansehen"
-    },
-    "collection_template": {
-      "clear_all": "Alles löschen",
-      "from": "Von",
-      "filter_and_sort": "Filtern und sortieren",
-      "filter_by_label": "Filtern nach",
-      "filter_button": "Filter",
-      "filters_selected": "{{ count }} ausgewählt",
-      "max_price": "Der höchste Preis ist {{ price }}",
-      "reset": "Zurücksetzen",
-      "sort_by_placeholder": "Relevanz",
-      "to": "To",
-      "use_fewer_filters_html": "Verwenden Sie weniger Filter oder <a class=\"{{ class }}\" href=\"{{ link }}\">löschen Sie alle<\/a>",
-      "type_to_filter": "Zum Filtern eingeben"
-    },
-    "search_template": {
-      "clear_all": "Alles löschen",
-      "from": "Von",
-      "filter_and_sort": "Filtern und sortieren",
-      "filter_by_label": "{{ count }} Ergebnisse für \"{{ terms }}\" filtern nach",
-      "filter_button": "Filter",
-      "filters_selected": "{{ count }} ausgewählt",
-      "max_price": "Der höchste Preis ist {{ price }}",
-      "reset": "Zurücksetzen",
-      "sort_by_placeholder": "Relevanz",
-      "to": "To",
-      "use_fewer_filters_html": "Verwenden Sie weniger Filter oder <a class=\"{{ class }}\" href=\"{{ link }}\">löschen Sie alle<\/a>",
-      "type_to_filter": "Zum Filtern eingeben",
-      "products": "Produkte",
-      "articles": "Artikel",
-      "pages": "Seiten"
-    }
+    "scroll_to_top": "Nach oben scrollen",
+    "skip_to_text": "Direkt zum Inhalt"
   },
   "blogs": {
     "article": {
@@ -122,6 +84,10 @@
       "more_posts": "Mehr Posts",
       "older_post": "Vorherige Post",
       "newer_post": "Nächste Post"
+    },
+    "onboarding": {
+      "title": "Artikelüberschrift",
+      "description": "Eine kurze Beschreibung des Inhalts Ihres Blog-Artikels."
     },
     "comments": {
       "title": "Ein Kommentar hinterlassen",
@@ -144,20 +110,9 @@
       "facebook_title": "Liken Sie uns auf Facebook"
     }
   },
-  "store_availability": {
-    "general": {
-      "view_store_info": "Ladeninformationen anzeigen",
-      "check_other_stores": "Überprüfen Sie die Verfügbarkeit in anderen Geschäften",
-      "pick_up_available": "Abholung möglich",
-      "pick_up_currently_unavailable": "Abholung derzeit nicht verfügbar",
-      "pick_up_available_at_html": "Abholung möglich bei <strong>{{ location_name }}<\/strong>",
-      "pick_up_unavailable_at_html": "Abholung derzeit nicht verfügbar bei <strong>{{ location_name }}<\/strong>"
-    }
-  },
   "cart": {
     "general": {
       "title": "Mein Einkaufswagen",
-      "close_cart": "Schließen",
       "shipping_at_checkout": "Versandkosten werden an der Kasse berechnet",
       "empty": "Ihr Einkaufswagen ist momentan leer.",
       "product": "Produkt",
@@ -180,6 +135,7 @@
       "free_shipping_exclusions": "(Außer international)",
       "items": "Artikel",
       "cart_error": "Warenkorbfehler",
+      "form_error": "Formularfehler",
       "update_qty_error": "Einige Artikel waren nicht mehr verfügbar. Aktualisieren Sie die Menge und versuchen Sie es erneut.",
       "tax": "MwSt",
       "shipping": "Versand",
@@ -196,39 +152,87 @@
       "calc_calculating": "Berechnen...",
       "go_shopping": "Einkaufen gehen",
       "in_shopping_cart": "in Ihrem Warenkorb",
-      "view_cart": "Warenkorb ansehen"
+      "view_cart": "Warenkorb ansehen",
+      "input_label": "Anzahl von {{ product }}",
+      "increase": "Erhöhe die Menge für {{ product }}",
+      "decrease": "Verringere die Menge für {{ product }}",
+      "featured_items": "Ausgewählte Artikel",
+      "gift_wrap": "Geschenkverpackung (kostenlos)"
     }
   },
-  "collections": {
-    "general": {
-      "all_collections": "Kollektionen",
-      "clear_all_tags": "Entfernen Sie alle Filter",
-      "no_matches": "Kein Artikel in dieser Kollektion",
-      "items": "Artikel"
-    },
-    "sorting": {
-      "title": "Sortieren nach",
-      "featured": "Vorgestellt",
-      "best_selling": "Am meisten verkauft",
-      "az": "Alphabetisch, A-Z",
-      "za": "Alphabetisch, Z-A",
-      "price_ascending": "Preis, von tief nach hoch",
-      "price_descending": "Preis, von hoch nach tief",
-      "date_descending": "Datum, von neu nach alt",
-      "date_ascending": "Datum, von alt nach neu"
-    },
-    "filter": {
-      "all": "Alle"
-    }
-  },
-  "contact": {
-    "form": {
+  "sections": {
+    "contact_form": {
       "name": "Name",
       "email": "E-mail",
       "phone": "Telefonnummer",
       "message": "Nachricht",
       "send": "Senden",
       "post_success": "Vielen Dank, dass Sie uns kontaktiert haben. Wir werden uns sobald wie möglich bei Ihnen melden."
+    },
+    "tabbed_collections": {
+      "collection": "Sammlung {{ index }}"
+    },
+    "search_and_filter": {
+      "select": "Suchen...",
+      "results_count": {
+        "one": "{{ count }} Artikel durchsuchen",
+        "other": "Durchsuchen Sie {{ count }} Artikel"
+      }
+    },
+    "countdown": {
+      "days": "Tage",
+      "hours": "Stunden",
+      "mins": "Minuten",
+      "secs": "Sekunden"
+    },
+    "search": {
+      "no_results_html": "Ihre Suche nach \"{{ terms }}\" ergab keine Ergebnisse.",
+      "results_for_html": "Ihre Suche nach \"{{ terms }}\" ergab Folgendes",
+      "title": "Unseren Laden durchsuchen",
+      "placeholder": "Suchen",
+      "products": "Produkte",
+      "collections": "Kollektionen",
+      "articles": "Artikel",
+      "pages": "Seiten",
+      "search_for": "Nach “{{ terms }}” suchen",
+      "clear_all": "Alles löschen",
+      "filter_by_label": "{{ count }} Ergebnisse für \"{{ terms }}\" filtern nach",
+      "filter_button": "Filter",
+      "filters_selected": "{{ count }} ausgewählt",
+      "use_fewer_filters_html": "Verwenden Sie weniger Filter oder <a class=\"{{ class }}\" href=\"{{ link }}\">löschen Sie alle<\/a>",
+      "type_to_filter": "Zum Filtern eingeben",
+      "suggestions": "Vorschläge"
+    },
+    "map": {
+      "get_directions": "Anweisungen bekommen",
+      "address_error": "Fehler beim Nachschlagen dieser Adresse",
+      "address_no_results": "Keine Ergebnisse für diese Adresse",
+      "address_query_limit": "Sie haben das Nutzungslimit für die Google API überschritten. Erwägen Sie ein Upgrade auf einen Premium-Plan (https:\/\/developers.google.com\/maps\/premium\/usage-limits).",
+      "auth_error": "Beim Authentifizieren Ihres Google Maps-Kontos ist ein Problem aufgetreten. Erstellen und aktivieren Sie die JavaScript-API (https:\/\/developers.google.com\/maps\/documentation\/javascript\/get-api-key) and Geocoding API (https:\/\/developers.google.com\/maps\/documentation\/geocoding\/get-api-key) permissions of your app."
+    },
+    "featured_collection": {
+      "view_all": "Alle ansehen"
+    }
+  },
+  "collections": {
+    "general": {
+      "all_collections": "Kollektionen",
+      "items": "Artikel"
+    },
+    "filters": {
+      "clear_all": "Alles löschen",
+      "from": "Ab",
+      "filter_by_label": "Filtern nach",
+      "filter_button": "Filter",
+      "filters_selected": "{{ count }} ausgewählt",
+      "sort_by_placeholder": "Relevanz",
+      "to": "To",
+      "use_fewer_filters_html": "Verwenden Sie weniger Filter oder <a class=\"{{ class }}\" href=\"{{ link }}\">löschen Sie alle<\/a>",
+      "type_to_filter": "Zum Filtern eingeben",
+      "match_all": "Allen entsprechen"
+    },
+    "sorting": {
+      "title": "Sortieren nach"
     }
   },
   "customer": {
@@ -237,8 +241,7 @@
       "link": "Zurück zum Konto",
       "returns_content": "Rückgabe \/ Umtausch",
       "details": "Kontodetails",
-      "view_addresses": "Adressen ansehen",
-      "return": "Zu den Kontodetails zurückkehren"
+      "view_addresses": "Adressen ansehen"
     },
     "activate_account": {
       "title": "Konto aktivieren",
@@ -278,7 +281,8 @@
       "sign_in": "Anmelden",
       "cancel": "Zum Laden zurückkehren",
       "guest_title": "Weiter als Gast",
-      "guest_continue": "Weiter"
+      "guest_continue": "Weiter",
+      "or": "oder"
     },
     "orders": {
       "title": "Bestellverlauf",
@@ -336,42 +340,30 @@
       "submit": "Erstellen"
     }
   },
-  "layout": {
-    "cart": {
-      "my_cart": "MEIN EINKAUFSWAGEN"
-    },
-    "customer": {
-      "my_account": "KONTO",
-      "log_out": "AUSLOGGEN",
-      "log_in": "EINLOGGEN",
-      "create_account": "REGISTRIEREN"
-    },
-    "homepage": {
-      "onboarding": {
-        "no_content": "Dieser Abschnitt enthält derzeit keine Inhalte. Fügen Sie diesem Abschnitt über die Seitenleiste Inhalte Hinzu."
-      }
-    },
-    "mobile_nav": {
-      "account": "Konto",
-      "login": "Einloggen \/ Konto erstellen",
-      "logout": "Ausloggen"
-    }
-  },
   "products": {
     "general": {
       "new": "NEU",
       "sale": "RABATT",
       "sold": "AUSVERKAUFT",
       "quick_view": "SCHNELLANSICHT",
-      "from": "Von",
+      "from": "Ab",
       "view_full": "Alle Details ansehen",
-      "related": "Mehr in dieser Kollektion",
       "sale_price": "Angebotspreis",
       "regular_price": "Regulärer Preis",
       "savings": "Du sparst {{ savings }}"
     },
+    "onboarding": {
+      "sample_product": "Beispielprodukt {{ index }}",
+      "product_vendor": "Ausgewählter Produktanbieter",
+      "product_title": "Ausgewählter Produkttitel",
+      "product_description": "Eine Beispielproduktbeschreibung für ein vorgestelltes Produkt.",
+      "vendor": "VERKÄUFER",
+      "title": "Produktname"
+    },
     "product": {
       "select_option": "Wähle eine Option",
+      "more_available": "Mehr {{ product_options }} verfügbar",
+      "features": "Hauptmerkmale",
       "required": "Erforderlich",
       "details": "Detail",
       "sold_out": "Ausverkauft",
@@ -392,7 +384,6 @@
       "view_cart": "Einkaufswagen Cart",
       "or": "oder",
       "continue": "Weiter einkaufen",
-      "popup_question": "Stellen Sie uns eine Frage",
       "add_to_cart_success_link": "Einkaufswagen ansehen und zur Kasse gehen!",
       "add_to_cart_success_html": "Artikel hinzugefügt {{ link }}",
       "unit_price_label": "Stückpreis",
@@ -401,7 +392,18 @@
       "only_left": {
         "one": "Nur noch {{ count }} übrig!",
         "other": "Nur noch {{ count }} übrig!"
-      }
+      },
+      "input_label": "Anzahl von {{ product }}",
+      "increase": "Erhöhe die Menge für {{ product }}",
+      "decrease": "Verringere die Menge für {{ product }}"
+    },
+    "product_pickup_availability": {
+      "view_store_info": "Ladeninformationen anzeigen",
+      "check_other_stores": "Überprüfen Sie die Verfügbarkeit in anderen Geschäften",
+      "pick_up_available": "Abholung möglich",
+      "pick_up_currently_unavailable": "Abholung derzeit nicht verfügbar",
+      "pick_up_available_at_html": "Abholung möglich bei <strong>{{ location_name }}<\/strong>",
+      "pick_up_unavailable_at_html": "Abholung derzeit nicht verfügbar bei <strong>{{ location_name }}<\/strong>"
     }
   },
   "gift_cards": {
@@ -415,6 +417,20 @@
       "shop_link": "Mit dem Einkaufen anfangen",
       "print": "Drucken",
       "email": "E-Mail"
+    }
+  },
+  "recipient": {
+    "form": {
+      "checkbox": "Ich möchte dies als Geschenk senden",
+      "email_label": "Empfänger E-Mail",
+      "email_label_optional": "E-Mail-Adresse des Empfängers (optional)",
+      "email": "E-Mail",
+      "name_label": "Name des Empfängers (optional)",
+      "name": "Name",
+      "message_label": "Nachricht (optional)",
+      "message": "Nachricht",
+      "max_characters": "Maximal {{ max_chars }} Zeichen",
+      "send_on_label": "senden am"
     }
   },
   "date_formats": {

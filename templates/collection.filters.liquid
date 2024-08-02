@@ -1,0 +1,14 @@
+{% layout none %}
+{% comment %}
+templates/collection.filters.liquid
+
+Loop filters for a given collection.
+{% endcomment %}
+<input type="button" class="button mb0 js-submit" style="width: 100%;" value="{{ 'sections.search_and_filter.results_count' | t: count: collection.products_count }}">
+{% for filter in collection.filters %}
+  {% for filter_value in filter.values %}
+    {% if filter_value.count > 0 %}
+      <option class="item selected" data-id="{{ forloop.index }}" data-group="{{ filter.label }}" value="{{filter_value.param_name }}={{ filter_value.value }}">{{ filter_value.label }}</option>
+    {% endif %}
+  {% endfor %}
+{% endfor %}

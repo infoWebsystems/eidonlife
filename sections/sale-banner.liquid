@@ -230,24 +230,10 @@
           "default": 40
         },
         {
-          "type": "select",
-          "id": "text_alignment",
-          "label": "Text alignment",
-          "options": [
-            {
-              "value": "left",
-              "label": "Left"
-            },
-            {
-              "value": "center",
-              "label": "Center"
-            },
-            {
-              "value": "right",
-              "label": "Right"
-            }
-          ],
-          "default": "center"
+           "type": "text_alignment",
+           "id": "text_alignment",
+           "label": "Text alignment",
+           "default": "center"
         }
       ]
     }
@@ -297,6 +283,8 @@
       }
     ]
   }],
-  "templates": ["404", "article", "blog", "cart", "collection", "list-collections", "page", "product", "search", "index", "customers/account"]
+  "disabled_on": {
+    "groups": ["header"]
+  }
 }
 {% endschema %}

@@ -28,7 +28,7 @@
   data-section-id="{{ section.id }}"
   data-aos="fade">
 
-  <div class="index-blog row grid__wrapper">
+  <div class="index-blog row grid__wrapper gr0">
     {% if section.settings.heading != blank %}
       <div class="span-12 auto">
         <h2 class="section-heading mb0">
@@ -41,7 +41,11 @@
         {% render 'onboard-blog', post_limit: post_limit, grid: grid %}
       {% else %}
         {% for article in blog.articles limit: post_limit %}
-          <div class="article-index {{ grid }} sm-span-12 auto" id="article-{{ article.id }}" data-alpha="{{ article.title }}">
+          <div class="article-index {{ grid }} sm-span-12 auto" 
+            id="article-{{ article.id }}" 
+            data-alpha="{{ article.title }}"
+            data-aos="fade"
+            data-aos-delay="{{ forloop.index | times: 100 }}">
             <div class="article-info">
               <div class="article-info-inner">
                 <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
@@ -52,10 +56,21 @@
                 {% if article.image %}
                   <div class="article-image">
                     <a href="{{ article.url }}">
-                      {% render 'basic-responsive-image', type: article.image, data_widths: '[180, 360, 540, 720, 900, 1080]' %}
-                      <noscript>
-                        <img src="{{ article.image | img_url: '1024x' }}" alt="{{ article.image.alt }}">
-                      </noscript>
+                      {% liquid
+                        assign loading = 'lazy'
+                        assign fetch_priority = 'auto'
+                        if section.index == 1
+                          assign loading = 'eager'
+                          assign fetch_priority = 'high'
+                        endif
+                       %}
+                      {%
+                        render 'basic-responsive-image',
+                        type: article.image,
+                        width: 1024,
+                        loading: loading,
+                        fetchpriority: fetch_priority
+                      %}
                     </a>
                   </div>
                 {% endif %}
@@ -216,6 +231,8 @@
       "post_limit": 2
     }
   }],
-  "templates": ["404", "article", "blog", "cart", "collection", "list-collections", "index", "page", "product", "search"]
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
 }
 {% endschema %}

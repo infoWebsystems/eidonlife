@@ -7,14 +7,38 @@
         "section_padding": "none"
       }
     },
-    "product-grid": {
-      "type": "collection-template-boost-pfs-filter",
+    "main": {
+      "type": "main-collection",
+      "blocks": {
+        "bef67807-6de8-4afa-b1fe-bc0a46351382": {
+          "type": "side_sortby",
+          "settings": {
+          }
+        },
+        "cea9f996-51a8-4b3a-8837-6975c0590a9c": {
+          "type": "side_filter",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "bef67807-6de8-4afa-b1fe-bc0a46351382",
+        "cea9f996-51a8-4b3a-8837-6975c0590a9c"
+      ],
+      "settings": {
+        "rows": 4,
+        "grid": 3
+      }
+    },
+    "banner": {
+      "type": "main-collection-banner",
       "settings": {
       }
     }
   },
   "order": [
+    "banner",
     "253f6172-45d5-4410-b7b6-17129f50de5a",
-    "product-grid"
+    "main"
   ]
 }

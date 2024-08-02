@@ -2,8 +2,8 @@
 Open graph tags.
 {% endcomment %}
 {%- if page_image -%}
-  <meta property="og:image" content="http:{{ page_image | img_url: 'master' }}">
-  <meta property="og:image:secure_url" content="https:{{ page_image | img_url: 'master' }}">
+  <meta property="og:image" content="http:{{ page_image | image_url: width: 1024 }}">
+  <meta property="og:image:secure_url" content="https:{{ page_image | image_url: width: 1024 }}">
   <meta property="og:image:width" content="{{ page_image.width }}">
   <meta property="og:image:height" content="{{ page_image.height }}">
 {%- elsif template == 'index' -%}
@@ -17,8 +17,8 @@ Open graph tags.
   <meta property="og:url" content="{{ canonical_url }}">
   <meta property="og:description" content="{{ product.description | strip_html | escape }}">
   {% for image in product.images limit:3 %}
-    <meta property="og:image" content="http:{{ image.src | img_url: 'grande' }}">
-    <meta property="og:image:secure_url" content="https:{{ image.src | img_url: 'grande' }}">
+    <meta property="og:image" content="http:{{ image.src | image_url: width: 1024 }}">
+    <meta property="og:image:secure_url" content="https:{{ image.src | image_url: width: 1024 }}">
   {% endfor %}
   <meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html | escape }}">
   <meta property="og:price:currency" content="{{ cart.currency.iso_code }}">
@@ -28,8 +28,8 @@ Open graph tags.
   <meta property="og:url" content="{{ canonical_url }}">
   <meta property="og:description" content="{{ article.excerpt_or_content | strip_html | escape }}">
   {% if article.image %}
-  <meta property="og:image" content="http:{{ article | img_url: '1024x1024' }}">
-  <meta property="og:image:secure_url" content="https:{{ article | img_url: '1024x1024' }}">
+  <meta property="og:image" content="http:{{ article | image_url: width: 1024 }}">
+  <meta property="og:image:secure_url" content="https:{{ article | image_url: width: 1024 }}">
   {% endif %}
 {% elsif template == 'password' %}
   <meta property="og:type" content="website">
@@ -74,13 +74,13 @@ This snippet renders meta data needed to create a Twitter card.
 {% elsif template contains 'product' %}
   <meta name="twitter:title" content="{{ product.title | strip_html | escape }}">
   <meta name="twitter:description" content="{{ product.description | strip_html | truncate: 200, '' | escape }}">
-  <meta name="twitter:image" content="https:{{ product | img_url: 'large' }}">
+  <meta name="twitter:image" content="https:{{ product | image_url: width: 1024 }}">
   <meta name="twitter:image:width" content="480">
   <meta name="twitter:image:height" content="480">
 {% elsif template contains 'article' %}
   <meta name="twitter:title" content="{{ article.title | strip_html | escape }}">
   <meta name="twitter:description" content="{{ article.excerpt_or_content | strip_html | truncate: 200, '' | escape }}">
   {% if article.image %}
-  <meta property="twitter:image" content="https:{{ article | img_url: '1024x1024' }}">
+  <meta property="twitter:image" content="https:{{ article | image_url: width: 1024 }}">
   {% endif %}
 {% endif %}

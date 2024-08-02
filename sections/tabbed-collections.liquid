@@ -13,9 +13,9 @@
 
 <section class="global__section tabbed-collections {{ section_padding }}"
   data-section-id="{{ section.id }}"
-  data-section-type="featured-collections"
+  data-section-type="tabbed-collections"
   data-aos="fade">
-  <div class="row grid__wrapper">
+  <div class="row grid__wrapper gr0">
     {% if section.settings.heading != blank %}
     <div class="span-12 auto">
       <h2 class="section-heading mb0">{{ section.settings.heading | escape }}</h2>
@@ -25,7 +25,7 @@
       {% render 'no-blocks' %}
     {% else %}
       <div class="tabbed__collections-{{ section.id }} span-12 auto js-tabbed-collection-container">
-        {% if section.blocks.size > 1 %}
+        {% if section.blocks.size > 0 %}
         <ul class="tabbed__collection-tabs" id="tabbed-collections-{{ section.id }}">
           {% for block in section.blocks %}
             {%- assign collection = collections[block.settings.collection] -%}
@@ -34,7 +34,7 @@
             {% else %}
               <li{{ block.shopify_attributes }} data-tab-index="{{ forloop.index0 }}">
                 <a class="js-tab-trigger" data-content="{{ block.id }}-tab-{{ forloop.index }}" href="#{{ block.id }}-tab-{{ forloop.index }}">
-                  Collection {{ forloop.index }}
+                  {{ 'sections.tabbed_collections.collection' | t: index: forloop.index }}
                 </a>
               </li>
             {% endif %}
@@ -69,14 +69,27 @@
             -%}
             <div class="featured__collection-carousel flickity__section product-loop {% if is_carousel %}js-carousel{% endif %}"
             {% if is_carousel %}
-              data-flickity='{{ slideshow_config }}'
+              data-flickity-config='{{ slideshow_config }}'
             {% endif %}>
               {% if collection == blank %}
                 {% render 'onboard-product', prod_limit: prod_limit, grid: grid %}
               {% else %}
                 {% for product in collection.products limit: prod_limit %}
-                  <div id="product-listing-{{ product.id }}" class="featured__collection-product product-index" data-product-id="{{ product.id }}" data-alpha="{{ product.title }}" data-price="{{ product.price }}">
-                    {% render 'product-listing', product: product, collection: collection %}
+                  {% liquid
+
+                    assign loading = 'lazy'
+                    assign fetch_priority = 'auto'
+
+                    if section.index == 1
+                      if forloop.parentloop.index == 1 and forloop.index <= grid
+                        assign loading = 'eager'
+                        assign fetch_priority = 'high'
+                      endif
+                    endif
+
+                   %}
+                  <div id="product-listing-{{ product.id }}" class="featured__collection-product product-index js-product-listing" data-product-id="{{ product.id }}" data-alpha="{{ product.title }}" data-price="{{ product.price }}">
+                    {% render 'product-listing', product: product, collection: collection, loading: loading, fetchpriority: fetch_priority %}
                   </div>
                 {% endfor %}
               {% endif %}
@@ -122,6 +135,30 @@
       "id": "heading",
       "label": "Heading",
       "default": "Tabbed collections"
+    },
+    {
+      "type": "select",
+      "id": "section_padding",
+      "label": "Section spacing",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "both",
+          "label": "Both"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "bottom"
     }
   ],
   "blocks": [{
@@ -149,30 +186,6 @@
         "step": 1,
         "label": "Products shown",
         "default": 12
-      },
-      {
-        "type": "select",
-        "id": "section_padding",
-        "label": "Section spacing",
-        "options": [
-          {
-            "value": "top",
-            "label": "Top"
-          },
-          {
-            "value": "bottom",
-            "label": "Bottom"
-          },
-          {
-            "value": "both",
-            "label": "Both"
-          },
-          {
-            "value": "none",
-            "label": "None"
-          }
-        ],
-        "default": "bottom"
       }
     ]
   }],
@@ -187,6 +200,8 @@
       }
     ]
   }],
-  "templates": ["404", "article", "blog", "cart", "collection", "list-collections", "index", "page", "product", "search"]
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
 }
 {% endschema %}

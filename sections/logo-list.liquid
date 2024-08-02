@@ -28,13 +28,26 @@
 
     <div class="row grid__wrapper logo__list-wrapper section-{{ section.id }}">
       {% for block in section.blocks %}
-        <div class="logo__list-image">
+        <div class="logo__list-image"
+          data-aos="fade"
+          data-aos-delay="{{ forloop.index | times: 100 }}">
           {% if block.settings.link != blank %}<a href="{{ block.settings.link }}">{% endif %}
           {% if block.settings.image != blank %}
-            {% render 'basic-responsive-image', type: block.settings.image, data_widths: '[180, 360, 540, 720, 900]' %}
-            <noscript>
-              <img src="{{ block.settings.image | img_url: '800x' }}" alt="{{ block.settings.image.alt }}">
-            </noscript>
+            {% liquid
+              assign loading = 'lazy'
+              assign fetch_priority = 'auto'
+              if section.index == 1
+                assign loading = 'eager'
+                assign fetch_priority = 'high'
+              endif
+             %}
+            {%
+              render 'basic-responsive-image',
+              type: block.settings.image,
+              width: 800,
+              loading: loading,
+              fetchpriority: fetch_priority
+            %}
           {% else %}
             <div class="onboard">
               {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -142,6 +155,8 @@
       }
     ]
   }],
-  "templates": ["404", "article", "blog", "cart", "collection", "list-collections", "index", "page", "product", "search"]
+  "disabled_on": {
+    "groups": ["header"]
+  }
 }
 {% endschema %}

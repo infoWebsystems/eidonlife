@@ -1,0 +1,103 @@
+{% comment %}
+snippets/complementary-product.liquid
+
+Renders a complementary product block on product and featured product sections.
+
+Accepts:
+
+- block: {Object} Section block.
+- section: {Object} Section.
+- product: {Object} Product.
+
+Usage:
+
+{%
+  render 'complementary-product',
+  block: block,
+  section: section,
+  product: product
+%}
+{% endcomment %}
+
+{% liquid
+
+  assign limit = block.settings.limit | plus: 0
+  assign no_carousel = false
+
+  if  block.settings.appearance == 'full' and limit <= 2
+    assign no_carousel = true
+  endif
+
+%}
+
+{% unless no_carousel %}
+  {% capture slideshow_config %}{
+  "wrapAround": true,
+  "freeScroll": false,
+  "dragThreshold":"15",
+  "draggable": true,
+  "cellAlign": "left",
+  "pauseAutoPlayOnHover": false,
+  "prevNextButtons": true,
+  "pageDots": false
+  }{% endcapture %}
+{% endunless %}
+
+<div class="complementary__products complementary__products--{{ block.id }} product__section-content__block product__section--element{% if block.settings.appearance == 'simple' %} layout--simple{% endif %}" {{ block.shopify_attributes }}>
+{%- if recommendations.performed -%}
+  <wau-complementary-products>
+  <div class="js-complementary-products"
+    data-base-url="{{ routes.product_recommendations_url }}"
+    data-product-id="{{ product.id }}"
+    data-section-id="{{ section.id }}"
+    data-intent="complementary"
+    data-limit="{{ limit }}"
+    >
+    {%- if recommendations.performed and recommendations.products_count > 0 -%}
+      {% if block.settings.heading != blank %}
+        <h4 class="span-12 auto">{{ block.settings.heading }}</h4>
+      {% endif %}
+
+      <div class="complementary__product--loop{% if no_carousel %} no--carousel{% else %} flickity__section js-carousel{% endif %}"{% unless no_carousel %} data-flickity-config='{{ slideshow_config }}'{% endunless%} data-count="{{ recommendations.products_count | plus: 0 }}">
+
+      {%- for product in recommendations.products limit: limit -%}
+        <div class="product-index js-product-listing"
+          data-product-id="{{ product.id }}"
+          data-alpha="{{ product.title }}"
+          data-price="{{ product.price }}">
+          {% if block.settings.appearance == 'simple' %}
+            {%
+              render 'complementary-product-listing',
+              product: product,
+              section: section,
+              block: block
+            %}
+          {% else %}
+            {%
+              render 'product-listing',
+              product: product,
+              section: section,
+              block: block
+            %}
+          {% endif %}
+        </div>
+      {%- endfor -%}
+
+      </div><!-- /.js-carousel -->
+
+    {%- endif -%}
+  </div>
+  </wau-complementary-products>
+{%- else  -%}
+  <wau-complementary-products>
+  <div class="js-complementary-products"
+  data-base-url="{{ routes.product_recommendations_url }}"
+  data-product-id="{{ product.id }}"
+  data-section-id="{{ section.id }}"
+  data-intent="complementary"
+  data-limit="{{ limit }}"
+  >
+  </div>
+  </wau-complementary-products>
+{%- endif -%}
+</div>

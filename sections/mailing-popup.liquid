@@ -1,8 +1,59 @@
+{% liquid
+
+  assign has_image = false
+  if section.settings.email_image != blank
+    assign has_image = true
+  endif
+
+case section.settings.popup_image
+  when 'background'
+    assign style = 'background'
+  when 'content'
+    assign style = 'image_top'
+  when 'left_image'
+    assign style = 'left_image'
+  else
+    assign style = 'simple'
+    assign has_image = false
+endcase
+
+%}
+
+{% style %}
+#shopify-section-{{ section.id }} {
+  --background: {{ section.settings.popup_background_color }};
+  --text-color: {{ section.settings.popup_text_color }};
+  --h3-size: {{ section.settings.popup_h3_size | append: 'px' }};
+  --font-size: {{ section.settings.popup_subheading_size | append: 'px' }};
+}
+{% if style == 'background' %}
+  .newsletter__popup-contentWrapper {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+  }
+  {% if has_image %}
+    .newsletter__popup-content.style--background {
+      height: 600px;
+      background: url({{ section.settings.email_image | image_url: width: 1200 }});
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+  {% endif %}
+{% endif %}
+{% endstyle %}
+
 <section data-section-id="{{ section.id }}" data-section-type="mailing-popup">
   <div class="js-popup-overlay newsletter__popup-overlay"></div>
-  <div class="js-popup newsletter__popup-container"
-       style="display:none"
-       data-popup-enabled={{ section.settings.popup | json }}
+  <div class="js-popup newsletter__popup-container{% if style == 'simple' %} is--simple{% endif %}"
+        style="display:none"
+        data-popup-enabled={{ section.settings.popup | json }}
        data-popup-delay={{ section.settings.popup_delay | json }} data-popup-frequency={{ section.settings.popup_frequency | json }} >
     <a class="js-popup-close newsletter__popup-container-close" href="">
       {% render 'snip-icons',
@@ -14,9 +65,22 @@
          fill: section.settings.popup_text_color,
          hover: section.settings.popup_text_color %}
     </a>
-    <div id="newsletter__popup-content">
-      {% if section.settings.email_image != blank and section.settings.popup_image == 'content' %}
-        <div class="newsletter__popup-image"></div>
+
+    <div class="newsletter__popup-content style--{{ style }}">
+      {% if has_image %}
+        {% if style == 'image_top' or style == 'left_image' %}
+          <div class="newsletter__popup-image">
+            {% render 'basic-responsive-image',
+              type:  section.settings.email_image,
+              width: 800,
+              sm_render: sm_render,
+              md_render: md_render,
+              lg_render: lg_render,
+              loading: loading,
+              fetchpriority: high
+            %}
+          </div>
+        {% endif %}
       {% endif %}
       <div class="newsletter__popup-contentWrapper">
         <div class="newsletter__popup-text">
@@ -30,7 +94,8 @@
         <div class="newsletter__popup-form">
           {% form 'customer' %}
             <input type="hidden" name="contact[tags]" value="prospect, newsletter">
-            <input type="email" name="contact[email]" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}">
+            <label class="visuallyhidden" for="newsletter__popup-form--email">{{ 'general.newsletter_form.newsletter_email' | t }}</label>
+            <input type="email" name="contact[email]" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" id="newsletter__popup-form--email">
             <input type="submit" value="{{ section.settings.mail_button_text }}">
             {% if section.settings.mail_gdpr_text %}
               <p class="gdpr-text before-signup"><em>{{ section.settings.mail_gdpr_text }}</em></p>
@@ -40,74 +105,14 @@
       </div>
       <div class="clear"></div>
     </div>
+
   </div>
-  <style>
-    #newsletter__popup-content {
-      background-color: {{ section.settings.popup_background_color }};
-      {% if section.settings.popup_image == 'content' %}
-      padding: 0;
-      {% endif %}
-      {% if section.settings.popup_image == 'background' %}
-      height: 600px;
-      {% endif %}
-    }
-    .newsletter__popup-text h3,
-    .newsletter__popup-text p {
-      color: {{ section.settings.popup_text_color }};
-    }
-    .newsletter__popup-text h3 {
-      font-size: {{ section.settings.popup_h3_size }}px;
-    }
-    .newsletter__popup-text p {
-      font-size: {{ section.settings.popup_subheading_size }}px;
-    }
-    .newsletter__popup-form input[type="email"] {
-      background: {{ section.settings.popup_background_color }};
-    }
-    p.gdpr-text {
-      color: {{ section.settings.popup_text_color }};
-    }
-
-    {% if section.settings.popup_image == 'background' %}
-      .newsletter__popup-contentWrapper {
-        width: 100%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -webkit-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-        -moz-transform: translate(-50%, -50%);
-        -o-transform: translate(-50%, -50%);
-      }
-    {% endif %}
-
-    {% if section.settings.email_image != blank and section.settings.popup_image == 'background' %}
-      #newsletter__popup-content {
-        background: url({{ section.settings.email_image | img_url: '1200x'}});
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
-      }
-    {% else %}
-      #newsletter__popup-content .newsletter__popup-image {
-        background: url({{ section.settings.email_image | img_url: '1200x'}});
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
-        width: 100%;
-        min-height: 300px;
-      }
-    {% endif %}
-  </style>
 </section>
 
 {% schema %}
 {
   "name": "Mailing Popup",
-  "settings": [{
-      "type": "header",
-      "content": "Mailing Popup"
-    },
+  "settings": [
     {
       "type": "checkbox",
       "id": "popup",
@@ -146,10 +151,18 @@
         },
         {
           "value": "content",
-          "label": "Content image"
+          "label": "Top image"
+        },
+        {
+          "value": "left_image",
+          "label": "Left image"
+        },
+        {
+          "value": "simple",
+          "label": "Simple (no image)"
         }
       ],
-      "label": "Image type"
+      "label": "Popup style"
     },
     {
       "type": "image_picker",
@@ -192,22 +205,22 @@
     {
       "type": "range",
       "id": "popup_h3_size",
-      "min": 12,
+      "min": 13,
       "max": 36,
       "step": 1,
       "unit": "px",
       "label": "Heading size",
-      "default": 18
+      "default": 22
     },
     {
       "type": "range",
       "id": "popup_subheading_size",
-      "min": 12,
+      "min": 13,
       "max": 36,
       "step": 1,
       "unit": "px",
       "label": "Subheading size",
-      "default": 18
+      "default": 14
     },
     {
       "type": "color",

@@ -55,6 +55,8 @@
     assign desc_width = 'span-12'
   endif
 
+  assign aos_mod = section.settings.grid | plus: 0
+
 -%}
 
 <section class="collection__page row grid__wrapper section-{{ section.id }} global__section"
@@ -73,29 +75,34 @@ data-collection-link="{{ collection_link }}">
         </div>
         {%- if collection_image -%}
           <div class="collection__page-image span-3 sm-span-12 auto">
-            <img src="{{ collection.image | img_url: '350x' }}" alt="{{ collection.image.alt }}">
+            {%
+              render 'basic-responsive-image',
+              type: collection.image,
+              width: 350,
+              loading: 'eager',
+              fetchpriority: 'high'
+            %}
           </div>
         {%- endif -%}
       {%- endif -%}
 
       {%- if horizontal_filtering_enabled or horizontal_sort -%}
-        <form id="CollectionFiltersForm" class="span-12 auto" data-collection-filters>
+        <form id="CollectionFiltersForm" class="span-12 md-span-12 auto" data-collection-filters>
           {% render 'collection-horizontal-toolbar',
             collection: collection,
-            block: block,
             horizontal_filtering_enabled: horizontal_filtering_enabled,
             horizontal_sort: horizontal_sort %}
         </form>
       {%- endif -%}
 
       {% if show_sidebar %}
-        <form id="CollectionSidebarFiltersForm" class="span-3 sm-span-12 auto" data-collection-sidebar-filters>
+        <form id="CollectionSidebarFiltersForm" class="span-3 md-span-12 sm-span-12 auto" data-collection-sidebar-filters>
           {% render 'collection-sidebar',
             collection: collection, block: block %}
         </form>
       {% endif %}
 
-      {% if show_sidebar %}<div class="collection__page--productContent span-9 sm-span-12 auto">{% endif %}
+      {% if show_sidebar %}<div class="collection__page--productContent span-9 md-span-12 sm-span-12 auto">{% endif %}
 
         {% if filter_count > 0 %}
           <div class="filtering__results span-12 auto js-filters-reset">
@@ -118,7 +125,7 @@ data-collection-link="{{ collection_link }}">
                   {%- endif -%}
                 {% endif %}
               {%- endfor -%}
-              <li><a class="current_filters--clear js-current-filter clear-tags" href="{{ collection.url }}">{{ 'sections.collection_template.clear_all' | t }}</a></li>
+              <li><a class="current_filters--clear js-current-filter clear-tags" href="{{ collection.url }}">{{ 'collections.filters.clear_all' | t }}</a></li>
             </ul>
           </div>
         {% endif %}
@@ -129,10 +136,27 @@ data-collection-link="{{ collection_link }}">
           data-aos="fade"
           data-id="{{ section.id }}">
             {% for product in collection.products %}
-              <div id="product-listing-{{ product.id }}" class="item product-index collection__page-product js-product-listing" data-alpha="{{ product.title }}" data-product-id="{{ product.id }}" data-price="{{ product.price }}">
+              <div id="product-listing-{{ product.id }}" 
+                class="item product-index collection__page-product js-product-listing"
+                data-alpha="{{ product.title }}" 
+                data-product-id="{{ product.id }}" 
+                data-price="{{ product.price }}"
+                data-aos="fade"
+                data-aos-delay="{{ forloop.index | minus: 1 | modulo: aos_mod | times: 100 }}">
+                {% liquid
+                  # grid
+                  assign loading = 'lazy'
+                  assign fetch_priority = 'auto'
+                  if forloop.index <= grid
+                    assign loading = 'eager'
+                    assign fetch_priority = 'high'
+                  endif
+                 %}
                 {% render 'product-listing',
                   product: product,
-                  collection: collection %}
+                  collection: collection,
+                  loading: loading,
+                  fetchpriority: fetch_priority %}
               </div>
             {% endfor %}
 
@@ -146,7 +170,7 @@ data-collection-link="{{ collection_link }}">
           <div id="main-collection-product-grid"
           class="collection collection--empty span-12 auto"
           data-id="{{ section.id }}">
-            <span class="rte">{{ 'sections.collection_template.use_fewer_filters_html' | t: link: collection.url, class: "underline" }}</span>
+            <span class="rte">{{ 'collections.filters.use_fewer_filters_html' | t: link: collection.url, class: "underline" }}</span>
           </div>
         {%- endif -%}
 
@@ -216,10 +240,18 @@ data-collection-link="{{ collection_link }}">
       "type": "dropdown_filter",
       "name": "Dropdown filter",
       "limit": 1,
-      "settings": [{
+      "settings": [
+        {
         "type": "paragraph",
         "content": "Learn how to add storefront filters [here](https:\/\/help.shopify.com\/en\/manual\/online-store\/themes\/os20\/customize\/filters)"
-      }]
+        },
+        {
+          "type": "checkbox",
+          "id": "show_color_swatches",
+          "label":"Show color swatches",
+          "default": true
+        }
+      ]
     },
     {
       "type": "dropdown_sortby",
