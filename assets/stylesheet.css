@@ -6865,7 +6865,7 @@ li.product__tab-trigger > a.active {
 
     /* Header section */
     header.theme-header { width: 100%; z-index: 11; }
-    ul#social-links { display: none;}
+    /*ul#social-links { display: none;}*/
     div.cart--container { text-align: right; }
     header ul.shopping--cart_links li.lang-selector,
     header ul.shopping--cart_links li.curr-selector { display: none;}
