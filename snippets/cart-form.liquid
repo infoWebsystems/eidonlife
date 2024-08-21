@@ -1,7 +1,7 @@
 <form class="ajax-cart__cart-form grid__wrapper edge js-cart-form {{ formEmpty }}"
     action="{{ routes.cart_url }}"
     method="post">
-  <div class="ajax-cart__cart-items span-12 auto">
+  <div class="ajax-cart__cart-items span-12 auto" style="max-height: auto;">
     {% for item in cart.items %}
       <div class="item_{{ item.id | append: '-' | append: forloop.index }} ajax-cart__cart-item grid__wrapper edge">
         <a class="ajax-cart__item-remove--no-js" style="display:none;" href="/cart/change?line={{ forloop.index }}&amp;quantity=0" data-role="product-remove">

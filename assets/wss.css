@@ -36,3 +36,16 @@
 .image-container .content table{
     max-width: 100%;
 }
+
+/*cart drawer*/
+#preview-bar-iframe{
+    display: none !important;
+}
+#slideout-ajax-cart{
+    overflow: hidden;
+}
+#slideout-ajax-cart .ajax-cart__cart-items{
+    overflow-y: scroll;
+    height: 100%;
+}
+/*cart drawer*/

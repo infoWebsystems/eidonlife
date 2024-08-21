@@ -2425,6 +2425,9 @@ Shopify.theme.ajaxCart = {
     setTimeout(function(){
       theme.Helpers.fadeOut(document.querySelector('.ajax-cart__drawer-wrapper .js-mini-cart-loader'));
     }, 800);
+      setTimeout(function (){
+          calcHeight();
+      }, 1000);
   },
   hideDrawer: function hideDrawer(config) {
     if (config.cart_action != 'drawer') return false;
