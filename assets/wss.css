@@ -1,0 +1,38 @@
+@media screen and (min-width:1220px) {
+    .shopping--cart_links svg{
+        width: 16px;
+        height: 18px;
+    }
+    .shopping--cart_links .js-cart-count{
+        font-size: 20px;
+    }
+}
+@media screen and (max-width: 740px) {
+    .shopping--cart_links svg{
+        width: 20px;
+        height: 20px;
+    }
+    #top-bar .row ul#social-links{
+        grid-column: 1 / span 2;
+    }
+
+}
+
+#mens-size-chart{
+    max-width: 100%;
+    margin: 0;
+}
+#mens-size-chart .step-section{
+    max-width: 100%;
+}
+#mens-size-chart .step-section table{
+    max-width: 100%;
+}
+.size-guide-inner .container,
+.size-guide-inner .image-container{
+    max-width: 100%;
+}
+.image-container .content,
+.image-container .content table{
+    max-width: 100%;
+}
