@@ -296,7 +296,7 @@
       {
         "type": "range",
         "id": "announcement_size",
-        "min": 13,
+        "min": 12,
         "max": 22,
         "step": 1,
         "unit": "px",
