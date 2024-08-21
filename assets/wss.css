@@ -49,3 +49,9 @@
     height: 100%;
 }
 /*cart drawer*/
+.boost-sd__header-title{
+    display: none;
+}
+.boost-sd__header-image-inner{
+    height: calc(100% + 120px);
+}
