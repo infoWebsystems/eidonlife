@@ -4277,7 +4277,7 @@ body:has(.modal-open.size-guide-inner) .size-guide-overlay {
 }
 
 .size-guide-header {
-  padding: 20px;
+  padding: 20px 10px 13px 9px;
   border-bottom: 1px solid #00000080;
   display: flex;
   justify-content: space-between;
@@ -4287,14 +4287,21 @@ body:has(.modal-open.size-guide-inner) .size-guide-overlay {
 
 .size-guide-header h2 {
   margin: 0;
+  font-size: 24px;
 }
-
+.size-guide-header .close{
+  line-height: normal;
+}
 .size-guide-content {
   flex: 1;
-  padding: 20px;
+  padding: 18px;
   overflow-y: auto;
 }
-
+.size-guide-inner img{
+  width: auto;
+  max-height: 516px;
+  margin: 0 auto;
+}
 .modal-open.size-guide-inner {
   transform: translateX(0);
 }
@@ -4304,6 +4311,10 @@ body:has(.modal-open.size-guide-inner) .size-guide-overlay {
 @media screen and (max-width: 550px) {
   .size-guide-inner {
     width: 100%;
+  }
+  .size-guide-inner img{
+    width: 48.462vw !important;
+    margin: 0 auto;
   }
 }
 

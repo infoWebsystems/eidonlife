@@ -15,7 +15,45 @@
     #top-bar .row ul#social-links{
         grid-column: 1 / span 2;
     }
-
+    ul.shopping--cart_links > li a,
+    ul.shopping--cart_links > li button{
+        padding: 0 5px 0 0 !important;
+    }
+    ul.shopping--cart_links > li:last-of-type a,
+    ul.shopping--cart_links > li:last-of-type button{
+        padding: 0!important;
+    }
+    header{
+        padding-top: 0;
+    }
+    #identity{
+        padding-bottom: 2px;
+    }
+    ul.shopping--cart_links li button.slideout__trigger-search{
+        padding-right: 13px!important;
+    }
+    .header_language_selector .localization__options{
+        gap: 8px;
+    }
+    #logo img{
+        max-width: 57px!important;
+        margin-top: -0.5px;
+    }
+    #logo a {
+        margin-right: -6px;
+    }
+    .header_language_selector{
+        position: absolute;
+        left: 50%;
+        transform: translateX(-23%) translateY(11%);
+    }
+    .selectors-form__item{
+        margin: 0;
+    }
+    .header_language_selector .disclosure__toggle{
+        letter-spacing: 0;
+        gap: 2px;
+    }
 }
 
 #mens-size-chart{
