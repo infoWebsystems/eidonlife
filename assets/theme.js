@@ -2746,7 +2746,8 @@ Shopify.theme.ajaxCart = {
         });
         // Update cart count
         document.querySelectorAll(selectors.cartCount).forEach((item, i) => {
-          item.innerHTML = '0';
+          // item.innerHTML = '0';
+          item.innerHTML = ' ';
         });
       } else {
         // Hide empty msg

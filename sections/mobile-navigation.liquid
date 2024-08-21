@@ -203,7 +203,7 @@
           <div class="mobile-menu__block mobile-menu__cart-status" {{ block.shopify_attributes }}>
             <a class="mobile-menu__cart-icon" href="{{ routes.cart_url }}">
               <span class="vib-center">{{ 'cart.general.title' | t }}</span>
-              <span class="mobile-menu__cart-count js-cart-count vib-center">{{ cart.item_count }}</span>
+              <span class="mobile-menu__cart-count js-cart-count vib-center">{% if cart.item_count != 0 %}{{ cart.item_count }}{% endif %}</span>
 
               {% if block.settings.cart_icon == 'bag' %}
                 {% render 'snip-icons',
