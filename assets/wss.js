@@ -17,3 +17,28 @@
     }
 
 // cart height
+//markets selector
+function updateLocalization(value,e) {
+    let form = e.closest('form');
+    console.log('form', form)
+    switch(value) {
+        case 'usd_en_us':
+            // form.innerHTML += '<input type="hidden" name="currency" value="USD">';
+            form.innerHTML += '<input type="hidden" name="language_code" value="en">';
+            form.innerHTML += '<input type="hidden" name="country_code" value="US">';
+            break;
+        case 'cad_en_us':
+            // form.innerHTML += '<input type="hidden" name="currency" value="CAD">';
+            form.innerHTML += '<input type="hidden" name="language_code" value="en">';
+            form.innerHTML += '<input type="hidden" name="country_code" value="CA">';
+            break;
+        case 'cad_fr_fr':
+            // form.innerHTML += '<input type="hidden" name="currency" value="CAD">';
+            form.innerHTML += '<input type="hidden" name="language_code" value="fr">';
+            form.innerHTML += '<input type="hidden" name="country_code" value="CA">';
+            break;
+    }
+
+    form.submit();
+}
+//markets selector

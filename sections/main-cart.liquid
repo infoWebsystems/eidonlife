@@ -28,7 +28,7 @@
       <h1 class="section-heading a-center mb0">{{ 'cart.general.title' | t }}</h1>
     </div>
     <div class="span-4 sm-span-4 auto a-right v-center">
-      <p class="mb0"><span class="js-cart-count inline-block">{% if cart.item_count != 0 %}{{ cart.item_count }}{% endif %}</span> {{ 'cart.general.items' | t }}</p>
+      <p class="mb0"><span class="js-cart-count inline-block {% if cart.item_count == 0 %}d-none{% endif %}">{% if cart.item_count != 0 %}{{ cart.item_count }}{% endif %}</span> {{ 'cart.general.items' | t }}</p>
     </div>
   </div>
   <div class="ajax-cart__form-wrapper--nojs js-ajax-cart-content-nojs">

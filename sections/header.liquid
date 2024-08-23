@@ -341,7 +341,7 @@
                    size: '24px',
                    fill: 'var(--cart-links)',
                    hover: 'var(--cart-links)' %}
-                <span class="js-cart-count vib-center">{% if cart.item_count != 0 %}{{ cart.item_count }}{% endif %}</span>
+                <span class="js-cart-count vib-center {% if cart.item_count == 0 %}d-none{% endif %}">{% if cart.item_count != 0 %}{{ cart.item_count }}{% endif %}</span>
               </a>
             </li>
           {% else %}
@@ -358,7 +358,7 @@
                        size: '24px',
                        fill: 'var(--cart-links)',
                        hover: 'var(--cart-links)' %}
-                    <span class="js-cart-count vib-center">{% if cart.item_count != 0 %}{{ cart.item_count }}{% endif %}</span>
+                    <span class="js-cart-count vib-center {% if cart.item_count == 0 %}d-none{% endif %}">{% if cart.item_count != 0 %}{{ cart.item_count }}{% endif %}</span>
                   </button>
                 </a>
               </div>

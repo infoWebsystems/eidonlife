@@ -2747,6 +2747,7 @@ Shopify.theme.ajaxCart = {
         // Update cart count
         document.querySelectorAll(selectors.cartCount).forEach((item, i) => {
           // item.innerHTML = '0';
+          item.classList.add('d-none');
           item.innerHTML = ' ';
         });
       } else {
@@ -2757,6 +2758,7 @@ Shopify.theme.ajaxCart = {
         // Update cart count
         document.querySelectorAll(selectors.cartCount).forEach((item, i) => {
           item.innerHTML = Cart.item_count;
+            item.classList.remove('d-none');
         });
         // Replace cart page and drawer content
         document.querySelectorAll(selectors.cartContent).forEach((item, i) => {
