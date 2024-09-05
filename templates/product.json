@@ -172,7 +172,7 @@
           }
         },
         "alireviews-block-1666181636": {
-          "type": "shopify:\/\/apps\/ali-reviews\/blocks\/widget-box\/bf2eea72-0400-4db1-8908-44b7418f9a88",
+          "type": "shopify:\/\/apps\/kudosi-ali-reviews\/blocks\/widget-box\/bf2eea72-0400-4db1-8908-44b7418f9a88",
           "disabled": true,
           "settings": {
             "product": "",

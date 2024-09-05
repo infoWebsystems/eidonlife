@@ -18,10 +18,17 @@
             "image_3": "shopify:\/\/shop_images\/KENSHO_0afac636-3889-46ab-9703-64500a862305.jpg",
             "link_3": "shopify:\/\/collections\/kensho"
           }
+        },
+        "announcement_text_WCgJN7": {
+          "type": "announcement_text",
+          "settings": {
+            "announcement_text": "<p>Get free shipping on all Canadian and American orders over $60 USD<\/p>"
+          }
         }
       },
       "block_order": [
-        "b4a8ea36-a68b-440a-9f6c-9c83b71e3d91"
+        "b4a8ea36-a68b-440a-9f6c-9c83b71e3d91",
+        "announcement_text_WCgJN7"
       ],
       "settings": {
         "full_width_announcement_bar": true,

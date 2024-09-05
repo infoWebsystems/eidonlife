@@ -4327,7 +4327,7 @@ body:has(.modal-open.size-guide-inner) .size-guide-overlay {
 .announcement__bar-section .disclosure__toggle,.header_language_selector .disclosure__toggle{
    color: var(--top-bar-color);
    background-color: var(--top-bar-background);
-   font-size: var(--announcement-size);
+   font-size: 12px;
    white-space: nowrap;
    margin: 0;
    padding: 0;
