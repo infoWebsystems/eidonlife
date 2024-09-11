@@ -11,11 +11,18 @@
     }
 }
 @media screen and (max-width: 740px) {
+    .mobile-menu__item svg{
+        height: 14px;
+    }
     .shopping--cart_links svg{
         width: 20px;
         height: 20px;
     }
+    #top-bar .row ul.localization__options{
+
+    }
     #top-bar .row ul#social-links{
+        display: none;
         grid-column: 1 / span 2;
     }
     ul.shopping--cart_links > li a,

@@ -4167,15 +4167,11 @@ button.flickity-button:disabled {
 
 /* Header Disclosure Selectors */
 
-.header_language_selector {
- display: none;
-}
-
 @media screen and (max-width:789px) {
-  .header_language_selector {
-    display: block;
-    max-height: 20px;
-  }
+  /*.header_language_selector {*/
+  /*  display: block;*/
+  /*  max-height: 20px;*/
+  /*}*/
   .header_language_selector span.country--flag {
     display: none;
   }
@@ -4422,6 +4418,23 @@ body:has(.modal-open.size-guide-inner) .size-guide-overlay {
 }
 .announcement__bar-section .selectors-form {
   margin-bottom: 0;
+}
+@media screen and (min-width:980px) {
+  .header_language_selector {
+    display: none;
+  }
+}
+@media screen and (max-width:980px) {
+  .header_language_selector {
+    display: block;
+    max-height: 20px;
+  }
+  .announcement__bar-section .disclosure__toggle,
+  .header_language_selector .disclosure__toggle {
+    background-color: transparent;
+    color: black;
+    font-weight: 700;
+  }
 }
 @media (min-width: 980px) {
   .selectors-form {

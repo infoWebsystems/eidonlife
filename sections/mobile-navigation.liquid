@@ -135,7 +135,7 @@
 
             {% endfor %}
             {% if shop.customer_accounts_enabled %}
-              {% if customer  %}
+              {% if customer %}
                 <li class="mobile-menu__item">
                   <a href="{{ routes.account_url }}">
                     {% render 'snip-icons',
@@ -146,7 +146,7 @@
                        size: '14px',
                        fill: section.settings.link_color,
                        hover: section.settings.link_color %}
-                       <span class="vib-center">&nbsp;&nbsp;{{ 'general.mobile_nav.account' | t }}</span>
+                       <span class="{% comment %}vib-center{%endcomment%}">&nbsp;&nbsp;{{ 'general.mobile_nav.account' | t }}</span>
                   </a>&nbsp;&nbsp;
                   <a href="{{ routes.account_logout_url }}">
                     {% render 'snip-icons',
@@ -157,7 +157,7 @@
                        size: '14px',
                        fill: section.settings.link_color,
                        hover: section.settings.link_color %}
-                       <span class="vib-center">&nbsp;&nbsp;{{ 'general.mobile_nav.logout' | t }}</span>
+                       <span class="{% comment %}vib-center{%endcomment%}">&nbsp;&nbsp;{{ 'general.mobile_nav.logout' | t }}</span>
                   </a>
                 </li>
               {% else %}
@@ -171,7 +171,7 @@
                        size: '14px',
                        fill: section.settings.link_color,
                        hover: section.settings.link_color %}
-                      <span class="vib-center">&nbsp;&nbsp; {{ 'general.mobile_nav.login' | t }}</span>
+                      <span class="{% comment %}vib-center{%endcomment%}">&nbsp;&nbsp; {{ 'general.mobile_nav.login' | t }}</span>
                   </a>
                 </li>
               {% endif %}

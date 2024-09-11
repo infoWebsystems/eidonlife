@@ -144,8 +144,9 @@
       {% endif %}
 
 
-    <div class="header_language_selector">
-      <ul class="localization__options">
+    <div class="header_language_selector js-top-bar gridlock-fluid" >
+      {% if false %}
+        <ul class="localization__options tablet-hide mobile-hide">
         <li class="lang-selector">
           <div class="selectors-form__item">
             <h2 class="visually-hidden" id="lang-heading">
@@ -256,6 +257,60 @@
             </div>
         </li>
       </ul>
+      {% endif %}
+      {% liquid
+        if section.settings.show_country_selector and localization.available_countries.size > 1
+          assign hd_country_selector = true
+        endif
+        if section.settings.show_locale_selector and shop.published_locales.size > 1
+          assign hd_locale_selector = true
+        endif
+        if hd_locale_selector or hd_country_selector
+          assign selectors = true
+        endif
+
+      %}
+      <ul class="localization__options">
+        {% if hd_locale_selector and hd_country_selector %}
+          <li class="curr-selector">
+            <div class="selectors-form__item">
+              {% form 'localization' %}
+                <div class="disclosure" data-disclosure-currency>
+                  <button type="button" class="disclosure__toggle" aria-expanded="false" aria-controls="currency-list_header" aria-describedby="currency-heading_header" data-disclosure-toggle>
+                    {{ localization.country.currency.iso_code }} | {{ localization.language.endonym_name | camelcase }}
+                  </button>
+                  <ul id="currency-list_header" class="disclosure-list" style="width: auto!important;" data-disclosure-list>
+                    <li class="disclosure-list__item">
+                      <a href="#" class="disclosure-list__option" onclick="updateLocalization('usd_en_us', this)" data-disclosure-option>
+                        USD | English
+                      </a>
+                    </li>
+                    <li class="disclosure-list__item">
+                      <a href="#" class="disclosure-list__option" onclick="updateLocalization('cad_en_us', this)" data-disclosure-option>
+                        CAD | English
+                      </a>
+                    </li>
+                    <li class="disclosure-list__item">
+                      <a href="#" class="disclosure-list__option" onclick="updateLocalization('cad_fr_fr', this)" data-disclosure-option>
+                        CAD | France
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                {% comment %}<div class="disclosure">{% endcomment %}
+                {% comment %}<select name="localization_select" id="localization_select" onchange="updateLocalization(this.value, this)">{% endcomment %}
+                {% comment %}<option value="usd_en_us">USD - En</option>{% endcomment %}
+                {% comment %}<option value="cad_en_us">CAD - En</option>{% endcomment %}
+                {% comment %}<option value="cad_fr_fr">CAD - Fr</option>{% endcomment %}
+                {% comment %}</select>{% endcomment %}
+                {% comment %}</div>{% endcomment %}
+              {% endform %}
+            </div>
+          </li>
+        {% endif %}
+
+      </ul>
+
     </div>
 
 
