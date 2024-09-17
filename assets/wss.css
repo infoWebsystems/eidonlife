@@ -141,3 +141,10 @@
     }
 }
 /*cart icon*/
+.tl-switcher-container{
+    display: none!important;
+}
+.mobile-menu__cart-status a > *{
+    font-size: 14px;
+    font-weight: 400;
+}

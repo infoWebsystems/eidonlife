@@ -537,9 +537,8 @@
         "blocks": {
           "mobile-navigation-1": {
             "type": "cart_status",
-            "disabled": true,
             "settings": {
-              "cart_icon": "bag"
+              "cart_icon": "cart"
             }
           },
           "mobile-navigation-2": {
